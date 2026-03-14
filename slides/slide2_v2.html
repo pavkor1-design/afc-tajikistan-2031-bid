@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 2 — Вариант 2: Центрированный с карточками</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+  }
+
+  .bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(10,24,48,1) 0%, var(--midnight) 70%);
+    animation: cinematicDrift 25s ease-in-out infinite alternate;
+  }
+
+  @keyframes cinematicDrift {
+    from { transform: scale(1.0); }
+    to { transform: scale(1.04); }
+  }
+
+  /* Large background map */
+  .bg-map {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+    z-index: 1;
+    opacity: 0.1;
+    animation: fadeIn 2s ease 0.3s both;
+  }
+
+  .bg-map svg {
+    width: 1600px;
+    height: 1100px;
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 45%, transparent 15%, rgba(5,14,29,0.5) 50%, rgba(5,14,29,0.95) 100%);
+    z-index: 2;
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 40%, rgba(5,14,29,0.7) 100%),
+      linear-gradient(90deg, rgba(5,14,29,0.5) 0%, transparent 20%),
+      linear-gradient(-90deg, rgba(5,14,29,0.5) 0%, transparent 20%),
+      linear-gradient(0deg, rgba(5,14,29,0.8) 0%, transparent 30%),
+      linear-gradient(180deg, rgba(5,14,29,0.6) 0%, transparent 20%);
+    z-index: 3;
+  }
+
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .afc-logo {
+    position: absolute;
+    top: 100px;
+    left: 80px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .afc-badge {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,14,29,0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .afc-badge svg { width: 30px; height: 30px; fill: var(--gold); }
+
+  .afc-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ivory);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .afc-text .year {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 5px;
+    display: block;
+  }
+
+  .flag-ribbon {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 8px;
+    height: 120px;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeIn 1s ease 0.7s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Centered content */
+  .content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    width: 1400px;
+    margin-top: -15px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(215,166,61,0.12);
+    border: 1px solid rgba(215,166,61,0.25);
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-bottom: 28px;
+    animation: fadeSlideUp 0.7s ease 1s both;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 68px;
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    animation: fadeSlideUp 0.8s ease 1.2s both;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+
+  .subtitle-line {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+    color: var(--warm-gold);
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    animation: fadeSlideUp 0.7s ease 1.4s both;
+  }
+
+  .divider-center {
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+    margin: 22px auto 42px;
+    animation: growWidth 0.6s ease 1.6s both;
+  }
+
+  @keyframes growWidth {
+    from { width: 0; }
+    to { width: 80px; }
+  }
+
+  /* Vertical cards */
+  .cards-row {
+    display: flex;
+    gap: 36px;
+    justify-content: center;
+    animation: fadeSlideUp 0.8s ease 1.8s both;
+  }
+
+  .card {
+    width: 380px;
+    background: rgba(10,24,48,0.55);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 12px;
+    padding: 36px 32px 32px;
+    backdrop-filter: blur(12px);
+    text-align: center;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: rgba(215,166,61,0.4);
+    transform: translateY(-4px);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 18px;
+    border: 1px solid rgba(215,166,61,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(215,166,61,0.08);
+  }
+
+  .card-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--gold);
+  }
+
+  .card-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .card-divider {
+    width: 40px;
+    height: 2px;
+    background: rgba(215,166,61,0.3);
+    margin: 12px auto 14px;
+  }
+
+  .card-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(246,244,239,0.65);
+    margin-bottom: 18px;
+  }
+
+  .card-stat {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--warm-gold);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .card-stat-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: rgba(246,244,239,0.4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 90px;
+    right: 80px;
+    z-index: 20;
+    text-align: right;
+    animation: fadeIn 1s ease 2.4s both;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 3px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="bg"></div>
+
+  <!-- Background map (large, faded) -->
+  <div class="bg-map">
+    <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="topoKaz" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0B1D38"/>
+          <stop offset="100%" stop-color="#0D2244"/>
+        </linearGradient>
+        <linearGradient id="topoChina" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0C1E3A"/>
+          <stop offset="100%" stop-color="#091828"/>
+        </linearGradient>
+        <linearGradient id="topoAfg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0D2040"/>
+          <stop offset="100%" stop-color="#0A1830"/>
+        </linearGradient>
+        <linearGradient id="topoUzb" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#0C1D38"/>
+          <stop offset="100%" stop-color="#0E2244"/>
+        </linearGradient>
+        <linearGradient id="topoKyr" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0D1F3C"/>
+          <stop offset="100%" stop-color="#0B1C36"/>
+        </linearGradient>
+        <linearGradient id="topoTkm" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0B1B34"/>
+          <stop offset="100%" stop-color="#091628"/>
+        </linearGradient>
+        <linearGradient id="topoPak" x1="0" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stop-color="#0C1E3A"/>
+          <stop offset="100%" stop-color="#081426"/>
+        </linearGradient>
+        <radialGradient id="tajGlow" cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stop-color="#E8BF5A" stop-opacity="0.85"/>
+          <stop offset="50%" stop-color="#D7A63D" stop-opacity="0.65"/>
+          <stop offset="100%" stop-color="#D7A63D" stop-opacity="0.35"/>
+        </radialGradient>
+        <radialGradient id="tajGlowOuter" cx="50%" cy="50%" r="90%">
+          <stop offset="0%" stop-color="#D7A63D" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#D7A63D" stop-opacity="0"/>
+        </radialGradient>
+        <pattern id="mountains" x="0" y="0" width="16" height="12" patternUnits="userSpaceOnUse">
+          <path d="M0,12 L4,4 L8,12 M4,12 L8,5 L12,12 M8,12 L12,3 L16,12" fill="none" stroke="rgba(215,166,61,0.12)" stroke-width="0.5"/>
+        </pattern>
+        <filter id="noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch" result="n"/>
+          <feColorMatrix type="saturate" values="0" in="n" result="g"/>
+          <feBlend in="SourceGraphic" in2="g" mode="multiply" result="blend"/>
+          <feComponentTransfer in="blend"><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+        </filter>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="14" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glowSm" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Subtle latitude grid -->
+      <g opacity="0.04" stroke="#D7A63D" stroke-width="0.5">
+        <line x1="0" y1="100" x2="900" y2="100"/>
+        <line x1="0" y1="200" x2="900" y2="200"/>
+        <line x1="0" y1="300" x2="900" y2="300"/>
+        <line x1="0" y1="400" x2="900" y2="400"/>
+        <line x1="0" y1="500" x2="900" y2="500"/>
+        <line x1="150" y1="0" x2="150" y2="620"/>
+        <line x1="300" y1="0" x2="300" y2="620"/>
+        <line x1="450" y1="0" x2="450" y2="620"/>
+        <line x1="600" y1="0" x2="600" y2="620"/>
+        <line x1="750" y1="0" x2="750" y2="620"/>
+      </g>
+
+      <!-- Kazakhstan -->
+      <path d="M70,55 L95,48 L130,42 L170,38 L210,33 L255,30 L300,28 L340,30 L380,35 L420,42 L455,52 L490,58 L520,48 L555,42 L590,40 L630,48 L665,58 L700,72 L730,88 L748,108 L752,135 L745,158 L730,178 L710,195 L688,208 L665,218 L640,228 L618,235 L595,242 L572,248 L548,252 L525,248 L502,240 L480,235 L458,242 L438,252 L418,258 L398,255 L378,248 L355,242 L332,248 L310,255 L288,258 L265,255 L242,248 L220,240 L198,232 L178,222 L158,212 L140,202 L122,190 L108,175 L98,158 L88,140 L78,120 L70,100 L65,80 Z"
+        fill="url(#topoKaz)" stroke="rgba(215,166,61,0.25)" stroke-width="0.8"/>
+      <text x="380" y="138" fill="rgba(246,244,239,0.3)" font-family="Inter, sans-serif" font-size="18" font-weight="300" text-anchor="middle" letter-spacing="8">КАЗАХСТАН</text>
+
+      <!-- Turkmenistan -->
+      <path d="M65,120 L78,135 L92,152 L108,170 L122,185 L138,198 L155,210 L170,218 L185,225 L200,232 L210,242 L218,255 L222,270 L224,285 L220,300 L215,315 L208,328 L198,338 L185,348 L170,355 L155,358 L138,355 L120,350 L105,342 L90,332 L78,320 L68,308 L58,292 L48,275 L40,258 L34,240 L28,222 L24,205 L22,188 L25,170 L32,155 L42,138 L52,125 Z"
+        fill="url(#topoTkm)" stroke="rgba(215,166,61,0.25)" stroke-width="0.8"/>
+      <text x="120" y="285" fill="rgba(246,244,239,0.22)" font-family="Inter, sans-serif" font-size="11" font-weight="300" text-anchor="middle" letter-spacing="2">ТУРКМЕНИСТАН</text>
+
+      <!-- Uzbekistan -->
+      <path d="M155,210 L175,218 L195,228 L215,235 L235,240 L255,248 L275,255 L295,258 L315,255 L335,248 L355,242 L370,248 L382,258 L390,270 L392,282 L388,295 L380,308 L370,318 L358,325 L345,332 L330,335 L315,330 L300,322 L285,315 L270,318 L255,322 L242,325 L228,318 L218,308 L212,295 L210,280 L212,265 L210,250 L202,238 Z"
+        fill="url(#topoUzb)" stroke="rgba(215,166,61,0.25)" stroke-width="0.8"/>
+      <text x="290" y="290" fill="rgba(246,244,239,0.25)" font-family="Inter, sans-serif" font-size="13" font-weight="300" text-anchor="middle" letter-spacing="3">УЗБЕКИСТАН</text>
+
+      <!-- Kyrgyzstan -->
+      <path d="M355,242 L375,248 L395,252 L415,255 L435,258 L455,255 L475,248 L495,240 L512,235 L528,242 L538,252 L535,265 L528,278 L518,290 L505,298 L490,305 L475,308 L458,305 L442,298 L428,292 L415,288 L402,282 L392,275 L385,265 Z"
+        fill="url(#topoKyr)" stroke="rgba(215,166,61,0.25)" stroke-width="0.8"/>
+      <text x="462" y="272" fill="rgba(246,244,239,0.25)" font-family="Inter, sans-serif" font-size="11" font-weight="300" text-anchor="middle" letter-spacing="2">КЫРГЫЗСТАН</text>
+
+      <!-- TAJIKISTAN -->
+      <path d="M392,275 L405,282 L418,290 L432,298 L448,305 L462,310 L472,318 L478,330 L480,342 L475,355 L468,368 L458,378 L445,385 L430,388 L415,385 L400,378 L388,370 L378,360 L368,348 L362,335 L358,322 L360,310 L365,298 L372,288 L382,280 Z"
+        fill="url(#tajGlowOuter)" stroke="none"/>
+      <path d="M392,275 L405,282 L418,290 L432,298 L448,305 L462,310 L472,318 L478,330 L480,342 L475,355 L468,368 L458,378 L445,385 L430,388 L415,385 L400,378 L388,370 L378,360 L368,348 L362,335 L358,322 L360,310 L365,298 L372,288 L382,280 Z"
+        fill="url(#mountains)" opacity="0.4"/>
+      <path d="M392,275 L405,282 L418,290 L432,298 L448,305 L462,310 L472,318 L478,330 L480,342 L475,355 L468,368 L458,378 L445,385 L430,388 L415,385 L400,378 L388,370 L378,360 L368,348 L362,335 L358,322 L360,310 L365,298 L372,288 L382,280 Z"
+        fill="url(#tajGlow)" stroke="var(--warm-gold)" stroke-width="2" opacity="0.85"/>
+
+      <!-- China -->
+      <path d="M512,235 L535,242 L555,248 L575,245 L595,240 L618,235 L640,228 L660,220 L680,210 L700,198 L718,185 L735,170 L748,155 L758,168 L768,185 L778,205 L785,228 L790,252 L792,278 L788,305 L780,330 L770,352 L758,372 L742,388 L725,398 L708,405 L690,408 L672,405 L655,398 L638,390 L622,382 L608,372 L595,362 L582,350 L570,340 L558,332 L545,325 L535,318 L528,308 L522,295 L518,282 L518,268 L522,255 L528,245 Z"
+        fill="url(#topoChina)" stroke="rgba(215,166,61,0.25)" stroke-width="0.8"/>
+      <text x="680" y="295" fill="rgba(246,244,239,0.3)" font-family="Inter, sans-serif" font-size="18" font-weight="300" text-anchor="middle" letter-spacing="6">КИТАЙ</text>
+
+      <!-- Afghanistan -->
+      <path d="M198,338 L212,340 L228,338 L242,332 L258,325 L272,320 L288,318 L302,322 L318,328 L332,335 L345,338 L358,335 L365,325 L362,312 L360,300 L365,312 L368,325 L372,338 L378,348 L385,360 L390,372 L388,385 L382,398 L372,408 L360,415 L345,420 L328,422 L310,420 L292,415 L275,410 L258,405 L242,398 L228,390 L215,380 L205,370 L198,358 L192,348 Z"
+        fill="url(#topoAfg)" stroke="rgba(215,166,61,0.25)" stroke-width="0.8"/>
+      <text x="295" y="385" fill="rgba(246,244,239,0.22)" font-family="Inter, sans-serif" font-size="12" font-weight="300" text-anchor="middle" letter-spacing="2">АФГАНИСТАН</text>
+
+      <!-- Pakistan -->
+      <path d="M345,420 L360,418 L372,410 L385,400 L395,388 L405,380 L418,385 L432,388 L445,388 L458,382 L468,372 L478,358 L485,345 L495,338 L508,335 L522,338 L538,342 L555,348 L570,355 L582,365 L590,378 L592,392 L588,408 L580,422 L568,435 L555,445 L540,452 L522,458 L505,460 L488,458 L472,455 L455,450 L440,445 L425,438 L410,432 L398,425 L382,422 L368,420 Z"
+        fill="url(#topoPak)" stroke="rgba(215,166,61,0.25)" stroke-width="0.8"/>
+      <text x="490" y="420" fill="rgba(246,244,239,0.22)" font-family="Inter, sans-serif" font-size="12" font-weight="300" text-anchor="middle" letter-spacing="2">ПАКИСТАН</text>
+
+      <!-- Noise -->
+      <rect x="0" y="0" width="900" height="620" fill="rgba(100,100,100,0.02)" filter="url(#noise)"/>
+
+      <!-- Dashed routes -->
+      <g stroke="rgba(215,166,61,0.3)" stroke-width="1" fill="none" stroke-dasharray="6,4">
+        <path d="M420,338 C400,320 360,305 305,292">
+          <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="3s" repeatCount="indefinite"/>
+        </path>
+        <path d="M425,335 C440,315 455,298 478,280">
+          <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="3s" repeatCount="indefinite"/>
+        </path>
+        <path d="M415,345 C400,365 380,385 340,400">
+          <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="3s" repeatCount="indefinite"/>
+        </path>
+      </g>
+
+      <!-- City markers -->
+      <circle cx="420" cy="338" r="5" fill="#E8BF5A" filter="url(#glow)" opacity="0.9"/>
+      <circle cx="420" cy="338" r="5" fill="none" stroke="#E8BF5A" stroke-width="1.5" opacity="0.6">
+        <animate attributeName="r" values="5;12;5" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.6;0.05;0.6" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+
+      <circle cx="398" cy="295" r="3" fill="#E8BF5A" opacity="0.7"/>
+      <circle cx="305" cy="288" r="2.5" fill="rgba(246,244,239,0.4)" filter="url(#glowSm)"/>
+      <circle cx="478" cy="275" r="2.5" fill="rgba(246,244,239,0.4)" filter="url(#glowSm)"/>
+      <circle cx="338" cy="402" r="2.5" fill="rgba(246,244,239,0.4)" filter="url(#glowSm)"/>
+      <circle cx="108" cy="338" r="2" fill="rgba(246,244,239,0.3)"/>
+    </svg>
+  </div>
+
+  <div class="gradient-overlay"></div>
+  <div class="vignette"></div>
+
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">
+      AFC Asian Cup
+      <span class="year">2031</span>
+    </div>
+  </div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Centered content -->
+  <div class="content-center">
+    <div class="tag">Геополитический контекст</div>
+    <h1 class="main-title">ТАДЖИКИСТАН</h1>
+    <div class="subtitle-line">Страна на перекрёстке цивилизаций</div>
+    <div class="divider-center"></div>
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
+        <div class="card-label">Расположение</div>
+        <div class="card-divider"></div>
+        <div class="card-text">Сердце Центральной Азии — граница с Китаем, Афганистаном, Узбекистаном, Кыргызстаном</div>
+        <div class="card-stat">4</div>
+        <div class="card-stat-sub">Страны-соседа</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <div class="card-label">Население</div>
+        <div class="card-divider"></div>
+        <div class="card-text">Молодая нация с огромным потенциалом — средний возраст всего 24 года</div>
+        <div class="card-stat">10+</div>
+        <div class="card-stat-sub">Млн человек</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
+        </div>
+        <div class="card-label">Уникальность</div>
+        <div class="card-divider"></div>
+        <div class="card-text">«Крыша мира» — Памир и Фанские горы, культурный мост между Востоком и Западом</div>
+        <div class="card-stat">93%</div>
+        <div class="card-stat-sub">Территории — горы</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 1 — Вариант 5: Minimal Elegance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0A0F18;
+    --card: #0E1624;
+    --gold: #C9A44A;
+    --light-gold: #DDBF6F;
+    --ivory: #F0EDE6;
+    --white: #FFFFFF;
+    --muted: rgba(240,237,230,0.5);
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(14,22,36,1) 0%, var(--bg) 70%);
+  }
+
+  /* Very subtle background image — barely visible */
+  .bg-hint {
+    position: absolute;
+    inset: 0;
+    background: url('../images/plaza.jpg') center center / cover no-repeat;
+    opacity: 0.08;
+    filter: blur(3px);
+  }
+
+  /* Central card container */
+  .card {
+    position: relative;
+    width: 1400px;
+    height: 780px;
+    background: rgba(14,22,36,0.6);
+    border: 1px solid rgba(201,164,74,0.15);
+    border-radius: 2px;
+    display: flex;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    animation: fadeIn 1s ease 0.3s both;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+  }
+
+  /* Left section of card — image */
+  .card-image {
+    position: relative;
+    width: 580px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .card-image .img {
+    position: absolute;
+    inset: -20px;
+    background: url('../images/plaza.jpg') center center / cover no-repeat;
+    animation: softDrift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes softDrift {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.1) translateY(-10px); }
+  }
+
+  .card-image .img-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent 60%, rgba(14,22,36,0.9) 100%),
+      linear-gradient(180deg, rgba(14,22,36,0.2) 0%, transparent 30%, transparent 70%, rgba(14,22,36,0.3) 100%);
+  }
+
+  /* Flag strip on image bottom */
+  .img-flag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    display: flex;
+  }
+
+  .img-flag div { flex: 1; }
+  .if-red { background: #CC0000; }
+  .if-white { background: #FFFFFF; }
+  .if-green { background: #006600; }
+
+  /* Right section of card — content */
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 70px 60px 50px;
+  }
+
+  .afc-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 50px;
+    animation: fadeSlideUp 0.6s ease 0.6s both;
+  }
+
+  .afc-circle {
+    width: 42px;
+    height: 42px;
+    border: 1.5px solid rgba(201,164,74,0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .afc-circle svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--gold);
+  }
+
+  .afc-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .afc-name strong {
+    display: block;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 4px;
+  }
+
+  .label-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    animation: fadeSlideUp 0.6s ease 0.8s both;
+  }
+
+  .label-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .label-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .main-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 72px;
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    animation: fadeSlideUp 0.7s ease 1.0s both;
+  }
+
+  .main-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--light-gold);
+    display: block;
+    font-size: 58px;
+    margin-top: 4px;
+  }
+
+  .elegant-line {
+    width: 50px;
+    height: 1px;
+    background: var(--gold);
+    margin: 28px 0;
+    animation: fadeSlideUp 0.5s ease 1.3s both;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 480px;
+    animation: fadeSlideUp 0.6s ease 1.5s both;
+  }
+
+  /* Bottom info inside card */
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(201,164,74,0.08);
+    animation: fadeIn 0.8s ease 2s both;
+  }
+
+  .fft-mini {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    border: 1px solid rgba(201,164,74,0.25);
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+
+  .card-bottom-text {
+    font-size: 11px;
+    color: rgba(240,237,230,0.3);
+    letter-spacing: 1.5px;
+  }
+
+  .spacer { flex: 1; }
+
+  .date-label {
+    font-size: 12px;
+    color: rgba(201,164,74,0.35);
+    letter-spacing: 2px;
+  }
+
+  /* Outer corner accents */
+  .corner-tl, .corner-br {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 20;
+  }
+
+  .corner-tl {
+    top: 30px;
+    left: 30px;
+    border-top: 1px solid rgba(201,164,74,0.2);
+    border-left: 1px solid rgba(201,164,74,0.2);
+    animation: fadeIn 1s ease 2s both;
+  }
+
+  .corner-br {
+    bottom: 30px;
+    right: 30px;
+    border-bottom: 1px solid rgba(201,164,74,0.2);
+    border-right: 1px solid rgba(201,164,74,0.2);
+    animation: fadeIn 1s ease 2s both;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="bg-hint"></div>
+
+  <!-- Corner accents -->
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+
+  <!-- Central Card -->
+  <div class="card">
+    <!-- Image section -->
+    <div class="card-image">
+      <div class="img"></div>
+      <div class="img-overlay"></div>
+      <div class="img-flag">
+        <div class="if-red"></div>
+        <div class="if-white"></div>
+        <div class="if-green"></div>
+      </div>
+    </div>
+
+    <!-- Content section -->
+    <div class="card-content">
+      <div class="afc-badge">
+        <div class="afc-circle">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
+        <div class="afc-name">
+          AFC Asian Cup
+          <strong>2031</strong>
+        </div>
+      </div>
+
+      <div class="label-line">
+        <div class="label-dot"></div>
+        <div class="label-text">Официальная заявка</div>
+      </div>
+
+      <h1 class="main-title">
+        Таджикистан
+        <em>Ваша арена 2031</em>
+      </h1>
+
+      <div class="elegant-line"></div>
+
+      <p class="subtitle">
+        Заявка Федерации футбола Таджикистана на проведение
+        групповых матчей AFC Asian Cup 2031 в городе Душанбе
+      </p>
+
+      <div class="card-bottom">
+        <div class="fft-mini">ФФТ</div>
+        <div class="card-bottom-text">Федерация футбола Таджикистана</div>
+        <div class="spacer"></div>
+        <div class="date-label">МАРТ 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

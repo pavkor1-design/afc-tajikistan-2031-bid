@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 4 — Вариант 1: Timeline Horizontal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(10,24,48,0.9) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(215,166,61,0.04) 0%, transparent 50%),
+      linear-gradient(180deg, var(--midnight) 0%, var(--navy) 50%, var(--midnight) 100%);
+  }
+
+  /* Cinematic letterbox bars */
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  /* AFC Logo */
+  .afc-logo {
+    position: absolute;
+    top: 100px;
+    left: 80px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .afc-badge {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,14,29,0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .afc-badge svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--gold);
+  }
+
+  .afc-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ivory);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .afc-text .year {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 5px;
+    display: block;
+  }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 8px;
+    height: 120px;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeIn 1s ease 0.7s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Title block — top area under logo */
+  .title-block {
+    position: absolute;
+    top: 100px;
+    left: 240px;
+    z-index: 10;
+    animation: fadeSlideUp 0.8s ease 0.8s both;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(215,166,61,0.12);
+    border: 1px solid rgba(215,166,61,0.25);
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+
+  .main-title .highlight {
+    color: var(--warm-gold);
+    font-weight: 500;
+    font-size: 34px;
+    display: block;
+    margin-top: 4px;
+    letter-spacing: 4px;
+  }
+
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+    margin: 14px 0;
+    animation: growWidth 0.6s ease 1.4s both;
+  }
+
+  @keyframes growWidth {
+    from { width: 0; }
+    to { width: 80px; }
+  }
+
+  /* Timeline — horizontal across the middle */
+  .timeline {
+    position: absolute;
+    top: 320px;
+    left: 200px;
+    right: 200px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    animation: fadeIn 1s ease 1s both;
+  }
+
+  .timeline-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(215,166,61,0.2), rgba(215,166,61,0.5), rgba(215,166,61,0.2));
+    position: relative;
+  }
+
+  .timeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 3px solid var(--gold);
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .timeline-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .timeline-node.future .timeline-dot {
+    border-color: var(--warm-gold);
+    box-shadow: 0 0 20px rgba(215,166,61,0.4);
+  }
+
+  .timeline-node.future .timeline-dot::after {
+    background: var(--warm-gold);
+    box-shadow: 0 0 12px rgba(232,191,90,0.6);
+  }
+
+  .timeline-year {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  .timeline-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: rgba(246,244,239,0.6);
+    text-align: center;
+    margin-top: 6px;
+    max-width: 180px;
+  }
+
+  .timeline-node:nth-child(1) { animation: fadeSlideUp 0.6s ease 1.2s both; }
+  .timeline-node:nth-child(3) { animation: fadeSlideUp 0.6s ease 1.5s both; }
+  .timeline-node:nth-child(5) { animation: fadeSlideUp 0.6s ease 1.8s both; }
+
+  /* Metric cards — below timeline */
+  .metrics {
+    position: absolute;
+    top: 520px;
+    left: 120px;
+    right: 120px;
+    z-index: 10;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .metric-card {
+    background: rgba(10,24,48,0.6);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 12px;
+    padding: 32px 36px;
+    text-align: center;
+    min-width: 220px;
+    backdrop-filter: blur(12px);
+    animation: fadeSlideUp 0.7s ease calc(1.4s + var(--i) * 0.2s) both;
+    position: relative;
+  }
+
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(215,166,61,0.3), transparent);
+  }
+
+  .metric-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .metric-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: rgba(246,244,239,0.6);
+    letter-spacing: 1px;
+  }
+
+  .metric-sublabel {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(215,166,61,0.5);
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Auto-qualification badge */
+  .auto-qual {
+    position: absolute;
+    top: 710px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(215,166,61,0.08);
+    border: 1px solid rgba(215,166,61,0.2);
+    border-radius: 8px;
+    padding: 14px 32px;
+    animation: fadeSlideUp 0.7s ease 2.4s both;
+  }
+
+  .auto-qual svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .auto-qual-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--ivory);
+    letter-spacing: 0.5px;
+  }
+
+  .auto-qual-text strong {
+    color: var(--warm-gold);
+    font-weight: 500;
+  }
+
+  /* Quote — bottom left */
+  .quote-block {
+    position: absolute;
+    bottom: 130px;
+    left: 80px;
+    z-index: 10;
+    animation: fadeSlideUp 0.7s ease 2.6s both;
+  }
+
+  .quote-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.7;
+    color: rgba(246,244,239,0.5);
+    max-width: 700px;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 90px;
+    right: 80px;
+    z-index: 20;
+    text-align: right;
+    animation: fadeIn 1s ease 2.2s both;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 3px;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- Cinematic letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">
+      AFC Asian Cup
+      <span class="year">2031</span>
+    </div>
+  </div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title block — top area -->
+  <div class="title-block">
+    <div class="tag">Футбольный профиль</div>
+    <h1 class="main-title">
+      ТАДЖИКИСТАН И ФУТБОЛ
+      <span class="highlight">История и потенциал</span>
+    </h1>
+    <div class="divider"></div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-node">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">1994</div>
+      <div class="timeline-label">Членство в AFC</div>
+    </div>
+    <div class="timeline-line"></div>
+    <div class="timeline-node">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2024</div>
+      <div class="timeline-label">Рост футбольной инфраструктуры</div>
+    </div>
+    <div class="timeline-line"></div>
+    <div class="timeline-node future">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2031</div>
+      <div class="timeline-label">Кубок Азии в Таджикистане</div>
+    </div>
+  </div>
+
+  <!-- Metric cards -->
+  <div class="metrics">
+    <div class="metric-card" style="--i:0">
+      <div class="metric-number">106</div>
+      <div class="metric-label">Рейтинг FIFA</div>
+      <div class="metric-sublabel">мировой рейтинг</div>
+    </div>
+    <div class="metric-card" style="--i:1">
+      <div class="metric-number">25 000+</div>
+      <div class="metric-label">Зарегистрированных игроков</div>
+    </div>
+    <div class="metric-card" style="--i:2">
+      <div class="metric-number">30+</div>
+      <div class="metric-label">Профессиональных клубов</div>
+    </div>
+    <div class="metric-card" style="--i:3">
+      <div class="metric-number">30</div>
+      <div class="metric-label">Лет в составе AFC</div>
+      <div class="metric-sublabel">с 1994 года</div>
+    </div>
+  </div>
+
+  <!-- Auto-qualification -->
+  <div class="auto-qual">
+    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+    <div class="auto-qual-text"><strong>Автоматическая квалификация</strong> сборной Таджикистана в случае победы заявки</div>
+  </div>
+
+  <!-- Quote — bottom left -->
+  <div class="quote-block">
+    <p class="quote-text">«Кубок Азии 2031 — катализатор развития таджикского футбола на десятилетия вперёд»</p>
+  </div>
+
+  <!-- Bottom info -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+</div>
+</body>
+</html>

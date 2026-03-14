@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 1 — Вариант 1: Imperial Night Classic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #07142C;
+    --deep-blue: #0D2247;
+    --gold: #D7A63D;
+    --warm-gold: #F2C96B;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #040E1F 0%, #0A1A38 30%, #0D2247 60%, #07142C 100%);
+  }
+
+  /* Background image layer */
+  .bg-image {
+    position: absolute;
+    inset: 0;
+    background: url('../images/aerial-night.jpg') center center / cover no-repeat;
+    opacity: 0.45;
+    animation: slowZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes slowZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+  }
+
+  /* Gradient overlays */
+  .overlay-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 350px;
+    background: linear-gradient(180deg, rgba(7,20,44,0.95) 0%, rgba(7,20,44,0.6) 60%, transparent 100%);
+    z-index: 2;
+  }
+
+  .overlay-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 400px;
+    background: linear-gradient(0deg, rgba(7,20,44,0.97) 0%, rgba(7,20,44,0.7) 50%, transparent 100%);
+    z-index: 2;
+  }
+
+  .overlay-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(4,14,31,0.6) 100%);
+    z-index: 2;
+  }
+
+  /* Gold decorative lines */
+  .gold-line-top {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    z-index: 10;
+    animation: fadeIn 1.5s ease 0.5s both;
+  }
+
+  .gold-line-bottom {
+    position: absolute;
+    bottom: 240px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    z-index: 10;
+    animation: fadeIn 1.5s ease 1.8s both;
+  }
+
+  /* AFC Logo area — top left */
+  .afc-logo {
+    position: absolute;
+    top: 40px;
+    left: 60px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: fadeSlideDown 0.8s ease 0.3s both;
+  }
+
+  .afc-logo-icon {
+    width: 52px;
+    height: 52px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7,20,44,0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .afc-logo-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--gold);
+  }
+
+  .afc-logo-text {
+    color: var(--ivory);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .afc-logo-text span {
+    display: block;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+  }
+
+  /* Tajikistan flag — top right */
+  .flag-accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 200px;
+    z-index: 5;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease 0.6s both;
+  }
+
+  .flag-accent::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 280px;
+    height: 200px;
+    background: linear-gradient(135deg,
+      #CC0000 0%, #CC0000 33%,
+      #FFFFFF 33%, #FFFFFF 66%,
+      #006600 66%, #006600 100%);
+    opacity: 0.25;
+    border-radius: 0 0 0 100%;
+    filter: blur(2px);
+  }
+
+  /* Main content */
+  .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    text-align: center;
+    padding: 0 120px;
+  }
+
+  .pre-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: fadeSlideUp 0.8s ease 0.8s both;
+  }
+
+  .main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 82px;
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    animation: fadeSlideUp 0.9s ease 1.0s both;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+
+  .main-title .gold {
+    color: var(--gold);
+    display: block;
+    font-size: 90px;
+    letter-spacing: 4px;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.6;
+    color: rgba(246,244,239,0.8);
+    max-width: 800px;
+    margin-top: 20px;
+    animation: fadeSlideUp 0.8s ease 1.4s both;
+  }
+
+  /* Bottom bar */
+  .bottom-bar {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20;
+    animation: fadeIn 1s ease 2s both;
+  }
+
+  .fft-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .fft-logo-circle {
+    width: 44px;
+    height: 44px;
+    border: 2px solid rgba(215,166,61,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7,20,44,0.6);
+  }
+
+  .fft-logo-circle span {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .fft-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(246,244,239,0.5);
+    letter-spacing: 1px;
+  }
+
+  .date-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+  }
+
+  /* Small flag badge — bottom center */
+  .flag-badge {
+    display: flex;
+    gap: 3px;
+    height: 16px;
+  }
+
+  .flag-badge div {
+    width: 20px;
+    height: 100%;
+  }
+
+  .flag-red { background: #CC0000; border-radius: 2px 0 0 2px; }
+  .flag-white { background: #FFFFFF; }
+  .flag-green { background: #006600; border-radius: 0 2px 2px 0; }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- Background -->
+  <div class="bg-image"></div>
+  <div class="overlay-top"></div>
+  <div class="overlay-bottom"></div>
+  <div class="overlay-vignette"></div>
+
+  <!-- Gold decorative lines -->
+  <div class="gold-line-top"></div>
+  <div class="gold-line-bottom"></div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-logo-text">
+      AFC Asian Cup
+      <span>2031</span>
+    </div>
+  </div>
+
+  <!-- Flag accent -->
+  <div class="flag-accent"></div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="pre-title">Официальная заявка</div>
+    <h1 class="main-title">
+      ТАДЖИКИСТАН
+      <span class="gold">ВАША АРЕНА 2031</span>
+    </h1>
+    <p class="subtitle">
+      Официальная заявка Федерации футбола Таджикистана<br>
+      на проведение групповых матчей AFC Asian Cup 2031
+    </p>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottom-bar">
+    <div class="fft-logo">
+      <div class="fft-logo-circle"><span>ФФТ</span></div>
+      <div class="fft-label">Федерация футбола Таджикистана</div>
+    </div>
+    <div class="flag-badge">
+      <div class="flag-red"></div>
+      <div class="flag-white"></div>
+      <div class="flag-green"></div>
+    </div>
+    <div class="date-label">МАРТ 2026</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 3 — Вариант 3: Горизонтальная полоса</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--midnight) 0%, var(--navy) 50%, #0D1F3A 100%);
+  }
+
+  /* Cinematic letterbox bars */
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  /* AFC Logo */
+  .afc-logo {
+    position: absolute;
+    top: 100px;
+    left: 80px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .afc-badge {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,14,29,0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .afc-badge svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--gold);
+  }
+
+  .afc-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ivory);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .afc-text .year {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 5px;
+    display: block;
+  }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 8px;
+    height: 120px;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeIn 1s ease 0.7s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Title above strip */
+  .title-section {
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    z-index: 12;
+    text-align: center;
+    animation: fadeSlideUp 0.8s ease 0.8s both;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(215,166,61,0.12);
+    border: 1px solid rgba(215,166,61,0.25);
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+
+  .divider-center {
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+    margin: 20px auto 0;
+    animation: growWidth 0.6s ease 1.2s both;
+  }
+
+  @keyframes growWidth {
+    from { width: 0; }
+    to { width: 80px; }
+  }
+
+  /* Horizontal scroll strip */
+  .card-strip {
+    position: absolute;
+    top: 400px;
+    left: 60px;
+    right: 60px;
+    z-index: 10;
+    display: flex;
+    gap: 20px;
+    height: 340px;
+  }
+
+  .card {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(215,166,61,0.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, flex 0.5s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 56px rgba(0,0,0,0.6);
+    flex: 1.3;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(0deg, rgba(5,14,29,0.9) 0%, transparent 100%);
+    z-index: 1;
+  }
+
+  .card-label {
+    position: absolute;
+    bottom: 20px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .card-number {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    opacity: 0.7;
+  }
+
+  /* Subtle gold line above each card */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20%; right: 20%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    z-index: 3;
+    opacity: 0.4;
+  }
+
+  /* Individual card photo backgrounds */
+  .card-lake    { background: url('../images/riverside-day.jpg') center/cover no-repeat; }
+  .card-park    { background: url('../images/boating.jpg') center/cover no-repeat; }
+  .card-mosque  { background: url('../images/detail.jpg') center/cover no-repeat; }
+  .card-avenue  { background: url('../images/bridge-night.jpg') center/cover no-repeat; }
+  .card-pamir   { background: url('../images/aerial-day.jpg') center/cover no-repeat; }
+  .card-cuisine { background: url('../images/plaza.jpg') center/cover no-repeat; }
+
+  /* Animation delays for cards */
+  .card:nth-child(1) { animation: fadeCardIn 0.5s ease 1.4s both; }
+  .card:nth-child(2) { animation: fadeCardIn 0.5s ease 1.55s both; }
+  .card:nth-child(3) { animation: fadeCardIn 0.5s ease 1.7s both; }
+  .card:nth-child(4) { animation: fadeCardIn 0.5s ease 1.85s both; }
+  .card:nth-child(5) { animation: fadeCardIn 0.5s ease 2.0s both; }
+  .card:nth-child(6) { animation: fadeCardIn 0.5s ease 2.15s both; }
+
+  @keyframes fadeCardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Slogan below strip */
+  .slogan-section {
+    position: absolute;
+    top: 780px;
+    left: 0;
+    right: 0;
+    z-index: 12;
+    text-align: center;
+    animation: fadeSlideUp 0.7s ease 2.4s both;
+  }
+
+  .slogan {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    color: rgba(246,244,239,0.65);
+    font-style: italic;
+    letter-spacing: 1px;
+  }
+
+  .slogan-accent {
+    color: var(--warm-gold);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Decorative line under slogan */
+  .slogan-line {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 16px auto 0;
+    opacity: 0.4;
+  }
+
+  /* Bottom info strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 90px;
+    right: 80px;
+    z-index: 20;
+    text-align: right;
+    animation: fadeIn 1s ease 2.6s both;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 3px;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Cinematic letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">
+      AFC Asian Cup
+      <span class="year">2031</span>
+    </div>
+  </div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title above -->
+  <div class="title-section">
+    <div class="tag">Слайд 3</div>
+    <h1 class="main-title">КРАСОТЫ ТАДЖИКИСТАНА</h1>
+    <div class="divider-center"></div>
+  </div>
+
+  <!-- Horizontal card strip -->
+  <div class="card-strip">
+    <div class="card card-lake">
+      <span class="card-number">01</span>
+      <div class="card-label">Озеро Искандеркуль</div>
+    </div>
+    <div class="card card-park">
+      <span class="card-number">02</span>
+      <div class="card-label">Нац. парк «Тигровая балка»</div>
+    </div>
+    <div class="card card-mosque">
+      <span class="card-number">03</span>
+      <div class="card-label">Мечети Худжанда</div>
+    </div>
+    <div class="card card-avenue">
+      <span class="card-number">04</span>
+      <div class="card-label">Проспект Рудаки</div>
+    </div>
+    <div class="card card-pamir">
+      <span class="card-number">05</span>
+      <div class="card-label">Памирский тракт</div>
+    </div>
+    <div class="card card-cuisine">
+      <span class="card-number">06</span>
+      <div class="card-label">Национальная кухня</div>
+    </div>
+  </div>
+
+  <!-- Slogan below -->
+  <div class="slogan-section">
+    <p class="slogan">«Таджикистан: где <span class="slogan-accent">древняя история</span> встречает <span class="slogan-accent">современные амбиции</span>»</p>
+    <div class="slogan-line"></div>
+  </div>
+
+  <!-- Bottom info -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+</div>
+</body>
+</html>

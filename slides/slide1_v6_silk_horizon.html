@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 1 — Вариант 6: New Silk Horizon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --mountain: #102A43;
+    --deep: #0B1E34;
+    --sunrise: #E0A64E;
+    --warm-gold: #D4943A;
+    --sand: #C9B28F;
+    --ivory: #F8F8F4;
+    --white: #FFFFFF;
+    --emerald: #2B8D68;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--mountain);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+  }
+
+  /* Multi-layer background */
+  .bg-base {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(170deg,
+      #0B1525 0%,
+      #102A43 30%,
+      #1A3A5C 55%,
+      #2C4A6B 70%,
+      #3D5A7A 85%,
+      #1E3854 100%);
+  }
+
+  /* Sunrise glow effect */
+  .sunrise-glow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px;
+    height: 500px;
+    background: radial-gradient(ellipse at center bottom,
+      rgba(224,166,78,0.25) 0%,
+      rgba(212,148,58,0.12) 30%,
+      transparent 65%);
+    z-index: 2;
+    animation: glowPulse 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowPulse {
+    from { opacity: 0.7; }
+    to { opacity: 1; }
+  }
+
+  /* Background photo — mountains/city panorama */
+  .bg-photo {
+    position: absolute;
+    inset: 0;
+    background: url('../images/aerial-night.jpg') center 60% / cover no-repeat;
+    opacity: 0.2;
+    animation: driftUp 25s ease-in-out infinite alternate;
+  }
+
+  @keyframes driftUp {
+    from { transform: scale(1.02) translateY(0); }
+    to { transform: scale(1.06) translateY(-20px); }
+  }
+
+  /* Abstract mountain silhouettes */
+  .mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    z-index: 3;
+  }
+
+  .mountains svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Decorative route lines — Silk Road motif */
+  .route-line {
+    position: absolute;
+    z-index: 4;
+  }
+
+  .route-1 {
+    top: 380px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(224,166,78,0.05) 20%,
+      rgba(224,166,78,0.15) 45%,
+      rgba(224,166,78,0.15) 55%,
+      rgba(224,166,78,0.05) 80%,
+      transparent 100%);
+    animation: fadeIn 2s ease 1s both;
+  }
+
+  .route-2 {
+    top: 640px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(224,166,78,0.04) 15%,
+      rgba(224,166,78,0.1) 40%,
+      rgba(224,166,78,0.1) 60%,
+      rgba(224,166,78,0.04) 85%,
+      transparent 100%);
+    animation: fadeIn 2s ease 1.3s both;
+  }
+
+  /* AFC Logo */
+  .afc-logo {
+    position: absolute;
+    top: 50px;
+    left: 80px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: fadeSlideDown 0.8s ease 0.4s both;
+  }
+
+  .afc-ring {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--sunrise);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16,42,67,0.6);
+    backdrop-filter: blur(6px);
+  }
+
+  .afc-ring svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--sunrise);
+  }
+
+  .afc-info {
+    font-family: 'Sora', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--ivory);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  .afc-info span {
+    display: block;
+    color: var(--sunrise);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 5px;
+  }
+
+  /* Flag — as a soft gradient band at top */
+  .flag-band {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    display: flex;
+    z-index: 20;
+  }
+
+  .flag-band div { flex: 1; }
+  .fb-r { background: linear-gradient(180deg, #CC0000, rgba(204,0,0,0.3)); }
+  .fb-w { background: linear-gradient(180deg, #FFFFFF, rgba(255,255,255,0.3)); }
+  .fb-g { background: linear-gradient(180deg, #006600, rgba(0,102,0,0.3)); }
+
+  /* Main Content */
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    text-align: center;
+    z-index: 10;
+    width: 100%;
+    padding: 0 100px;
+  }
+
+  .horizon-label {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 30px;
+    animation: fadeSlideUp 0.7s ease 0.8s both;
+  }
+
+  .main-title {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 80px;
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.4);
+    animation: fadeSlideUp 0.8s ease 1.0s both;
+  }
+
+  .title-accent {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 56px;
+    color: var(--sunrise);
+    letter-spacing: 6px;
+    margin-bottom: 32px;
+    animation: fadeSlideUp 0.8s ease 1.2s both;
+  }
+
+  .sun-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    animation: fadeIn 1s ease 1.5s both;
+  }
+
+  .sun-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sunrise), transparent);
+  }
+
+  .sun-dot {
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--sunrise);
+    border-radius: 50%;
+    background: rgba(224,166,78,0.3);
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(248,248,244,0.65);
+    max-width: 680px;
+    margin: 0 auto;
+    animation: fadeSlideUp 0.7s ease 1.7s both;
+  }
+
+  /* Bottom bar */
+  .bottom-bar {
+    position: absolute;
+    bottom: 50px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20;
+    animation: fadeIn 1s ease 2.2s both;
+  }
+
+  .fft-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .fft-emblem {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(224,166,78,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--sunrise);
+    letter-spacing: 1px;
+  }
+
+  .fft-text {
+    font-size: 11px;
+    color: rgba(248,248,244,0.35);
+    letter-spacing: 1.5px;
+  }
+
+  .bottom-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .bottom-center .city {
+    font-family: 'Sora', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(224,166,78,0.4);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .date-block {
+    font-size: 12px;
+    color: rgba(248,248,244,0.3);
+    letter-spacing: 2px;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- Layered background -->
+  <div class="bg-base"></div>
+  <div class="bg-photo"></div>
+  <div class="sunrise-glow"></div>
+
+  <!-- Abstract mountain silhouettes -->
+  <div class="mountains">
+    <svg viewBox="0 0 1920 400" preserveAspectRatio="none">
+      <path d="M0,400 L0,300 Q200,200 400,280 Q600,180 800,240 Q1000,140 1200,200 Q1400,120 1600,220 Q1800,160 1920,250 L1920,400 Z" fill="rgba(11,30,52,0.5)"/>
+      <path d="M0,400 L0,340 Q300,260 500,310 Q700,230 900,290 Q1100,210 1300,270 Q1500,200 1700,280 Q1850,230 1920,300 L1920,400 Z" fill="rgba(11,30,52,0.7)"/>
+      <path d="M0,400 L0,360 Q250,320 500,350 Q750,300 1000,340 Q1250,290 1500,330 Q1700,310 1920,350 L1920,400 Z" fill="rgba(11,30,52,0.9)"/>
+    </svg>
+  </div>
+
+  <!-- Route lines -->
+  <div class="route-line route-1"></div>
+  <div class="route-line route-2"></div>
+
+  <!-- Flag band -->
+  <div class="flag-band">
+    <div class="fb-r"></div>
+    <div class="fb-w"></div>
+    <div class="fb-g"></div>
+  </div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-ring">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-info">
+      AFC Asian Cup
+      <span>2031</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="horizon-label">Новый горизонт азиатского футбола</div>
+    <h1 class="main-title">ТАДЖИКИСТАН</h1>
+    <div class="title-accent">Ваша арена 2031</div>
+    <div class="sun-divider">
+      <div class="sun-line"></div>
+      <div class="sun-dot"></div>
+      <div class="sun-line"></div>
+    </div>
+    <p class="subtitle">
+      Официальная заявка Федерации футбола Таджикистана<br>
+      на проведение групповых матчей AFC Asian Cup 2031
+    </p>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottom-bar">
+    <div class="fft-block">
+      <div class="fft-emblem">ФФТ</div>
+      <div class="fft-text">Федерация футбола Таджикистана</div>
+    </div>
+    <div class="bottom-center">
+      <div class="city">Душанбе</div>
+    </div>
+    <div class="date-block">МАРТ 2026</div>
+  </div>
+</div>
+</body>
+</html>
