@@ -32,6 +32,8 @@
 
   .letterbox-top { position: absolute; top: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
   .letterbox-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
+  .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+  .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
 
   .afc-logo {
     position: absolute; top: 100px; left: 80px; z-index: 20;
@@ -154,7 +156,7 @@
     border: 1px solid rgba(76,175,80,0.3);
     border-radius: 20px;
     padding: 4px 14px;
-    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px;
     color: #4CAF50; letter-spacing: 1px; text-transform: uppercase;
   }
   .req-badge svg { width: 12px; height: 12px; fill: #4CAF50; }
