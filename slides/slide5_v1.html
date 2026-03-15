@@ -253,7 +253,7 @@
   /* ===== Big numbers row — cinematic broadcast style ===== */
   .numbers-row {
     position: absolute;
-    top: 110px;
+    top: 200px;
     left: 200px;
     right: 200px;
     display: flex;
@@ -275,7 +275,7 @@
   .stat-number {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 160px;
+    font-size: 120px;
     line-height: 1;
     background: linear-gradient(180deg, var(--warm-gold) 0%, var(--gold) 40%, #B8892E 100%);
     -webkit-background-clip: text;
@@ -335,7 +335,7 @@
   /* ===== Group stage bracket diagram ===== */
   .bracket-area {
     position: absolute;
-    top: 400px;
+    top: 440px;
     left: 80px;
     right: 80px;
     z-index: 10;
@@ -519,7 +519,7 @@
   /* ===== Stadium cards with photo backgrounds ===== */
   .stadiums-row {
     position: absolute;
-    top: 710px;
+    top: 740px;
     left: 80px;
     right: 80px;
     display: flex;
@@ -529,7 +529,7 @@
 
   .stadium-card {
     flex: 1;
-    height: 180px;
+    height: 160px;
     border-radius: 14px;
     overflow: hidden;
     position: relative;
@@ -641,11 +641,11 @@
     opacity: 0.6;
   }
 
-  /* ===== Title block — bottom-left ===== */
+  /* ===== Title block — top-left, next to AFC logo ===== */
   .title-block {
     position: absolute;
-    bottom: 120px;
-    left: 80px;
+    top: 96px;
+    left: 320px;
     z-index: 16;
     animation: fadeSlideUp 0.8s ease 0.6s both;
   }
@@ -662,26 +662,26 @@
     border: 1px solid rgba(215,166,61,0.2);
     padding: 7px 18px;
     border-radius: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     backdrop-filter: blur(8px);
   }
 
   .slide-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 44px;
+    font-size: 40px;
     color: var(--white);
     text-transform: uppercase;
     letter-spacing: 3px;
     line-height: 1.1;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .divider {
     width: 80px;
     height: 3px;
     background: linear-gradient(90deg, var(--gold), var(--warm-gold));
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     animation: growWidth 0.6s ease 1.0s both;
     border-radius: 2px;
   }
@@ -694,8 +694,8 @@
   .key-message {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 14px;
+    line-height: 1.6;
     color: rgba(246,244,239,0.55);
     max-width: 480px;
   }
