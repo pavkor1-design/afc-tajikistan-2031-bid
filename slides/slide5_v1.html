@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1920, height=1080, initial-scale=1">
-<title>Слайд 5 — Вариант 1: Карточки с числами</title>
+<title>Слайд 5 — Наша заявка: суть и масштаб</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -34,12 +34,108 @@
     height: 1080px;
     overflow: hidden;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(10,24,48,0.9) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 30%, rgba(215,166,61,0.04) 0%, transparent 50%),
-      linear-gradient(180deg, var(--midnight) 0%, var(--navy) 50%, var(--midnight) 100%);
+      radial-gradient(ellipse at 30% 40%, rgba(215,166,61,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 25%, rgba(215,166,61,0.04) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 80%, rgba(10,24,48,0.95) 0%, transparent 60%),
+      linear-gradient(160deg, var(--midnight) 0%, #071326 30%, var(--navy) 60%, var(--midnight) 100%);
   }
 
-  /* Cinematic letterbox bars */
+  /* ===== Grid pattern overlay ===== */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 55% 45%, rgba(0,0,0,0.5) 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 55% 45%, rgba(0,0,0,0.5) 0%, transparent 70%);
+  }
+
+  /* ===== Diagonal gold accent lines ===== */
+  .diagonal-accents {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .diagonal-accents::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: 300px;
+    width: 1px;
+    height: 600px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.15), transparent);
+    transform: rotate(-25deg);
+    animation: fadeIn 2s ease 0.5s both;
+  }
+
+  .diagonal-accents::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: 260px;
+    width: 1px;
+    height: 500px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.08), transparent);
+    transform: rotate(-25deg);
+    animation: fadeIn 2s ease 0.8s both;
+  }
+
+  .diagonal-line-3 {
+    position: absolute;
+    top: 200px;
+    left: -100px;
+    width: 1px;
+    height: 700px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.06), transparent);
+    transform: rotate(20deg);
+    animation: fadeIn 2s ease 1s both;
+  }
+
+  /* ===== Gold particles ===== */
+  .particles {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat 8s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
+  .particle:nth-child(2) { left: 35%; top: 55%; animation-delay: 1.5s; animation-duration: 9s; width: 2px; height: 2px; }
+  .particle:nth-child(3) { left: 55%; top: 15%; animation-delay: 3s; animation-duration: 6s; }
+  .particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 0.5s; animation-duration: 10s; width: 2px; height: 2px; }
+  .particle:nth-child(5) { left: 85%; top: 35%; animation-delay: 2s; animation-duration: 8s; }
+  .particle:nth-child(6) { left: 25%; top: 75%; animation-delay: 4s; animation-duration: 7s; width: 2px; height: 2px; }
+  .particle:nth-child(7) { left: 90%; top: 55%; animation-delay: 1s; animation-duration: 11s; }
+  .particle:nth-child(8) { left: 45%; top: 85%; animation-delay: 3.5s; animation-duration: 8s; width: 4px; height: 4px; }
+  .particle:nth-child(9) { left: 60%; top: 40%; animation-delay: 5s; animation-duration: 9s; width: 2px; height: 2px; }
+  .particle:nth-child(10) { left: 10%; top: 45%; animation-delay: 2.5s; animation-duration: 7s; }
+  .particle:nth-child(11) { left: 78%; top: 18%; animation-delay: 6s; animation-duration: 10s; width: 2px; height: 2px; }
+  .particle:nth-child(12) { left: 42%; top: 30%; animation-delay: 4.5s; animation-duration: 8s; }
+
+  @keyframes particleFloat {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    15% { opacity: 0.6; }
+    50% { opacity: 0.3; transform: translateY(-40px) scale(1.2); }
+    85% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+  }
+
+  /* ===== Cinematic letterbox bars ===== */
   .letterbox-top {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -56,7 +152,24 @@
     z-index: 15;
   }
 
-  /* AFC Logo */
+  /* Thin gold lines on letterbox edges */
+  .letterbox-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
+  }
+
+  .letterbox-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
+  }
+
+  /* ===== AFC Logo ===== */
   .afc-logo {
     position: absolute;
     top: 100px;
@@ -104,7 +217,7 @@
     display: block;
   }
 
-  /* Flag ribbon */
+  /* ===== Flag ribbon ===== */
   .flag-ribbon {
     position: absolute;
     top: 100px;
@@ -125,34 +238,438 @@
   .fr-white { background: #FFFFFF; }
   .fr-green { background: #006600; }
 
-  /* Title — bottom-left */
+  /* ===== Main content area ===== */
+  .content-area {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== Big numbers row — cinematic broadcast style ===== */
+  .numbers-row {
+    position: absolute;
+    top: 110px;
+    left: 200px;
+    right: 200px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    z-index: 10;
+  }
+
+  .stat-block {
+    text-align: center;
+    animation: fadeSlideUp 0.8s ease both;
+    position: relative;
+  }
+
+  .stat-block:nth-child(1) { animation-delay: 0.8s; }
+  .stat-block:nth-child(2) { animation-delay: 1.0s; }
+  .stat-block:nth-child(3) { animation-delay: 1.2s; }
+
+  .stat-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 160px;
+    line-height: 1;
+    background: linear-gradient(180deg, var(--warm-gold) 0%, var(--gold) 40%, #B8892E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 20px rgba(215,166,61,0.3));
+    position: relative;
+  }
+
+  .stat-number::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .stat-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ivory);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+
+  .stat-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(246,244,239,0.4);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* Separator dots between stats */
+  .stat-separator {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    animation: fadeIn 1s ease 1.4s both;
+  }
+
+  .stat-separator::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  /* ===== Group stage bracket diagram ===== */
+  .bracket-area {
+    position: absolute;
+    top: 400px;
+    left: 80px;
+    right: 80px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    animation: fadeSlideUp 0.8s ease 1.4s both;
+  }
+
+  .group-bracket {
+    width: 380px;
+    background: rgba(10,24,48,0.4);
+    border: 1px solid rgba(215,166,61,0.12);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .group-bracket::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(215,166,61,0.2), rgba(215,166,61,0.02));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .group-header {
+    padding: 18px 28px;
+    background: linear-gradient(90deg, rgba(215,166,61,0.12), rgba(215,166,61,0.03));
+    border-bottom: 1px solid rgba(215,166,61,0.1);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .group-letter {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    background: linear-gradient(180deg, var(--warm-gold), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .group-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ivory);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .group-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: rgba(246,244,239,0.4);
+    letter-spacing: 1px;
+  }
+
+  .team-slots {
+    padding: 12px 28px 20px;
+  }
+
+  .team-slot {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(215,166,61,0.05);
+  }
+
+  .team-slot:last-child { border-bottom: none; }
+
+  .team-pos {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--gold);
+    width: 24px;
+    text-align: center;
+  }
+
+  .team-flag-placeholder {
+    width: 32px;
+    height: 22px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, rgba(215,166,61,0.08), rgba(215,166,61,0.03));
+    border: 1px solid rgba(215,166,61,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .team-flag-placeholder svg {
+    width: 14px;
+    height: 14px;
+    fill: rgba(215,166,61,0.2);
+  }
+
+  .team-name-placeholder {
+    flex: 1;
+    height: 10px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, rgba(246,244,239,0.08), rgba(246,244,239,0.02));
+  }
+
+  .group-matches {
+    padding: 0 28px 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .group-matches svg {
+    width: 14px;
+    height: 14px;
+    fill: rgba(215,166,61,0.4);
+  }
+
+  /* Center connector between brackets */
+  .bracket-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    animation: fadeIn 1s ease 1.8s both;
+  }
+
+  .connector-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.3), transparent);
+  }
+
+  .connector-badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(215,166,61,0.3);
+    background: rgba(215,166,61,0.06);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .connector-badge .cb-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .connector-badge .cb-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 7px;
+    color: rgba(215,166,61,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== Stadium cards with photo backgrounds ===== */
+  .stadiums-row {
+    position: absolute;
+    top: 710px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    gap: 30px;
+    z-index: 10;
+  }
+
+  .stadium-card {
+    flex: 1;
+    height: 180px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    animation: fadeSlideUp 0.7s ease both;
+    border: 1px solid rgba(215,166,61,0.15);
+  }
+
+  .stadium-card:nth-child(1) { animation-delay: 1.8s; }
+  .stadium-card:nth-child(2) { animation-delay: 2.0s; }
+
+  .stadium-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    animation: cinematicDrift 20s ease-in-out infinite alternate;
+  }
+
+  .stadium-card:nth-child(1) .stadium-bg {
+    background-image: url('../ЭРА AFC/04 Стадионы/Душанбе/Landscape/日景鸟瞰.jpg');
+  }
+
+  .stadium-card:nth-child(2) .stadium-bg {
+    background-image: url('../ЭРА AFC/04 Стадионы/Душанбе/Landscape/夜景鸟瞰.jpg');
+  }
+
+  .stadium-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(5,14,29,0.3) 0%,
+      rgba(5,14,29,0.5) 40%,
+      rgba(5,14,29,0.85) 100%
+    );
+  }
+
+  .stadium-glass {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(1px);
+  }
+
+  .stadium-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .stadium-info h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+
+  .stadium-info .stadium-meta {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: rgba(246,244,239,0.7);
+    line-height: 1.6;
+  }
+
+  .stadium-info .stadium-meta span {
+    color: var(--warm-gold);
+    font-weight: 500;
+  }
+
+  .stadium-capacity {
+    text-align: right;
+  }
+
+  .capacity-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    background: linear-gradient(180deg, var(--warm-gold), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .capacity-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    color: rgba(246,244,239,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Gold line accent on stadium cards */
+  .stadium-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--warm-gold), transparent);
+    opacity: 0.6;
+  }
+
+  /* ===== Title block — bottom-left ===== */
   .title-block {
     position: absolute;
     bottom: 120px;
     left: 80px;
-    z-index: 10;
-    animation: fadeSlideUp 0.8s ease 0.8s both;
+    z-index: 16;
+    animation: fadeSlideUp 0.8s ease 0.6s both;
   }
 
   .tag {
     display: inline-block;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--gold);
-    background: rgba(215,166,61,0.12);
-    border: 1px solid rgba(215,166,61,0.25);
-    padding: 8px 20px;
+    background: rgba(215,166,61,0.1);
+    border: 1px solid rgba(215,166,61,0.2);
+    padding: 7px 18px;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(8px);
   }
 
   .slide-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 48px;
+    font-size: 44px;
     color: var(--white);
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -163,9 +680,10 @@
   .divider {
     width: 80px;
     height: 3px;
-    background: var(--gold);
-    margin-bottom: 16px;
-    animation: growWidth 0.6s ease 1.2s both;
+    background: linear-gradient(90deg, var(--gold), var(--warm-gold));
+    margin-bottom: 14px;
+    animation: growWidth 0.6s ease 1.0s both;
+    border-radius: 2px;
   }
 
   @keyframes growWidth {
@@ -176,162 +694,27 @@
   .key-message {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.7;
-    color: rgba(246,244,239,0.65);
-    max-width: 560px;
+    color: rgba(246,244,239,0.55);
+    max-width: 480px;
   }
 
-  /* Number cards row */
-  .numbers-row {
-    position: absolute;
-    top: 200px;
-    left: 80px;
-    right: 80px;
-    display: flex;
-    gap: 40px;
-    z-index: 10;
-  }
-
-  .number-card {
-    flex: 1;
-    background: rgba(10,24,48,0.6);
-    border: 1px solid rgba(215,166,61,0.15);
-    border-radius: 12px;
-    padding: 48px 40px;
-    text-align: center;
-    backdrop-filter: blur(8px);
-    animation: fadeSlideUp 0.7s ease both;
-  }
-
-  .number-card:nth-child(1) { animation-delay: 1s; }
-  .number-card:nth-child(2) { animation-delay: 1.2s; }
-  .number-card:nth-child(3) { animation-delay: 1.4s; }
-
-  .number-card .big-number {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 110px;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .number-card .number-label {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    color: var(--ivory);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-
-  .number-card .number-sub {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 13px;
-    color: rgba(246,244,239,0.45);
-    margin-top: 8px;
-  }
-
-  /* Stadium cards */
-  .stadiums-row {
-    position: absolute;
-    top: 520px;
-    left: 80px;
-    right: 80px;
-    display: flex;
-    gap: 40px;
-    z-index: 10;
-  }
-
-  .stadium-card {
-    flex: 1;
-    background: rgba(10,24,48,0.5);
-    border: 1px solid rgba(215,166,61,0.12);
-    border-radius: 12px;
-    padding: 32px 36px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    backdrop-filter: blur(8px);
-    animation: fadeSlideUp 0.7s ease both;
-  }
-
-  .stadium-card:nth-child(1) { animation-delay: 1.6s; }
-  .stadium-card:nth-child(2) { animation-delay: 1.8s; }
-
-  .stadium-icon {
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    border: 1px solid rgba(215,166,61,0.3);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(215,166,61,0.08);
-  }
-
-  .stadium-icon svg {
-    width: 28px;
-    height: 28px;
-    fill: var(--gold);
-  }
-
-  .stadium-info h3 {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 22px;
-    color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-
-  .stadium-info .stadium-meta {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    color: rgba(246,244,239,0.6);
-    line-height: 1.6;
-  }
-
-  .stadium-info .stadium-meta span {
-    color: var(--warm-gold);
-    font-weight: 500;
-  }
-
-  /* City label */
-  .city-label {
-    position: absolute;
-    top: 470px;
-    left: 80px;
-    z-index: 10;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(215,166,61,0.6);
-    animation: fadeIn 1s ease 1.5s both;
-  }
-
-  /* Bottom info strip */
+  /* ===== Bottom info strip ===== */
   .bottom-strip {
     position: absolute;
     bottom: 90px;
     right: 80px;
     z-index: 20;
     text-align: right;
-    animation: fadeIn 1s ease 2.2s both;
+    animation: fadeIn 1s ease 2.4s both;
   }
 
   .fft-name {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 12px;
-    color: rgba(246,244,239,0.45);
+    color: rgba(246,244,239,0.4);
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 6px;
@@ -341,24 +724,83 @@
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 13px;
-    color: rgba(215,166,61,0.5);
+    color: rgba(215,166,61,0.45);
     letter-spacing: 3px;
   }
 
-  /* Animations */
+  /* ===== Ambient glow behind numbers ===== */
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .glow-orb-1 {
+    width: 400px;
+    height: 300px;
+    background: rgba(215,166,61,0.06);
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fadeIn 2s ease 0.5s both;
+  }
+
+  .glow-orb-2 {
+    width: 300px;
+    height: 200px;
+    background: rgba(215,166,61,0.04);
+    top: 450px;
+    left: 30%;
+    animation: fadeIn 2s ease 1s both;
+  }
+
+  /* ===== Animations ===== */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 
   @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(25px); }
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes cinematicDrift {
+    from { transform: scale(1.05) translateX(0); }
+    to { transform: scale(1.1) translateX(-15px); }
   }
 </style>
 </head>
 <body>
 <div class="slide">
+
+  <!-- Decorative layers -->
+  <div class="grid-overlay"></div>
+  <div class="diagonal-accents">
+    <div class="diagonal-line-3"></div>
+  </div>
+
+  <!-- Ambient glow orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Gold particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
 
   <!-- Cinematic letterbox -->
   <div class="letterbox-top"></div>
@@ -382,51 +824,145 @@
     <div class="fr-green"></div>
   </div>
 
-  <!-- Number cards -->
+  <!-- ===== Big dramatic numbers ===== -->
   <div class="numbers-row">
-    <div class="number-card">
-      <div class="big-number">2</div>
-      <div class="number-label">Группы</div>
-      <div class="number-sub">Группа X &middot; Группа Y</div>
+    <div class="stat-block">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Группы</div>
+      <div class="stat-sub">Группа X &middot; Группа Y</div>
     </div>
-    <div class="number-card">
-      <div class="big-number">8</div>
-      <div class="number-label">Команд</div>
-      <div class="number-sub">Участники группового этапа</div>
+    <div class="stat-separator"></div>
+    <div class="stat-block">
+      <div class="stat-number">8</div>
+      <div class="stat-label">Команд</div>
+      <div class="stat-sub">Участники группового этапа</div>
     </div>
-    <div class="number-card">
-      <div class="big-number">12</div>
-      <div class="number-label">Матчей</div>
-      <div class="number-sub">Групповой этап турнира</div>
+    <div class="stat-separator"></div>
+    <div class="stat-block">
+      <div class="stat-number">12</div>
+      <div class="stat-label">Матчей</div>
+      <div class="stat-sub">Групповой этап в Душанбе</div>
     </div>
   </div>
 
-  <!-- City label -->
-  <div class="city-label">Город Душанбе — столица Таджикистана &middot; Стадионы</div>
+  <!-- ===== Group stage bracket diagram ===== -->
+  <div class="bracket-area">
 
-  <!-- Stadium cards -->
+    <!-- Group X -->
+    <div class="group-bracket">
+      <div class="group-header">
+        <div class="group-letter">X</div>
+        <div>
+          <div class="group-title">Группа X</div>
+          <div class="group-subtitle">Душанбе Арена &middot; 6 матчей</div>
+        </div>
+      </div>
+      <div class="team-slots">
+        <div class="team-slot">
+          <div class="team-pos">1</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+        <div class="team-slot">
+          <div class="team-pos">2</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+        <div class="team-slot">
+          <div class="team-pos">3</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+        <div class="team-slot">
+          <div class="team-pos">4</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+      </div>
+      <div class="group-matches">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        6 матчей группового этапа
+      </div>
+    </div>
+
+    <!-- Center connector -->
+    <div class="bracket-connector">
+      <div class="connector-line"></div>
+      <div class="connector-badge">
+        <div class="cb-number">12</div>
+        <div class="cb-label">матчей</div>
+      </div>
+      <div class="connector-line"></div>
+    </div>
+
+    <!-- Group Y -->
+    <div class="group-bracket">
+      <div class="group-header">
+        <div class="group-letter">Y</div>
+        <div>
+          <div class="group-title">Группа Y</div>
+          <div class="group-subtitle">Гиссар &middot; 6 матчей</div>
+        </div>
+      </div>
+      <div class="team-slots">
+        <div class="team-slot">
+          <div class="team-pos">1</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+        <div class="team-slot">
+          <div class="team-pos">2</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+        <div class="team-slot">
+          <div class="team-pos">3</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+        <div class="team-slot">
+          <div class="team-pos">4</div>
+          <div class="team-flag-placeholder"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg></div>
+          <div class="team-name-placeholder"></div>
+        </div>
+      </div>
+      <div class="group-matches">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        6 матчей группового этапа
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Stadium cards with photo backgrounds ===== -->
   <div class="stadiums-row">
     <div class="stadium-card">
-      <div class="stadium-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
-      </div>
-      <div class="stadium-info">
-        <h3>«Душанбе Арена»</h3>
-        <div class="stadium-meta">
-          Вместимость: <span>40 000</span><br>
-          Статус: <span>Новое строительство</span>
+      <div class="stadium-bg"></div>
+      <div class="stadium-gradient"></div>
+      <div class="stadium-glass"></div>
+      <div class="stadium-content">
+        <div class="stadium-info">
+          <h3>Душанбе Арена</h3>
+          <div class="stadium-meta">Новое строительство &middot; <span>Группа X</span></div>
+        </div>
+        <div class="stadium-capacity">
+          <div class="capacity-number">40 000</div>
+          <div class="capacity-label">мест</div>
         </div>
       </div>
     </div>
     <div class="stadium-card">
-      <div class="stadium-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
-      </div>
-      <div class="stadium-info">
-        <h3>«Гиссар»</h3>
-        <div class="stadium-meta">
-          Вместимость: <span>25 000</span><br>
-          Статус: <span>Реконструкция</span>
+      <div class="stadium-bg"></div>
+      <div class="stadium-gradient"></div>
+      <div class="stadium-glass"></div>
+      <div class="stadium-content">
+        <div class="stadium-info">
+          <h3>Гиссар</h3>
+          <div class="stadium-meta">Реконструкция &middot; <span>Группа Y</span></div>
+        </div>
+        <div class="stadium-capacity">
+          <div class="capacity-number">25 000</div>
+          <div class="capacity-label">мест</div>
         </div>
       </div>
     </div>
@@ -437,7 +973,7 @@
     <div class="tag">Слайд 5 &middot; Суть заявки</div>
     <h1 class="slide-title">Наша заявка:<br>суть и масштаб</h1>
     <div class="divider"></div>
-    <p class="key-message">Таджикистан берёт на себя реалистичную, чётко оформленную часть турнира — 2 группы, фокусная концентрация ресурсов, максимальное качество.</p>
+    <p class="key-message">2 группы, фокусная концентрация ресурсов, максимальное качество проведения турнира.</p>
   </div>
 
   <!-- Bottom info -->
