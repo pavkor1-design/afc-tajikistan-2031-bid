@@ -146,13 +146,12 @@
 
   .letterbox-bottom {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    top: 1000px; left: 0; right: 0;
     height: 80px;
     background: var(--midnight);
     z-index: 15;
   }
 
-  /* Thin gold lines on letterbox edges */
   .letterbox-top::after {
     content: '';
     position: absolute;
@@ -169,21 +168,61 @@
     background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
   }
 
-  /* ===== AFC Logo ===== */
-  .afc-logo {
+  /* ===== Ambient glow orbs ===== */
+  .glow-orb {
     position: absolute;
-    top: 100px;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .glow-orb-1 {
+    width: 400px;
+    height: 300px;
+    background: rgba(215,166,61,0.06);
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fadeIn 2s ease 0.5s both;
+  }
+
+  .glow-orb-2 {
+    width: 300px;
+    height: 200px;
+    background: rgba(215,166,61,0.04);
+    top: 500px;
+    left: 30%;
+    animation: fadeIn 2s ease 1s both;
+  }
+
+  /* ==========================================================
+     ROW 1: Top bar (y=90 to y=180)
+     ========================================================== */
+  .top-bar {
+    position: absolute;
+    top: 90px;
     left: 80px;
-    z-index: 20;
+    right: 80px;
+    height: 90px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+
+  /* AFC Logo */
+  .afc-logo {
     display: flex;
     align-items: center;
     gap: 16px;
-    animation: fadeIn 1s ease 0.5s both;
+    flex-shrink: 0;
   }
 
   .afc-badge {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     border: 2px solid var(--gold);
     border-radius: 8px;
     display: flex;
@@ -194,15 +233,15 @@
   }
 
   .afc-badge svg {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     fill: var(--gold);
   }
 
   .afc-text {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
     color: var(--ivory);
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -212,25 +251,69 @@
   .afc-text .year {
     color: var(--gold);
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
     letter-spacing: 5px;
     display: block;
   }
 
-  /* ===== Flag ribbon ===== */
+  /* Title center */
+  .title-center {
+    text-align: center;
+    flex: 1;
+    padding: 0 40px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(215,166,61,0.1);
+    border: 1px solid rgba(215,166,61,0.2);
+    padding: 4px 14px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    backdrop-filter: blur(8px);
+  }
+
+  .slide-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 38px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .title-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--warm-gold));
+    margin: 6px auto 0;
+    border-radius: 2px;
+    animation: growWidth 0.6s ease 1.0s both;
+  }
+
+  @keyframes growWidth {
+    from { width: 0; }
+    to { width: 80px; }
+  }
+
+  /* Flag ribbon */
   .flag-ribbon {
-    position: absolute;
-    top: 100px;
-    right: 80px;
-    z-index: 20;
     display: flex;
     flex-direction: column;
     width: 8px;
-    height: 120px;
+    height: 80px;
     border-radius: 4px;
     overflow: hidden;
-    animation: fadeIn 1s ease 0.7s both;
     box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    flex-shrink: 0;
   }
 
   .flag-ribbon div { flex: 1; }
@@ -238,28 +321,20 @@
   .fr-white { background: #FFFFFF; }
   .fr-green { background: #006600; }
 
-  /* ===== Main content area ===== */
-  .content-area {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    right: 0;
-    bottom: 100px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* ===== Big numbers row — cinematic broadcast style ===== */
+  /* ==========================================================
+     ROW 2: Big stat numbers (y=190 to y=380)
+     ========================================================== */
   .numbers-row {
     position: absolute;
-    top: 200px;
-    left: 200px;
-    right: 200px;
+    top: 190px;
+    left: 0;
+    right: 0;
+    height: 190px;
+    z-index: 10;
     display: flex;
     justify-content: center;
-    gap: 80px;
-    z-index: 10;
+    align-items: center;
+    gap: 60px;
   }
 
   .stat-block {
@@ -275,51 +350,38 @@
   .stat-number {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 120px;
+    font-size: 100px;
     line-height: 1;
     background: linear-gradient(180deg, var(--warm-gold) 0%, var(--gold) 40%, #B8892E 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     filter: drop-shadow(0 4px 20px rgba(215,166,61,0.3));
-    position: relative;
-  }
-
-  .stat-number::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
 
   .stat-label {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 22px;
+    font-size: 20px;
     color: var(--ivory);
     letter-spacing: 6px;
     text-transform: uppercase;
-    margin-top: 16px;
+    margin-top: 8px;
   }
 
   .stat-sub {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 12px;
     color: rgba(246,244,239,0.4);
-    margin-top: 8px;
+    margin-top: 4px;
     letter-spacing: 1px;
   }
 
-  /* Separator dots between stats */
   .stat-separator {
     display: flex;
     align-items: center;
-    padding-top: 40px;
+    padding-top: 30px;
     animation: fadeIn 1s ease 1.4s both;
   }
 
@@ -332,34 +394,40 @@
     opacity: 0.4;
   }
 
-  /* ===== Group stage bracket diagram ===== */
+  /* ==========================================================
+     ROW 3: Group brackets (y=390 to y=660)
+     ========================================================== */
   .bracket-area {
     position: absolute;
-    top: 440px;
+    top: 390px;
     left: 80px;
     right: 80px;
+    height: 270px;
     z-index: 10;
     display: flex;
     justify-content: center;
-    gap: 60px;
+    align-items: stretch;
+    gap: 40px;
     animation: fadeSlideUp 0.8s ease 1.4s both;
   }
 
   .group-bracket {
-    width: 380px;
+    width: 420px;
     background: rgba(10,24,48,0.4);
     border: 1px solid rgba(215,166,61,0.12);
-    border-radius: 16px;
+    border-radius: 14px;
     backdrop-filter: blur(12px);
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .group-bracket::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 1px;
     background: linear-gradient(180deg, rgba(215,166,61,0.2), rgba(215,166,61,0.02));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -369,7 +437,7 @@
   }
 
   .group-header {
-    padding: 18px 28px;
+    padding: 14px 24px;
     background: linear-gradient(90deg, rgba(215,166,61,0.12), rgba(215,166,61,0.03));
     border-bottom: 1px solid rgba(215,166,61,0.1);
     display: flex;
@@ -380,7 +448,7 @@
   .group-letter {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 28px;
+    font-size: 26px;
     background: linear-gradient(180deg, var(--warm-gold), var(--gold));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -390,7 +458,7 @@
   .group-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--ivory);
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -405,14 +473,15 @@
   }
 
   .team-slots {
-    padding: 12px 28px 20px;
+    padding: 8px 24px 10px;
+    flex: 1;
   }
 
   .team-slot {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 10px 0;
+    gap: 12px;
+    padding: 7px 0;
     border-bottom: 1px solid rgba(215,166,61,0.05);
   }
 
@@ -421,15 +490,15 @@
   .team-pos {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--gold);
-    width: 24px;
+    width: 22px;
     text-align: center;
   }
 
   .team-flag-placeholder {
-    width: 32px;
-    height: 22px;
+    width: 30px;
+    height: 20px;
     border-radius: 3px;
     background: linear-gradient(135deg, rgba(215,166,61,0.08), rgba(215,166,61,0.03));
     border: 1px solid rgba(215,166,61,0.1);
@@ -439,34 +508,35 @@
   }
 
   .team-flag-placeholder svg {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     fill: rgba(215,166,61,0.2);
   }
 
   .team-name-placeholder {
     flex: 1;
-    height: 10px;
+    height: 9px;
     border-radius: 5px;
     background: linear-gradient(90deg, rgba(246,244,239,0.08), rgba(246,244,239,0.02));
   }
 
   .group-matches {
-    padding: 0 28px 16px;
+    padding: 8px 24px 12px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 11px;
     color: rgba(215,166,61,0.5);
     letter-spacing: 2px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 8px;
+    border-top: 1px solid rgba(215,166,61,0.06);
   }
 
   .group-matches svg {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     fill: rgba(215,166,61,0.4);
   }
 
@@ -476,19 +546,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     animation: fadeIn 1s ease 1.8s both;
+    flex-shrink: 0;
+    width: 60px;
   }
 
   .connector-line {
     width: 1px;
-    height: 40px;
+    height: 35px;
     background: linear-gradient(180deg, transparent, rgba(215,166,61,0.3), transparent);
   }
 
   .connector-badge {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     border: 1px solid rgba(215,166,61,0.3);
     background: rgba(215,166,61,0.06);
@@ -502,7 +574,7 @@
   .connector-badge .cb-number {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 17px;
     color: var(--gold);
     line-height: 1;
   }
@@ -516,12 +588,15 @@
     text-transform: uppercase;
   }
 
-  /* ===== Stadium cards with photo backgrounds ===== */
+  /* ==========================================================
+     ROW 4: Stadium cards (y=670 to y=900)
+     ========================================================== */
   .stadiums-row {
     position: absolute;
-    top: 740px;
+    top: 670px;
     left: 80px;
     right: 80px;
+    height: 230px;
     display: flex;
     gap: 30px;
     z-index: 10;
@@ -529,7 +604,7 @@
 
   .stadium-card {
     flex: 1;
-    height: 160px;
+    height: 230px;
     border-radius: 14px;
     overflow: hidden;
     position: relative;
@@ -574,9 +649,7 @@
 
   .stadium-content {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     padding: 24px 30px;
     display: flex;
     align-items: flex-end;
@@ -631,7 +704,6 @@
     text-transform: uppercase;
   }
 
-  /* Gold line accent on stadium cards */
   .stadium-card::after {
     content: '';
     position: absolute;
@@ -641,73 +713,38 @@
     opacity: 0.6;
   }
 
-  /* ===== Title block — top-left, next to AFC logo ===== */
-  .title-block {
+  /* ==========================================================
+     BOTTOM STRIP (y=910 to y=990)
+     ========================================================== */
+  .bottom-strip {
     position: absolute;
-    top: 96px;
-    left: 320px;
-    z-index: 16;
-    animation: fadeSlideUp 0.8s ease 0.6s both;
+    top: 915px;
+    left: 80px;
+    right: 80px;
+    height: 75px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 1s ease 2.4s both;
   }
 
-  .tag {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(215,166,61,0.1);
-    border: 1px solid rgba(215,166,61,0.2);
-    padding: 7px 18px;
-    border-radius: 4px;
-    margin-bottom: 12px;
-    backdrop-filter: blur(8px);
-  }
-
-  .slide-title {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 40px;
-    color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    line-height: 1.1;
-    margin-bottom: 10px;
-  }
-
-  .divider {
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--warm-gold));
-    margin-bottom: 10px;
-    animation: growWidth 0.6s ease 1.0s both;
-    border-radius: 2px;
-  }
-
-  @keyframes growWidth {
-    from { width: 0; }
-    to { width: 80px; }
+  .bottom-left {
+    flex: 1;
   }
 
   .key-message {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
-    color: rgba(246,244,239,0.55);
-    max-width: 480px;
+    color: rgba(246,244,239,0.5);
+    max-width: 600px;
   }
 
-  /* ===== Bottom info strip ===== */
-  .bottom-strip {
-    position: absolute;
-    bottom: 90px;
-    right: 80px;
-    z-index: 20;
+  .bottom-right {
     text-align: right;
-    animation: fadeIn 1s ease 2.4s both;
+    flex-shrink: 0;
   }
 
   .fft-name {
@@ -717,7 +754,7 @@
     color: rgba(246,244,239,0.4);
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .date {
@@ -726,34 +763,6 @@
     font-size: 13px;
     color: rgba(215,166,61,0.45);
     letter-spacing: 3px;
-  }
-
-  /* ===== Ambient glow behind numbers ===== */
-  .glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    z-index: 4;
-    pointer-events: none;
-  }
-
-  .glow-orb-1 {
-    width: 400px;
-    height: 300px;
-    background: rgba(215,166,61,0.06);
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: fadeIn 2s ease 0.5s both;
-  }
-
-  .glow-orb-2 {
-    width: 300px;
-    height: 200px;
-    background: rgba(215,166,61,0.04);
-    top: 450px;
-    left: 30%;
-    animation: fadeIn 2s ease 1s both;
   }
 
   /* ===== Animations ===== */
@@ -806,25 +815,37 @@
   <div class="letterbox-top"></div>
   <div class="letterbox-bottom"></div>
 
-  <!-- AFC Logo -->
-  <div class="afc-logo">
-    <div class="afc-badge">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+  <!-- ===== ROW 1: Top bar (y=90–180) ===== -->
+  <div class="top-bar">
+
+    <!-- AFC Logo — left -->
+    <div class="afc-logo">
+      <div class="afc-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </div>
+      <div class="afc-text">
+        AFC Asian Cup
+        <span class="year">2031</span>
+      </div>
     </div>
-    <div class="afc-text">
-      AFC Asian Cup
-      <span class="year">2031</span>
+
+    <!-- Title — center -->
+    <div class="title-center">
+      <div class="tag">Слайд 5 &middot; Суть заявки</div>
+      <h1 class="slide-title">Наша заявка: суть и масштаб</h1>
+      <div class="title-divider"></div>
     </div>
+
+    <!-- Flag ribbon — right -->
+    <div class="flag-ribbon">
+      <div class="fr-red"></div>
+      <div class="fr-white"></div>
+      <div class="fr-green"></div>
+    </div>
+
   </div>
 
-  <!-- Flag ribbon -->
-  <div class="flag-ribbon">
-    <div class="fr-red"></div>
-    <div class="fr-white"></div>
-    <div class="fr-green"></div>
-  </div>
-
-  <!-- ===== Big dramatic numbers ===== -->
+  <!-- ===== ROW 2: Big stat numbers (y=190–380) ===== -->
   <div class="numbers-row">
     <div class="stat-block">
       <div class="stat-number">2</div>
@@ -845,7 +866,7 @@
     </div>
   </div>
 
-  <!-- ===== Group stage bracket diagram ===== -->
+  <!-- ===== ROW 3: Group stage bracket diagram (y=390–660) ===== -->
   <div class="bracket-area">
 
     <!-- Group X -->
@@ -934,7 +955,7 @@
 
   </div>
 
-  <!-- ===== Stadium cards with photo backgrounds ===== -->
+  <!-- ===== ROW 4: Stadium cards (y=670–900) ===== -->
   <div class="stadiums-row">
     <div class="stadium-card">
       <div class="stadium-bg"></div>
@@ -943,7 +964,7 @@
       <div class="stadium-content">
         <div class="stadium-info">
           <h3>Душанбе Арена</h3>
-          <div class="stadium-meta">Новое строительство &middot; <span>Группа X</span></div>
+          <div class="stadium-meta">Новое строительство &middot; <span>40 000 мест</span></div>
         </div>
         <div class="stadium-capacity">
           <div class="capacity-number">40 000</div>
@@ -958,7 +979,7 @@
       <div class="stadium-content">
         <div class="stadium-info">
           <h3>Гиссар</h3>
-          <div class="stadium-meta">Реконструкция &middot; <span>Группа Y</span></div>
+          <div class="stadium-meta">Реконструкция &middot; <span>25 000 мест</span></div>
         </div>
         <div class="stadium-capacity">
           <div class="capacity-number">25 000</div>
@@ -968,18 +989,15 @@
     </div>
   </div>
 
-  <!-- Title block — bottom-left -->
-  <div class="title-block">
-    <div class="tag">Слайд 5 &middot; Суть заявки</div>
-    <h1 class="slide-title">Наша заявка:<br>суть и масштаб</h1>
-    <div class="divider"></div>
-    <p class="key-message">2 группы, фокусная концентрация ресурсов, максимальное качество проведения турнира.</p>
-  </div>
-
-  <!-- Bottom info -->
+  <!-- ===== BOTTOM STRIP (y=915–990) ===== -->
   <div class="bottom-strip">
-    <div class="fft-name">Федерация футбола Таджикистана</div>
-    <div class="date">Март 2026 &middot; Душанбе</div>
+    <div class="bottom-left">
+      <p class="key-message">2 группы, фокусная концентрация ресурсов, максимальное качество проведения турнира.</p>
+    </div>
+    <div class="bottom-right">
+      <div class="fft-name">Федерация футбола Таджикистана</div>
+      <div class="date">Март 2026 &middot; Душанбе</div>
+    </div>
   </div>
 
 </div>
