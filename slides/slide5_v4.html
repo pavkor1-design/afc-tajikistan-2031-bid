@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 5 — Вариант 4: Турнирная сетка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+  body { width: 1920px; height: 1080px; overflow: hidden; font-family: 'Inter', sans-serif; background: var(--midnight); }
+
+  .slide {
+    position: relative; width: 1920px; height: 1080px; overflow: hidden;
+    background: var(--midnight);
+  }
+
+  /* === LETTERBOX BARS === */
+  .letterbox-top { position: absolute; top: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
+  .letterbox-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
+
+  /* === TOP BAR (y=90-160) === */
+  .top-bar {
+    position: absolute; top: 85px; left: 0; right: 0; height: 70px; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px;
+    animation: fadeIn 0.8s ease 0.3s both;
+  }
+  .afc-logo { display: flex; align-items: center; gap: 14px; }
+  .afc-badge {
+    width: 48px; height: 48px; border: 2px solid var(--gold); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(5,14,29,0.8); backdrop-filter: blur(8px);
+  }
+  .afc-badge svg { width: 26px; height: 26px; fill: var(--gold); }
+  .afc-text {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 14px;
+    color: var(--ivory); letter-spacing: 3px; text-transform: uppercase; line-height: 1.4;
+  }
+  .afc-text .year { color: var(--gold); font-weight: 700; font-size: 20px; letter-spacing: 5px; display: block; }
+
+  .top-title {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    text-align: center;
+  }
+  .top-title h1 {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 32px;
+    color: var(--white); text-transform: uppercase; letter-spacing: 5px;
+  }
+  .top-title .divider-line {
+    width: 60px; height: 2px; background: var(--gold); margin: 8px auto 0;
+    animation: growWidth 0.6s ease 1s both;
+  }
+
+  .flag-ribbon {
+    display: flex; flex-direction: column; width: 8px; height: 48px;
+    border-radius: 4px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; } .fr-white { background: #FFFFFF; } .fr-green { background: #006600; }
+
+  /* === FOOTBALL PITCH (y=170-880) === */
+  .pitch-area {
+    position: absolute; top: 165px; left: 40px; right: 40px; height: 720px;
+    border-radius: 8px; overflow: hidden; z-index: 5;
+  }
+  .pitch-bg {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg,
+        rgba(26,92,42,0.95) 0px, rgba(26,92,42,0.95) 46px,
+        rgba(22,82,36,0.95) 46px, rgba(22,82,36,0.95) 92px
+      ),
+      linear-gradient(180deg, #1a5c2a 0%, #147025 30%, #0d4a1d 100%);
+  }
+  /* Pitch markings */
+  .pitch-markings {
+    position: absolute; inset: 0; z-index: 1;
+  }
+  /* Touchlines & goal lines */
+  .pitch-markings::before {
+    content: ''; position: absolute;
+    top: 20px; left: 20px; right: 20px; bottom: 20px;
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 2px;
+  }
+  /* Halfway line */
+  .halfway-line {
+    position: absolute; top: 20px; bottom: 20px; left: 50%;
+    width: 2px; background: rgba(255,255,255,0.25);
+    transform: translateX(-50%);
+  }
+  /* Center circle */
+  .center-circle {
+    position: absolute; top: 50%; left: 50%;
+    width: 200px; height: 200px;
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .center-dot {
+    position: absolute; top: 50%; left: 50%;
+    width: 8px; height: 8px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  /* Penalty areas */
+  .penalty-left {
+    position: absolute; top: 50%; left: 20px;
+    width: 140px; height: 340px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-left: none;
+    transform: translateY(-50%);
+  }
+  .penalty-right {
+    position: absolute; top: 50%; right: 20px;
+    width: 140px; height: 340px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-right: none;
+    transform: translateY(-50%);
+  }
+  /* Goal areas */
+  .goal-left {
+    position: absolute; top: 50%; left: 20px;
+    width: 50px; height: 160px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-left: none;
+    transform: translateY(-50%);
+  }
+  .goal-right {
+    position: absolute; top: 50%; right: 20px;
+    width: 50px; height: 160px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-right: none;
+    transform: translateY(-50%);
+  }
+  /* Corner arcs */
+  .corner-tl, .corner-tr, .corner-bl, .corner-br {
+    position: absolute; width: 20px; height: 20px;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .corner-tl { top: 18px; left: 18px; border-radius: 0 0 100% 0; border-top: none; border-left: none; }
+  .corner-tr { top: 18px; right: 18px; border-radius: 0 0 0 100%; border-top: none; border-right: none; }
+  .corner-bl { bottom: 18px; left: 18px; border-radius: 0 100% 0 0; border-bottom: none; border-left: none; }
+  .corner-br { bottom: 18px; right: 18px; border-radius: 100% 0 0 0; border-bottom: none; border-right: none; }
+
+  /* Vignette */
+  .pitch-vignette {
+    position: absolute; inset: 0; z-index: 2;
+    background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(5,14,29,0.5) 90%, rgba(5,14,29,0.85) 100%);
+  }
+
+  /* === BRACKET CONTAINER === */
+  .bracket-container {
+    position: absolute; top: 165px; left: 40px; right: 40px; height: 720px;
+    z-index: 10;
+  }
+
+  /* === TEAM SLOTS === */
+  .team-slot {
+    position: absolute; width: 160px; height: 32px;
+    background: rgba(10,24,48,0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(215,166,61,0.3);
+    border-radius: 6px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 10px;
+    opacity: 0;
+    animation: fadeSlotIn 0.5s ease both;
+    transform: skewX(-2deg);
+  }
+  .team-slot .flag-ph {
+    width: 20px; height: 14px; border-radius: 2px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+  .team-slot .name-ph {
+    flex: 1; height: 8px; border-radius: 4px;
+    background: linear-gradient(90deg, rgba(180,180,190,0.35) 0%, rgba(140,140,150,0.15) 100%);
+  }
+
+  /* === BRACKET LINES (SVG) === */
+  .bracket-svg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 8;
+  }
+  .bracket-line {
+    stroke: var(--gold); stroke-width: 2; fill: none;
+    stroke-dasharray: 1000; stroke-dashoffset: 1000;
+    animation: drawLine 1.2s ease both;
+  }
+
+  /* === TROPHY CENTER === */
+  .trophy-container {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    z-index: 12; text-align: center;
+    animation: fadeIn 1s ease 2.5s both;
+  }
+  .trophy-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(215,166,61,0.35) 0%, rgba(215,166,61,0.1) 40%, transparent 70%);
+    border-radius: 50%;
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+  .trophy-glow-outer {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(215,166,61,0.12) 0%, transparent 60%);
+    border-radius: 50%;
+    animation: pulseGlow 3s ease-in-out 0.5s infinite;
+  }
+  .trophy-svg { position: relative; z-index: 2; }
+  .final-label {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 18px;
+    color: var(--gold); letter-spacing: 6px; text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* === STADIUM STRIP (y=890-990) === */
+  .stadium-strip {
+    position: absolute; top: 892px; left: 60px; right: 60px; height: 100px;
+    z-index: 20; display: flex; align-items: center; gap: 24px;
+    animation: fadeSlideUp 0.7s ease 3s both;
+  }
+  .stadium-card {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(10,24,48,0.7); border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 8px; padding: 12px 20px;
+    backdrop-filter: blur(8px);
+  }
+  .stadium-card .st-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(215,166,61,0.3);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(215,166,61,0.08);
+  }
+  .stadium-card .st-icon svg { width: 18px; height: 18px; fill: var(--gold); }
+  .stadium-card .st-info { line-height: 1.3; }
+  .stadium-card .st-name {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 15px;
+    color: var(--white); letter-spacing: 1px;
+  }
+  .stadium-card .st-cap {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 12px;
+    color: rgba(246,244,239,0.5);
+  }
+  .matches-badge {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.3);
+    border-radius: 8px; padding: 12px 24px;
+    margin-left: auto;
+  }
+  .matches-badge .mb-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 32px;
+    color: var(--gold); line-height: 1;
+  }
+  .matches-badge .mb-label {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 14px;
+    color: var(--ivory); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .fed-footer {
+    margin-left: 20px; text-align: right;
+  }
+  .fed-footer .ff-name {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px;
+    color: rgba(246,244,239,0.4); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .fed-footer .ff-date {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 11px;
+    color: rgba(215,166,61,0.4); letter-spacing: 2px;
+  }
+
+  /* === GOLD PARTICLES === */
+  .particle {
+    position: absolute; width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%;
+    opacity: 0; z-index: 11;
+    animation: floatParticle 6s ease-in-out infinite;
+  }
+
+  /* === ROUND LABELS === */
+  .round-label {
+    position: absolute; z-index: 12;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+    color: rgba(215,166,61,0.6); letter-spacing: 2px; text-transform: uppercase;
+    text-align: center; white-space: nowrap;
+    animation: fadeIn 0.8s ease 2.2s both;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes growWidth { from { width: 0; } to { width: 60px; } }
+  @keyframes fadeSlotIn {
+    from { opacity: 0; transform: skewX(-2deg) translateX(-10px); }
+    to { opacity: 1; transform: skewX(-2deg) translateX(0); }
+  }
+  @keyframes fadeSlotInRight {
+    from { opacity: 0; transform: skewX(2deg) translateX(10px); }
+    to { opacity: 1; transform: skewX(2deg) translateX(0); }
+  }
+  @keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+  }
+  @keyframes floatParticle {
+    0% { opacity: 0; transform: translateY(0) translateX(0); }
+    20% { opacity: 0.7; }
+    80% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-80px) translateX(30px); }
+  }
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+  /* Slot animation for right side */
+  .team-slot.right {
+    transform: skewX(2deg);
+    animation-name: fadeSlotInRight;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- Letterbox bars -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="afc-logo">
+      <div class="afc-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </div>
+      <div class="afc-text">AFC Asian Cup<span class="year">2031</span></div>
+    </div>
+    <div class="top-title">
+      <h1>Наша заявка: суть и масштаб</h1>
+      <div class="divider-line"></div>
+    </div>
+    <div class="flag-ribbon"><div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div></div>
+  </div>
+
+  <!-- Football pitch background -->
+  <div class="pitch-area">
+    <div class="pitch-bg"></div>
+    <div class="pitch-markings">
+      <div class="halfway-line"></div>
+      <div class="center-circle"></div>
+      <div class="center-dot"></div>
+      <div class="penalty-left"></div>
+      <div class="penalty-right"></div>
+      <div class="goal-left"></div>
+      <div class="goal-right"></div>
+      <div class="corner-tl"></div>
+      <div class="corner-tr"></div>
+      <div class="corner-bl"></div>
+      <div class="corner-br"></div>
+    </div>
+    <div class="pitch-vignette"></div>
+  </div>
+
+  <!-- BRACKET CONTAINER -->
+  <div class="bracket-container">
+
+    <!-- Round labels -->
+    <div class="round-label" style="left: 60px; top: 8px; width: 160px;">1/8 финала</div>
+    <div class="round-label" style="left: 270px; top: 8px; width: 160px;">1/4 финала</div>
+    <div class="round-label" style="left: 468px; top: 8px; width: 160px;">Полуфинал</div>
+    <div class="round-label" style="right: 60px; top: 8px; width: 160px;">1/8 финала</div>
+    <div class="round-label" style="right: 270px; top: 8px; width: 160px;">1/4 финала</div>
+    <div class="round-label" style="right: 468px; top: 8px; width: 160px;">Полуфинал</div>
+
+    <!--
+      BRACKET LAYOUT CALCULATIONS
+      Pitch height: 720px. Usable bracket area: ~35px to ~690px (655px).
+
+      LEFT SIDE:
+      R16 (8 slots): Evenly across 655px. Spacing = 655/8 = ~82px. Start offset ~56px.
+      Y positions for R16 (center of slot): 56, 138, 220, 302, 384, 466, 548, 630
+
+      QF (4 slots): midpoint of each pair
+      Y: (56+138)/2=97, (220+302)/2=261, (384+466)/2=425, (548+630)/2=589
+
+      SF (2 slots): midpoint of each QF pair
+      Y: (97+261)/2=179, (425+589)/2=507
+
+      Final (1 slot): midpoint of SF pair
+      Y: (179+507)/2=343 (center area)
+
+      X positions (left edge of slot):
+      R16: 60
+      QF: 280
+      SF: 480
+      Final: center trophy
+
+      RIGHT SIDE (mirrored):
+      R16: 1840-60-160 = 1620  → but bracket is inside 1840px container (1920-80).
+      Container is 1920-80=1840px wide.
+      R16 right: 1840-60-160 = 1620
+      QF right: 1840-280-160 = 1400
+      SF right: 1840-480-160 = 1200
+    -->
+
+    <!-- ===== LEFT SIDE R16 SLOTS ===== -->
+    <div class="team-slot" style="left: 60px; top: 40px; animation-delay: 0.8s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 60px; top: 122px; animation-delay: 0.9s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 60px; top: 204px; animation-delay: 1.0s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 60px; top: 286px; animation-delay: 1.1s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 60px; top: 368px; animation-delay: 1.2s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 60px; top: 450px; animation-delay: 1.3s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 60px; top: 532px; animation-delay: 1.4s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 60px; top: 614px; animation-delay: 1.5s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+
+    <!-- ===== LEFT SIDE QF SLOTS ===== -->
+    <div class="team-slot" style="left: 280px; top: 81px; animation-delay: 1.6s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 280px; top: 245px; animation-delay: 1.7s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 280px; top: 409px; animation-delay: 1.8s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 280px; top: 573px; animation-delay: 1.9s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+
+    <!-- ===== LEFT SIDE SF SLOTS ===== -->
+    <div class="team-slot" style="left: 480px; top: 163px; animation-delay: 2.0s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot" style="left: 480px; top: 491px; animation-delay: 2.1s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+
+    <!-- ===== RIGHT SIDE R16 SLOTS ===== -->
+    <div class="team-slot right" style="left: 1620px; top: 40px; animation-delay: 0.8s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1620px; top: 122px; animation-delay: 0.9s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1620px; top: 204px; animation-delay: 1.0s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1620px; top: 286px; animation-delay: 1.1s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1620px; top: 368px; animation-delay: 1.2s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1620px; top: 450px; animation-delay: 1.3s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1620px; top: 532px; animation-delay: 1.4s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1620px; top: 614px; animation-delay: 1.5s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+
+    <!-- ===== RIGHT SIDE QF SLOTS ===== -->
+    <div class="team-slot right" style="left: 1400px; top: 81px; animation-delay: 1.6s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1400px; top: 245px; animation-delay: 1.7s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1400px; top: 409px; animation-delay: 1.8s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1400px; top: 573px; animation-delay: 1.9s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+
+    <!-- ===== RIGHT SIDE SF SLOTS ===== -->
+    <div class="team-slot right" style="left: 1200px; top: 163px; animation-delay: 2.0s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+    <div class="team-slot right" style="left: 1200px; top: 491px; animation-delay: 2.1s;">
+      <div class="flag-ph"></div><div class="name-ph"></div>
+    </div>
+
+    <!-- ===== BRACKET LINES SVG ===== -->
+    <svg class="bracket-svg" viewBox="0 0 1840 720">
+      <!-- LEFT SIDE BRACKET LINES -->
+      <!-- R16 → QF connections -->
+      <!-- Pair 1: slots at y=56, y=138 → QF at y=97 -->
+      <polyline class="bracket-line" style="animation-delay: 1.2s;"
+        points="220,56 245,56 245,138 220,138" />
+      <line class="bracket-line" style="animation-delay: 1.3s;"
+        x1="245" y1="97" x2="280" y2="97" />
+
+      <!-- Pair 2: y=220, y=302 → QF y=261 -->
+      <polyline class="bracket-line" style="animation-delay: 1.3s;"
+        points="220,220 245,220 245,302 220,302" />
+      <line class="bracket-line" style="animation-delay: 1.4s;"
+        x1="245" y1="261" x2="280" y2="261" />
+
+      <!-- Pair 3: y=384, y=466 → QF y=425 -->
+      <polyline class="bracket-line" style="animation-delay: 1.4s;"
+        points="220,384 245,384 245,466 220,466" />
+      <line class="bracket-line" style="animation-delay: 1.5s;"
+        x1="245" y1="425" x2="280" y2="425" />
+
+      <!-- Pair 4: y=548, y=630 → QF y=589 -->
+      <polyline class="bracket-line" style="animation-delay: 1.5s;"
+        points="220,548 245,548 245,630 220,630" />
+      <line class="bracket-line" style="animation-delay: 1.6s;"
+        x1="245" y1="589" x2="280" y2="589" />
+
+      <!-- QF → SF connections -->
+      <!-- QF pair 1: y=97, y=261 → SF y=179 -->
+      <polyline class="bracket-line" style="animation-delay: 1.8s;"
+        points="440,97 460,97 460,261 440,261" />
+      <line class="bracket-line" style="animation-delay: 1.9s;"
+        x1="460" y1="179" x2="480" y2="179" />
+
+      <!-- QF pair 2: y=425, y=589 → SF y=507 -->
+      <polyline class="bracket-line" style="animation-delay: 1.9s;"
+        points="440,425 460,425 460,589 440,589" />
+      <line class="bracket-line" style="animation-delay: 2.0s;"
+        x1="460" y1="507" x2="480" y2="507" />
+
+      <!-- SF → Final connections -->
+      <!-- SF pair: y=179, y=507 → Final y=343 -->
+      <polyline class="bracket-line" style="animation-delay: 2.2s;"
+        points="640,179 670,179 670,507 640,507" />
+      <line class="bracket-line" style="animation-delay: 2.3s;"
+        x1="670" y1="343" x2="840" y2="343" />
+
+      <!-- RIGHT SIDE BRACKET LINES (mirrored) -->
+      <!-- R16 → QF connections -->
+      <!-- Pair 1 -->
+      <polyline class="bracket-line" style="animation-delay: 1.2s;"
+        points="1620,56 1595,56 1595,138 1620,138" />
+      <line class="bracket-line" style="animation-delay: 1.3s;"
+        x1="1595" y1="97" x2="1560" y2="97" />
+
+      <!-- Pair 2 -->
+      <polyline class="bracket-line" style="animation-delay: 1.3s;"
+        points="1620,220 1595,220 1595,302 1620,302" />
+      <line class="bracket-line" style="animation-delay: 1.4s;"
+        x1="1595" y1="261" x2="1560" y2="261" />
+
+      <!-- Pair 3 -->
+      <polyline class="bracket-line" style="animation-delay: 1.4s;"
+        points="1620,384 1595,384 1595,466 1620,466" />
+      <line class="bracket-line" style="animation-delay: 1.5s;"
+        x1="1595" y1="425" x2="1560" y2="425" />
+
+      <!-- Pair 4 -->
+      <polyline class="bracket-line" style="animation-delay: 1.5s;"
+        points="1620,548 1595,548 1595,630 1620,630" />
+      <line class="bracket-line" style="animation-delay: 1.6s;"
+        x1="1595" y1="589" x2="1560" y2="589" />
+
+      <!-- QF → SF connections -->
+      <!-- QF pair 1 -->
+      <polyline class="bracket-line" style="animation-delay: 1.8s;"
+        points="1400,97 1380,97 1380,261 1400,261" />
+      <line class="bracket-line" style="animation-delay: 1.9s;"
+        x1="1380" y1="179" x2="1360" y2="179" />
+
+      <!-- QF pair 2 -->
+      <polyline class="bracket-line" style="animation-delay: 1.9s;"
+        points="1400,425 1380,425 1380,589 1400,589" />
+      <line class="bracket-line" style="animation-delay: 2.0s;"
+        x1="1380" y1="507" x2="1360" y2="507" />
+
+      <!-- SF → Final connections -->
+      <polyline class="bracket-line" style="animation-delay: 2.2s;"
+        points="1200,179 1170,179 1170,507 1200,507" />
+      <line class="bracket-line" style="animation-delay: 2.3s;"
+        x1="1170" y1="343" x2="1000" y2="343" />
+    </svg>
+
+    <!-- ===== TROPHY CENTER ===== -->
+    <div class="trophy-container">
+      <div class="trophy-glow-outer"></div>
+      <div class="trophy-glow"></div>
+      <svg class="trophy-svg" width="120" height="160" viewBox="0 0 120 160">
+        <defs>
+          <linearGradient id="trophyGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#F2D98A"/>
+            <stop offset="30%" style="stop-color:#D7A63D"/>
+            <stop offset="60%" style="stop-color:#E8BF5A"/>
+            <stop offset="100%" style="stop-color:#B8892E"/>
+          </linearGradient>
+          <linearGradient id="trophyShine" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFF8E1; stop-opacity:0.6"/>
+            <stop offset="50%" style="stop-color:#F2D98A; stop-opacity:0.2"/>
+            <stop offset="100%" style="stop-color:#B8892E; stop-opacity:0"/>
+          </linearGradient>
+          <filter id="trophyShadow">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.4)"/>
+          </filter>
+        </defs>
+        <!-- Trophy cup body -->
+        <path d="M30,12 L90,12 L85,55 C83,70 72,80 60,82 C48,80 37,70 35,55 Z"
+              fill="url(#trophyGold)" filter="url(#trophyShadow)"/>
+        <!-- Cup shine highlight -->
+        <path d="M38,16 L55,16 L52,52 C50,62 48,65 45,66 C40,63 38,55 37,48 Z"
+              fill="url(#trophyShine)"/>
+        <!-- Left handle -->
+        <path d="M30,20 C10,20 5,40 20,55 L35,50"
+              fill="none" stroke="url(#trophyGold)" stroke-width="5" stroke-linecap="round"/>
+        <!-- Right handle -->
+        <path d="M90,20 C110,20 115,40 100,55 L85,50"
+              fill="none" stroke="url(#trophyGold)" stroke-width="5" stroke-linecap="round"/>
+        <!-- Stem -->
+        <rect x="53" y="82" width="14" height="28" rx="2" fill="url(#trophyGold)"/>
+        <!-- Base top -->
+        <rect x="38" y="110" width="44" height="8" rx="3" fill="url(#trophyGold)"/>
+        <!-- Base bottom -->
+        <rect x="30" y="118" width="60" height="12" rx="4" fill="url(#trophyGold)"/>
+        <!-- Base shine -->
+        <rect x="32" y="119" width="30" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+        <!-- Star on cup -->
+        <polygon points="60,28 63,36 72,37 66,43 67,52 60,47 53,52 54,43 48,37 57,36"
+                 fill="rgba(255,248,225,0.5)"/>
+        <!-- Sparkle effects -->
+        <circle cx="42" cy="25" r="2" fill="#FFF8E1" opacity="0">
+          <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+        </circle>
+        <circle cx="78" cy="30" r="1.5" fill="#FFF8E1" opacity="0">
+          <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite" begin="1s"/>
+        </circle>
+        <circle cx="55" cy="18" r="1.5" fill="#FFF8E1" opacity="0">
+          <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="0.2s"/>
+        </circle>
+        <circle cx="70" cy="50" r="1" fill="#FFF8E1" opacity="0">
+          <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite" begin="1.5s"/>
+        </circle>
+      </svg>
+      <div class="final-label">ФИНАЛ</div>
+    </div>
+
+    <!-- ===== GOLD PARTICLES ===== -->
+    <div class="particle" style="left: 45%; top: 30%; animation-delay: 0s; animation-duration: 5s;"></div>
+    <div class="particle" style="left: 52%; top: 55%; animation-delay: 1s; animation-duration: 6s;"></div>
+    <div class="particle" style="left: 48%; top: 40%; animation-delay: 2s; animation-duration: 7s;"></div>
+    <div class="particle" style="left: 55%; top: 50%; animation-delay: 0.5s; animation-duration: 5.5s;"></div>
+    <div class="particle" style="left: 43%; top: 60%; animation-delay: 3s; animation-duration: 6.5s;"></div>
+    <div class="particle" style="left: 50%; top: 35%; animation-delay: 1.5s; animation-duration: 4.5s;"></div>
+    <div class="particle" style="left: 47%; top: 65%; animation-delay: 2.5s; animation-duration: 5.8s;"></div>
+    <div class="particle" style="left: 53%; top: 25%; animation-delay: 0.8s; animation-duration: 6.2s;"></div>
+    <div class="particle" style="left: 40%; top: 48%; animation-delay: 3.5s; animation-duration: 5.3s;"></div>
+    <div class="particle" style="left: 58%; top: 42%; animation-delay: 1.8s; animation-duration: 7.2s;"></div>
+    <div class="particle" style="left: 46%; top: 70%; animation-delay: 4s; animation-duration: 6.8s;"></div>
+    <div class="particle" style="left: 56%; top: 28%; animation-delay: 2.2s; animation-duration: 5.1s;"></div>
+  </div>
+
+  <!-- STADIUM STRIP -->
+  <div class="stadium-strip">
+    <div class="stadium-card">
+      <div class="st-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.58 2 10c0 1.5.5 2.88 1.35 4.05L2 22l3-2.4C7.08 21.13 9.43 22 12 22c5.52 0 10-3.58 10-8V10c0-4.42-4.48-8-10-8zm0 2c4.42 0 8 2.69 8 6v2c0 3.31-3.58 6-8 6-2.12 0-4.07-.63-5.55-1.7l-.45-.32-2 1.6.8-2.4-.5-.7C3.55 12.56 4 11.3 4 10c0-3.31 3.58-6 8-6z"/></svg>
+      </div>
+      <div class="st-info">
+        <div class="st-name">Душанбе Арена</div>
+        <div class="st-cap">40 000 мест &middot; Новое строительство</div>
+      </div>
+    </div>
+    <div class="stadium-card">
+      <div class="st-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.58 2 10c0 1.5.5 2.88 1.35 4.05L2 22l3-2.4C7.08 21.13 9.43 22 12 22c5.52 0 10-3.58 10-8V10c0-4.42-4.48-8-10-8zm0 2c4.42 0 8 2.69 8 6v2c0 3.31-3.58 6-8 6-2.12 0-4.07-.63-5.55-1.7l-.45-.32-2 1.6.8-2.4-.5-.7C3.55 12.56 4 11.3 4 10c0-3.31 3.58-6 8-6z"/></svg>
+      </div>
+      <div class="st-info">
+        <div class="st-name">Стадион «Гиссар»</div>
+        <div class="st-cap">25 000 мест &middot; Реконструкция</div>
+      </div>
+    </div>
+    <div class="matches-badge">
+      <div class="mb-num">12</div>
+      <div class="mb-label">Матчей</div>
+    </div>
+    <div class="fed-footer">
+      <div class="ff-name">Федерация футбола Таджикистана</div>
+      <div class="ff-date">Март 2026 &middot; Душанбе</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
