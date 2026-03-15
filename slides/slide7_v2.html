@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 7 — Вариант 2: Радиальная раскладка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0D1F3A 0%, var(--navy) 40%, var(--midnight) 100%);
+  }
+
+  /* Radial glow behind center */
+  .center-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(215,166,61,0.06) 0%, transparent 70%);
+    z-index: 1;
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  }
+
+  /* Orbit rings */
+  .orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 1px solid rgba(215,166,61,0.08);
+    z-index: 2;
+  }
+
+  .orbit-ring-1 {
+    width: 500px; height: 500px;
+    transform: translate(-50%, -50%);
+  }
+
+  .orbit-ring-2 {
+    width: 720px; height: 720px;
+    transform: translate(-50%, -50%);
+    border-color: rgba(215,166,61,0.05);
+  }
+
+  /* Particles */
+  .particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: floatParticle 8s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) { left: 12%; top: 25%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 30%; top: 65%; animation-delay: 2s; }
+  .particle:nth-child(3) { left: 55%; top: 18%; animation-delay: 1s; }
+  .particle:nth-child(4) { left: 75%; top: 72%; animation-delay: 3s; }
+  .particle:nth-child(5) { left: 88%; top: 35%; animation-delay: 1.5s; }
+  .particle:nth-child(6) { left: 42%; top: 82%; animation-delay: 4s; }
+
+  @keyframes floatParticle {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+    25% { opacity: 0.5; }
+    50% { opacity: 0.3; transform: translateY(-50px) scale(1.3); }
+    75% { opacity: 0.4; }
+  }
+
+  /* Cinematic letterbox bars */
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  /* AFC Logo */
+  .afc-logo {
+    position: absolute;
+    top: 100px;
+    left: 80px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+
+  .afc-badge {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,14,29,0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .afc-badge svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--gold);
+  }
+
+  .afc-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ivory);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .afc-text .year {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 5px;
+    display: block;
+  }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 8px;
+    height: 120px;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Center badge */
+  .center-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    animation: fadeIn 0.8s ease 0.5s both;
+  }
+
+  .center-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(10,24,48,0.85);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(215,166,61,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 0 60px rgba(215,166,61,0.1), inset 0 0 40px rgba(215,166,61,0.05);
+  }
+
+  .center-circle svg {
+    width: 42px;
+    height: 42px;
+    fill: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .center-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .center-sublabel {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: rgba(246,244,239,0.5);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* Title at top center */
+  .title-area {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    color: var(--white);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    animation: fadeSlideUp 0.7s ease 0.6s both;
+  }
+
+  .main-title .gold { color: var(--gold); }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: rgba(246,244,239,0.55);
+    letter-spacing: 1px;
+    margin-top: 10px;
+    animation: fadeSlideUp 0.7s ease 0.8s both;
+  }
+
+  /* Radial blocks — positioned absolutely around center */
+  .req-block {
+    position: absolute;
+    z-index: 10;
+    width: 240px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .req-block:hover {
+    transform: scale(1.05);
+  }
+
+  .req-card {
+    background: rgba(10,24,48,0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.18);
+    border-radius: 14px;
+    padding: 20px 16px 18px;
+    transition: border-color 0.3s ease;
+  }
+
+  .req-block:hover .req-card {
+    border-color: rgba(215,166,61,0.5);
+  }
+
+  .req-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(215,166,61,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+
+  .req-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--gold);
+  }
+
+  .req-code {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .req-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+  }
+
+  .req-title-ru {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+  }
+
+  .req-check {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--warm-gold);
+    letter-spacing: 1px;
+  }
+
+  .req-check svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--warm-gold);
+  }
+
+  /* Connector lines from center to blocks */
+  .connector {
+    position: absolute;
+    z-index: 5;
+    background: linear-gradient(var(--gold), transparent);
+    opacity: 0.15;
+  }
+
+  /* Position the 6 blocks around the center (960,540 is center in safe area) */
+  /* Top-left */
+  .req-block-1 {
+    top: 190px;
+    left: 180px;
+    animation: fadeIn 0.6s ease 1.0s both;
+  }
+  /* Top-right */
+  .req-block-2 {
+    top: 190px;
+    right: 180px;
+    animation: fadeIn 0.6s ease 1.2s both;
+  }
+  /* Mid-left */
+  .req-block-3 {
+    top: 430px;
+    left: 100px;
+    animation: fadeIn 0.6s ease 1.4s both;
+  }
+  /* Mid-right */
+  .req-block-4 {
+    top: 430px;
+    right: 100px;
+    animation: fadeIn 0.6s ease 1.6s both;
+  }
+  /* Bottom-left */
+  .req-block-5 {
+    top: 680px;
+    left: 180px;
+    animation: fadeIn 0.6s ease 1.8s both;
+  }
+  /* Bottom-right */
+  .req-block-6 {
+    top: 680px;
+    right: 180px;
+    animation: fadeIn 0.6s ease 2.0s both;
+  }
+
+  /* Connecting lines (SVG overlay) */
+  .connectors-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .connectors-svg line {
+    stroke: var(--gold);
+    stroke-width: 1;
+    opacity: 0.12;
+    stroke-dasharray: 4,4;
+  }
+
+  /* Bottom info strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 90px;
+    left: 80px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    animation: fadeIn 1s ease 2.4s both;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 3px;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Glow & orbit rings -->
+  <div class="center-glow"></div>
+  <div class="orbit-ring orbit-ring-1"></div>
+  <div class="orbit-ring orbit-ring-2"></div>
+
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Connecting lines -->
+  <svg class="connectors-svg">
+    <!-- Center is at 960, 540. Lines to approximate card centers -->
+    <line x1="960" y1="540" x2="300" y2="290" />
+    <line x1="960" y1="540" x2="1620" y2="290" />
+    <line x1="960" y1="540" x2="220" y2="520" />
+    <line x1="960" y1="540" x2="1700" y2="520" />
+    <line x1="960" y1="540" x2="300" y2="770" />
+    <line x1="960" y1="540" x2="1620" y2="770" />
+  </svg>
+
+  <!-- Cinematic letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">
+      AFC Asian Cup
+      <span class="year">2031</span>
+    </div>
+  </div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title at top center -->
+  <div class="title-area">
+    <h1 class="main-title">СООТВЕТСТВИЕ ТРЕБОВАНИЯМ <span class="gold">AFC</span></h1>
+    <p class="subtitle">Системный подход к каждому разделу заявки</p>
+  </div>
+
+  <!-- Center AFC badge -->
+  <div class="center-badge">
+    <div class="center-circle">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      <div class="center-label">AFC 2031</div>
+      <div class="center-sublabel">Requirements</div>
+    </div>
+  </div>
+
+  <!-- 6 Requirement blocks arranged radially -->
+
+  <!-- Block 1: Host City — top-left -->
+  <div class="req-block req-block-1">
+    <div class="req-card">
+      <div class="req-icon">
+        <svg viewBox="0 0 24 24"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
+      </div>
+      <div class="req-code">4a</div>
+      <div class="req-title">Host City</div>
+      <div class="req-title-ru">Город-организатор</div>
+      <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+    </div>
+  </div>
+
+  <!-- Block 2: Stadiums — top-right -->
+  <div class="req-block req-block-2">
+    <div class="req-card">
+      <div class="req-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM5.61 16.78C4.6 15.45 4 13.8 4 12s.6-3.45 1.61-4.78L7.92 9.5H6v1h3V7.5H8v1.67L5.92 7.06C7.26 5.72 9.03 4.86 11 4.6V8h2V4.6c1.97.26 3.74 1.12 5.08 2.46L16 9.17V7.5h-1v3h3v-1h-1.92l2.31-2.28C19.4 8.55 20 10.2 20 12s-.6 3.45-1.61 4.78L16.08 14.5H18v-1h-3v3h1v-1.67l2.08 2.11C16.74 18.28 14.97 19.14 13 19.4V16h-2v3.4c-1.97-.26-3.74-1.12-5.08-2.46L8 14.83v1.67h1v-3H6v1h1.92L5.61 16.78z"/></svg>
+      </div>
+      <div class="req-code">4b-i</div>
+      <div class="req-title">Stadiums</div>
+      <div class="req-title-ru">Стадионы</div>
+      <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+    </div>
+  </div>
+
+  <!-- Block 3: Training — mid-left -->
+  <div class="req-block req-block-3">
+    <div class="req-card">
+      <div class="req-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h8v14H3zm18 0h-8V5h8v14zm-7-8h6v2h-6v-2zm0 4h6v2h-6v-2zm0-8h6v2h-6V7z"/></svg>
+      </div>
+      <div class="req-code">4b-ii</div>
+      <div class="req-title">Training Facilities</div>
+      <div class="req-title-ru">Тренировочные базы</div>
+      <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+    </div>
+  </div>
+
+  <!-- Block 4: Accommodation — mid-right -->
+  <div class="req-block req-block-4">
+    <div class="req-card">
+      <div class="req-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2V10c0-2.21-1.79-4-4-4z"/></svg>
+      </div>
+      <div class="req-code">4b-iii</div>
+      <div class="req-title">Accommodation</div>
+      <div class="req-title-ru">Размещение</div>
+      <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+    </div>
+  </div>
+
+  <!-- Block 5: Financial — bottom-left -->
+  <div class="req-block req-block-5">
+    <div class="req-card">
+      <div class="req-icon">
+        <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+      </div>
+      <div class="req-code">4c</div>
+      <div class="req-title">Financial Commitments</div>
+      <div class="req-title-ru">Финансовые обязательства</div>
+      <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+    </div>
+  </div>
+
+  <!-- Block 6: Additional — bottom-right -->
+  <div class="req-block req-block-6">
+    <div class="req-card">
+      <div class="req-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM6 20V4h5v5h5v11H6z"/></svg>
+      </div>
+      <div class="req-code">4d</div>
+      <div class="req-title">Additional Requirements</div>
+      <div class="req-title-ru">Дополнительные требования</div>
+      <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+    </div>
+  </div>
+
+  <!-- Bottom info strip -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+
+</div>
+</body>
+</html>

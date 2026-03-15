@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 10 — Стадионы: техническое соответствие (V1 — Таблица)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(215,166,61,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 25%, rgba(215,166,61,0.04) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 80%, rgba(10,24,48,0.95) 0%, transparent 60%),
+      linear-gradient(160deg, var(--midnight) 0%, #071326 30%, var(--navy) 60%, var(--midnight) 100%);
+  }
+
+  .grid-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 55% 45%, rgba(0,0,0,0.5) 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 55% 45%, rgba(0,0,0,0.5) 0%, transparent 70%);
+  }
+
+  .diagonal-accents {
+    position: absolute; inset: 0; z-index: 2; overflow: hidden;
+  }
+  .diagonal-accents::before {
+    content: ''; position: absolute; top: -200px; right: 300px;
+    width: 1px; height: 600px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.15), transparent);
+    transform: rotate(-25deg); animation: fadeIn 2s ease 0.5s both;
+  }
+  .diagonal-accents::after {
+    content: ''; position: absolute; top: -100px; right: 260px;
+    width: 1px; height: 500px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.08), transparent);
+    transform: rotate(-25deg); animation: fadeIn 2s ease 0.8s both;
+  }
+
+  .particles { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .particle {
+    position: absolute; width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%; opacity: 0;
+    animation: particleFloat 8s ease-in-out infinite;
+  }
+  .particle:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
+  .particle:nth-child(2) { left: 35%; top: 55%; animation-delay: 1.5s; animation-duration: 9s; width: 2px; height: 2px; }
+  .particle:nth-child(3) { left: 55%; top: 15%; animation-delay: 3s; animation-duration: 6s; }
+  .particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 0.5s; animation-duration: 10s; width: 2px; height: 2px; }
+  .particle:nth-child(5) { left: 85%; top: 35%; animation-delay: 2s; animation-duration: 8s; }
+  .particle:nth-child(6) { left: 25%; top: 75%; animation-delay: 4s; animation-duration: 7s; width: 2px; height: 2px; }
+  .particle:nth-child(7) { left: 90%; top: 55%; animation-delay: 1s; animation-duration: 11s; }
+  .particle:nth-child(8) { left: 45%; top: 85%; animation-delay: 3.5s; animation-duration: 8s; width: 4px; height: 4px; }
+
+  @keyframes particleFloat {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    15% { opacity: 0.6; }
+    50% { opacity: 0.3; transform: translateY(-40px) scale(1.2); }
+    85% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+  }
+
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; top: 1000px; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
+  }
+  .letterbox-bottom::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
+  }
+
+  .glow-orb {
+    position: absolute; border-radius: 50%; filter: blur(80px); z-index: 4; pointer-events: none;
+  }
+  .glow-orb-1 {
+    width: 500px; height: 300px; background: rgba(215,166,61,0.05);
+    top: 300px; left: 50%; transform: translateX(-50%); animation: fadeIn 2s ease 0.5s both;
+  }
+
+  /* ===== TOP BAR ===== */
+  .top-bar {
+    position: absolute; top: 90px; left: 80px; right: 80px;
+    height: 70px; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+
+  .afc-logo { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  .afc-badge {
+    width: 52px; height: 52px; border: 2px solid var(--gold); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(5,14,29,0.8); backdrop-filter: blur(8px);
+  }
+  .afc-badge svg { width: 28px; height: 28px; fill: var(--gold); }
+  .afc-text {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 14px;
+    color: var(--ivory); letter-spacing: 3px; text-transform: uppercase; line-height: 1.4;
+  }
+  .afc-text .year { color: var(--gold); font-weight: 700; font-size: 20px; letter-spacing: 5px; display: block; }
+
+  .title-center { text-align: center; flex: 1; padding: 0 40px; }
+  .tag {
+    display: inline-block; font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold);
+    background: rgba(215,166,61,0.1); border: 1px solid rgba(215,166,61,0.2);
+    padding: 4px 14px; border-radius: 3px; margin-bottom: 6px; backdrop-filter: blur(8px);
+  }
+  .slide-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 34px;
+    color: var(--white); text-transform: uppercase; letter-spacing: 4px; line-height: 1.1;
+  }
+  .title-divider {
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--warm-gold));
+    margin: 6px auto 0; border-radius: 2px;
+    animation: growWidth 0.6s ease 1.0s both;
+  }
+  @keyframes growWidth { from { width: 0; } to { width: 80px; } }
+
+  .flag-ribbon {
+    display: flex; flex-direction: column; width: 8px; height: 80px;
+    border-radius: 4px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.3); flex-shrink: 0;
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* ===== LEGEND ROW ===== */
+  .legend-row {
+    position: absolute; top: 168px; left: 80px; right: 80px;
+    z-index: 10; display: flex; align-items: center; gap: 30px;
+    justify-content: flex-end;
+    animation: fadeIn 0.8s ease 0.8s both;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px;
+    color: rgba(246,244,239,0.6); letter-spacing: 1px;
+  }
+  .legend-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 500;
+  }
+  .legend-pill.ready { background: rgba(76,175,80,0.15); color: #81C784; border: 1px solid rgba(76,175,80,0.3); }
+  .legend-pill.planned { background: rgba(215,166,61,0.15); color: var(--warm-gold); border: 1px solid rgba(215,166,61,0.3); }
+
+  /* ===== TABLE AREA ===== */
+  .table-area {
+    position: absolute; top: 200px; left: 80px; right: 80px;
+    bottom: 120px; z-index: 10;
+    animation: fadeSlideUp 0.8s ease 1.0s both;
+  }
+
+  .compliance-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(215,166,61,0.12);
+    backdrop-filter: blur(12px);
+  }
+
+  .compliance-table thead th {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 15px;
+    color: var(--warm-gold); letter-spacing: 3px; text-transform: uppercase;
+    padding: 16px 20px; text-align: left;
+    background: linear-gradient(180deg, rgba(215,166,61,0.1), rgba(215,166,61,0.04));
+    border-bottom: 1px solid rgba(215,166,61,0.15);
+  }
+  .compliance-table thead th:first-child { width: 240px; }
+  .compliance-table thead th:nth-child(2) { width: 260px; }
+  .compliance-table thead th:nth-child(3) { width: 340px; }
+  .compliance-table thead th:nth-child(4) { width: auto; }
+
+  .compliance-table tbody tr {
+    animation: fadeSlideUp 0.5s ease both;
+  }
+  .compliance-table tbody tr:nth-child(1) { animation-delay: 1.2s; }
+  .compliance-table tbody tr:nth-child(2) { animation-delay: 1.3s; }
+  .compliance-table tbody tr:nth-child(3) { animation-delay: 1.4s; }
+  .compliance-table tbody tr:nth-child(4) { animation-delay: 1.5s; }
+  .compliance-table tbody tr:nth-child(5) { animation-delay: 1.6s; }
+  .compliance-table tbody tr:nth-child(6) { animation-delay: 1.7s; }
+  .compliance-table tbody tr:nth-child(7) { animation-delay: 1.8s; }
+  .compliance-table tbody tr:nth-child(8) { animation-delay: 1.9s; }
+  .compliance-table tbody tr:nth-child(9) { animation-delay: 2.0s; }
+  .compliance-table tbody tr:nth-child(10) { animation-delay: 2.1s; }
+
+  .compliance-table tbody td {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
+    color: var(--ivory); padding: 14px 20px;
+    border-bottom: 1px solid rgba(215,166,61,0.06);
+  }
+
+  .compliance-table tbody tr:nth-child(odd) td {
+    background: rgba(10,24,48,0.5);
+  }
+  .compliance-table tbody tr:nth-child(even) td {
+    background: rgba(10,24,48,0.3);
+  }
+
+  .compliance-table tbody tr:last-child td { border-bottom: none; }
+
+  .param-name {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 14px;
+    color: var(--ivory); letter-spacing: 1px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .param-icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: rgba(215,166,61,0.08); border: 1px solid rgba(215,166,61,0.15);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .param-icon svg { width: 16px; height: 16px; fill: var(--gold); }
+
+  .afc-req {
+    font-weight: 300; font-size: 13px; color: rgba(246,244,239,0.5);
+  }
+
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500;
+  }
+  .status-pill.ready {
+    background: rgba(76,175,80,0.12); color: #81C784;
+    border: 1px solid rgba(76,175,80,0.25);
+  }
+  .status-pill.planned {
+    background: rgba(215,166,61,0.12); color: var(--warm-gold);
+    border: 1px solid rgba(215,166,61,0.25);
+  }
+
+  .spec-value { font-weight: 500; color: var(--ivory); }
+  .spec-value.gold { color: var(--warm-gold); }
+
+  /* ===== BOTTOM STRIP ===== */
+  .bottom-strip {
+    position: absolute; top: 915px; left: 80px; right: 80px;
+    height: 75px; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    animation: fadeIn 1s ease 2.4s both;
+  }
+  .bottom-left { flex: 1; }
+  .key-message {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px;
+    line-height: 1.6; color: rgba(246,244,239,0.5); max-width: 700px;
+  }
+  .bottom-right { text-align: right; flex-shrink: 0; }
+  .fft-name {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px;
+    color: rgba(246,244,239,0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .date {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px;
+    color: rgba(215,166,61,0.45); letter-spacing: 3px;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="grid-overlay"></div>
+  <div class="diagonal-accents"></div>
+  <div class="glow-orb glow-orb-1"></div>
+
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  </div>
+
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="afc-logo">
+      <div class="afc-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </div>
+      <div class="afc-text">AFC Asian Cup<span class="year">2031</span></div>
+    </div>
+    <div class="title-center">
+      <div class="tag">Слайд 10 &middot; Техническое соответствие</div>
+      <h1 class="slide-title">Стадионы — техническое соответствие</h1>
+      <div class="title-divider"></div>
+    </div>
+    <div class="flag-ribbon">
+      <div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend-row">
+    <div class="legend-item"><span class="legend-pill ready">✓</span> Готово / соответствует</div>
+    <div class="legend-item"><span class="legend-pill planned">◉</span> Запланировано / гарантировано</div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-area">
+    <table class="compliance-table">
+      <thead>
+        <tr>
+          <th>Параметр</th>
+          <th>Требование AFC</th>
+          <th>Душанбе Арена</th>
+          <th>Гиссар</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg></div>Поле</div></td>
+          <td class="afc-req">105 &times; 68 м</td>
+          <td><span class="spec-value">105 &times; 68 м</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">105 &times; 68 м</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-6v-5c0-2.76 1.64-5.07 4-5.82V4.5C12 3.67 12.67 3 13.5 3S15 3.67 15 4.5v.68c2.36.75 4 3.06 4 5.82v5l2 2H3l2-2z"/></svg></div>Газон</div></td>
+          <td class="afc-req">Натуральный / гибрид</td>
+          <td><span class="spec-value">Натуральный гибрид</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланирован</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></div>Освещение</div></td>
+          <td class="afc-req">2 400 люкс</td>
+          <td><span class="spec-value">FIFA Cat. B</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланировано</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>Вместимость</div></td>
+          <td class="afc-req">20 000+</td>
+          <td><span class="spec-value">30 062</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">25 000</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm4 10H8v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1z"/></svg></div>Раздевалки</div></td>
+          <td class="afc-req">4 &times; 80 м&sup2;+</td>
+          <td><span class="spec-value">4 комн. &gt;80 м&sup2;</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланировано</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>VIP / VVIP</div></td>
+          <td class="afc-req">Обязательные зоны</td>
+          <td><span class="spec-value">792 + 32 места</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланировано</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm10 0h2v2h-2zm-6-4h8v2h-8z"/></svg></div>Медиацентр</div></td>
+          <td class="afc-req">Обязателен</td>
+          <td><span class="spec-value">600 м&sup2; broadcast</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланировано</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg></div>Пресс-места</div></td>
+          <td class="afc-req">Обязательны</td>
+          <td><span class="spec-value">72 места</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланировано</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg></div>Коляски</div></td>
+          <td class="afc-req">Минимум по нормам</td>
+          <td><span class="spec-value">150 + 150</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланировано</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+        <tr>
+          <td><div class="param-name"><div class="param-icon"><svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/></svg></div>Экраны</div></td>
+          <td class="afc-req">2 экрана</td>
+          <td><span class="spec-value">В комплекте</span> <span class="status-pill ready">✓</span></td>
+          <td><span class="spec-value gold">Запланировано</span> <span class="status-pill planned">◉</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom-strip">
+    <div class="bottom-left">
+      <p class="key-message">Все объекты соответствуют или будут соответствовать ключевым параметрам AFC к 2030 году.</p>
+    </div>
+    <div class="bottom-right">
+      <div class="fft-name">Федерация футбола Таджикистана</div>
+      <div class="date">Март 2026 &middot; Душанбе</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

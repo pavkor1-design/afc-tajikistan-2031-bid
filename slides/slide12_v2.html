@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 12 — Вариант 2: Фото-карточки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px; height: 1080px; overflow: hidden;
+    font-family: 'Inter', sans-serif; background: var(--midnight);
+  }
+
+  .slide {
+    position: relative; width: 1920px; height: 1080px; overflow: hidden;
+    background: linear-gradient(160deg, var(--midnight) 0%, var(--navy) 50%, #0D2040 100%);
+  }
+
+  .letterbox-top { position: absolute; top: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
+  .letterbox-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
+
+  .afc-logo {
+    position: absolute; top: 100px; left: 80px; z-index: 20;
+    display: flex; align-items: center; gap: 16px;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+  .afc-badge {
+    width: 56px; height: 56px; border: 2px solid var(--gold); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(5,14,29,0.8); backdrop-filter: blur(8px);
+  }
+  .afc-badge svg { width: 30px; height: 30px; fill: var(--gold); }
+  .afc-text {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 15px;
+    color: var(--ivory); letter-spacing: 3px; text-transform: uppercase; line-height: 1.4;
+  }
+  .afc-text .year { color: var(--gold); font-weight: 700; font-size: 22px; letter-spacing: 5px; display: block; }
+
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column; width: 8px; height: 120px;
+    border-radius: 4px; overflow: hidden; animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Title — centered top */
+  .title-block {
+    position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+    z-index: 10; text-align: center;
+    animation: fadeSlideUp 0.7s ease 0.6s both;
+  }
+  .tag {
+    display: inline-block; font-family: 'Inter', sans-serif;
+    font-weight: 500; font-size: 13px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.25);
+    padding: 8px 20px; border-radius: 4px; margin-bottom: 12px;
+  }
+  .main-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 44px;
+    line-height: 1.1; color: var(--white); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .divider {
+    width: 60px; height: 3px; background: var(--gold); margin: 12px auto;
+    animation: growWidth 0.6s ease 1s both;
+  }
+  @keyframes growWidth { from { width: 0; } to { width: 60px; } }
+  .subtitle-text {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 15px;
+    color: rgba(246,244,239,0.6);
+  }
+
+  /* Photo card grid */
+  .photo-grid {
+    position: absolute; top: 260px; left: 80px; right: 80px;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .photo-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 420px;
+    border: 1px solid rgba(215,166,61,0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .photo-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(215,166,61,0.5);
+  }
+  .photo-card:nth-child(1) { animation: fadeSlideUp 0.6s ease 1.2s both; }
+  .photo-card:nth-child(2) { animation: fadeSlideUp 0.6s ease 1.4s both; }
+  .photo-card:nth-child(3) { animation: fadeSlideUp 0.6s ease 1.6s both; }
+  .photo-card:nth-child(4) { animation: fadeSlideUp 0.6s ease 1.8s both; }
+
+  .photo-card-img {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+  }
+  .photo-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(5,14,29,0.95) 0%, rgba(5,14,29,0.4) 40%, rgba(5,14,29,0.1) 70%);
+  }
+
+  .photo-card-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 28px 24px;
+  }
+
+  .card-number {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 48px;
+    color: rgba(215,166,61,0.2); position: absolute; top: 20px; right: 24px;
+  }
+
+  .card-name {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 20px;
+    color: var(--white); letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-desc {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 12px;
+    color: rgba(246,244,239,0.6); line-height: 1.5; margin-bottom: 14px;
+  }
+
+  .card-specs {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .card-spec {
+    background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.25);
+    border-radius: 4px; padding: 5px 10px;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px;
+    color: var(--warm-gold); white-space: nowrap;
+  }
+
+  /* Route connector lines between cards */
+  .connectors {
+    position: absolute; top: 460px; left: 80px; right: 80px;
+    z-index: 11; pointer-events: none;
+    animation: fadeIn 1s ease 2.2s both;
+  }
+
+  /* Metrics row */
+  .metrics-row {
+    position: absolute; bottom: 110px; left: 80px; right: 80px;
+    z-index: 12; display: flex; justify-content: center; gap: 80px;
+    animation: fadeSlideUp 0.6s ease 2.4s both;
+  }
+  .metric {
+    text-align: center;
+  }
+  .metric-val {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 32px;
+    color: var(--warm-gold);
+  }
+  .metric-lbl {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 12px;
+    color: rgba(246,244,239,0.5); letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .bottom-strip {
+    position: absolute; bottom: 90px; right: 80px; z-index: 20;
+    text-align: right; animation: fadeIn 1s ease 2.6s both;
+  }
+  .fft-name {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px;
+    color: rgba(246,244,239,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .date {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px;
+    color: rgba(215,166,61,0.5); letter-spacing: 3px;
+  }
+
+  /* Particles */
+  .particles { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  .particle {
+    position: absolute; width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%; opacity: 0;
+    animation: float 6s ease-in-out infinite;
+  }
+  .particle:nth-child(1) { top: 25%; left: 15%; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 55%; left: 45%; animation-delay: 2s; }
+  .particle:nth-child(3) { top: 35%; left: 80%; animation-delay: 4s; }
+  @keyframes float {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 0.6; transform: translateY(-30px); }
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  </div>
+
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">AFC Asian Cup<span class="year">2031</span></div>
+  </div>
+
+  <div class="flag-ribbon">
+    <div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <div class="tag">Тренировочные объекты</div>
+    <h1 class="main-title">Тренировочная инфраструктура</h1>
+    <div class="divider"></div>
+    <p class="subtitle-text">Полный комплекс для подготовки команд</p>
+  </div>
+
+  <!-- Photo card grid -->
+  <div class="photo-grid">
+    <div class="photo-card">
+      <div class="photo-card-img" style="background-image: url('../ЭРА AFC/04 Стадионы/База ФФТ/ФФТ 1.jpg');"></div>
+      <div class="photo-card-overlay"></div>
+      <div class="card-number">01</div>
+      <div class="photo-card-content">
+        <div class="card-name">База ФФТ</div>
+        <div class="card-desc">Главный тренировочный комплекс федерации. Несколько полей, современные раздевалки, освещение</div>
+        <div class="card-specs">
+          <span class="card-spec">105x68 м</span>
+          <span class="card-spec">500+ лк</span>
+          <span class="card-spec">10 мин до отеля</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-card-img" style="background-image: url('../ЭРА AFC/04 Стадионы/База ФФТ/ФФТ 2.jpg');"></div>
+      <div class="photo-card-overlay"></div>
+      <div class="card-number">02</div>
+      <div class="photo-card-content">
+        <div class="card-name">Тренировочное поле №2</div>
+        <div class="card-desc">Вспомогательное поле рядом со стадионом, натуральный газон</div>
+        <div class="card-specs">
+          <span class="card-spec">105x68 м</span>
+          <span class="card-spec">500+ лк</span>
+          <span class="card-spec">8 мин до отеля</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-card-img" style="background-image: url('../ЭРА AFC/04 Стадионы/База ФФТ/ФФТ 3.jpg');"></div>
+      <div class="photo-card-overlay"></div>
+      <div class="card-number">03</div>
+      <div class="photo-card-content">
+        <div class="card-name">Тренировочное поле №3</div>
+        <div class="card-desc">Дополнительная площадка с полным освещением и инфраструктурой</div>
+        <div class="card-specs">
+          <span class="card-spec">105x68 м</span>
+          <span class="card-spec">500+ лк</span>
+          <span class="card-spec">15 мин до отеля</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-card-img" style="background-image: url('../ЭРА AFC/04 Стадионы/База ФФТ/ФФТ 4.jpg');"></div>
+      <div class="photo-card-overlay"></div>
+      <div class="card-number">04</div>
+      <div class="photo-card-content">
+        <div class="card-name">Гиссарская база</div>
+        <div class="card-desc">Тренировочный комплекс рядом со стадионом Гиссар</div>
+        <div class="card-specs">
+          <span class="card-spec">105x68 м</span>
+          <span class="card-spec">500+ лк</span>
+          <span class="card-spec">20 мин до отеля</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metrics row -->
+  <div class="metrics-row">
+    <div class="metric">
+      <div class="metric-val">4+</div>
+      <div class="metric-lbl">Тренировочных площадок</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">&lt;20 мин</div>
+      <div class="metric-lbl">До отелей</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">&lt;15 мин</div>
+      <div class="metric-lbl">До стадионов</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">500+</div>
+      <div class="metric-lbl">Люкс освещения</div>
+    </div>
+  </div>
+
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 13 — Вариант 2: Анимированный чеклист с фоном</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px; height: 1080px; overflow: hidden;
+    font-family: 'Inter', sans-serif; background: var(--midnight);
+  }
+
+  .slide {
+    position: relative; width: 1920px; height: 1080px; overflow: hidden;
+  }
+
+  /* Background photo */
+  .bg {
+    position: absolute; inset: -40px;
+    background: url('../ЭРА AFC/04 Стадионы/База ФФТ/ФФТ 1.jpg') center center / cover no-repeat;
+    animation: cinematicDrift 20s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  .bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(5,14,29,0.97) 0%, rgba(5,14,29,0.85) 30%, rgba(5,14,29,0.7) 60%, rgba(5,14,29,0.85) 100%);
+    z-index: 1;
+  }
+  @keyframes cinematicDrift {
+    0% { transform: scale(1.05) translate(0,0); }
+    100% { transform: scale(1.08) translate(-20px,-10px); }
+  }
+
+  .letterbox-top { position: absolute; top: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
+  .letterbox-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
+
+  .afc-logo {
+    position: absolute; top: 100px; left: 80px; z-index: 20;
+    display: flex; align-items: center; gap: 16px;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+  .afc-badge {
+    width: 56px; height: 56px; border: 2px solid var(--gold); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(5,14,29,0.8); backdrop-filter: blur(8px);
+  }
+  .afc-badge svg { width: 30px; height: 30px; fill: var(--gold); }
+  .afc-text {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 15px;
+    color: var(--ivory); letter-spacing: 3px; text-transform: uppercase; line-height: 1.4;
+  }
+  .afc-text .year { color: var(--gold); font-weight: 700; font-size: 22px; letter-spacing: 5px; display: block; }
+
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column; width: 8px; height: 120px;
+    border-radius: 4px; overflow: hidden; animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Title — centered */
+  .title-block {
+    position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+    z-index: 10; text-align: center;
+    animation: fadeSlideUp 0.7s ease 0.6s both;
+  }
+  .tag {
+    display: inline-block; font-family: 'Inter', sans-serif;
+    font-weight: 500; font-size: 13px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.25);
+    padding: 8px 20px; border-radius: 4px; margin-bottom: 12px;
+  }
+  .main-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 44px;
+    line-height: 1.1; color: var(--white); letter-spacing: 2px; text-transform: uppercase;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+  .divider {
+    width: 60px; height: 3px; background: var(--gold); margin: 10px auto;
+    animation: growWidth 0.6s ease 1s both;
+  }
+  @keyframes growWidth { from { width: 0; } to { width: 60px; } }
+  .subtitle-text {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 15px;
+    color: rgba(246,244,239,0.6);
+  }
+
+  /* Centered single-column checklist */
+  .checklist {
+    position: absolute; top: 240px; left: 50%; transform: translateX(-50%);
+    width: 900px; z-index: 10;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  .check-row {
+    display: flex; align-items: center; gap: 20px;
+    padding: 14px 24px;
+    background: rgba(10,24,48,0.5);
+    backdrop-filter: blur(12px);
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .check-row:hover {
+    border-left-color: var(--gold);
+    background: rgba(10,24,48,0.7);
+  }
+
+  .check-row:nth-child(1) { animation: revealCheck 0.4s ease 1.0s both; }
+  .check-row:nth-child(2) { animation: revealCheck 0.4s ease 1.15s both; }
+  .check-row:nth-child(3) { animation: revealCheck 0.4s ease 1.3s both; }
+  .check-row:nth-child(4) { animation: revealCheck 0.4s ease 1.45s both; }
+  .check-row:nth-child(5) { animation: revealCheck 0.4s ease 1.6s both; }
+  .check-row:nth-child(6) { animation: revealCheck 0.4s ease 1.75s both; }
+  .check-row:nth-child(7) { animation: revealCheck 0.4s ease 1.9s both; }
+  .check-row:nth-child(8) { animation: revealCheck 0.4s ease 2.05s both; }
+  .check-row:nth-child(9) { animation: revealCheck 0.4s ease 2.2s both; }
+  .check-row:nth-child(10) { animation: revealCheck 0.4s ease 2.35s both; }
+  .check-row:nth-child(11) { animation: revealCheck 0.4s ease 2.5s both; }
+  .check-row:nth-child(12) { animation: revealCheck 0.4s ease 2.65s both; }
+
+  @keyframes revealCheck {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .check-mark {
+    width: 28px; height: 28px; min-width: 28px;
+    border-radius: 50%;
+    background: rgba(76,175,80,0.15);
+    border: 2px solid #4CAF50;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .check-mark svg { width: 16px; height: 16px; fill: #4CAF50; }
+
+  .check-text {
+    flex: 1;
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 17px;
+    color: var(--white); letter-spacing: 0.5px;
+  }
+
+  .check-note {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 12px;
+    color: rgba(246,244,239,0.5); white-space: nowrap;
+  }
+
+  /* Completion badge */
+  .completion-badge {
+    position: absolute; bottom: 110px; left: 50%; transform: translateX(-50%);
+    z-index: 12;
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(215,166,61,0.1);
+    border: 1px solid rgba(215,166,61,0.3);
+    border-radius: 12px;
+    padding: 16px 40px;
+    animation: fadeSlideUp 0.6s ease 3s both;
+  }
+  .completion-icon {
+    width: 48px; height: 48px;
+    background: rgba(215,166,61,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .completion-icon svg { width: 28px; height: 28px; fill: var(--gold); }
+  .completion-text {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 22px;
+    color: var(--warm-gold); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .completion-sub {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px;
+    color: rgba(246,244,239,0.5);
+  }
+
+  .bottom-strip {
+    position: absolute; bottom: 90px; right: 80px; z-index: 20;
+    text-align: right; animation: fadeIn 1s ease 3.2s both;
+  }
+  .fft-name {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px;
+    color: rgba(246,244,239,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .date {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px;
+    color: rgba(215,166,61,0.5); letter-spacing: 3px;
+  }
+
+  .particles { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  .particle {
+    position: absolute; width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%; opacity: 0;
+    animation: float 6s ease-in-out infinite;
+  }
+  .particle:nth-child(1) { top: 25%; left: 10%; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 65%; left: 80%; animation-delay: 2s; }
+  .particle:nth-child(3) { top: 45%; left: 50%; animation-delay: 4s; }
+  @keyframes float {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 0.6; transform: translateY(-30px); }
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg"></div>
+
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  </div>
+
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">AFC Asian Cup<span class="year">2031</span></div>
+  </div>
+
+  <div class="flag-ribbon">
+    <div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <div class="tag">Соответствие стандартам</div>
+    <h1 class="main-title">Тренировочные стандарты</h1>
+    <div class="divider"></div>
+    <p class="subtitle-text">Соответствие требованиям AFC к тренировочным объектам</p>
+  </div>
+
+  <!-- Single centered checklist with animated reveal -->
+  <div class="checklist">
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Игровое поле 105 x 68 м</div>
+      <div class="check-note">Стандарт FIFA</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Натуральный или гибридный газон</div>
+      <div class="check-note">Натуральный газон</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Освещение минимум 500 люкс</div>
+      <div class="check-note">LED-системы</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Раздевалки с душевыми</div>
+      <div class="check-note">Современные</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Медицинский кабинет</div>
+      <div class="check-note">На каждом объекте</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Ограждение и охрана</div>
+      <div class="check-note">Периметр</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Интернет / WiFi</div>
+      <div class="check-note">Высокоскоростной</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Зона доступа для медиа</div>
+      <div class="check-note">Выделенные зоны</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Парковка для командных автобусов</div>
+      <div class="check-note">Доступна</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Расстояние до отеля менее 30 мин</div>
+      <div class="check-note">Все до 20 мин</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Эксклюзивное использование 14 дней</div>
+      <div class="check-note">Гарантировано</div>
+    </div>
+    <div class="check-row">
+      <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Зона разминки</div>
+      <div class="check-note">Прилегающие объекты</div>
+    </div>
+  </div>
+
+  <!-- Completion badge -->
+  <div class="completion-badge">
+    <div class="completion-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+    </div>
+    <div>
+      <div class="completion-text">12 / 12 требований выполнено</div>
+      <div class="completion-sub">Полное соответствие стандартам AFC</div>
+    </div>
+  </div>
+
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+
+</div>
+</body>
+</html>

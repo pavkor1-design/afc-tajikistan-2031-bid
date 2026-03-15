@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 8 — V1: Split Layout — Таблица + Фото</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+  }
+
+  /* ── Left panel background ── */
+  .left-panel-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1060px;
+    height: 1080px;
+    background: var(--midnight);
+    z-index: 1;
+  }
+
+  /* ── Right panel: photo ── */
+  .right-photo {
+    position: absolute;
+    top: 0; right: 0;
+    width: 860px;
+    height: 1080px;
+    background: url('../ЭРА AFC/04 Стадионы/Душанбе/Landscape/日景鸟瞰.jpg') center center / cover no-repeat;
+    z-index: 1;
+  }
+
+  .right-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--midnight) 0%, rgba(5,14,29,0.6) 30%, rgba(5,14,29,0.15) 100%);
+    z-index: 2;
+  }
+
+  /* Map overlay hint */
+  .map-overlay {
+    position: absolute;
+    bottom: 120px;
+    right: 60px;
+    z-index: 12;
+    background: rgba(10,24,48,0.8);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(215,166,61,0.25);
+    border-radius: 12px;
+    padding: 20px 28px;
+    animation: fadeSlideUp 0.7s ease 3s both;
+  }
+
+  .map-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .map-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(246,244,239,0.6);
+  }
+
+  /* ── Letterbox bars ── */
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  /* ── AFC Logo ── */
+  .afc-logo {
+    position: absolute;
+    top: 100px;
+    left: 80px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .afc-badge {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,14,29,0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .afc-badge svg { width: 30px; height: 30px; fill: var(--gold); }
+
+  .afc-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ivory);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .afc-text .year {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 5px;
+    display: block;
+  }
+
+  /* ── Flag ribbon ── */
+  .flag-ribbon {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 8px;
+    height: 120px;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeIn 1s ease 0.7s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* ── Title area ── */
+  .title-area {
+    position: absolute;
+    top: 100px;
+    left: 200px;
+    z-index: 10;
+    animation: fadeSlideUp 0.7s ease 0.8s both;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(215,166,61,0.12);
+    border: 1px solid rgba(215,166,61,0.25);
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+
+  .main-title span {
+    display: block;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(246,244,239,0.55);
+    letter-spacing: 3px;
+    margin-top: 6px;
+  }
+
+  /* ── Compliance table ── */
+  .compliance-table {
+    position: absolute;
+    top: 236px;
+    left: 80px;
+    width: 920px;
+    z-index: 10;
+  }
+
+  .comp-row {
+    display: grid;
+    grid-template-columns: 40px 320px 1fr 80px;
+    gap: 0;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(215,166,61,0.1);
+    animation: fadeSlideUp 0.5s ease calc(1.2s + var(--i) * 0.15s) both;
+  }
+
+  .comp-row.header {
+    border-bottom: 2px solid rgba(215,166,61,0.3);
+    padding-bottom: 12px;
+    margin-bottom: 2px;
+  }
+
+  .comp-row.header span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .comp-num {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: rgba(215,166,61,0.5);
+  }
+
+  .comp-req {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(246,244,239,0.6);
+    line-height: 1.4;
+    padding-right: 16px;
+  }
+
+  .comp-response {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ivory);
+    line-height: 1.4;
+  }
+
+  .comp-response strong {
+    color: var(--warm-gold);
+    font-weight: 500;
+  }
+
+  .comp-status {
+    text-align: center;
+  }
+
+  .check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(34,180,85,0.15);
+    border: 1px solid rgba(34,180,85,0.4);
+    color: #22B455;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .status-text {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #22B455;
+    margin-top: 4px;
+  }
+
+  /* ── Key stats row ── */
+  .stats-row {
+    position: absolute;
+    bottom: 100px;
+    left: 80px;
+    width: 920px;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .stat-card {
+    background: rgba(10,24,48,0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.2);
+    border-radius: 10px;
+    padding: 22px 18px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(215,166,61,0.5);
+  }
+
+  .stat-card:nth-child(1) { animation: fadeSlideUp 0.6s ease 2.4s both; }
+  .stat-card:nth-child(2) { animation: fadeSlideUp 0.6s ease 2.6s both; }
+  .stat-card:nth-child(3) { animation: fadeSlideUp 0.6s ease 2.8s both; }
+  .stat-card:nth-child(4) { animation: fadeSlideUp 0.6s ease 3.0s both; }
+
+  .stat-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--warm-gold);
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.6);
+    letter-spacing: 1px;
+    line-height: 1.3;
+  }
+
+  /* ── Bottom strip ── */
+  .bottom-strip {
+    position: absolute;
+    bottom: 90px;
+    right: 80px;
+    z-index: 20;
+    text-align: right;
+    animation: fadeIn 1s ease 3.2s both;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 3px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes growWidth {
+    from { width: 0; }
+    to { width: 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Left panel background -->
+  <div class="left-panel-bg"></div>
+
+  <!-- Right panel: city photo -->
+  <div class="right-photo"></div>
+
+  <!-- Map overlay on photo -->
+  <div class="map-overlay">
+    <div class="map-label">Аэропорт → Стадион</div>
+    <div class="map-sub">15 мин · Компактная планировка города</div>
+  </div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">
+      AFC Asian Cup
+      <span class="year">2031</span>
+    </div>
+  </div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-area">
+    <div class="tag">Требование 4a — Host City Compliance</div>
+    <h1 class="main-title">
+      Город-организатор: Душанбе
+      <span>Соответствие требованиям раздела 4a</span>
+    </h1>
+  </div>
+
+  <!-- Compliance table -->
+  <div class="compliance-table">
+    <!-- Header -->
+    <div class="comp-row header" style="--i:0">
+      <span>#</span>
+      <span>Требование AFC</span>
+      <span>Ответ Душанбе</span>
+      <span>Статус</span>
+    </div>
+
+    <!-- Row 1 -->
+    <div class="comp-row" style="--i:1">
+      <div class="comp-num">01</div>
+      <div class="comp-req">Международный аэропорт с ежедневными рейсами</div>
+      <div class="comp-response"><strong>Dushanbe International Airport (DYU)</strong></div>
+      <div class="comp-status">
+        <span class="check">&#10003;</span>
+        <span class="status-text">Ready</span>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="comp-row" style="--i:2">
+      <div class="comp-num">02</div>
+      <div class="comp-req">Центр населения</div>
+      <div class="comp-response"><strong>Столица, 1M+ населения</strong></div>
+      <div class="comp-status">
+        <span class="check">&#10003;</span>
+        <span class="status-text">Ready</span>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="comp-row" style="--i:3">
+      <div class="comp-num">03</div>
+      <div class="comp-req">Гостиничный фонд</div>
+      <div class="comp-response"><strong>37 гостиниц · 2 119 номеров · 3 756 мест</strong><br>+ 5 строящихся (699 номеров)</div>
+      <div class="comp-status">
+        <span class="check">&#10003;</span>
+        <span class="status-text">Ready</span>
+      </div>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="comp-row" style="--i:4">
+      <div class="comp-num">04</div>
+      <div class="comp-req">Внутренняя логистика &lt;30 мин</div>
+      <div class="comp-response"><strong>Аэропорт → стадион: 15 мин</strong><br>Компактная планировка города</div>
+      <div class="comp-status">
+        <span class="check">&#10003;</span>
+        <span class="status-text">Ready</span>
+      </div>
+    </div>
+
+    <!-- Row 5 -->
+    <div class="comp-row" style="--i:5">
+      <div class="comp-num">05</div>
+      <div class="comp-req">Инфраструктура безопасности</div>
+      <div class="comp-response"><strong>Столица с полным аппаратом безопасности</strong></div>
+      <div class="comp-status">
+        <span class="check">&#10003;</span>
+        <span class="status-text">Ready</span>
+      </div>
+    </div>
+
+    <!-- Row 6 -->
+    <div class="comp-row" style="--i:6">
+      <div class="comp-num">06</div>
+      <div class="comp-req">Медицинские учреждения</div>
+      <div class="comp-response"><strong>Столичные больницы и клиники</strong></div>
+      <div class="comp-status">
+        <span class="check">&#10003;</span>
+        <span class="status-text">Ready</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key stats bottom row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-number">37</div>
+      <div class="stat-label">Гостиниц</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2 119</div>
+      <div class="stat-label">Номеров</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">15 мин</div>
+      <div class="stat-label">Аэропорт → стадион</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">1M+</div>
+      <div class="stat-label">Население</div>
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+
+</div>
+</body>
+</html>
