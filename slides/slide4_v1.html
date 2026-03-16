@@ -33,7 +33,7 @@
     width: 1920px;
     height: 1080px;
     overflow: hidden;
-    background: linear-gradient(rgba(5,14,29,0.85), rgba(5,14,29,0.88)), url('img/stadium-plaza.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(5,14,29,0.82), rgba(5,14,29,0.88)), url('img/tajikistan-mountains.jpg') center/cover no-repeat;
   }
 
   /* Cinematic letterbox bars */
@@ -52,6 +52,7 @@
     background: var(--midnight);
     z-index: 15;
   }
+
   /* Flag ribbon */
   .flag-ribbon {
     position: absolute;
@@ -73,29 +74,15 @@
   .fr-white { background: #FFFFFF; }
   .fr-green { background: #006600; }
 
-  /* Title block — top area under logo */
+  /* Title block — centered */
   .title-block {
     position: absolute;
     top: 100px;
-    left: 320px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 10;
+    text-align: center;
     animation: fadeSlideUp 0.8s ease 0.8s both;
-  }
-
-  .tag {
-    display: none !important;
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(215,166,61,0.12);
-    border: 1px solid rgba(215,166,61,0.25);
-    padding: 8px 20px;
-    border-radius: 4px;
-    margin-bottom: 16px;
   }
 
   .main-title {
@@ -122,7 +109,7 @@
     width: 80px;
     height: 3px;
     background: var(--gold);
-    margin: 14px 0;
+    margin: 14px auto;
     animation: growWidth 0.6s ease 1.4s both;
   }
 
@@ -134,7 +121,7 @@
   /* Timeline — horizontal across the middle */
   .timeline {
     position: absolute;
-    top: 360px;
+    top: 280px;
     left: 200px;
     right: 200px;
     z-index: 10;
@@ -215,12 +202,12 @@
   /* Metric cards — below timeline */
   .metrics {
     position: absolute;
-    top: 560px;
+    top: 470px;
     left: 120px;
     right: 120px;
     z-index: 10;
     display: flex;
-    gap: 30px;
+    gap: 24px;
     justify-content: center;
   }
 
@@ -228,9 +215,10 @@
     background: rgba(10,24,48,0.6);
     border: 1px solid rgba(215,166,61,0.15);
     border-radius: 12px;
-    padding: 32px 36px;
+    padding: 28px 28px 20px;
     text-align: center;
-    min-width: 220px;
+    flex: 1;
+    max-width: 280px;
     backdrop-filter: blur(12px);
     animation: fadeSlideUp 0.7s ease calc(1.4s + var(--i) * 0.2s) both;
     position: relative;
@@ -249,18 +237,19 @@
   .metric-number {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 60px;
+    font-size: 52px;
     color: var(--gold);
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .metric-label {
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
-    color: rgba(246,244,239,0.6);
-    letter-spacing: 1px;
+    color: rgba(246,244,239,0.7);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
   }
 
   .metric-sublabel {
@@ -268,21 +257,62 @@
     font-weight: 300;
     font-size: 12px;
     color: rgba(215,166,61,0.5);
-    margin-top: 4px;
     letter-spacing: 1px;
     text-transform: uppercase;
+  }
+
+  /* AFC checklist — bottom section from slide 13 */
+  .checklist {
+    position: absolute;
+    top: 710px;
+    left: 120px;
+    right: 120px;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    animation: fadeSlideUp 0.7s ease 2.2s both;
+  }
+
+  .check-item {
+    background: rgba(10,24,48,0.5);
+    border: 1px solid rgba(76,175,80,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .check-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    border-radius: 50%;
+    background: rgba(76,175,80,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .check-icon svg {
+    width: 14px; height: 14px; fill: #81C784;
+  }
+
+  .check-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: rgba(246,244,239,0.7);
+    line-height: 1.3;
   }
 
   /* Auto-qualification badge */
   .auto-qual-wrapper {
     position: absolute;
-    top: 760px;
+    top: 850px;
     left: 0;
     right: 0;
     z-index: 10;
     display: flex;
     justify-content: center;
-    animation: fadeSlideUp 0.7s ease 2.4s both;
+    animation: fadeSlideUp 0.7s ease 2.6s both;
   }
 
   .auto-qual {
@@ -313,25 +343,6 @@
   .auto-qual-text strong {
     color: var(--warm-gold);
     font-weight: 500;
-  }
-
-  /* Quote — bottom left */
-  .quote-block {
-    position: absolute;
-    bottom: 130px;
-    left: 80px;
-    z-index: 10;
-    animation: fadeSlideUp 0.7s ease 2.6s both;
-  }
-
-  .quote-text {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    font-style: italic;
-    line-height: 1.7;
-    color: rgba(246,244,239,0.5);
-    max-width: 700px;
   }
 
   /* Bottom strip */
@@ -389,9 +400,8 @@
     <div class="fr-green"></div>
   </div>
 
-  <!-- Title block — top area -->
+  <!-- Title block — centered -->
   <div class="title-block">
-    <div class="tag">Футбольный профиль</div>
     <h1 class="main-title">
       ТАДЖИКИСТАН И ФУТБОЛ
       <span class="highlight">История и потенциал</span>
@@ -454,17 +464,36 @@
     </div>
   </div>
 
+  <!-- AFC Standards checklist (from slide 13) -->
+  <div class="checklist">
+    <div class="check-item">
+      <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Поле 105×68 м, натуральный газон</div>
+    </div>
+    <div class="check-item">
+      <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Освещение 500+ люкс</div>
+    </div>
+    <div class="check-item">
+      <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Раздевалки 4×80+ м²</div>
+    </div>
+    <div class="check-item">
+      <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">Медпункт на объекте</div>
+    </div>
+    <div class="check-item">
+      <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="check-text">WiFi, медиа-зона, парковка</div>
+    </div>
+  </div>
+
   <!-- Auto-qualification -->
   <div class="auto-qual-wrapper">
     <div class="auto-qual">
       <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
       <div class="auto-qual-text"><strong>Автоматическая квалификация</strong> сборной Таджикистана в случае победы заявки</div>
     </div>
-  </div>
-
-  <!-- Quote — bottom left -->
-  <div class="quote-block">
-    <p class="quote-text">«Кубок Азии 2031 — катализатор развития таджикского футбола на десятилетия вперёд»</p>
   </div>
 
   <!-- Bottom info -->
