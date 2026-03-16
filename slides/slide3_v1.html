@@ -83,22 +83,24 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
-    height: 480px;
+    gap: 32px;
+    height: 520px;
   }
 
   .card {
     position: relative;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(215,166,61,0.15);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(215,166,61,0.2);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
   }
 
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(215,166,61,0.15);
+    border-color: rgba(215,166,61,0.5);
+    z-index: 5;
   }
 
   .card::after {
@@ -112,29 +114,36 @@
 
   .card-label {
     position: absolute;
-    bottom: 16px;
-    left: 16px;
-    right: 16px;
+    bottom: 20px;
+    left: 24px;
+    right: 24px;
     z-index: 2;
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 22px;
     color: var(--white);
     letter-spacing: 1px;
     text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    line-height: 1.2;
   }
 
   .card-number {
     position: absolute;
-    top: 12px;
-    left: 14px;
+    top: 16px;
+    left: 20px;
     z-index: 2;
     font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    color: var(--gold);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--warm-gold);
     letter-spacing: 2px;
-    opacity: 0.7;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+    background: rgba(10,24,48,0.6);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(215,166,61,0.3);
+    backdrop-filter: blur(4px);
   }
 
   /* Gradient placeholders simulating Tajikistan landscapes */
@@ -182,19 +191,19 @@
   }
 
   .tag {
-    display: none !important;
-    display: inline-block;
+    display: inline-block !important;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
+    font-weight: 600;
+    font-size: 14px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(215,166,61,0.12);
-    border: 1px solid rgba(215,166,61,0.25);
-    padding: 8px 20px;
+    color: var(--warm-gold);
+    background: rgba(215,166,61,0.15);
+    border: 1px solid rgba(215,166,61,0.3);
+    padding: 8px 24px;
     border-radius: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
 
   .main-title {
