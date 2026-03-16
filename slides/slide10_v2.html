@@ -115,17 +115,18 @@
 
   /* ===== TWO COLUMN CARDS LAYOUT ===== */
   .cards-area {
-    position: absolute; top: 180px; left: 80px; right: 80px;
+    position: absolute; top: 210px; left: 80px; right: 80px;
     z-index: 10;
-    display: flex; gap: 0; align-items: flex-start;
+    display: flex; gap: 24px; align-items: flex-start;
   }
 
   .stadium-card {
     flex: 1;
-    background: rgba(10,24,48,0.4);
-    border: 1px solid rgba(215,166,61,0.12);
-    border-radius: 14px;
-    backdrop-filter: blur(12px);
+    background: linear-gradient(145deg, rgba(10,24,48,0.7), rgba(5,14,29,0.8));
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.4);
     overflow: hidden;
     display: flex; flex-direction: column;
     animation: fadeSlideUp 0.8s ease both;
@@ -134,43 +135,48 @@
   .stadium-card:nth-child(3) { animation-delay: 1.0s; }
 
   .stadium-card::before {
-    content: ''; position: absolute; inset: 0; border-radius: 14px; padding: 1px;
-    background: linear-gradient(180deg, rgba(215,166,61,0.2), rgba(215,166,61,0.02));
+    content: ''; position: absolute; inset: 0; border-radius: 16px; padding: 1px;
+    background: linear-gradient(180deg, rgba(215,166,61,0.4), rgba(215,166,61,0.05));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
   }
 
   .card-header {
-    padding: 14px 24px 12px;
-    background: linear-gradient(90deg, rgba(215,166,61,0.1), rgba(215,166,61,0.02));
-    border-bottom: 1px solid rgba(215,166,61,0.1);
+    height: 124px;
+    padding: 0 24px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: linear-gradient(180deg, rgba(215,166,61,0.1), rgba(215,166,61,0.02));
+    border-bottom: 1px solid rgba(215,166,61,0.15);
     text-align: center;
   }
   .card-header h2 {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 24px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 26px;
     color: var(--white); text-transform: uppercase; letter-spacing: 3px;
     margin-bottom: 4px;
   }
   .card-header .card-sub {
-    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
-    color: rgba(246,244,239,0.5); letter-spacing: 1px;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.6); letter-spacing: 1px;
   }
   .card-header .status-badge {
-    display: inline-block; margin-top: 8px; padding: 4px 14px; border-radius: 12px;
-    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 1px;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-top: 10px; padding: 4px 16px; border-radius: 20px;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px;
+    text-transform: uppercase;
   }
   .status-badge.ready {
-    background: rgba(76,175,80,0.12); color: #81C784; border: 1px solid rgba(76,175,80,0.25);
+    background: rgba(76,175,80,0.15); color: #81C784; border: 1px solid rgba(76,175,80,0.3);
   }
   .status-badge.planned {
-    background: rgba(215,166,61,0.12); color: var(--warm-gold); border: 1px solid rgba(215,166,61,0.25);
+    background: rgba(215,166,61,0.15); color: var(--warm-gold); border: 1px solid rgba(215,166,61,0.3);
   }
 
-  .card-rows { padding: 4px 0; }
+  .card-rows { padding: 12px 0; }
 
   .spec-row {
-    display: flex; align-items: center; padding: 7px 24px;
-    border-bottom: 1px solid rgba(215,166,61,0.04);
+    display: flex; align-items: center; justify-content: space-between;
+    height: 48px; padding: 0 32px;
+    border-bottom: 1px solid rgba(215,166,61,0.06);
     animation: fadeIn 0.5s ease both;
   }
   .spec-row:nth-child(1) { animation-delay: 1.2s; }
@@ -187,42 +193,68 @@
   .spec-row:last-child { border-bottom: none; }
 
   .spec-value {
-    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 15px;
     color: var(--ivory); flex: 1;
   }
+  .stadium-card:first-child .spec-value { text-align: left; padding-right: 16px; }
+  .stadium-card:last-child .spec-value { text-align: right; padding-left: 16px; }
+
   .spec-check {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
   }
-  .spec-check.ready { background: rgba(76,175,80,0.15); color: #81C784; font-size: 14px; }
-  .spec-check.planned { background: rgba(215,166,61,0.15); color: var(--warm-gold); font-size: 14px; }
+  .spec-check.ready { background: rgba(76,175,80,0.2); color: #81C784; font-size: 14px; box-shadow: 0 0 10px rgba(76,175,80,0.2); }
+  .spec-check.planned { background: rgba(215,166,61,0.2); color: var(--warm-gold); font-size: 14px; box-shadow: 0 0 10px rgba(215,166,61,0.2); }
 
   /* CENTER COLUMN — requirements */
   .center-col {
-    width: 260px; flex-shrink: 0;
+    width: 280px; flex-shrink: 0;
     display: flex; flex-direction: column;
-    padding-top: 72px; /* align with card rows */
     animation: fadeIn 0.8s ease 1.0s both;
   }
 
+  .center-header {
+    height: 124px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  }
+  .center-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.5));
+  }
+
+  .req-rows {
+    padding: 12px 0;
+    position: relative;
+  }
+  .req-rows::before {
+    content: ''; position: absolute;
+    top: 12px; bottom: 12px; left: 50%; width: 1px; transform: translateX(-50%);
+    background: rgba(215,166,61,0.15);
+    z-index: 0;
+  }
+
   .req-label {
+    position: relative;
     display: flex; align-items: center; justify-content: center;
-    height: 38px; /* match spec-row height */
+    height: 48px; 
     padding: 0 12px;
-    text-align: center;
+    z-index: 2;
+  }
+  .req-label::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: -24px; right: -24px;
+    height: 1px;
+    border-top: 1px dashed rgba(215,166,61,0.3);
+    z-index: -1;
   }
   .req-label span {
     font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 14px;
-    color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
-    background: rgba(215,166,61,0.06); border: 1px solid rgba(215,166,61,0.12);
-    padding: 5px 14px; border-radius: 20px; white-space: nowrap;
-  }
-
-  /* connector lines */
-  .center-col::before {
-    content: ''; display: block;
-    width: 1px; height: 30px; margin: 0 auto 0;
-    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.2));
+    color: var(--warm-gold); letter-spacing: 1.5px; text-transform: uppercase;
+    background: #0A1830;
+    border: 1px solid rgba(215,166,61,0.3);
+    padding: 6px 20px; border-radius: 20px; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
 
   /* BOTTOM */
@@ -303,16 +335,21 @@
 
     <!-- CENTER: Requirements -->
     <div class="center-col">
-      <div class="req-label"><span>105 &times; 68 м</span></div>
-      <div class="req-label"><span>Натур. / гибрид</span></div>
-      <div class="req-label"><span>2 400 люкс</span></div>
-      <div class="req-label"><span>20 000+</span></div>
-      <div class="req-label"><span>4 &times; 80 м&sup2;+</span></div>
-      <div class="req-label"><span>VIP зоны</span></div>
-      <div class="req-label"><span>Медиацентр</span></div>
-      <div class="req-label"><span>Пресс-места</span></div>
-      <div class="req-label"><span>Доступность</span></div>
-      <div class="req-label"><span>2 экрана</span></div>
+      <div class="center-header">
+        <div class="center-line"></div>
+      </div>
+      <div class="req-rows">
+        <div class="req-label"><span>105 &times; 68 м</span></div>
+        <div class="req-label"><span>Натур. / гибрид</span></div>
+        <div class="req-label"><span>2 400 люкс</span></div>
+        <div class="req-label"><span>20 000+</span></div>
+        <div class="req-label"><span>4 &times; 80 м&sup2;+</span></div>
+        <div class="req-label"><span>VIP зоны</span></div>
+        <div class="req-label"><span>Медиацентр</span></div>
+        <div class="req-label"><span>Пресс-места</span></div>
+        <div class="req-label"><span>Доступность</span></div>
+        <div class="req-label"><span>2 экрана</span></div>
+      </div>
     </div>
 
     <!-- RIGHT: Hissar -->
@@ -323,16 +360,16 @@
         <div class="status-badge planned">10 / 10 запланировано ◉</div>
       </div>
       <div class="card-rows">
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">105 &times; 68 м (план)</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланирован</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланировано</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">22 000 (план)</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланировано</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланировано</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланировано</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланировано</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланировано</span></div>
-        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value" style="text-align:right">Запланировано</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">105 &times; 68 м (план)</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланирован</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланировано</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">22 000 (план)</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланировано</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланировано</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланировано</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланировано</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланировано</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Запланировано</span></div>
       </div>
     </div>
 
