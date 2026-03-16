@@ -121,13 +121,13 @@
 
   /* ===== TIMELINE ===== */
   .timeline-area {
-    position: absolute; top: 240px; left: 80px; right: 80px;
-    z-index: 10;
+    position: absolute; top: 220px; left: 80px; right: 80px;
+    height: 520px; z-index: 10;
   }
 
   /* The golden line */
   .timeline-line {
-    position: absolute; top: 70px; left: 100px; right: 100px;
+    position: absolute; top: 258px; left: 100px; right: 100px;
     height: 4px;
     background: linear-gradient(90deg, var(--gold), var(--warm-gold));
     border-radius: 2px;
@@ -144,12 +144,11 @@
   .milestones {
     position: relative;
     display: flex; justify-content: space-between;
-    width: 100%;
+    width: 100%; height: 100%;
   }
 
   .milestone {
-    display: flex; flex-direction: column; align-items: center;
-    width: 200px; position: relative;
+    position: relative; width: 200px; height: 100%;
     animation: fadeSlideUp 0.6s ease both;
   }
   .milestone:nth-child(1) { animation-delay: 1.2s; }
@@ -161,78 +160,82 @@
   .milestone:nth-child(7) { animation-delay: 2.4s; }
   .milestone:nth-child(8) { animation-delay: 2.6s; }
 
-  /* Year label above line */
+  /* Year label above/below line */
   .ms-year {
+    position: absolute; left: 0; width: 100%; text-align: center;
     font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 26px;
     color: var(--warm-gold); letter-spacing: 2px;
-    margin-bottom: 4px;
-    line-height: 26px;
+    line-height: 1;
     text-shadow: 0 2px 10px rgba(232,191,90,0.3);
+    margin: 0;
   }
   .ms-quarter {
+    position: absolute; left: 0; width: 100%; text-align: center;
     font-family: 'Inter', sans-serif; font-weight: 500; font-size: 16px;
     color: rgba(246,244,239,0.8); letter-spacing: 1.5px;
-    margin-bottom: 16px;
-    line-height: 16px;
-    height: 16px;
+    line-height: 1;
     text-transform: uppercase;
+    margin: 0;
   }
 
   /* Dot on the line */
   .ms-dot {
-    width: 20px; height: 20px; border-radius: 50%;
+    position: absolute; top: 248px; left: 50%; transform: translateX(-50%);
+    width: 24px; height: 24px; border-radius: 50%;
     background: var(--gold); border: 4px solid var(--midnight);
     box-shadow: 0 0 15px rgba(215,166,61,0.5), 0 0 30px rgba(215,166,61,0.2);
-    z-index: 5; position: relative;
-    margin-bottom: 0;
-    flex-shrink: 0;
+    z-index: 5;
   }
   .milestone:last-child .ms-dot {
     background: var(--white);
     box-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3);
-    width: 26px; height: 26px;
+    width: 30px; height: 30px;
     border-color: var(--gold);
-    margin-top: -3px;
-    margin-bottom: -3px;
+    top: 245px;
   }
 
   /* Connector line from dot to card */
   .ms-connector {
-    width: 2px; height: 32px;
-    background: linear-gradient(180deg, var(--gold), transparent);
+    position: absolute; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 40px;
     margin: 0;
-    flex-shrink: 0;
   }
 
-  /* Detail card below */
+  /* Detail card */
   .ms-card {
+    position: absolute; left: 0; width: 100%;
     background: linear-gradient(145deg, rgba(10,24,48,0.7), rgba(5,14,29,0.8));
     border: 1px solid rgba(215,166,61,0.2);
-    border-top: 3px solid var(--gold);
     border-radius: 12px;
     padding: 20px 16px;
     backdrop-filter: blur(20px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    width: 100%;
-    height: 160px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     text-align: center;
-    margin-top: 0;
-    position: relative;
+    margin: 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .ms-card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 20px rgba(215,166,61,0.1);
   }
+  .milestone:nth-child(odd) .ms-card:hover {
+    transform: translateY(-5px);
+  }
+  .milestone:nth-child(even) .ms-card:hover {
+    transform: translateY(5px);
+  }
+  
   .ms-card::after {
     content: ''; position: absolute; inset: 0; border-radius: 12px; padding: 1px;
     background: linear-gradient(180deg, rgba(215,166,61,0.3), rgba(215,166,61,0.05));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude; pointer-events: none;
   }
 
   .ms-card h3 {
@@ -242,7 +245,39 @@
   }
   .ms-card p {
     font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
-    color: rgba(246,244,239,0.7); line-height: 1.5;
+    color: rgba(246,244,239,0.7); line-height: 1.5; margin: 0;
+  }
+
+  /* ODD (CARD ABOVE) */
+  .milestone:nth-child(odd) .ms-connector {
+    bottom: 272px;
+    background: linear-gradient(0deg, var(--gold), transparent);
+  }
+  .milestone:nth-child(odd) .ms-card {
+    bottom: 312px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .milestone:nth-child(odd) .ms-year {
+    top: 284px;
+  }
+  .milestone:nth-child(odd) .ms-quarter {
+    top: 318px;
+  }
+
+  /* EVEN (CARD BELOW) */
+  .milestone:nth-child(even) .ms-connector {
+    top: 272px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+  .milestone:nth-child(even) .ms-card {
+    top: 312px;
+    border-top: 3px solid var(--gold);
+  }
+  .milestone:nth-child(even) .ms-year {
+    bottom: 284px;
+  }
+  .milestone:nth-child(even) .ms-quarter {
+    bottom: 318px;
   }
 
   /* ===== GUARANTEES ROW ===== */
@@ -274,7 +309,9 @@
     content: ''; position: absolute; inset: 0; border-radius: 16px; padding: 1px;
     background: linear-gradient(180deg, rgba(215,166,61,0.3), rgba(215,166,61,0.05));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude; pointer-events: none;
   }
   .guarantee-card::before {
     content: ''; display: block; width: 4px; height: 56px;
