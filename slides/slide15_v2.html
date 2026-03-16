@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 15 — Инфраструктура (V2 — Вертикальный поток)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  /* Right background image */
+  .bg-image {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 960px;
+    background: url('img/avenue-rudaki.jpg') center/cover no-repeat;
+    z-index: 1;
+  }
+  .bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--midnight) 0%, rgba(5,14,29,0.85) 30%, rgba(5,14,29,0.5) 100%);
+  }
+
+  /* Letterbox */
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+  .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column;
+    width: 8px; height: 120px; border-radius: 4px; overflow: hidden;
+    animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Tags */
+  .tags { display: none !important; }
+
+  /* Grid overlay */
+  .grid-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 2;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
+    pointer-events: none;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute; bottom: 18px; right: 80px; z-index: 20;
+    display: flex; align-items: center; gap: 20px;
+    animation: fadeIn 1s ease 1s both;
+  }
+  .bottom-strip span {
+    font-size: 11px; color: rgba(246,244,239,0.35);
+    letter-spacing: 2px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif; font-weight: 400;
+  }
+  .bottom-strip .divider {
+    width: 1px; height: 14px; background: rgba(215,166,61,0.2);
+  }
+
+  /* Particles */
+  .particle {
+    position: absolute; border-radius: 50%; z-index: 3;
+    background: var(--gold); opacity: 0;
+    animation: particleFloat 6s ease-in-out infinite;
+  }
+  .p1 { width: 3px; height: 3px; top: 20%; left: 65%; animation-delay: 0s; }
+  .p2 { width: 2px; height: 2px; top: 45%; left: 88%; animation-delay: 1.2s; }
+  .p3 { width: 4px; height: 4px; top: 70%; left: 72%; animation-delay: 2.5s; }
+  .p4 { width: 2px; height: 2px; top: 30%; left: 82%; animation-delay: 0.8s; }
+  .p5 { width: 3px; height: 3px; top: 60%; left: 55%; animation-delay: 3.5s; }
+  .p6 { width: 2px; height: 2px; top: 15%; left: 78%; animation-delay: 4.2s; }
+  .p7 { width: 3px; height: 3px; top: 80%; left: 68%; animation-delay: 1.8s; }
+
+  /* Title area */
+  .title-area {
+    position: absolute; top: 100px; left: 80px; z-index: 10;
+    animation: fadeSlideUp 0.8s ease 0.3s both;
+  }
+  .slide-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 48px; color: var(--white); text-transform: uppercase;
+    letter-spacing: 3px; line-height: 1.1;
+  }
+  .slide-title .gold { color: var(--gold); }
+  .slide-subtitle {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 16px; color: rgba(246,244,239,0.5);
+    letter-spacing: 4px; text-transform: uppercase;
+    margin-top: 10px;
+  }
+  .title-line {
+    width: 60px; height: 2px; background: var(--gold); margin-top: 16px;
+    animation: growWidth 0.6s ease 0.8s both;
+    transform-origin: left;
+  }
+
+  /* Timeline container */
+  .timeline {
+    position: absolute;
+    top: 230px; left: 80px;
+    width: 700px;
+    z-index: 10;
+  }
+
+  /* Vertical gold line */
+  .timeline-line {
+    position: absolute;
+    top: 0; left: 27px;
+    width: 2px;
+    height: 730px;
+    background: linear-gradient(180deg, var(--gold), rgba(215,166,61,0.15));
+    z-index: 1;
+    animation: lineGrow 1s ease 0.5s both;
+    transform-origin: top;
+  }
+
+  /* Timeline node */
+  .tl-node {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding-left: 0;
+    margin-bottom: 16px;
+  }
+
+  .tl-dot {
+    position: relative;
+    z-index: 2;
+    width: 56px; height: 56px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--midnight);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tl-dot svg { width: 26px; height: 26px; }
+
+  .tl-content {
+    padding-top: 4px;
+    flex: 1;
+  }
+
+  .tl-title {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 19px; color: var(--white); text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 6px;
+  }
+
+  .tl-text {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 13px; color: rgba(246,244,239,0.55);
+    line-height: 1.65;
+  }
+
+  /* Node number badge */
+  .tl-num {
+    position: absolute;
+    top: -6px; left: -6px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--midnight);
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3;
+  }
+
+  /* Staggered animations */
+  .tl-node:nth-child(1) { animation: fadeSlideLeft 0.6s ease 0.6s both; }
+  .tl-node:nth-child(2) { animation: fadeSlideLeft 0.6s ease 0.75s both; }
+  .tl-node:nth-child(3) { animation: fadeSlideLeft 0.6s ease 0.9s both; }
+  .tl-node:nth-child(4) { animation: fadeSlideLeft 0.6s ease 1.05s both; }
+  .tl-node:nth-child(5) { animation: fadeSlideLeft 0.6s ease 1.2s both; }
+  .tl-node:nth-child(6) { animation: fadeSlideLeft 0.6s ease 1.35s both; }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeSlideLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes growWidth {
+    from { transform: scaleX(0); } to { transform: scaleX(1); }
+  }
+  @keyframes lineGrow {
+    from { transform: scaleY(0); } to { transform: scaleY(1); }
+  }
+  @keyframes particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    20% { opacity: 0.4; }
+    50% { opacity: 0.6; transform: translateY(-30px); }
+    80% { opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- Background image right side -->
+  <div class="bg-image"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Particles -->
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  <div class="particle p5"></div>
+  <div class="particle p6"></div>
+  <div class="particle p7"></div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-area">
+    <div class="slide-title">ИНФРАСТРУКТУРА <span class="gold">ГОРОДА</span></div>
+    <div class="slide-subtitle">Полный цикл поддержки турнира</div>
+    <div class="title-line"></div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-line"></div>
+
+    <!-- Node 1: Airport -->
+    <div class="tl-node">
+      <div class="tl-dot">
+        <div class="tl-num">1</div>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 10 7 5 9L11 10V14L9 16V17L11 16V19L9 20V21L12 20L15 21V20L13 19V16L15 17V16L13 14V10L19 9C14 7 12 2 12 2Z" stroke="#D7A63D" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-title">Аэропорт</div>
+        <div class="tl-text">Международный аэропорт Душанбе.<br>Прямые рейсы из 15+ городов Азии. VIP-терминал.</div>
+      </div>
+    </div>
+
+    <!-- Node 2: Transfer -->
+    <div class="tl-node">
+      <div class="tl-dot">
+        <div class="tl-num">2</div>
+        <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="8" width="20" height="9" rx="2" stroke="#D7A63D" stroke-width="1.5"/><circle cx="7" cy="19" r="2" stroke="#D7A63D" stroke-width="1.5"/><circle cx="17" cy="19" r="2" stroke="#D7A63D" stroke-width="1.5"/><path d="M2 12h20M5 8V5h6v3" stroke="#D7A63D" stroke-width="1.5"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-title">Трансфер</div>
+        <div class="tl-text">Шаттлы аэропорт — отель — стадион.<br>Dedicated lanes. GPS-мониторинг.</div>
+      </div>
+    </div>
+
+    <!-- Node 3: Stadium -->
+    <div class="tl-node">
+      <div class="tl-dot">
+        <div class="tl-num">3</div>
+        <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="16" rx="10" ry="4" stroke="#D7A63D" stroke-width="1.5"/><path d="M2 16V10c0-2.2 4.48-4 10-4s10 1.8 10 4v6" stroke="#D7A63D" stroke-width="1.5"/><ellipse cx="12" cy="10" rx="10" ry="4" stroke="#D7A63D" stroke-width="1.5"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-title">Стадион</div>
+        <div class="tl-text">Last-mile логистика. Зонирование<br>входов. Парковка 5 000+ мест.</div>
+      </div>
+    </div>
+
+    <!-- Node 4: Media -->
+    <div class="tl-node">
+      <div class="tl-dot">
+        <div class="tl-num">4</div>
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="11" rx="2" stroke="#D7A63D" stroke-width="1.5"/><circle cx="12" cy="10.5" r="3" stroke="#D7A63D" stroke-width="1.5"/><circle cx="12" cy="10.5" r="1" fill="#D7A63D"/><path d="M7 18h10M9 16v2M15 16v2" stroke="#D7A63D" stroke-width="1.5"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-title">Медиа-сервисы</div>
+        <div class="tl-text">Broadcast compound. Пресс-центр.<br>Высокоскоростной интернет. IBC support.</div>
+      </div>
+    </div>
+
+    <!-- Node 5: VIP -->
+    <div class="tl-node">
+      <div class="tl-dot">
+        <div class="tl-num">5</div>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 9v11h18V9L12 2z" stroke="#D7A63D" stroke-width="1.5"/><rect x="9" y="13" width="6" height="7" rx="0.5" stroke="#D7A63D" stroke-width="1.2"/><rect x="10" y="15" width="4" height="3" rx="0.5" stroke="#D7A63D" stroke-width="1"/><circle cx="12" cy="7" r="1.5" stroke="#D7A63D" stroke-width="1.2"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-title">VIP маршрут</div>
+        <div class="tl-text">Отдельная логистика VIP/VVIP.<br>Протокольные коридоры. Эскорт.</div>
+      </div>
+    </div>
+
+    <!-- Node 6: Medical -->
+    <div class="tl-node">
+      <div class="tl-dot">
+        <div class="tl-num">6</div>
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="14" rx="2" stroke="#D7A63D" stroke-width="1.5"/><path d="M10 6V4h4v2" stroke="#D7A63D" stroke-width="1.5"/><line x1="12" y1="10" x2="12" y2="17" stroke="#D7A63D" stroke-width="2" stroke-linecap="round"/><line x1="8.5" y1="13.5" x2="15.5" y2="13.5" stroke="#D7A63D" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-title">Медицина</div>
+        <div class="tl-text">3 клиники. Ambulance routing.<br>Координация экстренной помощи.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <span>Федерация футбола Таджикистана</span>
+    <div class="divider"></div>
+    <span>Март 2026 · Душанбе</span>
+  </div>
+
+  <!-- Tags -->
+  <div class="tags">slide15, инфраструктура города, вертикальный поток, аэропорт, трансфер, медиа</div>
+</div>
+</body>
+</html>

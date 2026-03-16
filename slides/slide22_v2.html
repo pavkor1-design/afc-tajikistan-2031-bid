@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 22 — Closing (V2 — Минималистичный)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  /* Tags hidden */
+  .tag, tag { display: none !important; }
+
+  /* Letterbox bars */
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 20;
+  }
+
+  .letterbox-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 20;
+  }
+
+  .letterbox-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  /* Flag ribbon — larger for closing */
+  .flag-ribbon {
+    position: absolute;
+    top: 80px;
+    right: 55px;
+    width: 10px;
+    height: 160px;
+    z-index: 25;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1.8s forwards;
+  }
+
+  .flag-ribbon .red { flex: 1; background: #CC0000; }
+  .flag-ribbon .wht { flex: 1; background: #FFFFFF; }
+  .flag-ribbon .grn { flex: 1; background: #006600; }
+
+  /* Center content */
+  .center-content {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 80px;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 100px;
+  }
+
+  /* Main title */
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 96px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    line-height: 1.05;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeSlideUp 1s ease-out 0.5s forwards;
+  }
+
+  /* Gold line */
+  .gold-line {
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--warm-gold), var(--gold), transparent);
+    margin-top: 28px;
+    animation: growLine 1s ease-out 1.2s forwards;
+  }
+
+  @keyframes growLine {
+    to { width: 120px; }
+  }
+
+  /* Highlight subtitle */
+  .highlight {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 36px;
+    color: var(--warm-gold);
+    margin-top: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 1s ease-out 1.0s forwards;
+  }
+
+  /* Contact info */
+  .contact {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1.8s forwards;
+  }
+
+  .contact-line {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 1px;
+  }
+
+  .contact-line.org {
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(246,244,239,0.6);
+    letter-spacing: 1.5px;
+  }
+
+  .contact-line a {
+    color: rgba(215,166,61,0.6);
+    text-decoration: none;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 18px;
+    right: 80px;
+    z-index: 25;
+    text-align: right;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 2.2s forwards;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.35);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(215,166,61,0.4);
+    letter-spacing: 3px;
+  }
+
+  /* Gold particles — subtle on dark bg */
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    z-index: 5;
+    animation: floatParticle 8s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) { left: 15%; top: 30%; animation-delay: 0s; animation-duration: 9s; width: 2px; height: 2px; }
+  .particle:nth-child(2) { left: 82%; top: 25%; animation-delay: 2s; animation-duration: 7s; }
+  .particle:nth-child(3) { left: 45%; top: 18%; animation-delay: 4s; animation-duration: 10s; width: 4px; height: 4px; }
+  .particle:nth-child(4) { left: 68%; top: 60%; animation-delay: 1s; animation-duration: 8s; }
+  .particle:nth-child(5) { left: 28%; top: 70%; animation-delay: 3s; animation-duration: 11s; width: 2px; height: 2px; }
+  .particle:nth-child(6) { left: 90%; top: 50%; animation-delay: 5s; animation-duration: 9s; }
+
+  @keyframes floatParticle {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    15% { opacity: 0.35; }
+    50% { opacity: 0.15; transform: translateY(-35px) scale(1.5); }
+    85% { opacity: 0.35; }
+    100% { opacity: 0; transform: translateY(-70px) scale(1); }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- No background image — pure dark -->
+
+  <!-- Particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="red"></div>
+    <div class="wht"></div>
+    <div class="grn"></div>
+  </div>
+
+  <!-- Center content -->
+  <div class="center-content">
+    <div class="main-title">ТАДЖИКИСТАН ГОТОВ</div>
+    <div class="gold-line"></div>
+    <div class="highlight">Мы приветствуем Азию</div>
+    <div class="contact">
+      <div class="contact-line org">Федерация футбола Таджикистана</div>
+      <div class="contact-line">football.tj &nbsp;|&nbsp; info@football.tj</div>
+      <div class="contact-line">Душанбе, Таджикистан</div>
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+</div>
+</body>
+</html>

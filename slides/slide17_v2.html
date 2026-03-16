@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 17 — Гарантии (V2 — Горизонтальные карточки)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  /* Subtle grid overlay */
+  .grid-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Letterbox */
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+  .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column;
+    width: 8px; height: 120px; border-radius: 4px; overflow: hidden;
+    animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px; z-index: 20;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 80px; gap: 32px;
+  }
+  .bottom-strip span {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 13px; color: rgba(246,244,239,0.35);
+    letter-spacing: 1px;
+  }
+  .bottom-strip .dot { color: var(--gold); opacity: 0.4; }
+
+  /* Gold particles */
+  .particle {
+    position: absolute; border-radius: 50%; z-index: 2;
+    background: var(--gold); opacity: 0;
+    animation: floatParticle 6s ease-in-out infinite;
+  }
+  .p1 { width: 3px; height: 3px; top: 15%; left: 12%; animation-delay: 0s; }
+  .p2 { width: 4px; height: 4px; top: 40%; left: 55%; animation-delay: 1.2s; }
+  .p3 { width: 2px; height: 2px; top: 70%; left: 30%; animation-delay: 2.4s; }
+  .p4 { width: 3px; height: 3px; top: 25%; left: 85%; animation-delay: 0.8s; }
+  .p5 { width: 2px; height: 2px; top: 60%; left: 75%; animation-delay: 3.6s; }
+  .p6 { width: 4px; height: 4px; top: 85%; left: 50%; animation-delay: 1.8s; }
+  .p7 { width: 2px; height: 2px; top: 50%; left: 8%; animation-delay: 4.2s; }
+
+  @keyframes floatParticle {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    30%, 70% { opacity: 0.5; }
+    50% { opacity: 0.7; transform: translateY(-20px); }
+  }
+
+  /* Content area */
+  .content {
+    position: absolute;
+    top: 80px; left: 0; right: 0; bottom: 80px;
+    z-index: 10;
+    padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .header {
+    padding-top: 28px;
+    padding-bottom: 20px;
+    animation: fadeIn 0.8s ease both;
+  }
+  .header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.1;
+  }
+  .header .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: rgba(246,244,239,0.5);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+  .header .gold-line {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-top: 16px;
+    animation: growWidth 1s ease 0.5s both;
+    transform-origin: left;
+  }
+
+  /* Cards list */
+  .cards-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    padding-top: 4px;
+    min-height: 0;
+  }
+
+  .h-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 28px;
+    background: rgba(10,24,48,0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.12);
+    border-radius: 10px;
+    opacity: 0;
+    animation: fadeSlideRight 0.6s ease both;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .h-card:hover {
+    border-color: rgba(215,166,61,0.35);
+    background: rgba(10,24,48,0.85);
+  }
+
+  .h-card:nth-child(1) { animation-delay: 0.4s; }
+  .h-card:nth-child(2) { animation-delay: 0.52s; }
+  .h-card:nth-child(3) { animation-delay: 0.64s; }
+  .h-card:nth-child(4) { animation-delay: 0.76s; }
+  .h-card:nth-child(5) { animation-delay: 0.88s; }
+  .h-card:nth-child(6) { animation-delay: 1.0s; }
+  .h-card:nth-child(7) { animation-delay: 1.12s; }
+
+  .card-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--gold);
+    opacity: 0.35;
+    min-width: 44px;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .card-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-icon svg {
+    width: 36px;
+    height: 36px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .card-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .card-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--warm-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+  .card-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: rgba(246,244,239,0.6);
+    line-height: 1.4;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeSlideRight {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes growWidth {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* Hide tags */
+  tag, .tag { display: none !important; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="grid-overlay"></div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Gold particles -->
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  <div class="particle p5"></div>
+  <div class="particle p6"></div>
+  <div class="particle p7"></div>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Header -->
+    <div class="header">
+      <h1>Государственные гарантии</h1>
+      <div class="subtitle">За заявкой стоит государство</div>
+      <div class="gold-line"></div>
+    </div>
+
+    <!-- Horizontal cards list -->
+    <div class="cards-list">
+
+      <!-- 01. Координационный штаб -->
+      <div class="h-card">
+        <div class="card-number">01</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Координационный штаб</div>
+          <div class="card-desc">Межведомственный комитет по подготовке турнира</div>
+        </div>
+      </div>
+
+      <!-- 02. Визовая поддержка -->
+      <div class="h-card">
+        <div class="card-number">02</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="16" cy="15" r="2"/><path d="M6 15h4"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Визовая поддержка</div>
+          <div class="card-desc">Упрощённый режим для участников, персонала и болельщиков</div>
+        </div>
+      </div>
+
+      <!-- 03. Таможня -->
+      <div class="h-card">
+        <div class="card-number">03</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v4"/><path d="M10 14h4"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Таможня</div>
+          <div class="card-desc">Ускоренное оформление оборудования и грузов турнира</div>
+        </div>
+      </div>
+
+      <!-- 04. Налоги -->
+      <div class="h-card">
+        <div class="card-number">04</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M8 10c0-1.1 1.8-2 4-2s4 .9 4 2-1.8 2-4 2-4 .9-4 2 1.8 2 4 2 4-.9 4-2"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Налоги</div>
+          <div class="card-desc">Налоговые льготы для AFC и партнёров турнира</div>
+        </div>
+      </div>
+
+      <!-- 05. Безопасность -->
+      <div class="h-card">
+        <div class="card-number">05</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.25-3.44 10.17-8 12-4.56-1.83-8-6.75-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Безопасность</div>
+          <div class="card-desc">Полное обеспечение безопасности силами МВД и спецслужб</div>
+        </div>
+      </div>
+
+      <!-- 06. Инфраструктура -->
+      <div class="h-card">
+        <div class="card-number">06</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Инфраструктура</div>
+          <div class="card-desc">Гарантированное энерго- и водоснабжение объектов</div>
+        </div>
+      </div>
+
+      <!-- 07. Коммерческие права -->
+      <div class="h-card">
+        <div class="card-number">07</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Коммерческие права</div>
+          <div class="card-desc">Защита коммерческих прав AFC на территории страны</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <span>Федерация футбола Таджикистана</span>
+    <span class="dot">·</span>
+    <span>Март 2026 · Душанбе</span>
+  </div>
+</div>
+</body>
+</html>

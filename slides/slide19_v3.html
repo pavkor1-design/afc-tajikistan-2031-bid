@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1920, height=1080, initial-scale=1">
-<title>Слайд 19 — Ответственное проведение турнира</title>
+<title>Слайд 19 — Ответственное проведение (V3 — Сплит с фото)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
     width: 1920px;
     height: 1080px;
     overflow: hidden;
-    background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(10,24,48,0.95), var(--midnight));
+    background: radial-gradient(ellipse 80% 70% at 60% 40%, rgba(10,24,48,0.95), var(--midnight));
   }
 
   /* Grid overlay */
@@ -72,96 +72,133 @@
   .fr-white { background: #FFFFFF; }
   .fr-green { background: #006600; }
 
-  /* Title */
-  .title-block {
-    position: absolute; top: 100px; left: 80px;
-    z-index: 10;
-    animation: fadeSlideUp 0.7s ease 0.4s both;
+  /* Left hero panel */
+  .hero-panel {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 45%;
+    height: 920px;
+    z-index: 5;
+    overflow: hidden;
   }
-  .title-label {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-    margin-bottom: 10px;
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    background: url('img/stadium-public-corridor.jpg') center center / cover no-repeat;
   }
-  .title-main {
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(5,14,29,0.85) 0%, rgba(5,14,29,0.6) 50%, rgba(5,14,29,0.9) 100%);
+  }
+
+  .hero-title {
+    position: absolute;
+    bottom: 80px;
+    left: 60px;
+    right: 40px;
+    z-index: 6;
+    animation: fadeSlideUp 0.8s ease 0.5s both;
+  }
+
+  .hero-title h1 {
     font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 52px;
-    letter-spacing: 3px;
+    font-weight: 700;
+    font-size: 64px;
+    letter-spacing: 4px;
     color: var(--white);
     text-transform: uppercase;
-    line-height: 1.1;
+    line-height: 1.05;
   }
-  .title-accent {
-    display: block;
+  .hero-title h1 span {
+    color: var(--gold);
+  }
+
+  .hero-title-accent {
     width: 60px;
     height: 3px;
     background: linear-gradient(90deg, var(--gold), var(--warm-gold));
     border-radius: 2px;
-    margin-top: 14px;
-    animation: growWidth 0.6s ease 0.8s both;
+    margin-top: 18px;
+    animation: growWidth 0.6s ease 1s both;
   }
-  .subtitle {
+
+  .hero-subtitle {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 17px;
+    font-size: 16px;
     color: rgba(246,244,239,0.5);
-    margin-top: 10px;
+    margin-top: 12px;
     letter-spacing: 0.5px;
   }
 
-  /* Cards container */
-  .cards-area {
+  /* Vertical gold line separator */
+  .split-line {
     position: absolute;
-    top: 260px;
-    left: 80px;
-    right: 80px;
-    bottom: 120px;
+    top: 80px;
+    left: 45%;
+    width: 1px;
+    height: 920px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.25) 20%, rgba(215,166,61,0.25) 80%, transparent);
+    z-index: 10;
+  }
+
+  /* Right cards panel */
+  .cards-panel {
+    position: absolute;
+    top: 80px;
+    left: 45%;
+    right: 0;
+    height: 920px;
     z-index: 10;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 40px 80px 40px 60px;
     gap: 14px;
   }
 
-  .principle-card {
-    background: rgba(10,24,48,0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(215,166,61,0.15);
-    border-radius: 12px;
+  .compact-card {
     display: flex;
     align-items: center;
-    padding: 22px 32px;
-    gap: 28px;
+    gap: 20px;
+    background: rgba(10,24,48,0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(215,166,61,0.1);
+    border-radius: 10px;
+    padding: 22px 24px;
     opacity: 0;
-    transform: translateY(25px);
-    animation: fadeSlideUp 0.6s ease both;
+    transform: translateX(30px);
+    animation: fadeSlideLeft 0.5s ease both;
+    transition: border-color 0.3s ease;
   }
-  .principle-card:nth-child(1) { animation-delay: 0.6s; }
-  .principle-card:nth-child(2) { animation-delay: 0.8s; }
-  .principle-card:nth-child(3) { animation-delay: 1.0s; }
-  .principle-card:nth-child(4) { animation-delay: 1.2s; }
-  .principle-card:nth-child(5) { animation-delay: 1.4s; }
+  .compact-card:hover {
+    border-color: rgba(215,166,61,0.3);
+  }
+  .compact-card:nth-child(1) { animation-delay: 0.6s; }
+  .compact-card:nth-child(2) { animation-delay: 0.75s; }
+  .compact-card:nth-child(3) { animation-delay: 0.9s; }
+  .compact-card:nth-child(4) { animation-delay: 1.05s; }
+  .compact-card:nth-child(5) { animation-delay: 1.2s; }
 
-  .card-icon {
+  .compact-icon {
     flex-shrink: 0;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 10px;
     background: rgba(215,166,61,0.08);
-    border: 1px solid rgba(215,166,61,0.15);
+    border: 1px solid rgba(215,166,61,0.12);
   }
-  .card-icon svg {
-    width: 32px;
-    height: 32px;
+  .compact-icon svg {
+    width: 26px;
+    height: 26px;
     fill: none;
     stroke: var(--gold);
     stroke-width: 1.5;
@@ -169,36 +206,24 @@
     stroke-linejoin: round;
   }
 
-  .card-text {
+  .compact-text {
     flex: 1;
   }
-  .card-title {
+  .compact-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 19px;
-    letter-spacing: 2px;
+    font-size: 17px;
+    letter-spacing: 1.5px;
     color: var(--warm-gold);
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
-  .card-desc {
+  .compact-desc {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 14.5px;
-    color: rgba(246,244,239,0.6);
-    line-height: 1.5;
-  }
-
-  /* Card number */
-  .card-num {
-    flex-shrink: 0;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    font-size: 36px;
-    color: rgba(215,166,61,0.12);
-    width: 40px;
-    text-align: center;
-    line-height: 1;
+    font-size: 13.5px;
+    color: rgba(246,244,239,0.55);
+    line-height: 1.45;
   }
 
   /* Bottom strip */
@@ -226,13 +251,12 @@
     background: var(--gold); opacity: 0;
     animation: particleFloat 6s ease-in-out infinite;
   }
-  .p1 { width: 3px; height: 3px; top: 15%; left: 12%; animation-delay: 0s; }
+  .p1 { width: 3px; height: 3px; top: 15%; left: 55%; animation-delay: 0s; }
   .p2 { width: 2px; height: 2px; top: 40%; left: 88%; animation-delay: 1.2s; }
-  .p3 { width: 4px; height: 4px; top: 70%; left: 25%; animation-delay: 2.4s; }
+  .p3 { width: 4px; height: 4px; top: 70%; left: 65%; animation-delay: 2.4s; }
   .p4 { width: 2px; height: 2px; top: 25%; left: 75%; animation-delay: 0.8s; }
-  .p5 { width: 3px; height: 3px; top: 85%; left: 60%; animation-delay: 3.6s; }
-  .p6 { width: 2px; height: 2px; top: 55%; left: 5%; animation-delay: 1.8s; }
-  .p7 { width: 3px; height: 3px; top: 10%; left: 50%; animation-delay: 4.2s; }
+  .p5 { width: 3px; height: 3px; top: 85%; left: 52%; animation-delay: 3.6s; }
+  .p6 { width: 2px; height: 2px; top: 55%; left: 20%; animation-delay: 1.8s; }
 
   /* Animations */
   @keyframes fadeIn {
@@ -242,6 +266,10 @@
   @keyframes fadeSlideUp {
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeSlideLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
   }
   @keyframes growWidth {
     from { transform: scaleX(0); transform-origin: left; }
@@ -269,7 +297,6 @@
   <div class="particle p4"></div>
   <div class="particle p5"></div>
   <div class="particle p6"></div>
-  <div class="particle p7"></div>
 
   <!-- Letterbox -->
   <div class="letterbox-top"></div>
@@ -282,20 +309,25 @@
     <div class="fr-green"></div>
   </div>
 
-  <!-- Title -->
-  <div class="title-block">
-    <div class="title-label" style="display:none"></div>
-    <div class="title-main">Ответственное проведение</div>
-    <span class="title-accent"></span>
-    <div class="subtitle">Не только инфраструктура, но и принципы</div>
+  <!-- Left: Hero image panel -->
+  <div class="hero-panel">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-title">
+      <h1>Ответственное<br><span>проведение</span></h1>
+      <div class="hero-title-accent"></div>
+      <div class="hero-subtitle">Не только инфраструктура, но и принципы</div>
+    </div>
   </div>
 
-  <!-- Principle cards -->
-  <div class="cards-area">
-    <!-- Card 1: Inclusive Access -->
-    <div class="principle-card">
-      <div class="card-num">01</div>
-      <div class="card-icon">
+  <!-- Vertical separator -->
+  <div class="split-line"></div>
+
+  <!-- Right: 5 compact cards -->
+  <div class="cards-panel">
+    <!-- 1. Inclusive Access -->
+    <div class="compact-card">
+      <div class="compact-icon">
         <svg viewBox="0 0 32 32">
           <circle cx="16" cy="8" r="3"/>
           <path d="M12 28 l2-10 h4 l2 10"/>
@@ -303,32 +335,30 @@
           <circle cx="16" cy="16" r="12" stroke-dasharray="3 3" opacity="0.4"/>
         </svg>
       </div>
-      <div class="card-text">
-        <div class="card-title">Инклюзивный доступ</div>
-        <div class="card-desc">150+ мест для маломобильных зрителей на каждом стадионе. Пандусы, лифты, специальные зоны. Подготовленный персонал.</div>
+      <div class="compact-text">
+        <div class="compact-title">Инклюзивный доступ</div>
+        <div class="compact-desc">150+ мест для маломобильных на каждом стадионе. Пандусы, лифты, специальные зоны.</div>
       </div>
     </div>
 
-    <!-- Card 2: Medical Readiness -->
-    <div class="principle-card">
-      <div class="card-num">02</div>
-      <div class="card-icon">
+    <!-- 2. Medical Readiness -->
+    <div class="compact-card">
+      <div class="compact-icon">
         <svg viewBox="0 0 32 32">
           <rect x="6" y="10" width="20" height="14" rx="3"/>
           <path d="M16 14 v6 M13 17 h6"/>
           <path d="M10 10 V8 a2 2 0 0 1 2-2 h8 a2 2 0 0 1 2 2 v2"/>
         </svg>
       </div>
-      <div class="card-text">
-        <div class="card-title">Медицинская готовность</div>
-        <div class="card-desc">3 клиники в радиусе 15 минут. Ambulance на каждом объекте. Координация экстренной помощи. Медпункты на трибунах.</div>
+      <div class="compact-text">
+        <div class="compact-title">Медицинская готовность</div>
+        <div class="compact-desc">3 клиники в радиусе 15 мин. Ambulance на каждом объекте. Медпункты на трибунах.</div>
       </div>
     </div>
 
-    <!-- Card 3: Guest Care -->
-    <div class="principle-card">
-      <div class="card-num">03</div>
-      <div class="card-icon">
+    <!-- 3. Guest Care -->
+    <div class="compact-card">
+      <div class="compact-icon">
         <svg viewBox="0 0 32 32">
           <circle cx="12" cy="12" r="3"/>
           <circle cx="20" cy="12" r="3"/>
@@ -337,31 +367,29 @@
           <path d="M14 18 c1-1 3-1 4 0"/>
         </svg>
       </div>
-      <div class="card-text">
-        <div class="card-title">Забота о гостях</div>
-        <div class="card-desc">Мультиязычные волонтёры. Информационные центры. Навигация на 4 языках. Горячая линия 24/7.</div>
+      <div class="compact-text">
+        <div class="compact-title">Забота о гостях</div>
+        <div class="compact-desc">Мультиязычные волонтёры. Информационные центры. Навигация на 4 языках. Горячая линия 24/7.</div>
       </div>
     </div>
 
-    <!-- Card 4: Labor Standards -->
-    <div class="principle-card">
-      <div class="card-num">04</div>
-      <div class="card-icon">
+    <!-- 4. Labor Standards -->
+    <div class="compact-card">
+      <div class="compact-icon">
         <svg viewBox="0 0 32 32">
           <path d="M16 6 l-6 4 v8 l6 4 l6-4 v-8 z" fill="none"/>
           <path d="M12 16 l3 3 l5-6"/>
         </svg>
       </div>
-      <div class="card-text">
-        <div class="card-title">Трудовые стандарты</div>
-        <div class="card-desc">Соблюдение международных трудовых норм. Достойные условия труда при подготовке объектов. Прозрачные контракты.</div>
+      <div class="compact-text">
+        <div class="compact-title">Трудовые стандарты</div>
+        <div class="compact-desc">Международные трудовые нормы. Достойные условия труда. Прозрачные контракты.</div>
       </div>
     </div>
 
-    <!-- Card 5: Social Responsibility -->
-    <div class="principle-card">
-      <div class="card-num">05</div>
-      <div class="card-icon">
+    <!-- 5. Social Responsibility -->
+    <div class="compact-card">
+      <div class="compact-icon">
         <svg viewBox="0 0 32 32">
           <circle cx="16" cy="16" r="10"/>
           <path d="M6 16 h20"/>
@@ -369,9 +397,9 @@
           <path d="M16 6 c4 4 4 16 0 20"/>
         </svg>
       </div>
-      <div class="card-text">
-        <div class="card-title">Социальная ответственность</div>
-        <div class="card-desc">Программы вовлечения местных сообществ. Наследие для молодёжного спорта. Образовательные инициативы.</div>
+      <div class="compact-text">
+        <div class="compact-title">Социальная ответственность</div>
+        <div class="compact-desc">Программы вовлечения сообществ. Наследие для молодёжного спорта. Образовательные инициативы.</div>
       </div>
     </div>
   </div>

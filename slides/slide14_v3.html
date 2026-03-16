@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 14 — Размещение (V3 — Горизонтальный обзор)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  /* Radial gold glow */
+  .bg-glow {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(215,166,61,0.04) 0%, transparent 70%);
+  }
+
+  /* Grid overlay */
+  .grid-overlay {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%);
+  }
+
+  /* Letterbox */
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+  .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column;
+    width: 8px; height: 120px; border-radius: 4px; overflow: hidden;
+    animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  .tag { display: none !important; }
+
+  /* LEFT PANEL — Hero photo */
+  .hero-panel {
+    position: absolute;
+    top: 80px; left: 0; bottom: 80px;
+    width: 40%;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .hero-panel img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+  }
+
+  .hero-gradient {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(5,14,29,0.2) 0%, rgba(5,14,29,0.85) 100%),
+      linear-gradient(180deg, rgba(5,14,29,0.3) 0%, rgba(5,14,29,0.6) 60%, rgba(5,14,29,0.8) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: absolute; bottom: 60px; left: 80px; right: 40px;
+    z-index: 2;
+    animation: fadeSlideUp 0.7s ease 0.6s both;
+  }
+
+  .hero-big-number {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 160px; line-height: 0.85;
+    color: var(--warm-gold);
+    letter-spacing: -2px;
+    text-shadow: 0 4px 40px rgba(215,166,61,0.25);
+  }
+
+  .hero-label {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 28px; color: var(--white);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-top: 8px;
+    opacity: 0.85;
+  }
+
+  .hero-sub {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 15px; color: rgba(246,244,239,0.5);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* Vertical divider line */
+  .panel-divider {
+    position: absolute;
+    top: 120px; bottom: 120px;
+    left: 40%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
+    z-index: 12;
+  }
+
+  /* RIGHT PANEL */
+  .right-panel {
+    position: absolute;
+    top: 80px; left: 40%; right: 0; bottom: 80px;
+    z-index: 10;
+    padding: 40px 80px 30px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Title area */
+  .right-title {
+    animation: fadeSlideUp 0.7s ease 0.4s both;
+    margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 38px; line-height: 1.1; color: var(--white);
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+
+  .divider {
+    width: 80px; height: 3px; background: var(--gold);
+    margin: 12px 0; animation: growWidth 0.6s ease 1s both;
+  }
+  @keyframes growWidth { from { width: 0; } to { width: 80px; } }
+
+  .subtitle-text {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 15px; color: rgba(246,244,239,0.55);
+    margin-bottom: 32px;
+  }
+
+  /* Hotel bars */
+  .hotel-bars {
+    display: flex; flex-direction: column; gap: 16px;
+    animation: fadeSlideUp 0.6s ease 1.0s both;
+    margin-bottom: 36px;
+  }
+
+  .hotel-bar {
+    display: flex; align-items: center;
+    background: rgba(10,24,48,0.6);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(215,166,61,0.12);
+    border-radius: 12px;
+    padding: 20px 28px;
+    gap: 24px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .hotel-bar:hover {
+    border-color: rgba(215,166,61,0.35);
+    transform: translateX(6px);
+  }
+
+  .hotel-bar-rank {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 28px; color: var(--warm-gold);
+    min-width: 36px; text-align: center;
+    opacity: 0.6;
+  }
+
+  .hotel-bar-sep {
+    width: 1px; height: 36px;
+    background: rgba(215,166,61,0.15);
+  }
+
+  .hotel-bar-info {
+    flex: 1;
+  }
+
+  .hotel-bar-name {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 20px; color: var(--white);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .hotel-bar-meta {
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .hotel-bar-stars {
+    font-size: 13px; color: var(--warm-gold);
+    letter-spacing: 2px;
+  }
+
+  .hotel-bar-category {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: 12px; color: rgba(246,244,239,0.45);
+    letter-spacing: 0.5px;
+  }
+
+  .hotel-bar-rooms {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 22px; color: var(--warm-gold);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .hotel-bar-rooms-label {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 12px; color: rgba(246,244,239,0.4);
+    margin-top: 2px;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .hotel-bar-right {
+    text-align: right;
+  }
+
+  /* Bottom metrics strip */
+  .metrics-strip {
+    display: flex; gap: 16px;
+    animation: fadeSlideUp 0.6s ease 1.5s both;
+    margin-top: auto;
+    margin-bottom: 10px;
+  }
+
+  .metric-pill {
+    flex: 1;
+    background: rgba(10,24,48,0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(215,166,61,0.1);
+    border-radius: 10px;
+    padding: 18px 16px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+  }
+  .metric-pill:hover {
+    border-color: rgba(215,166,61,0.3);
+  }
+
+  .metric-pill-number {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 32px; color: var(--warm-gold);
+    line-height: 1; margin-bottom: 4px;
+  }
+
+  .metric-pill-label {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 12px; color: rgba(246,244,239,0.5);
+    letter-spacing: 0.3px; line-height: 1.3;
+  }
+
+  /* Bottom info */
+  .bottom-strip {
+    position: absolute; bottom: 18px; right: 80px; z-index: 20;
+    text-align: right; animation: fadeIn 1s ease 2.4s both;
+  }
+  .fft-name {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: 14px; color: rgba(246,244,239,0.45);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .date {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 14px; color: rgba(215,166,61,0.5); letter-spacing: 3px;
+  }
+
+  /* Gold particles */
+  .particles {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat 6s ease-in-out infinite;
+  }
+  .particle:nth-child(1) { top: 25%; left: 8%; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 55%; left: 25%; animation-delay: 1.5s; }
+  .particle:nth-child(3) { top: 35%; left: 65%; animation-delay: 3s; }
+  .particle:nth-child(4) { top: 75%; left: 88%; animation-delay: 4.5s; }
+  .particle:nth-child(5) { top: 18%; left: 50%; animation-delay: 2s; }
+  @keyframes particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 0.5; transform: translateY(-30px); }
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Background glow -->
+  <div class="bg-glow"></div>
+
+  <!-- Grid overlay -->
+  <div class="grid-overlay"></div>
+
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle" style="left:38%; top:10%; animation-delay:1s; animation-duration:7.5s;"></div>
+    <div class="particle" style="left:82%; top:42%; animation-delay:2.8s; animation-duration:8.5s;"></div>
+    <div class="particle" style="left:15%; top:70%; animation-delay:4s; animation-duration:7s;"></div>
+  </div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div>
+  </div>
+
+  <!-- LEFT: Hero photo panel -->
+  <div class="hero-panel">
+    <img src="img/hyatt-exterior.jpg" alt="Hyatt Regency Dushanbe">
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <div class="hero-big-number">37</div>
+      <div class="hero-label">действующих гостиниц</div>
+      <div class="hero-sub">Международные сети в столице Таджикистана</div>
+    </div>
+  </div>
+
+  <!-- Vertical divider -->
+  <div class="panel-divider"></div>
+
+  <!-- RIGHT: Content panel -->
+  <div class="right-panel">
+    <div class="right-title">
+      <div class="tag">Гостиницы</div>
+      <h1 class="main-title">Размещение и гостеприимство</h1>
+      <div class="divider"></div>
+      <p class="subtitle-text">Международные сети и растущий гостиничный фонд</p>
+    </div>
+
+    <!-- Hotel bars -->
+    <div class="hotel-bars">
+      <div class="hotel-bar">
+        <div class="hotel-bar-rank">01</div>
+        <div class="hotel-bar-sep"></div>
+        <div class="hotel-bar-info">
+          <div class="hotel-bar-name">Hyatt Regency Dushanbe</div>
+          <div class="hotel-bar-meta">
+            <span class="hotel-bar-stars">★★★★★</span>
+            <span class="hotel-bar-category">Команды &middot; AFC / VIP</span>
+          </div>
+        </div>
+        <div class="hotel-bar-right">
+          <div class="hotel-bar-rooms">200+</div>
+          <div class="hotel-bar-rooms-label">номеров</div>
+        </div>
+      </div>
+      <div class="hotel-bar">
+        <div class="hotel-bar-rank">02</div>
+        <div class="hotel-bar-sep"></div>
+        <div class="hotel-bar-info">
+          <div class="hotel-bar-name">Radisson Collection</div>
+          <div class="hotel-bar-meta">
+            <span class="hotel-bar-stars">★★★★★</span>
+            <span class="hotel-bar-category">Команды &middot; AFC / VIP</span>
+          </div>
+        </div>
+        <div class="hotel-bar-right">
+          <div class="hotel-bar-rooms">200+</div>
+          <div class="hotel-bar-rooms-label">номеров</div>
+        </div>
+      </div>
+      <div class="hotel-bar">
+        <div class="hotel-bar-rank">03</div>
+        <div class="hotel-bar-sep"></div>
+        <div class="hotel-bar-info">
+          <div class="hotel-bar-name">Wyndham Dushanbe</div>
+          <div class="hotel-bar-meta">
+            <span class="hotel-bar-stars">★★★★</span>
+            <span class="hotel-bar-category">Медиа</span>
+          </div>
+        </div>
+        <div class="hotel-bar-right">
+          <div class="hotel-bar-rooms">150+</div>
+          <div class="hotel-bar-rooms-label">номеров</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom metrics strip -->
+    <div class="metrics-strip">
+      <div class="metric-pill">
+        <div class="metric-pill-number">2 119</div>
+        <div class="metric-pill-label">номеров</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-pill-number">3 756</div>
+        <div class="metric-pill-label">мест размещения</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-pill-number">5</div>
+        <div class="metric-pill-label">строящихся гостиниц</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-pill-number">+699</div>
+        <div class="metric-pill-label">новых номеров</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom info -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+
+</div>
+</body>
+</html>

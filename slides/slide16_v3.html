@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 16 — Финансы (V3 — Пропорциональный сплит)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+    --green-accent: #2E7D4F;
+    --green-light: #3DA366;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  /* Radial gold glow */
+  .bg-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 900px; height: 900px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(215,166,61,0.06) 0%, rgba(215,166,61,0.02) 40%, transparent 70%);
+    pointer-events: none; z-index: 1;
+  }
+
+  /* Letterbox */
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+  .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column;
+    width: 8px; height: 120px; border-radius: 4px; overflow: hidden;
+    animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Tags */
+  .tags { display: none !important; }
+
+  /* Grid overlay */
+  .grid-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
+    pointer-events: none;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute; bottom: 18px; right: 80px; z-index: 20;
+    display: flex; align-items: center; gap: 20px;
+    animation: fadeIn 1s ease 1s both;
+  }
+  .bottom-strip span {
+    font-size: 11px; color: rgba(246,244,239,0.35);
+    letter-spacing: 2px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif; font-weight: 400;
+  }
+  .bottom-strip .divider {
+    width: 1px; height: 14px; background: rgba(215,166,61,0.2);
+  }
+
+  /* Particles */
+  .particle {
+    position: absolute; border-radius: 50%; z-index: 2;
+    background: var(--gold); opacity: 0;
+    animation: particleFloat 6s ease-in-out infinite;
+  }
+  .p1 { width: 3px; height: 3px; top: 22%; left: 15%; animation-delay: 0s; }
+  .p2 { width: 2px; height: 2px; top: 40%; left: 85%; animation-delay: 1.4s; }
+  .p3 { width: 4px; height: 4px; top: 65%; left: 30%; animation-delay: 2.8s; }
+  .p4 { width: 2px; height: 2px; top: 35%; left: 68%; animation-delay: 0.6s; }
+  .p5 { width: 3px; height: 3px; top: 55%; left: 50%; animation-delay: 3.8s; }
+  .p6 { width: 2px; height: 2px; top: 18%; left: 45%; animation-delay: 4.5s; }
+
+  /* Title area */
+  .title-area {
+    position: absolute; top: 100px; left: 80px; z-index: 10;
+    animation: fadeSlideUp 0.8s ease 0.3s both;
+  }
+  .slide-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 48px; color: var(--white); text-transform: uppercase;
+    letter-spacing: 3px; line-height: 1.1;
+  }
+  .slide-title .gold { color: var(--gold); }
+  .slide-subtitle {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 16px; color: rgba(246,244,239,0.5);
+    letter-spacing: 4px; text-transform: uppercase;
+    margin-top: 10px;
+  }
+  .title-line {
+    width: 60px; height: 2px; background: var(--gold); margin-top: 16px;
+    animation: growWidth 0.6s ease 0.8s both;
+    transform-origin: left;
+  }
+
+  /* Split container */
+  .split-container {
+    position: absolute;
+    top: 250px; left: 80px; right: 80px; bottom: 200px;
+    z-index: 10;
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    animation: fadeSlideUp 0.8s ease 0.5s both;
+  }
+
+  /* Glass panel */
+  .panel {
+    flex: 1;
+    background: rgba(10,24,48,0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 40px 44px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* AFC panel — gold accent */
+  .panel-afc {
+    border: 1px solid rgba(215,166,61,0.2);
+    border-right: 3px solid var(--gold);
+    border-radius: 16px 0 0 16px;
+    animation: fadeSlideLeft 0.7s ease 0.6s both;
+  }
+  .panel-afc::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), rgba(215,166,61,0.2));
+    border-radius: 16px 0 0 0;
+  }
+
+  /* Tajikistan panel — green accent */
+  .panel-host {
+    border: 1px solid rgba(46,125,79,0.25);
+    border-left: 3px solid var(--green-accent);
+    border-radius: 0 16px 16px 0;
+    animation: fadeSlideRight 0.7s ease 0.6s both;
+  }
+  .panel-host::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(46,125,79,0.2), var(--green-accent));
+    border-radius: 0 16px 0 0;
+  }
+
+  /* Panel header */
+  .panel-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .panel-header-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .panel-afc .panel-header-icon {
+    border: 1.5px solid rgba(215,166,61,0.3);
+    background: rgba(215,166,61,0.06);
+  }
+  .panel-host .panel-header-icon {
+    border: 1.5px solid rgba(46,125,79,0.3);
+    background: rgba(46,125,79,0.06);
+  }
+  .panel-header-icon svg { width: 24px; height: 24px; }
+
+  .panel-title {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 24px; text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  .panel-afc .panel-title { color: var(--gold); }
+  .panel-host .panel-title { color: var(--green-light); }
+
+  .panel-count {
+    font-family: 'Oswald', sans-serif; font-weight: 300;
+    font-size: 14px; color: rgba(246,244,239,0.35);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  /* Item list */
+  .panel-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+  .panel-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(215,166,61,0.06);
+  }
+  .panel-host .panel-item {
+    border-bottom-color: rgba(46,125,79,0.08);
+  }
+  .panel-item:last-child { border-bottom: none; }
+
+  .item-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .panel-afc .item-icon {
+    background: rgba(215,166,61,0.08);
+    border: 1px solid rgba(215,166,61,0.15);
+  }
+  .panel-host .item-icon {
+    background: rgba(46,125,79,0.08);
+    border: 1px solid rgba(46,125,79,0.15);
+  }
+  .item-icon svg { width: 18px; height: 18px; }
+
+  .item-label {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: 16px; color: var(--ivory);
+    letter-spacing: 0.3px;
+  }
+
+  /* Center divider */
+  .center-divider {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 11;
+  }
+  .center-divider-line {
+    width: 1px;
+    flex: 1;
+    background: linear-gradient(180deg, transparent, rgba(246,244,239,0.15) 20%, rgba(246,244,239,0.15) 80%, transparent);
+  }
+  .center-divider-circle {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--midnight);
+    border: 1.5px solid rgba(246,244,239,0.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin: 12px 0;
+  }
+  .center-divider-circle svg { width: 28px; height: 28px; }
+
+  .pct-label {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 13px; letter-spacing: 1px;
+    text-align: center;
+    padding: 6px 0;
+  }
+  .pct-afc { color: var(--gold); }
+  .pct-host { color: var(--green-light); }
+
+  /* Staggered item animations */
+  .panel-afc .panel-item:nth-child(1) { animation: fadeSlideLeft 0.5s ease 0.7s both; }
+  .panel-afc .panel-item:nth-child(2) { animation: fadeSlideLeft 0.5s ease 0.8s both; }
+  .panel-afc .panel-item:nth-child(3) { animation: fadeSlideLeft 0.5s ease 0.9s both; }
+  .panel-afc .panel-item:nth-child(4) { animation: fadeSlideLeft 0.5s ease 1.0s both; }
+  .panel-afc .panel-item:nth-child(5) { animation: fadeSlideLeft 0.5s ease 1.1s both; }
+
+  .panel-host .panel-item:nth-child(1) { animation: fadeSlideRight 0.5s ease 0.7s both; }
+  .panel-host .panel-item:nth-child(2) { animation: fadeSlideRight 0.5s ease 0.8s both; }
+  .panel-host .panel-item:nth-child(3) { animation: fadeSlideRight 0.5s ease 0.9s both; }
+  .panel-host .panel-item:nth-child(4) { animation: fadeSlideRight 0.5s ease 1.0s both; }
+  .panel-host .panel-item:nth-child(5) { animation: fadeSlideRight 0.5s ease 1.1s both; }
+  .panel-host .panel-item:nth-child(6) { animation: fadeSlideRight 0.5s ease 1.2s both; }
+
+  /* Bottom guarantee bar */
+  .guarantee-bar {
+    position: absolute;
+    bottom: 100px; left: 80px; right: 80px;
+    z-index: 10;
+    background: rgba(10,24,48,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 12px;
+    padding: 22px 36px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    animation: fadeSlideUp 0.6s ease 1.4s both;
+  }
+
+  .guarantee-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid rgba(215,166,61,0.3);
+    border-radius: 10px;
+    background: rgba(215,166,61,0.06);
+  }
+  .guarantee-icon svg { width: 26px; height: 26px; }
+
+  .guarantee-text {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: 15px; color: var(--ivory);
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+  }
+  .guarantee-text strong {
+    color: var(--gold); font-weight: 500;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeSlideLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeSlideRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes growWidth {
+    from { transform: scaleX(0); } to { transform: scaleX(1); }
+  }
+  @keyframes particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    20% { opacity: 0.4; }
+    50% { opacity: 0.6; transform: translateY(-30px); }
+    80% { opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="bg-glow"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Particles -->
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  <div class="particle p5"></div>
+  <div class="particle p6"></div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-area">
+    <div class="slide-title">ФИНАНСОВЫЕ <span class="gold">ОБЯЗАТЕЛЬСТВА</span></div>
+    <div class="slide-subtitle">Прозрачное распределение ответственности</div>
+    <div class="title-line"></div>
+  </div>
+
+  <!-- Split panels -->
+  <div class="split-container">
+    <!-- AFC panel -->
+    <div class="panel panel-afc">
+      <div class="panel-header">
+        <div class="panel-header-icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#D7A63D" stroke-width="1.5"/><path d="M8 12l3 3 5-6" stroke="#D7A63D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="panel-title">AFC</div>
+        <div class="panel-count">5 пунктов</div>
+      </div>
+      <ul class="panel-list">
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><path d="M9 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4l2-4z" stroke="#D7A63D" stroke-width="1.2" fill="none"/></svg></div>
+          <span class="item-label">Коммерческие права</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="#D7A63D" stroke-width="1.2"/><path d="M5 8h8M5 11h5" stroke="#D7A63D" stroke-width="1"/></svg></div>
+          <span class="item-label">Трансляционные права</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6" stroke="#D7A63D" stroke-width="1.2"/><path d="M9 6v3l2 2" stroke="#D7A63D" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          <span class="item-label">Маркетинг турнира</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><path d="M5 3h8l2 5H3l2-5zM3 8h12v2a3 3 0 01-3 3H6a3 3 0 01-3-3V8z" stroke="#D7A63D" stroke-width="1.2" fill="none"/><path d="M9 13v3M6 16h6" stroke="#D7A63D" stroke-width="1.2"/></svg></div>
+          <span class="item-label">Призовой фонд</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="12" height="12" rx="2" stroke="#D7A63D" stroke-width="1.2"/><path d="M6 7h6M6 9.5h6M6 12h4" stroke="#D7A63D" stroke-width="1"/></svg></div>
+          <span class="item-label">Операционные расходы турнира</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Center divider -->
+    <div class="center-divider">
+      <div class="pct-label pct-afc">45%</div>
+      <div class="center-divider-line"></div>
+      <div class="center-divider-circle">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v5c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z" stroke="rgba(246,244,239,0.4)" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="rgba(246,244,239,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="center-divider-line"></div>
+      <div class="pct-label pct-host">55%</div>
+    </div>
+
+    <!-- Tajikistan panel -->
+    <div class="panel panel-host">
+      <div class="panel-header">
+        <div class="panel-header-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V7l7-4 7 4v14" stroke="#2E7D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="9" y="13" width="6" height="8" rx="0.5" stroke="#2E7D4F" stroke-width="1.2"/></svg>
+        </div>
+        <div class="panel-title">Таджикистан</div>
+        <div class="panel-count">6 пунктов</div>
+      </div>
+      <ul class="panel-list">
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><ellipse cx="9" cy="12" rx="7" ry="3" stroke="#2E7D4F" stroke-width="1.2"/><path d="M2 12V8c0-1.7 3.13-3 7-3s7 1.3 7 3v4" stroke="#2E7D4F" stroke-width="1.2"/><ellipse cx="9" cy="8" rx="7" ry="3" stroke="#2E7D4F" stroke-width="1.2"/></svg></div>
+          <span class="item-label">Стадионы и объекты</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="3" y="10" width="12" height="5" rx="1" stroke="#2E7D4F" stroke-width="1.2"/><path d="M5 10V7a4 4 0 018 0v3" stroke="#2E7D4F" stroke-width="1.2"/><line x1="9" y1="3" x2="9" y2="5" stroke="#2E7D4F" stroke-width="1.2"/></svg></div>
+          <span class="item-label">Тренировочная инфраструктура</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="7" width="14" height="7" rx="1.5" stroke="#2E7D4F" stroke-width="1.2"/><circle cx="6" cy="15.5" r="1.5" stroke="#2E7D4F" stroke-width="1"/><circle cx="12" cy="15.5" r="1.5" stroke="#2E7D4F" stroke-width="1"/><path d="M2 10h14" stroke="#2E7D4F" stroke-width="1"/></svg></div>
+          <span class="item-label">Транспорт и логистика</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><path d="M9 2L4 5v4c0 4 2.8 7.7 5 8.5 2.2-.8 5-4.5 5-8.5V5l-5-3z" stroke="#2E7D4F" stroke-width="1.2" fill="none"/><path d="M7 9l1.5 1.5 3-3" stroke="#2E7D4F" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          <span class="item-label">Безопасность</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="4" y="5" width="10" height="10" rx="1.5" stroke="#2E7D4F" stroke-width="1.2"/><path d="M8 5V3.5h2V5" stroke="#2E7D4F" stroke-width="1.2"/><line x1="9" y1="8" x2="9" y2="13" stroke="#2E7D4F" stroke-width="1.5" stroke-linecap="round"/><line x1="6.5" y1="10.5" x2="11.5" y2="10.5" stroke="#2E7D4F" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <span class="item-label">Медицинское обеспечение</span>
+        </li>
+        <li class="panel-item">
+          <div class="item-icon"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="3" stroke="#2E7D4F" stroke-width="1.2"/><path d="M3 16c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#2E7D4F" stroke-width="1.2"/></svg></div>
+          <span class="item-label">Волонтёрская программа</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Guarantee bar -->
+  <div class="guarantee-bar">
+    <div class="guarantee-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L4 6v5c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z" stroke="#D7A63D" stroke-width="1.5" fill="rgba(215,166,61,0.1)"/>
+        <path d="M12 7l1.5 3H17l-2.5 2 1 3.5L12 13.5 8.5 15.5l1-3.5L7 10h3.5L12 7z" fill="#D7A63D"/>
+      </svg>
+    </div>
+    <div class="guarantee-text">
+      <strong>100% локальных обязательств — государственное финансирование.</strong>
+      Бюджет утверждён на уровне правительства Республики Таджикистан.
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <span>Федерация футбола Таджикистана</span>
+    <div class="divider"></div>
+    <span>Март 2026 · Душанбе</span>
+  </div>
+
+  <!-- Tags -->
+  <div class="tags">slide16, финансовые обязательства, пропорциональный сплит, AFC, Таджикистан</div>
+</div>
+</body>
+</html>

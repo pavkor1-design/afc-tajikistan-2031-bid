@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1920, height=1080, initial-scale=1">
-<title>Слайд 19 — Ответственное проведение турнира</title>
+<title>Слайд 19 — Ответственное проведение (V2 — Иконочная сетка)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -79,14 +79,7 @@
     animation: fadeSlideUp 0.7s ease 0.4s both;
   }
   .title-label {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-    margin-bottom: 10px;
+    display: none !important;
   }
   .title-main {
     font-family: 'Oswald', sans-serif;
@@ -115,8 +108,8 @@
     letter-spacing: 0.5px;
   }
 
-  /* Cards container */
-  .cards-area {
+  /* Icon grid */
+  .grid-area {
     position: absolute;
     top: 260px;
     left: 80px;
@@ -125,43 +118,64 @@
     z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 20px;
   }
 
-  .principle-card {
+  .grid-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .grid-row.top-row {
+    justify-content: center;
+  }
+
+  .grid-row.bottom-row {
+    justify-content: center;
+  }
+
+  .icon-card {
+    width: 330px;
     background: rgba(10,24,48,0.7);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(215,166,61,0.15);
-    border-radius: 12px;
+    border-radius: 14px;
+    padding: 36px 28px 32px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 22px 32px;
-    gap: 28px;
+    text-align: center;
     opacity: 0;
     transform: translateY(25px);
     animation: fadeSlideUp 0.6s ease both;
+    transition: border-color 0.3s ease;
   }
-  .principle-card:nth-child(1) { animation-delay: 0.6s; }
-  .principle-card:nth-child(2) { animation-delay: 0.8s; }
-  .principle-card:nth-child(3) { animation-delay: 1.0s; }
-  .principle-card:nth-child(4) { animation-delay: 1.2s; }
-  .principle-card:nth-child(5) { animation-delay: 1.4s; }
+  .icon-card:hover {
+    border-color: rgba(215,166,61,0.35);
+  }
 
-  .card-icon {
-    flex-shrink: 0;
-    width: 64px;
-    height: 64px;
+  .icon-card:nth-child(1) { animation-delay: 0.6s; }
+  .icon-card:nth-child(2) { animation-delay: 0.75s; }
+  .icon-card:nth-child(3) { animation-delay: 0.9s; }
+  .grid-row.bottom-row .icon-card:nth-child(1) { animation-delay: 1.05s; }
+  .grid-row.bottom-row .icon-card:nth-child(2) { animation-delay: 1.2s; }
+
+  .icon-wrap {
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    background: rgba(215,166,61,0.08);
-    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 16px;
+    background: rgba(215,166,61,0.06);
+    border: 1px solid rgba(215,166,61,0.12);
+    margin-bottom: 22px;
   }
-  .card-icon svg {
-    width: 32px;
-    height: 32px;
+  .icon-wrap svg {
+    width: 48px;
+    height: 48px;
     fill: none;
     stroke: var(--gold);
     stroke-width: 1.5;
@@ -169,36 +183,21 @@
     stroke-linejoin: round;
   }
 
-  .card-text {
-    flex: 1;
-  }
-  .card-title {
+  .icon-card-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 19px;
+    font-size: 18px;
     letter-spacing: 2px;
     color: var(--warm-gold);
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
   }
-  .card-desc {
+  .icon-card-desc {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 14.5px;
-    color: rgba(246,244,239,0.6);
-    line-height: 1.5;
-  }
-
-  /* Card number */
-  .card-num {
-    flex-shrink: 0;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    font-size: 36px;
-    color: rgba(215,166,61,0.12);
-    width: 40px;
-    text-align: center;
-    line-height: 1;
+    font-size: 14px;
+    color: rgba(246,244,239,0.55);
+    line-height: 1.55;
   }
 
   /* Bottom strip */
@@ -284,94 +283,83 @@
 
   <!-- Title -->
   <div class="title-block">
-    <div class="title-label" style="display:none"></div>
+    <div class="title-label"></div>
     <div class="title-main">Ответственное проведение</div>
     <span class="title-accent"></span>
     <div class="subtitle">Не только инфраструктура, но и принципы</div>
   </div>
 
-  <!-- Principle cards -->
-  <div class="cards-area">
-    <!-- Card 1: Inclusive Access -->
-    <div class="principle-card">
-      <div class="card-num">01</div>
-      <div class="card-icon">
-        <svg viewBox="0 0 32 32">
-          <circle cx="16" cy="8" r="3"/>
-          <path d="M12 28 l2-10 h4 l2 10"/>
-          <path d="M10 18 h12"/>
-          <circle cx="16" cy="16" r="12" stroke-dasharray="3 3" opacity="0.4"/>
-        </svg>
+  <!-- Icon Grid: 3+2 -->
+  <div class="grid-area">
+    <div class="grid-row top-row">
+      <!-- Inclusive Access -->
+      <div class="icon-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="10" r="4"/>
+            <path d="M18 42 l3-15 h6 l3 15"/>
+            <path d="M14 26 h20"/>
+            <circle cx="24" cy="24" r="18" stroke-dasharray="4 4" opacity="0.35"/>
+          </svg>
+        </div>
+        <div class="icon-card-title">Инклюзивный доступ</div>
+        <div class="icon-card-desc">150+ мест для маломобильных на каждом стадионе. Пандусы, лифты, специальные зоны.</div>
       </div>
-      <div class="card-text">
-        <div class="card-title">Инклюзивный доступ</div>
-        <div class="card-desc">150+ мест для маломобильных зрителей на каждом стадионе. Пандусы, лифты, специальные зоны. Подготовленный персонал.</div>
+
+      <!-- Medical Readiness -->
+      <div class="icon-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 48 48">
+            <rect x="8" y="14" width="32" height="22" rx="4"/>
+            <path d="M24 20 v10 M19 25 h10"/>
+            <path d="M16 14 V10 a3 3 0 0 1 3-3 h10 a3 3 0 0 1 3 3 v4"/>
+          </svg>
+        </div>
+        <div class="icon-card-title">Медицинская готовность</div>
+        <div class="icon-card-desc">3 клиники в радиусе 15 мин. Ambulance на каждом объекте. Медпункты на трибунах.</div>
+      </div>
+
+      <!-- Guest Care -->
+      <div class="icon-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 48 48">
+            <circle cx="17" cy="17" r="5"/>
+            <circle cx="31" cy="17" r="5"/>
+            <path d="M7 38 c0-6 6-9 10-9"/>
+            <path d="M41 38 c0-6-6-9-10-9"/>
+            <path d="M21 29 c2-2 5-2 6 0"/>
+          </svg>
+        </div>
+        <div class="icon-card-title">Забота о гостях</div>
+        <div class="icon-card-desc">Мультиязычные волонтёры. Информационные центры. Навигация на 4 языках. Горячая линия 24/7.</div>
       </div>
     </div>
 
-    <!-- Card 2: Medical Readiness -->
-    <div class="principle-card">
-      <div class="card-num">02</div>
-      <div class="card-icon">
-        <svg viewBox="0 0 32 32">
-          <rect x="6" y="10" width="20" height="14" rx="3"/>
-          <path d="M16 14 v6 M13 17 h6"/>
-          <path d="M10 10 V8 a2 2 0 0 1 2-2 h8 a2 2 0 0 1 2 2 v2"/>
-        </svg>
+    <div class="grid-row bottom-row">
+      <!-- Labor Standards -->
+      <div class="icon-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 48 48">
+            <path d="M24 6 l-10 6 v14 l10 6 l10-6 v-14 z" fill="none"/>
+            <path d="M17 24 l5 5 l9-10"/>
+          </svg>
+        </div>
+        <div class="icon-card-title">Трудовые стандарты</div>
+        <div class="icon-card-desc">Международные трудовые нормы. Достойные условия труда. Прозрачные контракты.</div>
       </div>
-      <div class="card-text">
-        <div class="card-title">Медицинская готовность</div>
-        <div class="card-desc">3 клиники в радиусе 15 минут. Ambulance на каждом объекте. Координация экстренной помощи. Медпункты на трибунах.</div>
-      </div>
-    </div>
 
-    <!-- Card 3: Guest Care -->
-    <div class="principle-card">
-      <div class="card-num">03</div>
-      <div class="card-icon">
-        <svg viewBox="0 0 32 32">
-          <circle cx="12" cy="12" r="3"/>
-          <circle cx="20" cy="12" r="3"/>
-          <path d="M6 24 c0-4 4-6 6-6"/>
-          <path d="M26 24 c0-4-4-6-6-6"/>
-          <path d="M14 18 c1-1 3-1 4 0"/>
-        </svg>
-      </div>
-      <div class="card-text">
-        <div class="card-title">Забота о гостях</div>
-        <div class="card-desc">Мультиязычные волонтёры. Информационные центры. Навигация на 4 языках. Горячая линия 24/7.</div>
-      </div>
-    </div>
-
-    <!-- Card 4: Labor Standards -->
-    <div class="principle-card">
-      <div class="card-num">04</div>
-      <div class="card-icon">
-        <svg viewBox="0 0 32 32">
-          <path d="M16 6 l-6 4 v8 l6 4 l6-4 v-8 z" fill="none"/>
-          <path d="M12 16 l3 3 l5-6"/>
-        </svg>
-      </div>
-      <div class="card-text">
-        <div class="card-title">Трудовые стандарты</div>
-        <div class="card-desc">Соблюдение международных трудовых норм. Достойные условия труда при подготовке объектов. Прозрачные контракты.</div>
-      </div>
-    </div>
-
-    <!-- Card 5: Social Responsibility -->
-    <div class="principle-card">
-      <div class="card-num">05</div>
-      <div class="card-icon">
-        <svg viewBox="0 0 32 32">
-          <circle cx="16" cy="16" r="10"/>
-          <path d="M6 16 h20"/>
-          <path d="M16 6 c-4 4-4 16 0 20"/>
-          <path d="M16 6 c4 4 4 16 0 20"/>
-        </svg>
-      </div>
-      <div class="card-text">
-        <div class="card-title">Социальная ответственность</div>
-        <div class="card-desc">Программы вовлечения местных сообществ. Наследие для молодёжного спорта. Образовательные инициативы.</div>
+      <!-- Social Responsibility -->
+      <div class="icon-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="16"/>
+            <path d="M8 24 h32"/>
+            <path d="M24 8 c-6 6-6 26 0 32"/>
+            <path d="M24 8 c6 6 6 26 0 32"/>
+          </svg>
+        </div>
+        <div class="icon-card-title">Социальная ответственность</div>
+        <div class="icon-card-desc">Программы вовлечения сообществ. Наследие для молодёжного спорта. Образовательные инициативы.</div>
       </div>
     </div>
   </div>
