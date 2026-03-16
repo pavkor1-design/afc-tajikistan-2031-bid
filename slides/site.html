@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Таджикистан — AFC Asian Cup 2031</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+    color: var(--ivory);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(5,14,29,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(215,166,61,0.1);
+    transition: background 0.3s;
+  }
+  .nav-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 40px; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 20px; color: var(--white); letter-spacing: 2px;
+    text-decoration: none; text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.6); text-decoration: none; letter-spacing: 0.5px;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-flag {
+    display: flex; gap: 0; width: 6px; height: 36px;
+    border-radius: 3px; overflow: hidden; flex-direction: column;
+  }
+  .nav-flag div { flex: 1; }
+  .nav-flag .r { background: #CC0000; }
+  .nav-flag .w { background: #FFFFFF; }
+  .nav-flag .g { background: #006600; }
+  .nav-burger {
+    display: none; background: none; border: none; cursor: pointer;
+    width: 32px; height: 32px; position: relative;
+  }
+  .nav-burger span {
+    display: block; width: 24px; height: 2px; background: var(--ivory);
+    position: absolute; left: 4px; transition: 0.3s;
+  }
+  .nav-burger span:nth-child(1) { top: 8px; }
+  .nav-burger span:nth-child(2) { top: 15px; }
+  .nav-burger span:nth-child(3) { top: 22px; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: -40px;
+    background: url('img/stadium-night-aerial.jpg') center 40% / cover no-repeat;
+    animation: heroDrift 25s ease-in-out infinite alternate;
+  }
+  @keyframes heroDrift {
+    from { transform: scale(1.02); }
+    to { transform: scale(1.08) translateY(-15px); }
+  }
+  .hero-gradient {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg,
+      rgba(5,14,29,0.98) 0%,
+      rgba(5,14,29,0.7) 40%,
+      rgba(5,14,29,0.3) 65%,
+      transparent 100%);
+  }
+  .hero-vignette {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(5,14,29,0.5) 0%, transparent 25%),
+      linear-gradient(-90deg, rgba(5,14,29,0.5) 0%, transparent 25%);
+  }
+  .hero-content {
+    position: relative; z-index: 10;
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 40px 100px;
+    width: 100%;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-weight: 600; font-size: 13px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--warm-gold);
+    background: rgba(215,166,61,0.15);
+    border: 1px solid rgba(215,166,61,0.3);
+    padding: 8px 24px; border-radius: 4px; margin-bottom: 24px;
+    animation: fadeUp 0.7s ease 0.5s both;
+  }
+  .hero-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(48px, 8vw, 96px); line-height: 1.0;
+    color: var(--white); letter-spacing: 2px; text-transform: uppercase;
+    animation: fadeUp 0.8s ease 0.7s both;
+  }
+  .hero-title .gold { color: var(--warm-gold); font-weight: 500; font-size: 0.75em; display: block; letter-spacing: 8px; margin-top: 4px; }
+  .hero-divider {
+    width: 80px; height: 3px; background: var(--gold);
+    margin: 24px 0; animation: fadeUp 0.6s ease 1s both;
+  }
+  .hero-sub {
+    font-weight: 300; font-size: 20px; line-height: 1.6;
+    color: rgba(246,244,239,0.85); max-width: 700px;
+    animation: fadeUp 0.7s ease 1.2s both;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    z-index: 10; animation: bounce 2s ease infinite 2s;
+    color: rgba(215,166,61,0.4); font-size: 12px; text-align: center;
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .hero-scroll svg { display: block; margin: 8px auto 0; width: 24px; height: 24px; fill: rgba(215,166,61,0.4); }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 120px 40px; position: relative; }
+  .container { max-width: 1400px; margin: 0 auto; }
+
+  .section-tag {
+    display: inline-block;
+    font-weight: 600; font-size: 12px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(32px, 4vw, 52px); line-height: 1.1;
+    color: var(--white); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-weight: 300; font-size: 17px;
+    color: rgba(246,244,239,0.6); margin-bottom: 48px;
+    max-width: 600px;
+  }
+  .section-divider {
+    width: 80px; height: 3px; background: var(--gold);
+    margin: 16px 0 24px;
+  }
+
+  /* ===== FACTS ROW ===== */
+  .facts-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .fact-card {
+    background: linear-gradient(145deg, rgba(10,24,48,0.7), rgba(5,14,29,0.8));
+    border: 1px solid rgba(215,166,61,0.2);
+    border-radius: 16px; padding: 32px;
+    backdrop-filter: blur(24px);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+  .fact-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(215,166,61,0.5);
+  }
+  .fact-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 44px; color: var(--warm-gold); line-height: 1; margin-bottom: 8px;
+  }
+  .fact-label {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 16px; color: var(--white);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .fact-text {
+    font-weight: 300; font-size: 14px; line-height: 1.6;
+    color: rgba(246,244,239,0.6);
+  }
+
+  /* ===== PHOTO GRID ===== */
+  .photo-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .photo-card {
+    position: relative; border-radius: 16px; overflow: hidden;
+    aspect-ratio: 16/10;
+    border: 1px solid rgba(215,166,61,0.2);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+  .photo-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(215,166,61,0.5);
+  }
+  .photo-card img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .photo-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(0deg, rgba(5,14,29,0.85) 0%, transparent 100%);
+  }
+  .photo-label {
+    position: absolute; bottom: 16px; left: 20px; right: 20px;
+    z-index: 2;
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 18px; color: var(--white); letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .photo-num {
+    position: absolute; top: 12px; left: 16px; z-index: 2;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 14px; color: var(--warm-gold); letter-spacing: 2px;
+    background: rgba(10,24,48,0.6); padding: 4px 10px;
+    border-radius: 6px; border: 1px solid rgba(215,166,61,0.3);
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    display: flex; align-items: center;
+    gap: 0; margin-top: 48px;
+  }
+  .tl-node {
+    display: flex; flex-direction: column; align-items: center;
+    flex-shrink: 0;
+  }
+  .tl-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--navy); border: 3px solid var(--gold);
+    position: relative; margin-bottom: 16px;
+  }
+  .tl-dot::after {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
+  }
+  .tl-node.future .tl-dot {
+    border-color: var(--warm-gold);
+    box-shadow: 0 0 20px rgba(215,166,61,0.4);
+  }
+  .tl-year {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 32px; color: var(--gold); letter-spacing: 2px;
+  }
+  .tl-label {
+    font-weight: 300; font-size: 13px;
+    color: rgba(246,244,239,0.6); text-align: center;
+    margin-top: 6px; max-width: 160px;
+  }
+  .tl-line {
+    flex: 1; height: 2px;
+    background: linear-gradient(90deg, rgba(215,166,61,0.2), rgba(215,166,61,0.5), rgba(215,166,61,0.2));
+    margin-bottom: auto; margin-top: 9px;
+  }
+
+  /* ===== METRICS ===== */
+  .metrics-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 20px; margin-top: 40px;
+  }
+  .metric-card {
+    background: rgba(10,24,48,0.6);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 12px; padding: 28px; text-align: center;
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .metric-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(215,166,61,0.4);
+  }
+  .metric-number {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 48px; color: var(--gold); line-height: 1; margin-bottom: 6px;
+  }
+  .metric-label {
+    font-weight: 400; font-size: 15px;
+    color: rgba(246,244,239,0.7);
+  }
+
+  /* ===== BID STATS ===== */
+  .bid-stats {
+    display: flex; justify-content: center; gap: 60px;
+    margin: 48px 0;
+  }
+  .bid-stat { text-align: center; }
+  .bid-stat-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 100px; line-height: 1;
+    background: linear-gradient(180deg, var(--warm-gold) 0%, var(--gold) 40%, #B8892E 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .bid-stat-label {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 20px; color: var(--ivory);
+    letter-spacing: 6px; text-transform: uppercase; margin-top: 8px;
+  }
+  .bid-stat-sub {
+    font-weight: 300; font-size: 12px;
+    color: rgba(246,244,239,0.4); margin-top: 4px; letter-spacing: 1px;
+  }
+  .bid-sep {
+    display: flex; align-items: center; padding-top: 30px;
+  }
+  .bid-sep::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--gold); border-radius: 50%; opacity: 0.4;
+  }
+
+  /* ===== HOST CITY ===== */
+  #city { background: linear-gradient(rgba(5,14,29,0.7), rgba(5,14,29,0.85)), url('img/somoni-monument.jpg') center/cover no-repeat fixed; }
+  .city-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .city-card {
+    background: rgba(10,24,48,0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.2);
+    border-radius: 12px; padding: 34px 28px; text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .city-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(215,166,61,0.5);
+  }
+  .city-icon {
+    width: 48px; height: 48px; margin: 0 auto 16px;
+    background: rgba(215,166,61,0.12); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .city-icon svg { width: 26px; height: 26px; fill: var(--gold); }
+  .city-num {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 32px; color: var(--warm-gold); margin-bottom: 6px;
+  }
+  .city-label {
+    font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.7); line-height: 1.4;
+  }
+
+  /* ===== STADIUMS ===== */
+  .stadiums-compare {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 0; margin-top: 48px;
+  }
+  .stadium-card-big {
+    background: linear-gradient(145deg, rgba(10,24,48,0.8), rgba(5,14,29,0.9));
+    border: 1px solid rgba(215,166,61,0.2);
+    border-radius: 16px; overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+  .stadium-card-big:hover {
+    border-color: rgba(215,166,61,0.5);
+    transform: translateY(-4px);
+  }
+  .stadium-photo {
+    width: 100%; height: 220px; object-fit: cover;
+  }
+  .stadium-photo-wrap {
+    position: relative; height: 220px; overflow: hidden;
+  }
+  .stadium-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .stadium-photo-wrap::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80%;
+    background: linear-gradient(180deg, transparent 0%, rgba(5,14,29,0.9) 100%);
+  }
+  .stadium-body { padding: 24px 28px; }
+  .stadium-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 24px; color: var(--white);
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .stadium-name-en {
+    font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.6); margin-top: 2px;
+  }
+  .stadium-badge {
+    display: inline-block; font-weight: 600; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px; margin-top: 12px;
+  }
+  .badge-new {
+    color: var(--warm-gold);
+    background: rgba(215,166,61,0.15);
+    border: 1px solid rgba(215,166,61,0.4);
+  }
+  .badge-recon {
+    color: #5BC0BE;
+    background: rgba(91,192,190,0.12);
+    border: 1px solid rgba(91,192,190,0.4);
+  }
+  .stadium-specs {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px 20px; margin-top: 20px;
+  }
+  .spec-item {
+    padding: 8px 12px;
+    background: rgba(215,166,61,0.03);
+    border-radius: 8px; border: 1px solid rgba(215,166,61,0.05);
+  }
+  .spec-label {
+    font-weight: 500; font-size: 11px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(215,166,61,0.8); margin-bottom: 4px;
+  }
+  .spec-val {
+    font-weight: 400; font-size: 15px; color: var(--ivory);
+  }
+  .spec-val.gold {
+    font-family: 'Oswald', sans-serif; color: var(--warm-gold);
+    font-size: 22px; font-weight: 600;
+  }
+  .stadium-bridge {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 16px;
+  }
+  .bridge-badge {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: linear-gradient(145deg, var(--navy), var(--midnight));
+    border: 2px solid var(--warm-gold);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 25px rgba(215,166,61,0.4);
+  }
+  .bridge-badge svg { width: 24px; height: 24px; fill: var(--warm-gold); }
+  .total-pill {
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(10,24,48,0.7); backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.25);
+    border-radius: 10px; padding: 16px 40px;
+    margin: 32px auto 0; width: fit-content;
+  }
+  .total-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 32px; color: var(--warm-gold); letter-spacing: 2px;
+  }
+  .total-label {
+    font-weight: 300; font-size: 14px;
+    color: rgba(246,244,239,0.55);
+  }
+
+  /* ===== AFC REQUIREMENTS ===== */
+  .req-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .req-card {
+    background: rgba(10,24,48,0.8); backdrop-filter: blur(20px);
+    border: 1px solid rgba(215,166,61,0.25);
+    border-radius: 16px; padding: 28px 24px; text-align: center;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .req-card:hover {
+    border-color: rgba(215,166,61,0.6);
+    transform: translateY(-4px);
+  }
+  .req-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(215,166,61,0.15);
+    border: 1px solid rgba(215,166,61,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .req-icon svg { width: 28px; height: 28px; fill: var(--warm-gold); }
+  .req-code {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 16px; letter-spacing: 3px;
+    color: var(--warm-gold); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .req-title {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 20px; color: var(--white); margin-bottom: 4px;
+  }
+  .req-title-ru {
+    font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.6);
+  }
+  .req-check {
+    margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 500; font-size: 15px; color: var(--warm-gold);
+  }
+  .req-check svg { width: 16px; height: 16px; fill: var(--warm-gold); }
+
+  /* ===== CHECKLIST ===== */
+  .checklist {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px; margin-top: 40px;
+  }
+  .check-item {
+    background: rgba(10,24,48,0.5);
+    border: 1px solid rgba(76,175,80,0.2);
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .check-icon {
+    width: 28px; height: 28px; min-width: 28px; border-radius: 50%;
+    background: rgba(76,175,80,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .check-icon svg { width: 14px; height: 14px; fill: #81C784; }
+  .check-text {
+    font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.7); line-height: 1.3;
+  }
+
+  /* ===== RECONSTRUCTION TIMELINE ===== */
+  .recon-timeline {
+    position: relative; margin-top: 48px; padding-left: 40px;
+  }
+  .recon-timeline::before {
+    content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), var(--warm-gold), rgba(215,166,61,0.2));
+    border-radius: 2px;
+  }
+  .recon-item {
+    position: relative; margin-bottom: 32px; padding-left: 32px;
+  }
+  .recon-dot {
+    position: absolute; left: -34px; top: 4px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--midnight);
+    box-shadow: 0 0 12px rgba(215,166,61,0.4);
+  }
+  .recon-item:last-child .recon-dot {
+    background: var(--white);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+  }
+  .recon-year {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 22px; color: var(--warm-gold); letter-spacing: 2px;
+  }
+  .recon-quarter {
+    font-weight: 500; font-size: 14px;
+    color: rgba(246,244,239,0.7); letter-spacing: 1px;
+    text-transform: uppercase; margin-left: 8px;
+  }
+  .recon-title {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 18px; color: var(--white); text-transform: uppercase;
+    letter-spacing: 1px; margin-top: 4px;
+  }
+  .recon-desc {
+    font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.6); margin-top: 4px;
+  }
+
+  /* ===== GUARANTEES ===== */
+  .guarantees-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 24px; margin-top: 40px;
+  }
+  .guarantee-card {
+    background: linear-gradient(145deg, rgba(10,24,48,0.7), rgba(5,14,29,0.8));
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 16px; padding: 24px 28px;
+    display: flex; align-items: center; gap: 20px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .guarantee-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(215,166,61,0.4);
+  }
+  .g-bar {
+    width: 4px; height: 56px;
+    background: linear-gradient(180deg, var(--gold), var(--warm-gold));
+    border-radius: 2px; flex-shrink: 0;
+  }
+  .g-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(215,166,61,0.1); border: 1px solid rgba(215,166,61,0.25);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .g-icon svg { width: 24px; height: 24px; fill: var(--warm-gold); }
+  .g-title {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 16px; color: var(--white); text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 4px;
+  }
+  .g-desc {
+    font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.7);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    padding: 60px 40px;
+    background: var(--midnight);
+    border-top: 1px solid rgba(215,166,61,0.1);
+  }
+  .footer-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-org {
+    font-weight: 400; font-size: 12px;
+    color: rgba(246,244,239,0.4);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .footer-date {
+    font-weight: 300; font-size: 13px;
+    color: rgba(215,166,61,0.5); letter-spacing: 3px;
+    margin-top: 6px;
+  }
+  .footer-flag {
+    display: flex; width: 8px; height: 80px;
+    border-radius: 4px; overflow: hidden; flex-direction: column;
+  }
+  .footer-flag div { flex: 1; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .facts-grid,
+    .metrics-grid,
+    .city-cards,
+    .req-grid { grid-template-columns: repeat(2, 1fr); }
+    .stadiums-compare { grid-template-columns: 1fr; gap: 24px; }
+    .stadium-bridge { display: none; }
+    .bid-stats { gap: 40px; flex-wrap: wrap; }
+    .bid-stat-num { font-size: 64px; }
+    .guarantees-grid { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    .timeline { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .tl-line { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    section { padding: 80px 24px; }
+    .nav-links { display: none; }
+    .nav-burger { display: block; }
+    .nav-inner { padding: 0 24px; }
+    .hero-content { padding: 0 24px 80px; }
+    .facts-grid,
+    .metrics-grid,
+    .city-cards,
+    .req-grid,
+    .photo-grid { grid-template-columns: 1fr; }
+    .bid-stats { flex-direction: column; gap: 24px; }
+    .bid-sep { display: none; }
+    .bid-stat-num { font-size: 72px; }
+    .stadium-specs { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Таджикистан <span>AFC 2031</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">О стране</a></li>
+      <li><a href="#football">Футбол</a></li>
+      <li><a href="#bid">Заявка</a></li>
+      <li><a href="#city">Душанбе</a></li>
+      <li><a href="#stadiums">Стадионы</a></li>
+      <li><a href="#requirements">Требования</a></li>
+      <li><a href="#reconstruction">Реконструкция</a></li>
+    </ul>
+    <div class="nav-flag">
+      <div class="r"></div>
+      <div class="w"></div>
+      <div class="g"></div>
+    </div>
+    <button class="nav-burger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Официальная заявка</div>
+    <h1 class="hero-title">
+      Таджикистан
+      <span class="gold">AFC Asian Cup 2031</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Официальная заявка Федерации футбола Таджикистана на проведение групповых матчей AFC Asian Cup 2031</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Узнать больше</span>
+    <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+  </div>
+</header>
+
+<!-- ABOUT TAJIKISTAN -->
+<section id="about">
+  <div class="container fade-in">
+    <div class="section-tag">Геополитический контекст</div>
+    <h2 class="section-title">Таджикистан</h2>
+    <p class="section-sub">Страна на перекрёстке цивилизаций</p>
+    <div class="section-divider"></div>
+    <p style="font-weight:300; font-size:16px; line-height:1.75; color:rgba(246,244,239,0.6); max-width:700px; margin-bottom:48px;">
+      Древняя земля на перекрёстке Шёлкового пути, где сходятся границы четырёх государств и пересекаются культуры Востока и Запада.
+    </p>
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-num">4</div>
+        <div class="fact-label">Страны-соседа</div>
+        <div class="fact-text">Сердце Центральной Азии — граница с Китаем, Афганистаном, Узбекистаном, Кыргызстаном</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-num">10+</div>
+        <div class="fact-label">Млн человек</div>
+        <div class="fact-text">Молодая нация с огромным потенциалом — средний возраст всего 24 года</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-num">93%</div>
+        <div class="fact-label">Территории — горы</div>
+        <div class="fact-text">«Крыша мира» — Памир и Фанские горы, культурный мост Востока и Запада</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOVER TAJIKISTAN -->
+<section id="discover" style="background: linear-gradient(160deg, var(--midnight) 0%, var(--navy) 50%, #0D1F3A 100%);">
+  <div class="container fade-in">
+    <div class="section-tag">Красоты Таджикистана</div>
+    <h2 class="section-title">Откройте Таджикистан</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">«Таджикистан: где древняя история встречает современные амбиции»</p>
+    <div class="photo-grid">
+      <div class="photo-card">
+        <img src="img/lake-iskanderkul.jpg" alt="Озеро Искандеркуль" loading="lazy">
+        <span class="photo-num">01</span>
+        <div class="photo-label">Озеро Искандеркуль</div>
+      </div>
+      <div class="photo-card">
+        <img src="img/park-nature.jpg" alt="Тигровая балка" loading="lazy">
+        <span class="photo-num">02</span>
+        <div class="photo-label">Национальный парк «Тигровая балка»</div>
+      </div>
+      <div class="photo-card">
+        <img src="img/katara-mosque-v2.jpg" alt="Мечети" loading="lazy">
+        <span class="photo-num">03</span>
+        <div class="photo-label">Мечети в стиле Катара</div>
+      </div>
+      <div class="photo-card">
+        <img src="img/rudaki-park-v2.jpg" alt="Парк Рудаки" loading="lazy">
+        <span class="photo-num">04</span>
+        <div class="photo-label">Парк Рудаки</div>
+      </div>
+      <div class="photo-card">
+        <img src="img/pamir-highway.jpg" alt="Памирский тракт" loading="lazy">
+        <span class="photo-num">05</span>
+        <div class="photo-label">Памирский тракт</div>
+      </div>
+      <div class="photo-card">
+        <img src="img/tajik-cuisine.jpg" alt="Национальная кухня" loading="lazy">
+        <span class="photo-num">06</span>
+        <div class="photo-label">Богатая национальная кухня</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTBALL HISTORY -->
+<section id="football" style="background: linear-gradient(rgba(5,14,29,0.82), rgba(5,14,29,0.88)), url('img/tajikistan-mountains.jpg') center/cover no-repeat fixed;">
+  <div class="container fade-in">
+    <div class="section-tag">История и потенциал</div>
+    <h2 class="section-title">Таджикистан и футбол</h2>
+    <div class="section-divider"></div>
+
+    <div class="timeline">
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1994</div>
+        <div class="tl-label">Членство в AFC и FIFA</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2006</div>
+        <div class="tl-label">Обладатели Кубка Challenge</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023</div>
+        <div class="tl-label">Участие в Кубке Азии</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-node future">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2027</div>
+        <div class="tl-label">Рассчитываем на Кубок Азии</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-node future">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2031</div>
+        <div class="tl-label">Кубок Азии в Таджикистане</div>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-number">100</div>
+        <div class="metric-label">Рейтинг FIFA</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">25 000+</div>
+        <div class="metric-label">Зарегистрированных игроков</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">30+</div>
+        <div class="metric-label">Профессиональных клубов</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">30</div>
+        <div class="metric-label">Лет в составе AFC</div>
+      </div>
+    </div>
+
+    <div class="checklist" style="margin-top: 48px;">
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="check-text">Поле 105x68 м, натуральный газон</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="check-text">Освещение 500+ люкс</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="check-text">Раздевалки 4x80+ м2</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="check-text">Медпункт на объекте</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <div class="check-text">WiFi, медиа-зона, парковка</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BID SCOPE -->
+<section id="bid" style="background: linear-gradient(rgba(5,14,29,0.7), rgba(5,14,29,0.85)), url('img/stadium-river-night.jpg') center/cover no-repeat fixed;">
+  <div class="container fade-in">
+    <div class="section-tag">Суть заявки</div>
+    <h2 class="section-title">Наша заявка: суть и масштаб</h2>
+    <div class="section-divider"></div>
+
+    <div class="bid-stats">
+      <div class="bid-stat">
+        <div class="bid-stat-num">2</div>
+        <div class="bid-stat-label">Группы</div>
+        <div class="bid-stat-sub">Группа X &middot; Группа Y</div>
+      </div>
+      <div class="bid-sep"></div>
+      <div class="bid-stat">
+        <div class="bid-stat-num">8</div>
+        <div class="bid-stat-label">Команд</div>
+        <div class="bid-stat-sub">Участники группового этапа</div>
+      </div>
+      <div class="bid-sep"></div>
+      <div class="bid-stat">
+        <div class="bid-stat-num">6</div>
+        <div class="bid-stat-label">Матчей</div>
+        <div class="bid-stat-sub">Групповой этап</div>
+      </div>
+    </div>
+
+    <p style="text-align:center; font-weight:300; font-size:16px; color:rgba(246,244,239,0.5); margin-top:32px;">
+      2 группы, фокусная концентрация ресурсов, максимальное качество проведения турнира.
+    </p>
+  </div>
+</section>
+
+<!-- HOST CITY -->
+<section id="city">
+  <div class="container fade-in">
+    <div class="section-tag">Город-организатор</div>
+    <h2 class="section-title">Душанбе: город-организатор</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Столица и крупнейший город Таджикистана — современный мегаполис, готовый принять международный турнир</p>
+
+    <div class="city-cards">
+      <div class="city-card">
+        <div class="city-icon">
+          <svg viewBox="0 0 24 24"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
+        </div>
+        <div class="city-num">~1 МЛН</div>
+        <div class="city-label">Население столицы<br>Крупнейший город страны</div>
+      </div>
+      <div class="city-card">
+        <div class="city-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        </div>
+        <div class="city-num">DYU</div>
+        <div class="city-label">Международный аэропорт<br>Москва, Стамбул, Дубай, Пекин</div>
+      </div>
+      <div class="city-card">
+        <div class="city-icon">
+          <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2V10c0-2.21-1.79-4-4-4z"/></svg>
+        </div>
+        <div class="city-num">37 / 2 119</div>
+        <div class="city-label">Гостиниц / номеров<br>3 756 мест размещения</div>
+      </div>
+      <div class="city-card">
+        <div class="city-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+        </div>
+        <div class="city-num">Культура</div>
+        <div class="city-label">Национальный музей, парки<br>Набережная Душанбе</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STADIUMS -->
+<section id="stadiums">
+  <div class="container fade-in">
+    <div class="section-tag" style="text-align:center; display:block;">Match Venues</div>
+    <h2 class="section-title" style="text-align:center;">Стадионы</h2>
+    <p class="section-sub" style="text-align:center; margin: 8px auto 0;">Два объекта мирового класса</p>
+    <div class="section-divider" style="margin: 16px auto 0;"></div>
+
+    <div class="stadiums-compare">
+      <!-- Markazi -->
+      <div class="stadium-card-big">
+        <div class="stadium-photo-wrap">
+          <img src="img/stadium-river-night.jpg" alt="Стадион Маркази" loading="lazy">
+        </div>
+        <div class="stadium-body">
+          <div class="stadium-name">Стадион Маркази</div>
+          <div class="stadium-name-en">Tajikistan National Stadium</div>
+          <div class="stadium-badge badge-new">Новое строительство</div>
+          <div class="stadium-specs">
+            <div class="spec-item">
+              <div class="spec-label">Вместимость</div>
+              <div class="spec-val gold">30 062</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Расширение</div>
+              <div class="spec-val">до 40 000</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Поле</div>
+              <div class="spec-val">105 x 68 м</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Покрытие</div>
+              <div class="spec-val">Гибридный газон</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">VIP</div>
+              <div class="spec-val">792 мест, 34 ложи</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Пресса</div>
+              <div class="spec-val">72 места</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bridge -->
+      <div class="stadium-bridge">
+        <div class="bridge-badge">
+          <svg viewBox="0 0 24 24"><path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/></svg>
+        </div>
+      </div>
+
+      <!-- Hissar -->
+      <div class="stadium-card-big">
+        <div class="stadium-photo-wrap">
+          <img src="img/hissar-stadium-aerial-v3.jpg" alt="Стадион Гиссар" loading="lazy">
+        </div>
+        <div class="stadium-body">
+          <div class="stadium-name">Стадион «Гиссар»</div>
+          <div class="stadium-name-en">Hissar Stadium</div>
+          <div class="stadium-badge badge-recon">Реконструкция</div>
+          <div class="stadium-specs">
+            <div class="spec-item">
+              <div class="spec-label">Вместимость</div>
+              <div class="spec-val gold">22 000</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Статус</div>
+              <div class="spec-val">Реконструкция</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Роль</div>
+              <div class="spec-val">Групповой этап</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Тренировочные поля</div>
+              <div class="spec-val">2 поля</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-pill">
+      <span class="total-num">52 000+</span>
+      <span class="total-label">общая вместимость двух стадионов</span>
+    </div>
+  </div>
+</section>
+
+<!-- AFC REQUIREMENTS -->
+<section id="requirements" style="background: linear-gradient(rgba(5,14,29,0.85), rgba(5,14,29,0.9)), url('img/stadium-concourse.jpg') center/cover no-repeat fixed;">
+  <div class="container fade-in">
+    <div class="section-tag" style="text-align:center; display:block;">Системный подход</div>
+    <h2 class="section-title" style="text-align:center;">Соответствие требованиям AFC</h2>
+    <div class="section-divider" style="margin: 16px auto 32px;"></div>
+
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="req-icon"><svg viewBox="0 0 24 24"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg></div>
+        <div class="req-code">4a</div>
+        <div class="req-title">Host City</div>
+        <div class="req-title-ru">Город-организатор</div>
+        <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div>
+        <div class="req-code">4b-i</div>
+        <div class="req-title">Stadiums</div>
+        <div class="req-title-ru">Стадионы</div>
+        <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon"><svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div>
+        <div class="req-code">4b-ii</div>
+        <div class="req-title">Training Facilities</div>
+        <div class="req-title-ru">Тренировочные базы</div>
+        <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon"><svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2V10c0-2.21-1.79-4-4-4z"/></svg></div>
+        <div class="req-code">4b-iii</div>
+        <div class="req-title">Accommodation</div>
+        <div class="req-title-ru">Размещение</div>
+        <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+        <div class="req-code">4c</div>
+        <div class="req-title">Financial Commitments</div>
+        <div class="req-title-ru">Финансовые обязательства</div>
+        <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg></div>
+        <div class="req-code">4d</div>
+        <div class="req-title">Additional Requirements</div>
+        <div class="req-title-ru">Дополнительные требования</div>
+        <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Готово</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECONSTRUCTION -->
+<section id="reconstruction" style="background: linear-gradient(rgba(5,14,29,0.85), rgba(5,14,29,0.9)), url('img/hissar-stadium-aerial-v3.jpg') center/cover no-repeat fixed;">
+  <div class="container fade-in">
+    <div class="section-tag">Реконструкция</div>
+    <h2 class="section-title">Стадион «Гиссар»: план реконструкции</h2>
+    <p class="section-sub">Управляемый проект с государственной поддержкой</p>
+    <div class="section-divider"></div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+      <div class="recon-timeline">
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2026</span><span class="recon-quarter">Q2</span>
+          <div class="recon-title">Утверждение проекта</div>
+          <div class="recon-desc">Проектная документация и государственное согласование</div>
+        </div>
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2026</span><span class="recon-quarter">Q4</span>
+          <div class="recon-title">Начало строительства</div>
+          <div class="recon-desc">Подготовка площадки, демонтаж старых конструкций</div>
+        </div>
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2027</span><span class="recon-quarter">Q2</span>
+          <div class="recon-title">Фундамент и каркас</div>
+          <div class="recon-desc">Железобетонные конструкции, основной каркас трибун</div>
+        </div>
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2028</span><span class="recon-quarter">Q1</span>
+          <div class="recon-title">Кровля и трибуны</div>
+          <div class="recon-desc">Монтаж кровли, установка 22 000 кресел</div>
+        </div>
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2028</span><span class="recon-quarter">Q3</span>
+          <div class="recon-title">Системы интеграции</div>
+          <div class="recon-desc">Освещение, экраны, broadcast-инфраструктура</div>
+        </div>
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2029</span><span class="recon-quarter">Q1</span>
+          <div class="recon-title">Ввод и тесты</div>
+          <div class="recon-desc">Пуско-наладка, тестовые мероприятия</div>
+        </div>
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2029</span><span class="recon-quarter">Q4</span>
+          <div class="recon-title">Полная готовность</div>
+          <div class="recon-desc">Операционная готовность стадиона</div>
+        </div>
+        <div class="recon-item">
+          <div class="recon-dot"></div>
+          <span class="recon-year">2030</span>
+          <div class="recon-title">Сертификация AFC</div>
+          <div class="recon-desc">Предтурнирная сертификация и допуск</div>
+        </div>
+      </div>
+
+      <div class="guarantees-grid" style="grid-template-columns: 1fr;">
+        <div class="guarantee-card">
+          <div class="g-bar"></div>
+          <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+          <div>
+            <div class="g-title">Гос. финансирование</div>
+            <div class="g-desc">Проект полностью финансируется из государственного бюджета</div>
+          </div>
+        </div>
+        <div class="guarantee-card">
+          <div class="g-bar"></div>
+          <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+          <div>
+            <div class="g-title">Государственный надзор</div>
+            <div class="g-desc">Контроль специального комитета при правительстве</div>
+          </div>
+        </div>
+        <div class="guarantee-card">
+          <div class="g-bar"></div>
+          <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+          <div>
+            <div class="g-title">22 000 мест</div>
+            <div class="g-desc">Целевая вместимость по стандартам AFC</div>
+          </div>
+        </div>
+        <div class="guarantee-card">
+          <div class="g-bar"></div>
+          <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+          <div>
+            <div class="g-title">Полное соответствие AFC</div>
+            <div class="g-desc">Все параметры будут выполнены к 2030 году</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-org">Федерация футбола Таджикистана</div>
+      <div class="footer-date">Март 2026 &middot; Душанбе</div>
+    </div>
+    <div class="footer-flag">
+      <div class="r" style="background:#CC0000;"></div>
+      <div style="background:#FFFFFF;"></div>
+      <div style="background:#006600;"></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll animation -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
