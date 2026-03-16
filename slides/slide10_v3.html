@@ -106,10 +106,6 @@
   .title-center { text-align: center; flex: 1; padding: 0 40px; }
   .tag {
     display: none !important;
-    display: inline-block; font-family: 'Inter', sans-serif; font-weight: 500;
-    font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold);
-    background: rgba(215,166,61,0.1); border: 1px solid rgba(215,166,61,0.2);
-    padding: 4px 14px; border-radius: 3px; margin-bottom: 6px; backdrop-filter: blur(8px);
   }
   .slide-title {
     font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 34px;
@@ -137,9 +133,8 @@
     z-index: 10;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 16px;
-    height: 710px;
+    grid-template-rows: repeat(2, auto);
+    gap: 14px;
   }
 
   .param-card {
@@ -147,7 +142,7 @@
     border: 1px solid rgba(215,166,61,0.1);
     border-radius: 14px;
     backdrop-filter: blur(12px);
-    padding: 20px;
+    padding: 16px;
     display: flex; flex-direction: column;
     position: relative;
     overflow: hidden;
@@ -165,18 +160,18 @@
   .param-card:nth-child(10) { animation-delay: 1.7s; }
 
   .param-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--gold), var(--warm-gold), transparent);
-    opacity: 0.5;
+    content: ''; position: absolute; top: 0; left: 20px; right: 20px; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--warm-gold));
+    opacity: 0.4; border-radius: 1px;
   }
 
   .card-icon {
-    width: 40px; height: 40px; border-radius: 10px;
+    width: 36px; height: 36px; border-radius: 8px;
     background: rgba(215,166,61,0.08); border: 1px solid rgba(215,166,61,0.15);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
-  .card-icon svg { width: 22px; height: 22px; fill: var(--gold); }
+  .card-icon svg { width: 20px; height: 20px; fill: var(--gold); }
 
   .card-param-name {
     font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 16px;
@@ -185,15 +180,15 @@
   }
 
   .card-afc-req {
-    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px;
     color: rgba(246,244,239,0.4); letter-spacing: 1px;
-    margin-bottom: 16px; padding-bottom: 12px;
-    border-bottom: 1px solid rgba(215,166,61,0.06);
+    margin-bottom: 10px; padding-bottom: 8px;
+    border-bottom: 1px solid rgba(215,166,61,0.08);
   }
 
   .stadium-status {
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 6px;
   }
   .stadium-status:last-child { margin-bottom: 0; }
 

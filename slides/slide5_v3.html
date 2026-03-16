@@ -22,9 +22,8 @@
   .flag-ribbon { position: absolute; top: 100px; right: 80px; z-index: 20; display: flex; flex-direction: column; width: 8px; height: 120px; border-radius: 4px; overflow: hidden; animation: fadeIn 1s ease 0.7s both; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
   .flag-ribbon div { flex: 1; } .fr-red { background: #CC0000; } .fr-white { background: #FFFFFF; } .fr-green { background: #006600; }
   .title-block { position: absolute; top: 100px; left: 0; right: 0; text-align: center; z-index: 10; animation: fadeSlideUp 0.8s ease 0.8s both; }
-  .tag { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.25); padding: 8px 20px; border-radius: 4px; margin-bottom: 16px; }
-    display: none !important;
-  .slide-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 44px; color: var(--white); text-transform: uppercase; letter-spacing: 4px; }
+  .tag { display: none !important; }
+  .slide-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 44px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 4px; }
   .divider-center { width: 80px; height: 3px; background: var(--gold); margin: 16px auto 0; animation: growWidth 0.6s ease 1.2s both; }
   @keyframes growWidth { from { width: 0; } to { width: 80px; } }
   .central-hub { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center; animation: fadeIn 1s ease 1.2s both; }
@@ -57,7 +56,7 @@
   <div class="letterbox-bottom"></div>
   <div class="afc-logo"><div class="afc-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div><div class="afc-text">AFC Asian Cup<span class="year">2031</span></div></div>
   <div class="flag-ribbon"><div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div></div>
-  <div class="title-block"><div class="tag">Суть заявки</div><h1 class="slide-title">Наша заявка: суть и масштаб</h1><div class="divider-center"></div></div>
+  <div class="title-block"><h1 class="slide-title">Наша заявка</h1><div class="divider-center"></div></div>
   <svg class="conn-lines" viewBox="0 0 1920 1080" fill="none">
     <line x1="400" y1="380" x2="760" y2="480" stroke="rgba(215,166,61,0.15)" stroke-width="1" stroke-dasharray="6 4"/>
     <line x1="400" y1="700" x2="760" y2="580" stroke="rgba(215,166,61,0.15)" stroke-width="1" stroke-dasharray="6 4"/>

@@ -78,7 +78,7 @@
     padding: 8px 20px; border-radius: 4px; margin-bottom: 12px;
   }
   .main-title {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 44px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 48px;
     line-height: 1.1; color: var(--white); letter-spacing: 2px; text-transform: uppercase;
   }
   .divider {
@@ -132,28 +132,28 @@
   }
 
   .card-number {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 48px;
-    color: rgba(215,166,61,0.2); position: absolute; top: 20px; right: 24px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 52px;
+    color: rgba(232,191,90,0.35); position: absolute; top: 20px; right: 24px;
   }
 
   .card-name {
-    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 20px;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 24px;
     color: var(--white); letter-spacing: 1px; text-transform: uppercase;
     margin-bottom: 8px;
   }
   .card-desc {
-    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
-    color: rgba(246,244,239,0.6); line-height: 1.5; margin-bottom: 14px;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 15px;
+    color: rgba(246,244,239,0.75); line-height: 1.5; margin-bottom: 14px;
   }
 
   .card-specs {
     display: flex; gap: 10px; flex-wrap: wrap;
   }
   .card-spec {
-    background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.25);
-    border-radius: 4px; padding: 5px 10px;
-    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
-    color: var(--warm-gold); white-space: nowrap;
+    background: rgba(232,191,90,0.18); border: 1px solid rgba(232,191,90,0.4);
+    border-radius: 4px; padding: 6px 12px;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 15px;
+    color: var(--light-gold); white-space: nowrap;
   }
 
   /* Route connector lines between cards */
@@ -173,12 +173,12 @@
     text-align: center;
   }
   .metric-val {
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 32px;
-    color: var(--warm-gold);
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 36px;
+    color: var(--light-gold);
   }
   .metric-lbl {
-    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
-    color: rgba(246,244,239,0.5); letter-spacing: 2px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 15px;
+    color: rgba(246,244,239,0.65); letter-spacing: 2px; text-transform: uppercase;
   }
 
   .bottom-strip {
@@ -255,11 +255,12 @@
       <div class="card-number">01</div>
       <div class="photo-card-content">
         <div class="card-name">База ФФТ</div>
-        <div class="card-desc">Главный тренировочный комплекс федерации. Несколько полей, современные раздевалки, освещение</div>
+        <div class="card-desc">Главный тренировочный комплекс федерации. 3 поля, современные раздевалки, медицинский центр, LED-освещение</div>
         <div class="card-specs">
           <span class="card-spec">105x68 м</span>
           <span class="card-spec">500+ лк</span>
-          <span class="card-spec">10 мин до отеля</span>
+          <span class="card-spec">10 мин</span>
+          <span class="card-spec">3 поля</span>
         </div>
       </div>
     </div>
@@ -270,11 +271,12 @@
       <div class="card-number">02</div>
       <div class="photo-card-content">
         <div class="card-name">Тренировочное поле №2</div>
-        <div class="card-desc">Вспомогательное поле рядом со стадионом, натуральный газон</div>
+        <div class="card-desc">Натуральный газон рядом со стадионом. Раздевалки, зоны разминки, трибуны для наблюдателей</div>
         <div class="card-specs">
           <span class="card-spec">105x68 м</span>
           <span class="card-spec">500+ лк</span>
-          <span class="card-spec">8 мин до отеля</span>
+          <span class="card-spec">8 мин</span>
+          <span class="card-spec">Газон</span>
         </div>
       </div>
     </div>
@@ -285,11 +287,12 @@
       <div class="card-number">03</div>
       <div class="photo-card-content">
         <div class="card-name">Тренировочное поле №3</div>
-        <div class="card-desc">Дополнительная площадка с полным освещением и инфраструктурой</div>
+        <div class="card-desc">Площадка с полным LED-освещением, система полива, зона восстановления и медкабинет</div>
         <div class="card-specs">
           <span class="card-spec">105x68 м</span>
           <span class="card-spec">500+ лк</span>
-          <span class="card-spec">15 мин до отеля</span>
+          <span class="card-spec">15 мин</span>
+          <span class="card-spec">LED</span>
         </div>
       </div>
     </div>
@@ -300,11 +303,12 @@
       <div class="card-number">04</div>
       <div class="photo-card-content">
         <div class="card-name">Гиссарская база</div>
-        <div class="card-desc">Тренировочный комплекс рядом со стадионом Гиссар</div>
+        <div class="card-desc">Автономный комплекс при стадионе Гиссар. Собственная инфраструктура, раздевалки, парковка</div>
         <div class="card-specs">
           <span class="card-spec">105x68 м</span>
           <span class="card-spec">500+ лк</span>
-          <span class="card-spec">20 мин до отеля</span>
+          <span class="card-spec">20 мин</span>
+          <span class="card-spec">Автономная</span>
         </div>
       </div>
     </div>

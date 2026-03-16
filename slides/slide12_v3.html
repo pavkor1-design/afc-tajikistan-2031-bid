@@ -88,7 +88,7 @@
   @keyframes growWidth { from { width: 0; } to { width: 80px; } }
   .subtitle-text {
     font-family: 'Inter', sans-serif; font-weight: 300; font-size: 15px;
-    color: rgba(246,244,239,0.6);
+    color: rgba(246,244,239,0.75);
   }
 
   /* Central hub — stadium icon */
@@ -103,26 +103,26 @@
   .hub-circle {
     width: 160px; height: 160px;
     border-radius: 50%;
-    background: rgba(215,166,61,0.1);
-    border: 3px solid var(--gold);
+    background: rgba(232,191,90,0.15);
+    border: 3px solid var(--warm-gold);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    box-shadow: 0 0 60px rgba(215,166,61,0.2);
+    box-shadow: 0 0 70px rgba(232,191,90,0.3);
     position: relative;
   }
   .hub-circle::after {
     content: ''; position: absolute;
     top: -12px; left: -12px; right: -12px; bottom: -12px;
     border-radius: 50%;
-    border: 1px solid rgba(215,166,61,0.15);
+    border: 1px solid rgba(232,191,90,0.25);
   }
 
   .hub-icon {
     width: 48px; height: 48px; margin-bottom: 8px;
   }
-  .hub-icon svg { width: 48px; height: 48px; fill: var(--gold); }
+  .hub-icon svg { width: 48px; height: 48px; fill: var(--warm-gold); }
   .hub-label {
-    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 16px;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 16px;
     color: var(--white); letter-spacing: 2px; text-transform: uppercase;
   }
 
@@ -133,9 +133,9 @@
   }
 
   .node-card {
-    background: rgba(10,24,48,0.75);
+    background: rgba(10,24,48,0.8);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(215,166,61,0.25);
+    border: 1px solid rgba(232,191,90,0.35);
     border-radius: 14px;
     padding: 24px 28px;
     width: 320px;
@@ -143,12 +143,12 @@
   }
   .node-card:hover {
     transform: scale(1.03);
-    border-color: rgba(215,166,61,0.6);
+    border-color: rgba(232,191,90,0.7);
   }
 
   .node-num {
     font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 24px;
-    color: var(--gold); margin-bottom: 4px;
+    color: var(--warm-gold); margin-bottom: 4px;
   }
   .node-name {
     font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 18px;
@@ -157,16 +157,16 @@
   }
   .node-desc {
     font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
-    color: rgba(246,244,239,0.55); line-height: 1.4; margin-bottom: 10px;
+    color: rgba(246,244,239,0.7); line-height: 1.4; margin-bottom: 10px;
   }
   .node-badges {
     display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
   }
   .node-badge {
-    background: rgba(215,166,61,0.1); border: 1px solid rgba(215,166,61,0.2);
+    background: rgba(232,191,90,0.15); border: 1px solid rgba(232,191,90,0.35);
     border-radius: 4px; padding: 4px 10px;
     font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
-    color: var(--warm-gold);
+    color: var(--light-gold);
   }
 
   /* Position nodes around hub */
@@ -193,15 +193,15 @@
     animation: fadeIn 1s ease 1.2s both;
   }
   .conn-line {
-    stroke: rgba(215,166,61,0.25);
+    stroke: rgba(232,191,90,0.4);
     stroke-width: 2;
     stroke-dasharray: 8 6;
     fill: none;
   }
   .conn-label {
-    fill: var(--warm-gold);
+    fill: var(--light-gold);
     font-family: 'Oswald', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
   }
 

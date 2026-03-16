@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1920, height=1080, initial-scale=1">
-<title>Слайд 9 — Вариант 2: Stacked Hero</title>
+<title>Слайд 9 — Вариант 2: Стадионы — чистый макет</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -33,52 +33,50 @@
     width: 1920px;
     height: 1080px;
     overflow: hidden;
+    background: linear-gradient(135deg, var(--midnight) 0%, var(--navy) 50%, var(--midnight) 100%);
   }
 
-  /* Hero background — top half Dushanbe Arena */
-  .hero-bg {
-    position: absolute;
-    top: -40px;
-    left: -40px;
-    right: -40px;
-    height: 640px;
-    background: url('../ЭРА AFC/04 Стадионы/Душанбе/Landscape/河对岸人视·日景.jpg') center center / cover no-repeat;
-    animation: cinematicDrift 20s ease-in-out infinite alternate;
-    z-index: 0;
-  }
-
-  .hero-bg::after {
+  /* Subtle radial glow */
+  .slide::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(180deg,
-        rgba(5,14,29,0.4) 0%,
-        rgba(5,14,29,0.2) 30%,
-        rgba(5,14,29,0.6) 70%,
-        rgba(5,14,29,1) 100%),
-      linear-gradient(90deg,
-        rgba(5,14,29,0.6) 0%,
-        transparent 30%,
-        transparent 70%,
-        rgba(5,14,29,0.6) 100%);
+      radial-gradient(ellipse 900px 500px at 960px 500px, rgba(215,166,61,0.04) 0%, transparent 70%);
     z-index: 1;
   }
 
-  @keyframes cinematicDrift {
-    0% { transform: scale(1.05) translate(0, 0); }
-    100% { transform: scale(1.08) translate(-20px, -10px); }
+  /* Gold particles */
+  .particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
   }
 
-  /* Bottom area bg */
-  .bottom-bg {
+  .particle {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 520px;
-    background: linear-gradient(180deg, var(--midnight) 0%, var(--navy) 100%);
-    z-index: 0;
+    width: 3px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat 6s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 30%; top: 60%; animation-delay: 1s; }
+  .particle:nth-child(3) { left: 50%; top: 30%; animation-delay: 2s; }
+  .particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 3s; }
+  .particle:nth-child(5) { left: 90%; top: 40%; animation-delay: 4s; }
+  .particle:nth-child(6) { left: 20%; top: 80%; animation-delay: 0.5s; }
+  .particle:nth-child(7) { left: 60%; top: 15%; animation-delay: 1.5s; }
+  .particle:nth-child(8) { left: 80%; top: 55%; animation-delay: 2.5s; }
+
+  @keyframes particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+    50% { opacity: 0.5; transform: translateY(-30px) scale(1.5); }
   }
 
   /* Letterbox bars */
@@ -169,49 +167,47 @@
   .fr-white { background: #FFFFFF; }
   .fr-green { background: #006600; }
 
-  /* Title over hero */
-  .hero-title {
+  /* Header — centered */
+  .header {
     position: absolute;
-    top: 200px;
-    left: 80px;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
     z-index: 10;
-    animation: fadeSlideUp 0.7s ease 0.8s both;
+    animation: fadeSlideUp 0.7s ease 0.6s both;
   }
 
   .tag {
     display: none !important;
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(215,166,61,0.12);
-    border: 1px solid rgba(215,166,61,0.25);
-    padding: 8px 20px;
-    border-radius: 4px;
-    backdrop-filter: blur(8px);
-    margin-bottom: 16px;
   }
 
   .main-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 58px;
+    font-size: 52px;
     line-height: 1.0;
     color: var(--white);
     letter-spacing: 3px;
     text-transform: uppercase;
-    text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+
+  .sub-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: rgba(246,244,239,0.6);
+    margin-top: 10px;
+    letter-spacing: 1px;
   }
 
   .divider {
     width: 80px;
     height: 3px;
     background: var(--gold);
-    margin: 14px 0;
-    animation: growWidth 0.6s ease 1.2s both;
+    margin: 14px auto 0;
+    animation: growWidth 0.6s ease 1.0s both;
   }
 
   @keyframes growWidth {
@@ -219,229 +215,146 @@
     to { width: 80px; }
   }
 
-  .sub-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 17px;
-    color: rgba(246,244,239,0.65);
-    max-width: 500px;
-    line-height: 1.5;
-  }
-
-  /* Floating spec pills over hero */
-  .spec-pills {
+  /* Cards container */
+  .cards-row {
     position: absolute;
-    top: 200px;
-    right: 120px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-end;
-  }
-
-  .pill {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(10,24,48,0.75);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(215,166,61,0.2);
-    border-radius: 40px;
-    padding: 10px 24px 10px 16px;
-    transition: border-color 0.3s ease;
-  }
-
-  .pill:hover {
-    border-color: rgba(215,166,61,0.5);
-  }
-
-  .pill:nth-child(1) { animation: fadeSlideUp 0.5s ease 1.2s both; }
-  .pill:nth-child(2) { animation: fadeSlideUp 0.5s ease 1.4s both; }
-  .pill:nth-child(3) { animation: fadeSlideUp 0.5s ease 1.6s both; }
-  .pill:nth-child(4) { animation: fadeSlideUp 0.5s ease 1.8s both; }
-  .pill:nth-child(5) { animation: fadeSlideUp 0.5s ease 2.0s both; }
-  .pill:nth-child(6) { animation: fadeSlideUp 0.5s ease 2.2s both; }
-
-  .pill-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(215,166,61,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .pill-icon svg {
-    width: 16px;
-    height: 16px;
-    fill: var(--gold);
-  }
-
-  .pill-text {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    color: var(--ivory);
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
-
-  .pill-text strong {
-    font-weight: 600;
-    color: var(--warm-gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    letter-spacing: 1px;
-    margin-right: 6px;
-  }
-
-  /* Big arena label floating */
-  .arena-label {
-    position: absolute;
-    top: 440px;
-    left: 80px;
-    z-index: 10;
-    animation: fadeSlideUp 0.7s ease 1.0s both;
-  }
-
-  .arena-name {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 30px;
-    color: var(--white);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-  }
-
-  .arena-name-en {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    color: rgba(246,244,239,0.5);
-    margin-top: 4px;
-  }
-
-  .arena-status {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(215,166,61,0.15);
-    border: 1px solid rgba(215,166,61,0.3);
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-top: 10px;
-  }
-
-  /* Bottom section: Key numbers left, Hissar card right */
-  .bottom-section {
-    position: absolute;
-    bottom: 100px;
+    top: 230px;
     left: 80px;
     right: 80px;
+    bottom: 180px;
     z-index: 10;
     display: flex;
     gap: 40px;
-    align-items: flex-end;
   }
 
-  /* Key numbers */
-  .key-numbers {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex-shrink: 0;
-    animation: fadeSlideUp 0.7s ease 1.6s both;
-  }
-
-  .key-num-block {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-  }
-
-  .key-big {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 52px;
-    color: var(--warm-gold);
-    letter-spacing: 2px;
-    line-height: 1;
-  }
-
-  .key-label {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 15px;
-    color: rgba(246,244,239,0.55);
-    line-height: 1.4;
-  }
-
-  .key-label strong {
-    color: var(--ivory);
-    font-weight: 500;
-  }
-
-  /* Hissar comparison card */
-  .hissar-card {
+  /* Stadium card */
+  .stadium-card {
     flex: 1;
-    max-width: 720px;
-    margin-left: auto;
-    background: rgba(10,24,48,0.75);
+    background: rgba(10,24,48,0.7);
     backdrop-filter: blur(16px);
     border: 1px solid rgba(215,166,61,0.15);
     border-radius: 16px;
     overflow: hidden;
     display: flex;
-    animation: fadeSlideUp 0.7s ease 1.8s both;
+    flex-direction: column;
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
 
-  .hissar-card:hover {
-    transform: translateY(-4px);
+  .stadium-card:hover {
     border-color: rgba(215,166,61,0.4);
+    transform: translateY(-4px);
   }
 
-  .hissar-photo {
-    width: 280px;
-    height: 220px;
-    object-fit: cover;
+  .stadium-card:first-child {
+    animation: fadeSlideUp 0.7s ease 1.0s both;
+  }
+
+  .stadium-card:last-child {
+    animation: fadeSlideUp 0.7s ease 1.3s both;
+  }
+
+  /* Gradient placeholder for stadium image */
+  .card-visual {
+    width: 100%;
+    height: 280px;
     flex-shrink: 0;
-    display: block;
+    position: relative;
+    overflow: hidden;
   }
 
-  .hissar-body {
+  .card-visual.dushanbe-bg {
+    background: linear-gradient(135deg, #0d2847 0%, #1a4a3a 30%, #0f6a4a 50%, #1a3a5c 75%, #0d2847 100%);
+  }
+
+  .card-visual.hissar-bg {
+    background: linear-gradient(135deg, #0a1830 0%, #162d50 30%, #1a3a6a 55%, #0d2040 80%, #050E1D 100%);
+  }
+
+  .card-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 55%, rgba(215,166,61,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 90% 60% at 30% 40%, rgba(255,255,255,0.03) 0%, transparent 60%);
+  }
+
+  .card-visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, transparent 0%, rgba(10,24,48,0.6) 100%);
+  }
+
+  .visual-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .visual-icon svg {
+    width: 56px;
+    height: 56px;
+    fill: rgba(215,166,61,0.18);
+  }
+
+  /* Capacity overlay on visual */
+  .capacity-overlay {
+    position: absolute;
+    bottom: 16px;
+    left: 24px;
+    z-index: 3;
+  }
+
+  .capacity-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    color: var(--warm-gold);
+    letter-spacing: 2px;
+    line-height: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .capacity-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(246,244,239,0.65);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* Card body */
+  .card-body {
     padding: 24px 28px;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    flex: 1;
   }
 
-  .hissar-header {
+  .card-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
+    justify-content: space-between;
+    margin-bottom: 18px;
   }
 
-  .hissar-name {
+  .card-name {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
-    font-size: 22px;
+    font-size: 24px;
     color: var(--white);
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
-  .hissar-name-en {
+  .card-name-en {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 14px;
@@ -449,89 +362,157 @@
     margin-top: 2px;
   }
 
-  .status-recon {
+  .card-location {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(246,244,239,0.5);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  .card-location svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--gold);
+    vertical-align: -2px;
+    margin-right: 4px;
+  }
+
+  .status-badge {
     display: inline-block;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .status-new {
+    color: var(--gold);
+    background: rgba(215,166,61,0.15);
+    border: 1px solid rgba(215,166,61,0.3);
+  }
+
+  .status-recon {
     color: #5BC0BE;
     background: rgba(91,192,190,0.12);
     border: 1px solid rgba(91,192,190,0.3);
-    padding: 4px 12px;
-    border-radius: 20px;
-    flex-shrink: 0;
   }
 
-  .hissar-specs {
+  /* Spec grid */
+  .spec-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px 20px;
+    gap: 12px 24px;
+    flex: 1;
   }
 
-  .hissar-spec-label {
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spec-label {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(246,244,239,0.4);
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
 
-  .hissar-spec-value {
+  .spec-value {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--ivory);
     letter-spacing: 0.5px;
   }
 
-  .hissar-spec-value.hl {
-    color: var(--warm-gold);
-    font-weight: 600;
+  /* Stats pills at bottom */
+  .stats-row {
+    position: absolute;
+    bottom: 100px;
+    left: 80px;
+    right: 80px;
+    z-index: 10;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    animation: fadeSlideUp 0.7s ease 1.8s both;
   }
 
-  /* Gold particles */
-  .particles {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    overflow: hidden;
-    pointer-events: none;
+  .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(10,24,48,0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 40px;
+    padding: 12px 24px 12px 16px;
+    transition: border-color 0.3s ease;
   }
 
-  .particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: var(--gold);
+  .stat-pill:hover {
+    border-color: rgba(215,166,61,0.4);
+  }
+
+  .stat-pill-icon {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    opacity: 0;
-    animation: particleFloat 6s ease-in-out infinite;
+    background: rgba(215,166,61,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
-  .particle:nth-child(1) { left: 15%; top: 65%; animation-delay: 0s; }
-  .particle:nth-child(2) { left: 35%; top: 75%; animation-delay: 1.2s; }
-  .particle:nth-child(3) { left: 55%; top: 70%; animation-delay: 2.4s; }
-  .particle:nth-child(4) { left: 75%; top: 80%; animation-delay: 0.8s; }
-  .particle:nth-child(5) { left: 88%; top: 68%; animation-delay: 3.0s; }
-  .particle:nth-child(6) { left: 45%; top: 85%; animation-delay: 1.8s; }
+  .stat-pill-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--gold);
+  }
 
-  @keyframes particleFloat {
-    0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
-    50% { opacity: 0.5; transform: translateY(-25px) scale(1.4); }
+  .stat-pill-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--warm-gold);
+    letter-spacing: 1px;
+  }
+
+  .stat-pill-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(246,244,239,0.6);
+    letter-spacing: 0.5px;
   }
 
   /* Bottom info */
-  .bottom-info {
+  .bottom-info-left {
     position: absolute;
-    bottom: 90px;
+    bottom: 100px;
+    left: 80px;
+    z-index: 20;
+    animation: fadeIn 1s ease 2.2s both;
+  }
+
+  .bottom-info-right {
+    position: absolute;
+    bottom: 100px;
     right: 80px;
     z-index: 20;
     text-align: right;
-    animation: fadeIn 1s ease 2.6s both;
+    animation: fadeIn 1s ease 2.2s both;
   }
 
   .fft-name {
@@ -567,12 +548,10 @@
 <body>
 <div class="slide">
 
-  <!-- Hero background -->
-  <div class="hero-bg"></div>
-  <div class="bottom-bg"></div>
-
   <!-- Gold particles -->
   <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
     <div class="particle"></div>
     <div class="particle"></div>
     <div class="particle"></div>
@@ -603,102 +582,127 @@
     <div class="fr-green"></div>
   </div>
 
-  <!-- Title over hero -->
-  <div class="hero-title">
+  <!-- Header — centered -->
+  <div class="header">
     <div class="tag">Match Venues</div>
     <h1 class="main-title">СТАДИОНЫ</h1>
-    <div class="divider"></div>
     <p class="sub-title">Два объекта мирового класса</p>
+    <div class="divider"></div>
   </div>
 
-  <!-- Floating spec pills -->
-  <div class="spec-pills">
-    <div class="pill">
-      <div class="pill-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-      <span class="pill-text"><strong>30 062</strong> основная вместимость</span>
-    </div>
-    <div class="pill">
-      <div class="pill-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2V7h-4v2h2z"/></svg></div>
-      <span class="pill-text"><strong>105 × 68 м</strong> гибридный газон</span>
-    </div>
-    <div class="pill">
-      <div class="pill-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
-      <span class="pill-text"><strong>792</strong> VIP мест, <strong>34</strong> ложи</span>
-    </div>
-    <div class="pill">
-      <div class="pill-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm10 0h2v2h-2zm-6-4h8v2h-2z"/></svg></div>
-      <span class="pill-text"><strong>72</strong> пресса, <strong>600 м²</strong> медиа</span>
-    </div>
-    <div class="pill">
-      <div class="pill-icon"><svg viewBox="0 0 24 24"><path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg></div>
-      <span class="pill-text"><strong>150</strong> мест для МГН + 150 сопровождающих</span>
-    </div>
-    <div class="pill">
-      <div class="pill-icon"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></div>
-      <span class="pill-text"><strong>FIFA Cat. B</strong> освещение</span>
-    </div>
-  </div>
+  <!-- Two stadium cards side by side -->
+  <div class="cards-row">
 
-  <!-- Arena label over photo -->
-  <div class="arena-label">
-    <div class="arena-name">Душанбе Арена</div>
-    <div class="arena-name-en">Tajikistan National Stadium &middot; Новое строительство</div>
-    <div class="arena-status">до 40 000 мест</div>
-  </div>
-
-  <!-- Bottom section -->
-  <div class="bottom-section">
-
-    <!-- Key numbers left -->
-    <div class="key-numbers">
-      <div class="key-num-block">
-        <span class="key-big">55 000+</span>
-        <span class="key-label"><strong>Общая вместимость</strong><br>два стадиона</span>
-      </div>
-      <div class="key-num-block">
-        <span class="key-big">2</span>
-        <span class="key-label"><strong>Арены мирового класса</strong><br>новое строительство + реконструкция</span>
-      </div>
-    </div>
-
-    <!-- Hissar comparison card -->
-    <div class="hissar-card">
-      <img class="hissar-photo" src="../ЭРА AFC/04 Стадионы/Душанбе/Landscape/夜景鸟瞰.jpg" alt="Стадион Гиссар">
-      <div class="hissar-body">
-        <div class="hissar-header">
-          <div>
-            <div class="hissar-name">Стадион «Гиссар»</div>
-            <div class="hissar-name-en">Hissar Stadium</div>
-          </div>
-          <span class="status-recon">Реконструкция</span>
+    <!-- Card 1: Istiqlol / Dushanbe Arena -->
+    <div class="stadium-card">
+      <div class="card-visual dushanbe-bg">
+        <div class="visual-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+        <div class="capacity-overlay">
+          <div class="capacity-number">30 000</div>
+          <div class="capacity-label">мест вместимость</div>
         </div>
-        <div class="hissar-specs">
+      </div>
+      <div class="card-body">
+        <div class="card-header">
           <div>
-            <div class="hissar-spec-label">Вместимость</div>
-            <div class="hissar-spec-value hl">25 000</div>
+            <div class="card-name">Стадион «Истиклол»</div>
+            <div class="card-name-en">Istiqlol Stadium</div>
+            <div class="card-location"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Душанбе</div>
           </div>
-          <div>
-            <div class="hissar-spec-label">Статус</div>
-            <div class="hissar-spec-value">Реконструкция</div>
+          <span class="status-badge status-new">Новое строительство</span>
+        </div>
+        <div class="spec-grid">
+          <div class="spec-item">
+            <span class="spec-label">Расширение</span>
+            <span class="spec-value">до 40 000</span>
           </div>
-          <div>
-            <div class="hissar-spec-label">Роль</div>
-            <div class="hissar-spec-value">Групповой этап</div>
+          <div class="spec-item">
+            <span class="spec-label">Поле</span>
+            <span class="spec-value">105 × 68 м</span>
           </div>
-          <div>
-            <div class="hissar-spec-label">Формат</div>
-            <div class="hissar-spec-value">Матчи группового этапа</div>
+          <div class="spec-item">
+            <span class="spec-label">Покрытие</span>
+            <span class="spec-value">Гибридный газон</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">VIP</span>
+            <span class="spec-value">792 мест, 34 ложи</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Пресса</span>
+            <span class="spec-value">72 места</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Освещение</span>
+            <span class="spec-value">FIFA Cat. B</span>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Card 2: Hissar Stadium -->
+    <div class="stadium-card">
+      <div class="card-visual hissar-bg">
+        <div class="visual-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+        <div class="capacity-overlay">
+          <div class="capacity-number">25 000</div>
+          <div class="capacity-label">мест (план)</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-header">
+          <div>
+            <div class="card-name">Стадион «Гиссар»</div>
+            <div class="card-name-en">Hissar Stadium</div>
+            <div class="card-location"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Гиссар</div>
+          </div>
+          <span class="status-badge status-recon">Реконструкция</span>
+        </div>
+        <div class="spec-grid">
+          <div class="spec-item">
+            <span class="spec-label">Статус</span>
+            <span class="spec-value">Реконструкция</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Роль</span>
+            <span class="spec-value">Групповой этап</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Поле</span>
+            <span class="spec-value">105 × 68 м</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Формат</span>
+            <span class="spec-value">Матчи группового этапа</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Bottom info -->
-  <div class="bottom-info">
-    <div class="fft-name">Федерация футбола Таджикистана</div>
-    <div class="date">Март 2026 &middot; Душанбе</div>
+  <!-- Stats pills at bottom center -->
+  <div class="stats-row">
+    <div class="stat-pill">
+      <div class="stat-pill-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+      <span class="stat-pill-number">55 000+</span>
+      <span class="stat-pill-label">общая вместимость</span>
+    </div>
+    <div class="stat-pill">
+      <div class="stat-pill-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+      <span class="stat-pill-number">2</span>
+      <span class="stat-pill-label">арены мирового класса</span>
+    </div>
+    <div class="stat-pill">
+      <div class="stat-pill-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg></div>
+      <span class="stat-pill-number">105 × 68</span>
+      <span class="stat-pill-label">размер поля (м)</span>
+    </div>
+    <div class="stat-pill">
+      <div class="stat-pill-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+      <span class="stat-pill-number">792</span>
+      <span class="stat-pill-label">VIP мест</span>
+    </div>
   </div>
 
 </div>

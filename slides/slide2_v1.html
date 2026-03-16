@@ -151,12 +151,14 @@
     right: 60px;
     z-index: 10;
     animation: fadeIn 1.2s ease 0.8s both;
+    -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+    mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
   }
 
   .map-area svg {
     width: 820px;
     height: 560px;
-    filter: drop-shadow(0 8px 40px rgba(0,0,0,0.5));
+    overflow: visible;
   }
 
   /* Content — left side */
@@ -567,8 +569,7 @@
       <circle cx="108" cy="338" r="2.5" fill="rgba(246,244,239,0.35)"/>
       <text x="108" y="330" fill="rgba(246,244,239,0.25)" font-family="Inter, sans-serif" font-size="7" font-weight="400" text-anchor="middle">АШХАБАД</text>
 
-      <!-- Map vignette overlay -->
-      <rect x="0" y="0" width="900" height="620" fill="url(#mapVignette)"/>
+      <!-- Map vignette overlay (removed for seamless blending) -->
     </svg>
   </div>
 

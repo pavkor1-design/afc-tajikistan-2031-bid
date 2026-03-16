@@ -12,7 +12,7 @@
   :root { --midnight: #050E1D; --navy: #0A1830; --gold: #D7A63D; --warm-gold: #E8BF5A; --light-gold: #F2D98A; --ivory: #F6F4EF; --white: #FFFFFF; }
   body { width: 1920px; height: 1080px; overflow: hidden; font-family: 'Inter', sans-serif; background: var(--midnight); }
   .slide { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
-  .bg { position: absolute; inset: -40px; background: url('../ЭРА AFC/04 Стадионы/Душанбе/Landscape/日景鸟瞰.jpg') center center / cover no-repeat; animation: cinematicDrift 20s ease-in-out infinite alternate; z-index: 0; }
+  .bg { position: absolute; inset: -40px; background: linear-gradient(to bottom, #0a1628 0%, #0f2240 15%, #16213e 30%, #1a1a2e 45%, #2a1a3a 55%, #3d2044 62%, #6b3a5a 70%, #c27840 78%, #d4924a 83%, #e8a84c 88%, #d07a38 93%, #1a1a2e 100%) center center / cover no-repeat; animation: cinematicDrift 20s ease-in-out infinite alternate; z-index: 0; }
   .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(5,14,29,0.95) 0%, rgba(5,14,29,0.7) 30%, rgba(5,14,29,0.4) 50%, rgba(5,14,29,0.6) 70%, rgba(5,14,29,0.85) 100%); z-index: 1; }
   @keyframes cinematicDrift { 0% { transform: scale(1.05); } 100% { transform: scale(1.1) translate(-15px, -8px); } }
   .letterbox-top { position: absolute; top: 0; left: 0; right: 0; height: 80px; background: var(--midnight); z-index: 15; }
@@ -25,8 +25,7 @@
   .flag-ribbon { position: absolute; top: 100px; right: 80px; z-index: 20; display: flex; flex-direction: column; width: 8px; height: 120px; border-radius: 4px; overflow: hidden; animation: fadeIn 1s ease 0.7s both; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
   .flag-ribbon div { flex: 1; } .fr-red { background: #CC0000; } .fr-white { background: #FFFFFF; } .fr-green { background: #006600; }
   .title-block { position: absolute; top: 100px; left: 0; right: 0; text-align: center; z-index: 10; animation: fadeSlideUp 0.8s ease 0.8s both; }
-  .tag { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.25); padding: 8px 20px; border-radius: 4px; margin-bottom: 16px; }
-    display: none !important;
+  .tag { display: none !important; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); background: rgba(215,166,61,0.12); border: 1px solid rgba(215,166,61,0.25); padding: 8px 20px; border-radius: 4px; margin-bottom: 16px; }
   .main-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 56px; color: var(--white); letter-spacing: 3px; text-transform: uppercase; text-shadow: 0 4px 40px rgba(0,0,0,0.6); }
   .divider-center { width: 80px; height: 3px; background: var(--gold); margin: 16px auto; animation: growWidth 0.6s ease 1.2s both; }
   @keyframes growWidth { from { width: 0; } to { width: 80px; } }
