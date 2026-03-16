@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 14 — Размещение и гостеприимство</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  /* Radial gold glow */
+  .bg-glow {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(215,166,61,0.04) 0%, transparent 70%);
+  }
+
+  /* Grid overlay */
+  .grid-overlay {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 80%);
+  }
+
+  /* Letterbox */
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+  .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column;
+    width: 8px; height: 120px; border-radius: 4px; overflow: hidden;
+    animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Title */
+  .title-block {
+    position: absolute; top: 100px; left: 80px;
+    z-index: 10;
+    animation: fadeSlideUp 0.7s ease 0.4s both;
+  }
+  .tag { display: none !important; }
+  .main-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 42px; line-height: 1.1; color: var(--white);
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .divider {
+    width: 80px; height: 3px; background: var(--gold);
+    margin: 12px 0; animation: growWidth 0.6s ease 1s both;
+  }
+  @keyframes growWidth { from { width: 0; } to { width: 80px; } }
+  .subtitle-text {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 15px; color: rgba(246,244,239,0.6); max-width: 600px;
+  }
+
+  /* Stats row */
+  .stats-row {
+    position: absolute; top: 224px; left: 80px; right: 80px;
+    z-index: 10;
+    display: flex; justify-content: space-between;
+    animation: fadeSlideUp 0.6s ease 0.8s both;
+  }
+
+  .stat-item {
+    text-align: center; flex: 1;
+    padding: 20px 16px;
+    position: relative;
+  }
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute; right: 0; top: 20%; bottom: 20%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.2), transparent);
+  }
+
+  .stat-number {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 56px; color: var(--warm-gold);
+    line-height: 1; margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .stat-label {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 14px; color: rgba(246,244,239,0.55);
+    letter-spacing: 0.5px; line-height: 1.3;
+  }
+  .stat-sub {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 12px; color: rgba(215,166,61,0.5);
+    margin-top: 4px;
+  }
+
+  /* Hotel cards */
+  .hotel-cards {
+    position: absolute; top: 400px; left: 80px; right: 80px;
+    z-index: 10;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  .hotel-card {
+    background: rgba(10,24,48,0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .hotel-card:hover {
+    border-color: rgba(215,166,61,0.4);
+    transform: translateY(-4px);
+  }
+  .hotel-card:nth-child(1) { animation: fadeSlideUp 0.5s ease 1.0s both; }
+  .hotel-card:nth-child(2) { animation: fadeSlideUp 0.5s ease 1.2s both; }
+  .hotel-card:nth-child(3) { animation: fadeSlideUp 0.5s ease 1.4s both; }
+
+  .hotel-img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: filter 0.3s ease;
+  }
+  .hotel-card:hover .hotel-img {
+    filter: brightness(1);
+  }
+
+  .hotel-info {
+    padding: 20px 24px 22px;
+  }
+  .hotel-name {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 20px; color: var(--white);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hotel-meta {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .hotel-stars {
+    font-size: 14px; color: var(--warm-gold);
+    letter-spacing: 2px;
+  }
+  .hotel-rooms {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 14px; color: rgba(246,244,239,0.55);
+  }
+
+  /* Category bar */
+  .category-bar {
+    position: absolute; bottom: 100px; left: 80px; right: 80px;
+    z-index: 20;
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+    animation: fadeSlideUp 0.7s ease 1.8s both;
+  }
+
+  .category-item {
+    background: rgba(10,24,48,0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(215,166,61,0.12);
+    border-radius: 10px;
+    padding: 16px 20px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+  }
+  .category-item:hover { border-color: rgba(215,166,61,0.35); }
+
+  .cat-label {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 16px; color: var(--warm-gold);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cat-desc {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 13px; color: rgba(246,244,239,0.5);
+  }
+
+  /* Bottom info */
+  .bottom-strip {
+    position: absolute; bottom: 18px; right: 80px; z-index: 20;
+    text-align: right; animation: fadeIn 1s ease 2.4s both;
+  }
+  .fft-name {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: 14px; color: rgba(246,244,239,0.45);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .date {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 14px; color: rgba(215,166,61,0.5); letter-spacing: 3px;
+  }
+
+  /* Gold particles */
+  .particles {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat 6s ease-in-out infinite;
+  }
+  .particle:nth-child(1) { top: 25%; left: 8%; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 55%; left: 25%; animation-delay: 1.5s; }
+  .particle:nth-child(3) { top: 35%; left: 65%; animation-delay: 3s; }
+  .particle:nth-child(4) { top: 75%; left: 88%; animation-delay: 4.5s; }
+  .particle:nth-child(5) { top: 18%; left: 50%; animation-delay: 2s; }
+  @keyframes particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 0.5; transform: translateY(-30px); }
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Background glow -->
+  <div class="bg-glow"></div>
+
+  <!-- Grid overlay -->
+  <div class="grid-overlay"></div>
+
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle" style="left:38%; top:10%; animation-delay:1s; animation-duration:7.5s;"></div>
+    <div class="particle" style="left:82%; top:42%; animation-delay:2.8s; animation-duration:8.5s;"></div>
+    <div class="particle" style="left:15%; top:70%; animation-delay:4s; animation-duration:7s;"></div>
+  </div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <div class="tag">Гостиницы</div>
+    <h1 class="main-title">Размещение и гостеприимство</h1>
+    <div class="divider"></div>
+    <p class="subtitle-text">Международные сети и растущий гостиничный фонд</p>
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-number">37</div>
+      <div class="stat-label">действующих гостиниц</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2 119</div>
+      <div class="stat-label">номеров</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">3 756</div>
+      <div class="stat-label">мест</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">5</div>
+      <div class="stat-label">строящихся гостиниц</div>
+      <div class="stat-sub">+699 номеров</div>
+    </div>
+  </div>
+
+  <!-- Hotel cards -->
+  <div class="hotel-cards">
+    <div class="hotel-card">
+      <img class="hotel-img" src="img/hyatt-exterior.jpg" alt="Hyatt Regency Dushanbe">
+      <div class="hotel-info">
+        <div class="hotel-name">Hyatt Regency Dushanbe</div>
+        <div class="hotel-meta">
+          <span class="hotel-stars">★★★★★</span>
+          <span class="hotel-rooms">200+ номеров</span>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <img class="hotel-img" src="img/hyatt-room.jpg" alt="Radisson Collection">
+      <div class="hotel-info">
+        <div class="hotel-name">Radisson Collection</div>
+        <div class="hotel-meta">
+          <span class="hotel-stars">★★★★★</span>
+          <span class="hotel-rooms">200+ номеров</span>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <img class="hotel-img" src="img/wyndham-lobby.jpg" alt="Wyndham Dushanbe">
+      <div class="hotel-info">
+        <div class="hotel-name">Wyndham Dushanbe</div>
+        <div class="hotel-meta">
+          <span class="hotel-stars">★★★★</span>
+          <span class="hotel-rooms">150+ номеров</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category bar -->
+  <div class="category-bar">
+    <div class="category-item">
+      <div class="cat-label">Команды</div>
+      <div class="cat-desc">5★ отели</div>
+    </div>
+    <div class="category-item">
+      <div class="cat-label">AFC / VIP</div>
+      <div class="cat-desc">Hyatt, Radisson</div>
+    </div>
+    <div class="category-item">
+      <div class="cat-label">Медиа</div>
+      <div class="cat-desc">4★ отели</div>
+    </div>
+    <div class="category-item">
+      <div class="cat-label">Гости</div>
+      <div class="cat-desc">3-4★ отели</div>
+    </div>
+  </div>
+
+  <!-- Bottom info -->
+  <div class="bottom-strip">
+    <div class="fft-name">Федерация футбола Таджикистана</div>
+    <div class="date">Март 2026 &middot; Душанбе</div>
+  </div>
+
+</div>
+</body>
+</html>

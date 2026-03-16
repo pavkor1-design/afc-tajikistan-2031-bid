@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 21 — Почему Таджикистан?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+  }
+
+  /* Background */
+  .bg-image {
+    position: absolute;
+    inset: 0;
+    background: url('img/stadium-night-aerial.jpg') center center / cover no-repeat;
+    animation: cinematicDrift 30s ease-in-out infinite alternate;
+  }
+
+  @keyframes cinematicDrift {
+    from { transform: scale(1.02) translateX(0); }
+    to { transform: scale(1.07) translateX(-10px); }
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(5,14,29,0.92) 0%,
+      rgba(5,14,29,0.88) 30%,
+      rgba(5,14,29,0.85) 70%,
+      rgba(5,14,29,0.95) 100%);
+    z-index: 2;
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(5,14,29,0.6) 0%, transparent 20%),
+      linear-gradient(-90deg, rgba(5,14,29,0.6) 0%, transparent 20%);
+    z-index: 2;
+  }
+
+  /* Tags hidden */
+  .tag, tag { display: none !important; }
+
+  /* Letterbox bars */
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 20;
+  }
+
+  .letterbox-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 20;
+  }
+
+  .letterbox-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute;
+    top: 80px;
+    right: 80px;
+    width: 8px;
+    height: 120px;
+    z-index: 25;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flag-ribbon .red { flex: 1; background: #CC0000; }
+  .flag-ribbon .wht { flex: 1; background: #FFFFFF; }
+  .flag-ribbon .grn { flex: 1; background: #006600; }
+
+  /* Content area */
+  .content {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 80px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 100px 20px 100px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 24px;
+    animation: fadeSlideUp 0.8s ease-out both;
+  }
+
+  .title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.1;
+  }
+
+  .title span {
+    color: var(--gold);
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: rgba(246,244,239,0.6);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .gold-divider {
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--warm-gold), transparent);
+    margin-top: 14px;
+    animation: growWidth 1s ease-out 0.5s forwards;
+  }
+
+  @keyframes growWidth {
+    to { width: 120px; }
+  }
+
+  /* Cards container */
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  /* Thesis card */
+  .thesis-card {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background: rgba(10,24,48,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 12px;
+    padding: 22px 32px;
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeSlideUp 0.7s ease-out forwards;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .thesis-card:hover {
+    border-color: rgba(215,166,61,0.35);
+    background: rgba(10,24,48,0.85);
+  }
+
+  .thesis-card:nth-child(1) { animation-delay: 0.3s; }
+  .thesis-card:nth-child(2) { animation-delay: 0.5s; }
+  .thesis-card:nth-child(3) { animation-delay: 0.7s; }
+  .thesis-card:nth-child(4) { animation-delay: 0.9s; }
+  .thesis-card:nth-child(5) { animation-delay: 1.1s; }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .card-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--gold);
+    min-width: 52px;
+    text-align: center;
+    line-height: 1;
+    opacity: 0.85;
+  }
+
+  .card-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-body {
+    flex: 1;
+  }
+
+  .card-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: rgba(246,244,239,0.75);
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 22px;
+    right: 100px;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    animation: fadeIn 1s ease-out 1.5s both;
+  }
+
+  .bottom-strip-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: rgba(246,244,239,0.35);
+    letter-spacing: 0.5px;
+  }
+
+  .bottom-strip-sep {
+    width: 1px;
+    height: 12px;
+    background: rgba(215,166,61,0.25);
+  }
+
+  /* Gold particles */
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    z-index: 5;
+    animation: floatParticle 8s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) { left: 12%; top: 25%; animation-delay: 0s; animation-duration: 9s; }
+  .particle:nth-child(2) { left: 85%; top: 35%; animation-delay: 1.5s; animation-duration: 7s; }
+  .particle:nth-child(3) { left: 45%; top: 15%; animation-delay: 3s; animation-duration: 10s; }
+  .particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 2s; animation-duration: 8s; }
+  .particle:nth-child(5) { left: 25%; top: 80%; animation-delay: 4s; animation-duration: 9s; }
+  .particle:nth-child(6) { left: 55%; top: 50%; animation-delay: 1s; animation-duration: 11s; }
+  .particle:nth-child(7) { left: 90%; top: 20%; animation-delay: 5s; animation-duration: 8s; }
+
+  @keyframes floatParticle {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    15% { opacity: 0.5; }
+    50% { opacity: 0.3; transform: translateY(-30px) scale(1.5); }
+    85% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-60px) scale(1); }
+  }
+
+  /* Left accent line */
+  .accent-line {
+    position: absolute;
+    left: 80px;
+    top: 120px;
+    width: 2px;
+    height: 0;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    z-index: 10;
+    animation: growLine 1.2s ease-out 0.3s forwards;
+  }
+
+  @keyframes growLine {
+    to { height: 840px; }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- Background -->
+  <div class="bg-image"></div>
+  <div class="gradient-overlay"></div>
+  <div class="vignette"></div>
+
+  <!-- Particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <!-- Accent line -->
+  <div class="accent-line"></div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="red"></div>
+    <div class="wht"></div>
+    <div class="grn"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="header">
+      <div class="title">ПОЧЕМУ <span>ТАДЖИКИСТАН?</span></div>
+      <div class="subtitle">Не только соответствие — стратегический смысл для AFC</div>
+      <div class="gold-divider"></div>
+    </div>
+
+    <div class="cards">
+      <!-- 1 -->
+      <div class="thesis-card">
+        <div class="card-number">1</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4L23.09 13.26L33 14.27L25.81 20.47L27.82 30.18L20 25.77L12.18 30.18L14.19 20.47L7 14.27L16.91 13.26L20 4Z" fill="none" stroke="#D7A63D" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="18" r="4" fill="none" stroke="#E8BF5A" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Новая история</div>
+          <div class="card-desc">Первый турнир AFC в Центральной Азии. Историческое событие для региона и конфедерации. Новая глава азиатского футбола.</div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="thesis-card">
+        <div class="card-number">2</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="14" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+            <path d="M13 20L18 25L28 15" stroke="#E8BF5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Полное соответствие</div>
+          <div class="card-desc">Стадионы, инфраструктура, гостиницы и логистика — по стандартам AFC. Готовность подтверждена фактами и документами.</div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="thesis-card">
+        <div class="card-number">3</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 32V14L20 6L32 14V32H8Z" stroke="#D7A63D" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <rect x="16" y="22" width="8" height="10" stroke="#E8BF5A" stroke-width="1" fill="none"/>
+            <path d="M14 14H26" stroke="#E8BF5A" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Государственная поддержка</div>
+          <div class="card-desc">За заявкой стоит правительство Республики Таджикистан. Финансирование, гарантии и координация на высшем уровне.</div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="thesis-card">
+        <div class="card-number">4</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="15" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+            <ellipse cx="20" cy="20" rx="8" ry="15" stroke="#D7A63D" stroke-width="0.8" fill="none"/>
+            <path d="M5 20H35" stroke="#E8BF5A" stroke-width="0.8"/>
+            <path d="M8 12H32" stroke="#E8BF5A" stroke-width="0.5"/>
+            <path d="M8 28H32" stroke="#E8BF5A" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Новый рынок</div>
+          <div class="card-desc">10 миллионов новых болельщиков. Выход азиатского футбола в Центральную Азию. Расширение аудитории и географии AFC.</div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="thesis-card">
+        <div class="card-number">5</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L24 16H14L20 6Z" fill="none" stroke="#E8BF5A" stroke-width="1"/>
+            <path d="M11 16H29L32 20H8L11 16Z" fill="none" stroke="#D7A63D" stroke-width="1.5"/>
+            <path d="M8 20L6 34H34L32 20" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+            <path d="M16 24V30" stroke="#E8BF5A" stroke-width="1"/>
+            <path d="M20 22V30" stroke="#E8BF5A" stroke-width="1"/>
+            <path d="M24 24V30" stroke="#E8BF5A" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Наследие</div>
+          <div class="card-desc">Развитие инфраструктуры. Рост молодёжного футбола. Вдохновение для нового поколения. Долгосрочный эффект турнира.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <span class="bottom-strip-text">Федерация футбола Таджикистана</span>
+    <span class="bottom-strip-sep"></span>
+    <span class="bottom-strip-text">Март 2026 · Душанбе</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Слайд 15 — Инфраструктура города</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(5,14,29,0.85) 0%, rgba(10,24,48,0.92) 50%, rgba(5,14,29,0.95) 100%), url('img/avenue-rudaki.jpg') center/cover no-repeat;
+  }
+
+  /* Letterbox */
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+  .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute; top: 100px; right: 80px; z-index: 20;
+    display: flex; flex-direction: column;
+    width: 8px; height: 120px; border-radius: 4px; overflow: hidden;
+    animation: fadeIn 1s ease 0.5s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Tags */
+  .tags { display: none !important; }
+
+  /* Grid overlay */
+  .grid-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
+    pointer-events: none;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute; bottom: 18px; right: 80px; z-index: 20;
+    display: flex; align-items: center; gap: 20px;
+    animation: fadeIn 1s ease 1s both;
+  }
+  .bottom-strip span {
+    font-size: 11px; color: rgba(246,244,239,0.35);
+    letter-spacing: 2px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif; font-weight: 400;
+  }
+  .bottom-strip .divider {
+    width: 1px; height: 14px; background: rgba(215,166,61,0.2);
+  }
+
+  /* Particles */
+  .particle {
+    position: absolute; border-radius: 50%; z-index: 2;
+    background: var(--gold); opacity: 0;
+    animation: particleFloat 6s ease-in-out infinite;
+  }
+  .p1 { width: 3px; height: 3px; top: 20%; left: 12%; animation-delay: 0s; }
+  .p2 { width: 2px; height: 2px; top: 45%; left: 88%; animation-delay: 1.2s; }
+  .p3 { width: 4px; height: 4px; top: 70%; left: 25%; animation-delay: 2.5s; }
+  .p4 { width: 2px; height: 2px; top: 30%; left: 72%; animation-delay: 0.8s; }
+  .p5 { width: 3px; height: 3px; top: 60%; left: 55%; animation-delay: 3.5s; }
+  .p6 { width: 2px; height: 2px; top: 15%; left: 42%; animation-delay: 4.2s; }
+  .p7 { width: 3px; height: 3px; top: 80%; left: 78%; animation-delay: 1.8s; }
+
+  /* Title area */
+  .title-area {
+    position: absolute; top: 100px; left: 80px; z-index: 10;
+    animation: fadeSlideUp 0.8s ease 0.3s both;
+  }
+  .slide-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 48px; color: var(--white); text-transform: uppercase;
+    letter-spacing: 3px; line-height: 1.1;
+  }
+  .slide-title .gold { color: var(--gold); }
+  .slide-subtitle {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 16px; color: rgba(246,244,239,0.5);
+    letter-spacing: 4px; text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* Gold accent line under title */
+  .title-line {
+    width: 60px; height: 2px; background: var(--gold); margin-top: 16px;
+    animation: growWidth 0.6s ease 0.8s both;
+    transform-origin: left;
+  }
+
+  /* Flow grid */
+  .flow-grid {
+    position: absolute;
+    top: 280px; left: 80px; right: 80px;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 40px;
+    animation: fadeSlideUp 0.8s ease 0.5s both;
+  }
+
+  /* Flow node */
+  .flow-node {
+    background: rgba(10,24,48,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 12px;
+    padding: 32px 28px;
+    position: relative;
+    transition: border-color 0.3s ease;
+  }
+  .flow-node:hover {
+    border-color: rgba(215,166,61,0.35);
+  }
+
+  .node-number {
+    position: absolute; top: -1px; left: 28px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 13px; color: var(--midnight);
+    background: var(--gold);
+    padding: 4px 12px;
+    border-radius: 0 0 6px 6px;
+    letter-spacing: 1px;
+  }
+
+  .node-icon {
+    width: 48px; height: 48px; margin-bottom: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .node-icon svg {
+    width: 40px; height: 40px;
+  }
+
+  .node-title {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 20px; color: var(--white); text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+
+  .node-text {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 14px; color: rgba(246,244,239,0.6);
+    line-height: 1.7;
+  }
+
+  /* Connector lines (SVG overlay) */
+  .connectors {
+    position: absolute;
+    top: 280px; left: 80px; right: 80px;
+    height: 640px;
+    z-index: 9;
+    pointer-events: none;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes growWidth {
+    from { transform: scaleX(0); } to { transform: scaleX(1); }
+  }
+  @keyframes particleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    20% { opacity: 0.4; }
+    50% { opacity: 0.6; transform: translateY(-30px); }
+    80% { opacity: 0.3; }
+  }
+
+  /* Staggered node animation */
+  .flow-node:nth-child(1) { animation: fadeSlideUp 0.6s ease 0.6s both; }
+  .flow-node:nth-child(2) { animation: fadeSlideUp 0.6s ease 0.75s both; }
+  .flow-node:nth-child(3) { animation: fadeSlideUp 0.6s ease 0.9s both; }
+  .flow-node:nth-child(4) { animation: fadeSlideUp 0.6s ease 1.05s both; }
+  .flow-node:nth-child(5) { animation: fadeSlideUp 0.6s ease 1.2s both; }
+  .flow-node:nth-child(6) { animation: fadeSlideUp 0.6s ease 1.35s both; }
+
+  /* Arrow connectors between cards */
+  .arrow-row {
+    position: absolute;
+    z-index: 11;
+    pointer-events: none;
+  }
+  .arrow-row svg { overflow: visible; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="grid-overlay"></div>
+
+  <!-- Particles -->
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  <div class="particle p5"></div>
+  <div class="particle p6"></div>
+  <div class="particle p7"></div>
+
+  <!-- Letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-area">
+    <div class="slide-title">ИНФРАСТРУКТУРА <span class="gold">ГОРОДА</span></div>
+    <div class="slide-subtitle">Полный цикл поддержки турнира</div>
+    <div class="title-line"></div>
+  </div>
+
+  <!-- Connector SVG -->
+  <svg class="connectors" viewBox="0 0 1760 640" preserveAspectRatio="xMidYMid meet" style="position:absolute; top:280px; left:80px; width:1760px; height:640px; z-index:9; pointer-events:none;">
+    <!-- Row 1 horizontal connectors -->
+    <line x1="560" y1="155" x2="600" y2="155" stroke="rgba(215,166,61,0.3)" stroke-width="2" stroke-dasharray="6 4"/>
+    <polygon points="598,151 606,155 598,159" fill="rgba(215,166,61,0.3)"/>
+    <line x1="1150" y1="155" x2="1190" y2="155" stroke="rgba(215,166,61,0.3)" stroke-width="2" stroke-dasharray="6 4"/>
+    <polygon points="1188,151 1196,155 1188,159" fill="rgba(215,166,61,0.3)"/>
+    <!-- Row 2 horizontal connectors -->
+    <line x1="560" y1="475" x2="600" y2="475" stroke="rgba(215,166,61,0.3)" stroke-width="2" stroke-dasharray="6 4"/>
+    <polygon points="598,471 606,475 598,479" fill="rgba(215,166,61,0.3)"/>
+    <line x1="1150" y1="475" x2="1190" y2="475" stroke="rgba(215,166,61,0.3)" stroke-width="2" stroke-dasharray="6 4"/>
+    <polygon points="1188,471 1196,475 1188,479" fill="rgba(215,166,61,0.3)"/>
+    <!-- Vertical connector row1 to row2 (col 3 to col 1 of row 2) -->
+    <line x1="1480" y1="310" x2="1480" y2="340" stroke="rgba(215,166,61,0.3)" stroke-width="2" stroke-dasharray="6 4"/>
+    <line x1="1480" y1="340" x2="280" y2="340" stroke="rgba(215,166,61,0.3)" stroke-width="2" stroke-dasharray="6 4"/>
+    <line x1="280" y1="340" x2="280" y2="365" stroke="rgba(215,166,61,0.3)" stroke-width="2" stroke-dasharray="6 4"/>
+    <polygon points="276,363 280,371 284,363" fill="rgba(215,166,61,0.3)"/>
+  </svg>
+
+  <!-- Flow grid -->
+  <div class="flow-grid">
+    <!-- Node 1: Airport -->
+    <div class="flow-node">
+      <div class="node-number">01</div>
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4L6 20h6v16h24V20h6L24 4z" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M44 22L26 8V4l-2-1-2 1v4L4 22" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M8 40h32M12 44h24" stroke="#D7A63D" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M16 18l8-10 8 10" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M24 8v-4" stroke="#D7A63D" stroke-width="1.5"/>
+          <circle cx="24" cy="3" r="1.5" fill="#D7A63D"/>
+          <!-- Plane icon -->
+          <path d="M10 28l14-16 14 16" stroke="#D7A63D" stroke-width="0" fill="none"/>
+          <path d="M6 30l18-22 18 22" stroke="none"/>
+          <g transform="translate(8, 14) scale(0.65)">
+            <path d="M24 4C24 4 20 14 10 18L22 20V28L18 32V34L22 32V38L18 40V42L24 40L30 42V40L26 38V32L30 34V32L26 28V20L38 18C28 14 24 4 24 4Z" stroke="#D7A63D" stroke-width="2" fill="none"/>
+          </g>
+        </svg>
+      </div>
+      <div class="node-title">Аэропорт</div>
+      <div class="node-text">Международный аэропорт Душанбе.<br>Прямые рейсы из 15+ городов Азии.<br>VIP-терминал.</div>
+    </div>
+
+    <!-- Node 2: Transfer -->
+    <div class="flow-node">
+      <div class="node-number">02</div>
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="16" width="40" height="18" rx="4" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <circle cx="14" cy="37" r="4" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <circle cx="34" cy="37" r="4" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M4 24h40M10 16V10h12v6M36 16v-3h6v3" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <rect x="8" y="27" width="6" height="4" rx="1" stroke="#D7A63D" stroke-width="1"/>
+          <rect x="34" y="27" width="6" height="4" rx="1" stroke="#D7A63D" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="node-title">Трансфер</div>
+      <div class="node-text">Шаттлы аэропорт — отель — стадион.<br>Dedicated lanes. GPS-мониторинг.</div>
+    </div>
+
+    <!-- Node 3: Stadium -->
+    <div class="flow-node">
+      <div class="node-number">03</div>
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="24" cy="32" rx="20" ry="8" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M4 32V20c0-4.4 8.95-8 20-8s20 3.6 20 8v12" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <ellipse cx="24" cy="20" rx="20" ry="8" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M10 20v12M24 20v12M38 20v12" stroke="#D7A63D" stroke-width="1" stroke-dasharray="3 2"/>
+          <rect x="16" y="28" width="16" height="8" rx="1" stroke="#D7A63D" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+        </svg>
+      </div>
+      <div class="node-title">Стадион</div>
+      <div class="node-text">Last-mile логистика. Зонирование<br>входов. Парковка 5 000+ мест.</div>
+    </div>
+
+    <!-- Node 4: Media -->
+    <div class="flow-node">
+      <div class="node-number">04</div>
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="10" width="36" height="22" rx="3" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <circle cx="24" cy="21" r="6" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <circle cx="24" cy="21" r="2" fill="#D7A63D"/>
+          <path d="M14 36h20M20 32v4M28 32v4" stroke="#D7A63D" stroke-width="1.5"/>
+          <path d="M36 6l6 4v10l-6 4" stroke="#D7A63D" stroke-width="1.2" fill="none"/>
+          <circle cx="8" cy="8" r="2" fill="#D7A63D" opacity="0.6"/>
+          <line x1="8" y1="4" x2="8" y2="2" stroke="#D7A63D" stroke-width="1"/>
+          <line x1="4" y1="8" x2="2" y2="8" stroke="#D7A63D" stroke-width="1"/>
+          <line x1="5.5" y1="5.5" x2="4" y2="4" stroke="#D7A63D" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="node-title">Медиа-сервисы</div>
+      <div class="node-text">Broadcast compound. Пресс-центр.<br>Высокоскоростной интернет.<br>IBC support.</div>
+    </div>
+
+    <!-- Node 5: VIP -->
+    <div class="flow-node">
+      <div class="node-number">05</div>
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4L6 18v22h36V18L24 4z" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M24 4l18 14H6L24 4z" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <rect x="18" y="26" width="12" height="14" rx="1" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <line x1="24" y1="26" x2="24" y2="40" stroke="#D7A63D" stroke-width="1"/>
+          <circle cx="24" cy="14" r="3" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M21 14l3-2 3 2" stroke="#D7A63D" stroke-width="1"/>
+          <path d="M16 22h16" stroke="#D7A63D" stroke-width="1" stroke-dasharray="3 2"/>
+          <!-- Lock -->
+          <rect x="20" y="30" width="8" height="6" rx="1" stroke="#D7A63D" stroke-width="1.2" fill="none"/>
+          <path d="M22 30v-2a2 2 0 014 0v2" stroke="#D7A63D" stroke-width="1.2" fill="none"/>
+          <circle cx="24" cy="33.5" r="1" fill="#D7A63D"/>
+        </svg>
+      </div>
+      <div class="node-title">VIP маршрут</div>
+      <div class="node-text">Отдельная логистика VIP/VVIP.<br>Протокольные коридоры. Эскорт.</div>
+    </div>
+
+    <!-- Node 6: Medical -->
+    <div class="flow-node">
+      <div class="node-number">06</div>
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="12" width="32" height="28" rx="4" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <path d="M20 12V8h8v4" stroke="#D7A63D" stroke-width="1.5" fill="none"/>
+          <line x1="24" y1="20" x2="24" y2="34" stroke="#D7A63D" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17" y1="27" x2="31" y2="27" stroke="#D7A63D" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="38" cy="10" r="5" stroke="#D7A63D" stroke-width="1.2" fill="none"/>
+          <path d="M38 7v6M35 10h6" stroke="#D7A63D" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="node-title">Медицина</div>
+      <div class="node-text">3 клиники. Ambulance routing.<br>Координация экстренной помощи.</div>
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <span>Федерация футбола Таджикистана</span>
+    <div class="divider"></div>
+    <span>Март 2026 · Душанбе</span>
+  </div>
+
+  <!-- Tags -->
+  <div class="tags">slide15, инфраструктура города, дополнительная инфраструктура, аэропорт, трансфер, медиа</div>
+</div>
+</body>
+</html>
