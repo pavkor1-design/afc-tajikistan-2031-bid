@@ -140,8 +140,12 @@
   /* Table container */
   .table-container {
     position: absolute;
-    top: 260px; left: 80px; right: 80px;
+    top: 250px; left: 80px; right: 80px;
+    bottom: 100px;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     animation: fadeSlideUp 0.8s ease 0.5s both;
   }
 
@@ -158,11 +162,16 @@
     border: 1px solid rgba(215,166,61,0.12);
   }
 
+  .obligations-table {
+    flex: 1;
+    min-height: 0;
+  }
+
   .obligations-table thead th {
     font-family: 'Oswald', sans-serif; font-weight: 600;
-    font-size: 16px; color: var(--gold); text-transform: uppercase;
+    font-size: 14px; color: var(--gold); text-transform: uppercase;
     letter-spacing: 3px;
-    padding: 24px 36px;
+    padding: 14px 32px;
     text-align: left;
     border-bottom: 1px solid rgba(215,166,61,0.15);
     background: rgba(215,166,61,0.04);
@@ -174,9 +183,10 @@
   }
 
   .obligations-table tbody td {
-    padding: 20px 36px;
+    padding: 8px 32px;
     border-bottom: 1px solid rgba(215,166,61,0.06);
     vertical-align: middle;
+    font-size: 15px;
   }
   .obligations-table tbody tr:last-child td {
     border-bottom: none;
@@ -210,12 +220,12 @@
   /* Checkmark */
   .check {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 32px; height: 32px;
+    width: 28px; height: 28px;
     border-radius: 50%;
     background: rgba(215,166,61,0.1);
     border: 1.5px solid rgba(215,166,61,0.3);
   }
-  .check svg { width: 16px; height: 16px; }
+  .check svg { width: 14px; height: 14px; }
 
   /* Empty cell dash */
   .dash {
@@ -240,15 +250,13 @@
 
   /* Bottom guarantee bar */
   .guarantee-bar {
-    position: absolute;
-    bottom: 100px; left: 80px; right: 80px;
-    z-index: 10;
+    flex-shrink: 0;
     background: rgba(10,24,48,0.7);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(215,166,61,0.15);
     border-radius: 12px;
-    padding: 22px 36px;
+    padding: 14px 32px;
     display: flex;
     align-items: center;
     gap: 24px;
@@ -393,7 +401,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
 
   <!-- Guarantee bar -->
   <div class="guarantee-bar">
@@ -407,7 +414,7 @@
       <strong>100% локальных обязательств — государственное финансирование.</strong>
       Бюджет утверждён на уровне правительства Республики Таджикистан.
     </div>
-  </div>
+  </div><!-- end table-container -->
 
   <!-- Bottom strip -->
   <div class="bottom-strip">
