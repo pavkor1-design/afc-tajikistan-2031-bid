@@ -391,59 +391,106 @@
     });
   }
 
-  /* ===== Cloud Comment System ===== */
-  const BLOB_ID = '019cf405-89fb-7d77-9591-48d25f9e2263';
-  const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/' + BLOB_ID;
+  /* ===== Cloud Comment System (GitHub Gist) ===== */
+  const GIST_ID = '3391065e9da708a576cc767fd6196e3a';
+  const GIST_RAW = 'https://gist.githubusercontent.com/pavkor1-design/' + GIST_ID + '/raw/comments.json';
+  const GIST_API = 'https://api.github.com/gists/' + GIST_ID;
 
   window.addEventListener('load', async () => {
     switchTab(1);
     scaleIframes();
-    await cloudLoad();         // load cloud → localStorage → render
+    await cloudLoad();
     renderAllComments();
   });
   window.addEventListener('resize', scaleIframes);
 
-  /* ---- Cloud helpers ---- */
+  /* ---- Cloud: READ from gist (no auth, CORS ok) ---- */
   async function cloudLoad() {
     const st = document.getElementById('sync-status');
     try {
       if (st) { st.className = 'sync-status'; st.textContent = 'Загрузка…'; }
-      const res = await fetch(BLOB_URL, { headers: { 'Accept': 'application/json' } });
+      const res = await fetch(GIST_RAW + '?t=' + Date.now());
       if (!res.ok) throw new Error(res.status);
       const cloud = await res.json();
-      // merge: cloud wins, but keep local-only keys
-      Object.keys(cloud).forEach(k => localStorage.setItem(k, JSON.stringify(cloud[k])));
-      if (st) { st.className = 'sync-status ok'; st.textContent = '✓ Загружено из облака — ' + new Date().toLocaleTimeString('ru-RU'); }
+      // merge cloud into localStorage
+      Object.keys(cloud).forEach(k => {
+        if (k.startsWith('comments_')) {
+          const local = JSON.parse(localStorage.getItem(k) || '[]');
+          const merged = mergeComments(local, cloud[k]);
+          localStorage.setItem(k, JSON.stringify(merged));
+        }
+      });
+      if (st) { st.className = 'sync-status ok'; st.textContent = '✓ Облако загружено — ' + new Date().toLocaleTimeString('ru-RU'); }
     } catch (e) {
-      if (st) { st.className = 'sync-status err'; st.textContent = '✗ Ошибка загрузки: ' + e.message; }
+      if (st) { st.className = 'sync-status err'; st.textContent = '✗ Ошибка: ' + e.message; }
     }
   }
 
+  function mergeComments(local, cloud) {
+    const seen = new Set();
+    const all = [];
+    [...cloud, ...local].forEach(c => {
+      const id = c.name + '|' + c.text + '|' + c.date;
+      if (!seen.has(id)) { seen.add(id); all.push(c); }
+    });
+    all.sort((a, b) => new Date(a.date) - new Date(b.date));
+    return all;
+  }
+
+  /* ---- Cloud: WRITE to gist (needs GitHub PAT) ---- */
   async function cloudSave() {
     const st = document.getElementById('sync-status');
-    const btn = document.getElementById('sync-btn');
+    const btn = document.getElementById('sync-save-btn');
+    let token = localStorage.getItem('gh_pat');
+    if (!token) {
+      token = prompt('Введите GitHub Personal Access Token (с правом gist).\nСоздайте на: github.com/settings/tokens\nТокен сохранится локально.');
+      if (!token) return;
+      localStorage.setItem('gh_pat', token);
+    }
     try {
       if (btn) btn.disabled = true;
-      if (st) { st.className = 'sync-status'; st.textContent = 'Сохранение…'; }
-      // collect all comment keys from DOM
-      const data = {};
-      document.querySelectorAll('.comments-section').forEach(s => {
-        const key = s.dataset.key;
-        const val = JSON.parse(localStorage.getItem(key) || '[]');
-        if (val.length) data[key] = val;
+      if (st) { st.className = 'sync-status'; st.textContent = 'Сохранение в облако…'; }
+      const data = collectAllComments();
+      const res = await fetch(GIST_API, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({ files: { 'comments.json': { content: JSON.stringify(data, null, 2) } } })
       });
-      const res = await fetch(BLOB_URL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      });
+      if (res.status === 401) {
+        localStorage.removeItem('gh_pat');
+        throw new Error('Неверный токен. Попробуйте снова.');
+      }
       if (!res.ok) throw new Error(res.status);
-      if (st) { st.className = 'sync-status ok'; st.textContent = '✓ Синхронизировано — ' + new Date().toLocaleTimeString('ru-RU'); }
+      if (st) { st.className = 'sync-status ok'; st.textContent = '✓ Сохранено в облако — ' + new Date().toLocaleTimeString('ru-RU'); }
     } catch (e) {
-      if (st) { st.className = 'sync-status err'; st.textContent = '✗ Ошибка: ' + e.message; }
+      if (st) { st.className = 'sync-status err'; st.textContent = '✗ ' + e.message; }
     } finally {
       if (btn) btn.disabled = false;
     }
+  }
+
+  function collectAllComments() {
+    const data = {};
+    document.querySelectorAll('.comments-section').forEach(s => {
+      const key = s.dataset.key;
+      const val = JSON.parse(localStorage.getItem(key) || '[]');
+      if (val.length) data[key] = val;
+    });
+    return data;
+  }
+
+  /* ---- Export as JSON file (fallback) ---- */
+  function exportComments() {
+    const data = collectAllComments();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'comments_export_' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
   }
 
   async function syncAll() {
@@ -460,7 +507,7 @@
     }
   }
 
-  async function submitComment(btn) {
+  function submitComment(btn) {
     const section = btn.closest('.comments-section');
     const key = section.dataset.key;
     const nameInput = section.querySelector('.comment-name');
@@ -477,9 +524,6 @@
     textInput.value = '';
     section.querySelector('.comment-form').classList.remove('open');
     renderComments(section);
-
-    // auto-save to cloud after each comment
-    await cloudSave();
   }
 
   function renderComments(section) {
@@ -514,9 +558,10 @@
 
   <!-- Cloud sync bar -->
   <div class="cloud-bar">
-    <button class="sync-btn" id="sync-btn" onclick="syncAll()">☁ Загрузить комментарии из облака</button>
-    <button class="sync-btn" onclick="cloudSave()" style="background:rgba(215,166,61,0.15);color:#D7A63D;">↑ Сохранить в облако</button>
-    <span class="sync-status" id="sync-status">Ожидание…</span>
+    <button class="sync-btn" id="sync-btn" onclick="syncAll()">☁ Загрузить из облака</button>
+    <button class="sync-btn" id="sync-save-btn" onclick="cloudSave()" style="background:rgba(215,166,61,0.15);color:#D7A63D;">↑ Сохранить в облако</button>
+    <button class="sync-btn" onclick="exportComments()" style="background:rgba(255,255,255,0.08);color:#E0DDD6;font-weight:400;">⬇ Скачать JSON</button>
+    <span class="sync-status" id="sync-status">Автозагрузка…</span>
   </div>
 
   <!-- Tab Navigation -->
