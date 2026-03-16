@@ -276,19 +276,21 @@
   /* AFC compliance badge — right side, aligned with cards */
   .afc-badge {
     position: absolute;
-    top: 840px; /* bottom aligns with map bottom at y=920 */
+    top: 451px; /* 12px below last card */
     right: 80px;
-    width: 920px;
-    height: 80px;
+    width: 450px;
+    bottom: 160px; /* aligns with map bottom at y=920 */
     z-index: 10;
     background: linear-gradient(145deg, rgba(10,24,48,0.8), rgba(5,14,29,0.9));
     backdrop-filter: blur(24px);
     border: 1px solid rgba(76,175,80,0.3);
     border-radius: 16px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 16px;
+    padding: 24px 28px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     overflow: hidden;
     animation: fadeSlideUp 0.5s ease 2.2s both;
@@ -311,6 +313,7 @@
     font-family: 'Oswald', sans-serif; font-weight: 500;
     font-size: 20px; color: var(--white);
     letter-spacing: 1.5px; text-transform: uppercase;
+    text-align: center; line-height: 1.4;
   }
   .afc-badge-text span {
     color: #81C784; font-weight: 600;
