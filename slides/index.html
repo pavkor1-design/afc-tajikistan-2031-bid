@@ -213,6 +213,39 @@
     letter-spacing: 1px;
   }
 
+  /* Cloud sync bar */
+  .cloud-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: rgba(215,166,61,0.06);
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 8px;
+  }
+  .cloud-bar .sync-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0A0E17;
+    background: #D7A63D;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .cloud-bar .sync-btn:hover { background: #e6b84d; }
+  .cloud-bar .sync-btn:disabled { opacity: 0.5; cursor: wait; }
+  .cloud-bar .sync-status {
+    font-size: 12px;
+    color: rgba(224,221,214,0.5);
+  }
+  .cloud-bar .sync-status.ok { color: #4caf50; }
+  .cloud-bar .sync-status.err { color: #e74c3c; }
+
   /* Comments */
   .comments-section {
     padding: 12px 16px 16px;
@@ -358,14 +391,67 @@
     });
   }
 
-  window.addEventListener('load', () => { switchTab(1); scaleIframes(); renderAllComments(); });
+  /* ===== Cloud Comment System ===== */
+  const BLOB_ID = '019cf405-89fb-7d77-9591-48d25f9e2263';
+  const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/' + BLOB_ID;
+
+  window.addEventListener('load', async () => {
+    switchTab(1);
+    scaleIframes();
+    await cloudLoad();         // load cloud → localStorage → render
+    renderAllComments();
+  });
   window.addEventListener('resize', scaleIframes);
 
-  /* Comment system */
-  function getCommentKey(el) {
-    return el.closest('.slide-card').querySelector('.comments-section').dataset.key;
+  /* ---- Cloud helpers ---- */
+  async function cloudLoad() {
+    const st = document.getElementById('sync-status');
+    try {
+      if (st) { st.className = 'sync-status'; st.textContent = 'Загрузка…'; }
+      const res = await fetch(BLOB_URL, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) throw new Error(res.status);
+      const cloud = await res.json();
+      // merge: cloud wins, but keep local-only keys
+      Object.keys(cloud).forEach(k => localStorage.setItem(k, JSON.stringify(cloud[k])));
+      if (st) { st.className = 'sync-status ok'; st.textContent = '✓ Загружено из облака — ' + new Date().toLocaleTimeString('ru-RU'); }
+    } catch (e) {
+      if (st) { st.className = 'sync-status err'; st.textContent = '✗ Ошибка загрузки: ' + e.message; }
+    }
   }
 
+  async function cloudSave() {
+    const st = document.getElementById('sync-status');
+    const btn = document.getElementById('sync-btn');
+    try {
+      if (btn) btn.disabled = true;
+      if (st) { st.className = 'sync-status'; st.textContent = 'Сохранение…'; }
+      // collect all comment keys from DOM
+      const data = {};
+      document.querySelectorAll('.comments-section').forEach(s => {
+        const key = s.dataset.key;
+        const val = JSON.parse(localStorage.getItem(key) || '[]');
+        if (val.length) data[key] = val;
+      });
+      const res = await fetch(BLOB_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error(res.status);
+      if (st) { st.className = 'sync-status ok'; st.textContent = '✓ Синхронизировано — ' + new Date().toLocaleTimeString('ru-RU'); }
+    } catch (e) {
+      if (st) { st.className = 'sync-status err'; st.textContent = '✗ Ошибка: ' + e.message; }
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  }
+
+  async function syncAll() {
+    await cloudLoad();
+    renderAllComments();
+  }
+
+  /* ---- Local comment system ---- */
   function toggleCommentForm(btn) {
     const form = btn.parentElement.querySelector('.comment-form');
     form.classList.toggle('open');
@@ -374,7 +460,7 @@
     }
   }
 
-  function submitComment(btn) {
+  async function submitComment(btn) {
     const section = btn.closest('.comments-section');
     const key = section.dataset.key;
     const nameInput = section.querySelector('.comment-name');
@@ -391,6 +477,9 @@
     textInput.value = '';
     section.querySelector('.comment-form').classList.remove('open');
     renderComments(section);
+
+    // auto-save to cloud after each comment
+    await cloudSave();
   }
 
   function renderComments(section) {
@@ -421,6 +510,13 @@
   <div class="page-header">
     <h1>AFC Asian Cup 2031 — Галерея дизайнов</h1>
     <p>Заявка Таджикистана на проведение групповых матчей</p>
+  </div>
+
+  <!-- Cloud sync bar -->
+  <div class="cloud-bar">
+    <button class="sync-btn" id="sync-btn" onclick="syncAll()">☁ Загрузить комментарии из облака</button>
+    <button class="sync-btn" onclick="cloudSave()" style="background:rgba(215,166,61,0.15);color:#D7A63D;">↑ Сохранить в облако</button>
+    <span class="sync-status" id="sync-status">Ожидание…</span>
   </div>
 
   <!-- Tab Navigation -->
