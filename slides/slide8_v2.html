@@ -102,51 +102,6 @@
   }
   .letterbox-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
   .letterbox-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent); }
-
-  /* ── AFC Logo ── */
-  .afc-logo {
-    position: absolute;
-    top: 100px;
-    left: 80px;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    animation: fadeIn 1s ease 0.5s both;
-  }
-
-  .afc-badge {
-    width: 56px;
-    height: 56px;
-    border: 2px solid var(--gold);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(5,14,29,0.8);
-    backdrop-filter: blur(8px);
-  }
-
-  .afc-badge svg { width: 30px; height: 30px; fill: var(--gold); }
-
-  .afc-text {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    font-size: 15px;
-    color: var(--ivory);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    line-height: 1.4;
-  }
-
-  .afc-text .year {
-    color: var(--gold);
-    font-weight: 700;
-    font-size: 22px;
-    letter-spacing: 5px;
-    display: block;
-  }
-
   /* ── Flag ribbon ── */
   .flag-ribbon {
     position: absolute;
