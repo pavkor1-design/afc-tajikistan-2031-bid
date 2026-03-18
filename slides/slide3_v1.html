@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1920, height=1080, initial-scale=1">
-<title>Слайд 3 — Вариант 1: Сетка 3×2</title>
+<title>Слайд 3 — Геополитический контекст</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -36,7 +36,6 @@
     background: linear-gradient(160deg, var(--midnight) 0%, var(--navy) 50%, #0D1F3A 100%);
   }
 
-  /* Cinematic letterbox bars */
   .letterbox-top {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -52,7 +51,7 @@
     background: var(--midnight);
     z-index: 15;
   }
-  /* Flag ribbon */
+
   .flag-ribbon {
     position: absolute;
     top: 100px;
@@ -73,121 +72,13 @@
   .fr-white { background: #FFFFFF; }
   .fr-green { background: #006600; }
 
-  /* Grid of cards */
-  .card-grid {
+  .left-panel {
     position: absolute;
-    top: 200px;
-    left: 200px;
-    right: 200px;
-    z-index: 10;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 32px;
-    height: 520px;
-  }
-
-  .card {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(215,166,61,0.2);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(215,166,61,0.15);
-    border-color: rgba(215,166,61,0.5);
-    z-index: 5;
-  }
-
-  .card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 60%;
-    background: linear-gradient(0deg, rgba(5,14,29,0.85) 0%, transparent 100%);
-    z-index: 1;
-  }
-
-  .card-label {
-    position: absolute;
-    bottom: 20px;
-    left: 24px;
-    right: 24px;
-    z-index: 2;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    font-size: 22px;
-    color: var(--white);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-    line-height: 1.2;
-  }
-
-  .card-number {
-    position: absolute;
-    top: 16px;
-    left: 20px;
-    z-index: 2;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--warm-gold);
-    letter-spacing: 2px;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-    background: rgba(10,24,48,0.6);
-    padding: 4px 10px;
-    border-radius: 6px;
-    border: 1px solid rgba(215,166,61,0.3);
-    backdrop-filter: blur(4px);
-  }
-
-  /* Gradient placeholders simulating Tajikistan landscapes */
-  .card-lake {
-    background: linear-gradient(rgba(5,14,29,0.3), rgba(5,14,29,0.5)), url('img/lake-iskanderkul.jpg') center/cover no-repeat;
-  }
-  .card-park {
-    background: linear-gradient(rgba(5,14,29,0.3), rgba(5,14,29,0.5)), url('img/park-nature.jpg') center/cover no-repeat;
-  }
-  .card-mosque {
-    background: linear-gradient(rgba(5,14,29,0.3), rgba(5,14,29,0.5)), url('img/katara-mosque-v2.jpg') center/cover no-repeat;
-  }
-  .card-avenue {
-    background: linear-gradient(rgba(5,14,29,0.3), rgba(5,14,29,0.5)), url('img/rudaki-park-v2.jpg') center/cover no-repeat;
-  }
-  .card-pamir {
-    background: linear-gradient(rgba(5,14,29,0.3), rgba(5,14,29,0.5)), url('img/pamir-highway.jpg') center/cover no-repeat;
-  }
-  .card-cuisine {
-    background: linear-gradient(rgba(5,14,29,0.3), rgba(5,14,29,0.5)), url('img/tajik-cuisine.jpg') center/cover no-repeat;
-  }
-
-  /* Animation delays for cards */
-  .card:nth-child(1) { animation: fadeSlideUp 0.6s ease 0.8s both; }
-  .card:nth-child(2) { animation: fadeSlideUp 0.6s ease 1.0s both; }
-  .card:nth-child(3) { animation: fadeSlideUp 0.6s ease 1.2s both; }
-  .card:nth-child(4) { animation: fadeSlideUp 0.6s ease 1.4s both; }
-  .card:nth-child(5) { animation: fadeSlideUp 0.6s ease 1.6s both; }
-  .card:nth-child(6) { animation: fadeSlideUp 0.6s ease 1.8s both; }
-
-  /* Title area at bottom */
-  .title-area {
-    position: absolute;
-    bottom: 100px;
+    top: 120px;
     left: 80px;
-    right: 80px;
+    width: 520px;
     z-index: 10;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
-
-  .title-left {
-    animation: fadeSlideUp 0.7s ease 2s both;
+    animation: fadeSlideUp 0.7s ease 0.5s both;
   }
 
   .tag {
@@ -202,27 +93,28 @@
     border: 1px solid rgba(215,166,61,0.3);
     padding: 8px 24px;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
 
   .main-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 52px;
-    line-height: 1.0;
+    font-size: 48px;
+    line-height: 1.05;
     color: var(--white);
     letter-spacing: 3px;
     text-transform: uppercase;
     text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+    margin-bottom: 16px;
   }
 
   .divider {
     width: 80px;
     height: 3px;
     background: var(--gold);
-    margin: 16px 0;
-    animation: growWidth 0.6s ease 2.2s both;
+    margin: 16px 0 24px 0;
+    animation: growWidth 0.6s ease 1s both;
   }
 
   @keyframes growWidth {
@@ -230,16 +122,132 @@
     to { width: 80px; }
   }
 
-  .slogan {
+  .description {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 17px;
-    color: rgba(246,244,239,0.65);
-    font-style: italic;
-    animation: fadeSlideUp 0.7s ease 2.4s both;
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(246,244,239,0.7);
+    margin-bottom: 32px;
   }
 
-  /* Bottom info strip */
+  .geo-facts {
+    list-style: none;
+    padding: 0;
+  }
+
+  .geo-facts li {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: rgba(246,244,239,0.8);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(215,166,61,0.12);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .geo-facts li:last-child {
+    border-bottom: none;
+  }
+
+  .fact-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(215,166,61,0.15);
+    border: 1px solid rgba(215,166,61,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+
+  .fact-highlight {
+    color: var(--warm-gold);
+    font-weight: 500;
+  }
+
+  .map-container {
+    position: absolute;
+    top: 90px;
+    right: 40px;
+    width: 1100px;
+    height: 880px;
+    z-index: 10;
+    animation: fadeIn 1.2s ease 0.8s both;
+  }
+
+  .map-container svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 10px 40px rgba(0,0,0,0.4));
+  }
+
+  .country-other {
+    fill: rgba(15, 32, 60, 0.85);
+    stroke: rgba(100, 130, 180, 0.4);
+    stroke-width: 1.0;
+    stroke-linejoin: round;
+    transition: fill 0.3s ease;
+  }
+
+  .country-other:hover {
+    fill: rgba(20, 45, 80, 0.9);
+  }
+
+  .country-tajikistan {
+    fill: #D7A63D;
+    stroke: rgba(232, 191, 90, 0.8);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 15px rgba(215,166,61,0.4));
+    transition: filter 0.3s ease;
+  }
+
+  .country-tajikistan:hover {
+    filter: drop-shadow(0 0 25px rgba(215,166,61,0.6));
+  }
+
+  .country-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    fill: rgba(246,244,239,0.7);
+    text-anchor: middle;
+    pointer-events: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .country-label-tj {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    fill: #050E1D;
+    text-anchor: middle;
+    pointer-events: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .capital-dot {
+    fill: var(--warm-gold);
+    stroke: var(--white);
+    stroke-width: 1.5;
+  }
+
+  .capital-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    fill: var(--light-gold);
+    text-anchor: start;
+    pointer-events: none;
+  }
+
   .bottom-strip {
     position: absolute;
     bottom: 90px;
@@ -267,7 +275,6 @@
     letter-spacing: 3px;
   }
 
-  /* Animations */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -277,63 +284,348 @@
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  .map-overlay-pattern {
+    position: absolute;
+    top: 90px;
+    right: 40px;
+    width: 1100px;
+    height: 880px;
+    z-index: 9;
+    opacity: 0.03;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.5) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
 <div class="slide">
 
-  <!-- Cinematic letterbox -->
   <div class="letterbox-top"></div>
   <div class="letterbox-bottom"></div>
 
-  <!-- AFC Logo removed per client request -->
-
-  <!-- Flag ribbon -->
   <div class="flag-ribbon">
     <div class="fr-red"></div>
     <div class="fr-white"></div>
     <div class="fr-green"></div>
   </div>
 
-  <!-- Card Grid 3x2 -->
-  <div class="card-grid">
-    <div class="card card-lake">
-      <span class="card-number">01</span>
-      <div class="card-label">Озеро Искандеркуль</div>
-    </div>
-    <div class="card card-park">
-      <span class="card-number">02</span>
-      <div class="card-label">Национальный парк «Тигровая балка»</div>
-    </div>
-    <div class="card card-mosque">
-      <span class="card-number">03</span>
-      <div class="card-label">Мечети в стиле Катара</div>
-    </div>
-    <div class="card card-avenue">
-      <span class="card-number">04</span>
-      <div class="card-label">Парк Рудаки / Проспект Путовского</div>
-    </div>
-    <div class="card card-pamir">
-      <span class="card-number">05</span>
-      <div class="card-label">Памирский тракт</div>
-    </div>
-    <div class="card card-cuisine">
-      <span class="card-number">06</span>
-      <div class="card-label">Богатая национальная кухня</div>
-    </div>
+  <div class="left-panel">
+    <div class="tag">Геополитический контекст</div>
+    <h1 class="main-title">СЕРДЦЕ<br>ЦЕНТРАЛЬНОЙ<br>АЗИИ</h1>
+    <div class="divider"></div>
+    <p class="description">
+      Таджикистан занимает стратегическое положение в центре Азии,
+      на перекрёстке древних торговых путей Великого Шёлкового пути.
+    </p>
+    <ul class="geo-facts">
+      <li>
+        <span class="fact-icon">&#x1F4CD;</span>
+        <span>Площадь: <span class="fact-highlight">143 100 км&#178;</span></span>
+      </li>
+      <li>
+        <span class="fact-icon">&#x1F3D4;</span>
+        <span>93% территории — <span class="fact-highlight">горы</span></span>
+      </li>
+      <li>
+        <span class="fact-icon">&#x1F30D;</span>
+        <span>Граничит с <span class="fact-highlight">4 странами</span></span>
+      </li>
+      <li>
+        <span class="fact-icon">&#x1F3D9;</span>
+        <span>Столица: <span class="fact-highlight">Душанбе</span></span>
+      </li>
+      <li>
+        <span class="fact-icon">&#x1F465;</span>
+        <span>Население: <span class="fact-highlight">10+ млн</span></span>
+      </li>
+    </ul>
   </div>
 
-  <!-- Title area at bottom -->
-  <div class="title-area">
-    <div class="title-left">
-      <div class="tag">Красоты Таджикистана</div>
-      <h1 class="main-title">ОТКРОЙТЕ ТАДЖИКИСТАН</h1>
-      <div class="divider"></div>
-      <p class="slogan">«Таджикистан: где древняя история встречает современные амбиции»</p>
-    </div>
+  <div class="map-overlay-pattern"></div>
+
+  <!--
+    SVG Map of Central Asia - realistic borders
+    Geographic projection: Equirectangular approximation
+    Region: 55E-82E lon, 33N-48N lat
+    Transform: x = (lon - 55) * 37.037, y = (48 - lat) * 53.333
+
+    Key border points derived from geographic coordinates:
+    - Tajikistan ~67-75E, 36.5-41N
+    - Uzbekistan ~56-73E, 37-45.5N
+    - Kyrgyzstan ~69-80E, 39-43.5N
+    - Afghanistan ~60.5-75E, 29.5-38.5N
+    - China ~73-82E, 35-48N (western Xinjiang)
+    - Kazakhstan ~55-82E, 40.5-48N (southern border)
+    - Turkmenistan ~52-66E, 35-42.5N
+  -->
+  <div class="map-container">
+    <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feFlood flood-color="#D7A63D" flood-opacity="0.3" result="color"/>
+          <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+          <feMerge>
+            <feMergeNode in="shadow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <linearGradient id="waterGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#081428"/>
+          <stop offset="100%" stop-color="#0C1C37"/>
+        </linearGradient>
+      </defs>
+
+      <rect width="1000" height="800" fill="url(#waterGrad)" rx="12"/>
+
+      <!-- KAZAKHSTAN - southern border runs roughly along 40.5-45N depending on longitude -->
+      <path class="country-other" d="
+        M 0,0 L 1000,0 L 1000,140
+        L 970,148 L 940,155 L 910,160 L 880,162
+        L 850,158 L 820,150 L 790,145 L 760,140
+        L 730,138 L 700,142 L 672,150 L 650,158
+        L 628,168 L 608,178 L 590,190 L 575,200
+        L 560,212 L 548,222 L 535,230 L 520,240
+        L 505,248 L 490,255 L 475,260 L 458,268
+        L 445,275 L 430,280 L 415,288 L 400,295
+        L 385,298 L 370,302 L 355,308 L 340,312
+        L 322,318 L 305,322 L 290,328 L 275,332
+        L 260,338 L 248,342 L 235,348 L 222,352
+        L 210,358 L 198,362 L 185,368 L 170,372
+        L 155,376 L 140,380 L 125,384 L 110,388
+        L 95,390 L 80,394 L 65,396 L 48,398
+        L 30,400 L 15,402 L 0,405
+        L 0,0 Z
+      "/>
+      <text class="country-label" x="450" y="70" style="font-size:18px; letter-spacing:8px;">КАЗАХСТАН</text>
+
+      <!-- TURKMENISTAN - west side, between Uzbekistan border and Afghanistan -->
+      <path class="country-other" d="
+        M 0,405 L 15,402 L 30,400 L 48,398 L 65,396
+        L 80,394 L 95,390 L 110,388 L 125,384
+        L 140,380 L 155,376 L 170,372 L 185,368
+        L 198,362 L 210,358 L 222,352 L 235,348
+        L 248,342 L 260,338 L 275,332 L 290,328
+        L 305,322 L 310,330 L 318,340 L 322,350
+        L 328,358 L 332,365 L 338,375 L 340,385
+        L 345,395 L 350,405 L 355,415 L 358,425
+        L 362,435 L 365,445 L 368,455 L 370,465
+        L 372,475 L 375,488 L 378,500
+        L 362,505 L 348,510 L 332,515 L 318,518
+        L 302,522 L 288,525 L 272,528 L 258,530
+        L 242,532 L 228,535 L 212,538 L 198,540
+        L 182,542 L 168,545 L 152,548 L 138,550
+        L 122,552 L 108,555 L 92,558 L 78,560
+        L 62,562 L 48,565 L 32,568 L 18,570
+        L 0,572
+        L 0,405 Z
+      "/>
+      <text class="country-label" x="160" y="480" style="font-size:11px; letter-spacing:2px; opacity:0.55;">ТУРКМЕНИСТАН</text>
+
+      <!-- UZBEKISTAN - central-west, complex shape with Fergana valley protrusion east -->
+      <path class="country-other" d="
+        M 305,322 L 322,318 L 340,312 L 355,308
+        L 370,302 L 385,298 L 400,295 L 415,288
+        L 430,280 L 445,275 L 458,268 L 475,260
+        L 490,255 L 505,248 L 510,255 L 518,262
+        L 525,270 L 530,278 L 528,288 L 522,298
+        L 515,305 L 508,312 L 502,318 L 498,326
+        L 495,335 L 492,342 L 488,350 L 485,358
+        L 482,365 L 480,372 L 478,380
+        L 490,375 L 502,370 L 515,368
+        L 528,372 L 538,378 L 548,385
+        L 555,392 L 560,400 L 562,408
+        L 558,415 L 552,420 L 545,425
+        L 535,428 L 525,430 L 515,432
+        L 505,435 L 495,438 L 485,442
+        L 475,448 L 465,452 L 455,458
+        L 445,462 L 435,468 L 428,475
+        L 422,482 L 418,490 L 415,498
+        L 412,505 L 410,512 L 408,520
+        L 405,530 L 400,538 L 395,545
+        L 390,552 L 385,558 L 378,500
+        L 375,488 L 372,475 L 370,465
+        L 368,455 L 365,445 L 362,435
+        L 358,425 L 355,415 L 350,405
+        L 345,395 L 340,385 L 338,375
+        L 332,365 L 328,358 L 322,350
+        L 318,340 L 310,330 L 305,322 Z
+      "/>
+      <text class="country-label" x="390" y="415" style="font-size:13px; letter-spacing:3px;">УЗБЕКИСТАН</text>
+
+      <!-- KYRGYZSTAN - north of Tajikistan, east of Uzbekistan's Fergana valley -->
+      <path class="country-other" d="
+        M 505,248 L 520,240 L 535,230 L 548,222
+        L 560,212 L 575,200 L 590,190 L 608,178
+        L 628,168 L 650,158 L 672,150 L 700,142
+        L 730,138 L 760,140 L 790,145 L 820,150
+        L 850,158 L 848,170 L 842,185 L 835,198
+        L 828,210 L 818,222 L 808,232 L 796,242
+        L 784,250 L 770,258 L 756,265 L 742,272
+        L 728,278 L 714,284 L 700,290 L 686,295
+        L 672,300 L 658,305 L 645,310 L 632,316
+        L 620,322 L 610,328 L 600,335 L 592,342
+        L 585,350 L 578,358 L 572,365 L 565,372
+        L 558,378 L 550,382 L 542,385
+        L 535,382 L 528,375 L 522,368
+        L 518,360 L 515,352 L 512,345
+        L 510,338 L 508,330 L 505,322
+        L 502,315 L 500,308 L 498,300
+        L 495,292 L 492,285 L 490,278
+        L 488,270 L 505,260 L 505,248 Z
+      "/>
+      <text class="country-label" x="680" y="230" style="font-size:13px; letter-spacing:3px;">КЫРГЫЗСТАН</text>
+
+      <!-- CHINA (western Xinjiang) - east side -->
+      <path class="country-other" d="
+        M 850,158 L 880,162 L 910,160 L 940,155 L 970,148 L 1000,140
+        L 1000,800 L 720,800
+        L 710,788 L 700,775 L 690,762 L 682,750
+        L 675,738 L 668,725 L 662,712 L 658,700
+        L 654,688 L 650,675 L 648,662 L 646,650
+        L 644,638 L 642,625 L 640,612 L 638,600
+        L 636,588 L 634,575 L 632,562
+        L 630,550 L 628,538 L 625,525
+        L 622,512 L 620,500 L 618,488
+        L 616,475 L 615,462 L 614,450
+        L 613,438 L 612,425 L 610,412
+        L 608,400 L 605,388 L 600,378
+        L 594,368 L 585,358 L 578,365
+        L 572,372 L 565,378 L 558,382
+        L 550,385 L 542,388 L 542,385
+        L 550,382 L 558,378 L 565,372
+        L 572,365 L 578,358 L 585,350
+        L 592,342 L 600,335 L 610,328
+        L 620,322 L 632,316 L 645,310
+        L 658,305 L 672,300 L 686,295
+        L 700,290 L 714,284 L 728,278
+        L 742,272 L 756,265 L 770,258
+        L 784,250 L 796,242 L 808,232
+        L 818,222 L 828,210 L 835,198
+        L 842,185 L 848,170 L 850,158 Z
+      "/>
+      <text class="country-label" x="900" y="450" style="font-size:20px; letter-spacing:8px;">КИТАЙ</text>
+
+      <!-- AFGHANISTAN - south -->
+      <path class="country-other" d="
+        M 0,572 L 18,570 L 32,568 L 48,565
+        L 62,562 L 78,560 L 92,558 L 108,555
+        L 122,552 L 138,550 L 152,548 L 168,545
+        L 182,542 L 198,540 L 212,538 L 228,535
+        L 242,532 L 258,530 L 272,528 L 288,525
+        L 302,522 L 318,518 L 332,515 L 348,510
+        L 362,505 L 378,500 L 385,558
+        L 390,552 L 395,545 L 400,538 L 405,530
+        L 408,520 L 410,512 L 412,505
+        L 415,498 L 418,490 L 422,482
+        L 428,475 L 435,468 L 445,462
+        L 455,458 L 465,452 L 475,448
+        L 485,442 L 495,438 L 505,435
+        L 515,432 L 525,430 L 535,428
+        L 545,425 L 552,420 L 558,415
+        L 562,408 L 560,400 L 555,392
+        L 565,398 L 572,405 L 578,412
+        L 585,420 L 590,428 L 595,438
+        L 600,448 L 604,458 L 608,468
+        L 610,478 L 612,488 L 614,498
+        L 616,510 L 618,522 L 620,535
+        L 622,548 L 625,560 L 628,572
+        L 630,585 L 632,598 L 634,610
+        L 636,622 L 638,635 L 640,648
+        L 642,660 L 644,672 L 646,685
+        L 648,698 L 650,710 L 654,722
+        L 658,735 L 662,748 L 668,760
+        L 675,772 L 682,782 L 690,792
+        L 700,800 L 720,800
+        L 0,800 L 0,572 Z
+      "/>
+      <text class="country-label" x="330" y="680" style="font-size:15px; letter-spacing:5px;">АФГАНИСТАН</text>
+
+      <!-- TAJIKISTAN - the highlighted country -->
+      <!--
+        Borders:
+        North: shared with Uzbekistan Fergana valley + Kyrgyzstan
+        East: shared with China (Pamir/Xinjiang)
+        South: shared with Afghanistan (incl. Wakhan corridor finger)
+        West: shared with Uzbekistan
+      -->
+      <path class="country-tajikistan" filter="url(#glow)" d="
+        M 478,380 L 480,372 L 482,365 L 485,358
+        L 488,350 L 492,342 L 495,335 L 498,326
+        L 502,318 L 508,312 L 515,305 L 522,298
+        L 528,288 L 530,278 L 525,270 L 518,262
+        L 510,255 L 505,248 L 505,260 L 488,270
+        L 490,278 L 492,285 L 495,292 L 498,300
+        L 500,308 L 502,315 L 505,322 L 508,330
+        L 510,338 L 512,345 L 515,352 L 518,360
+        L 522,368 L 528,375 L 535,382 L 542,385
+        L 542,388 L 550,385 L 558,382 L 565,378
+        L 572,372 L 578,365 L 585,358 L 594,368
+        L 600,378 L 605,388 L 608,400 L 610,412
+        L 612,425 L 613,438 L 614,450 L 615,462
+        L 616,475 L 618,488 L 620,500 L 622,512
+        L 625,525 L 628,538 L 630,550 L 632,562
+        L 628,572 L 625,560 L 622,548
+        L 620,535 L 618,522 L 616,510
+        L 614,498 L 612,488 L 610,478
+        L 608,468 L 604,458 L 600,448
+        L 595,438 L 590,428 L 585,420
+        L 578,412 L 572,405 L 565,398
+        L 555,392 L 548,385 L 538,378
+        L 528,372 L 515,368 L 502,370
+        L 490,375 L 478,380 Z
+      "/>
+
+      <!-- Dushanbe capital marker -->
+      <circle class="capital-dot" cx="530" cy="405" r="5"/>
+      <circle cx="530" cy="405" r="9" fill="none" stroke="rgba(232,191,90,0.4)" stroke-width="1.5">
+        <animate attributeName="r" from="9" to="18" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.6" to="0" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text class="capital-label" x="542" y="401" style="font-size:12px; font-weight:500;">Душанбе</text>
+      <text class="capital-label" x="542" y="415" style="font-size:9px; opacity:0.6;">столица</text>
+
+      <!-- Tajikistan label -->
+      <text class="country-label-tj" x="560" y="460" style="font-size:12px;">ТАДЖИКИСТАН</text>
+
+      <!-- Neighboring capitals -->
+      <circle cx="425" cy="290" r="3" fill="rgba(150,170,200,0.6)" stroke="rgba(200,220,255,0.3)" stroke-width="1"/>
+      <text class="country-label" x="412" y="284" style="font-size:9px; text-anchor:end; opacity:0.5;">Ташкент</text>
+
+      <circle cx="580" cy="195" r="3" fill="rgba(150,170,200,0.6)" stroke="rgba(200,220,255,0.3)" stroke-width="1"/>
+      <text class="country-label" x="594" y="192" style="font-size:9px; text-anchor:start; opacity:0.5;">Бишкек</text>
+
+      <circle cx="355" cy="610" r="3" fill="rgba(150,170,200,0.6)" stroke="rgba(200,220,255,0.3)" stroke-width="1"/>
+      <text class="country-label" x="370" y="614" style="font-size:9px; text-anchor:start; opacity:0.5;">Кабул</text>
+
+      <!-- Direction labels -->
+      <text class="country-label" x="480" y="25" style="font-size:9px; opacity:0.35;">&#x2191; Астана</text>
+      <text class="country-label" x="970" y="350" style="font-size:9px; opacity:0.35;">Пекин &#x2192;</text>
+
+      <!-- Compass rose -->
+      <g transform="translate(80,720)" opacity="0.3">
+        <circle r="25" fill="none" stroke="rgba(215,166,61,0.4)" stroke-width="0.8"/>
+        <line x1="0" y1="-30" x2="0" y2="-20" stroke="rgba(215,166,61,0.6)" stroke-width="1.5"/>
+        <line x1="0" y1="20" x2="0" y2="30" stroke="rgba(215,166,61,0.3)" stroke-width="1"/>
+        <line x1="-30" y1="0" x2="-20" y2="0" stroke="rgba(215,166,61,0.3)" stroke-width="1"/>
+        <line x1="20" y1="0" x2="30" y2="0" stroke="rgba(215,166,61,0.3)" stroke-width="1"/>
+        <text x="0" y="-35" text-anchor="middle" fill="rgba(215,166,61,0.5)" font-size="10" font-family="Inter">N</text>
+      </g>
+
+      <!-- Scale bar -->
+      <g transform="translate(830,760)" opacity="0.25">
+        <line x1="0" y1="0" x2="100" y2="0" stroke="rgba(246,244,239,0.5)" stroke-width="1.5"/>
+        <line x1="0" y1="-4" x2="0" y2="4" stroke="rgba(246,244,239,0.5)" stroke-width="1"/>
+        <line x1="100" y1="-4" x2="100" y2="4" stroke="rgba(246,244,239,0.5)" stroke-width="1"/>
+        <text x="50" y="14" text-anchor="middle" fill="rgba(246,244,239,0.4)" font-size="9" font-family="Inter">~500 km</text>
+      </g>
+    </svg>
   </div>
 
-  <!-- Bottom info -->
   <div class="bottom-strip">
     <div class="fft-name">Федерация футбола Таджикистана</div>
     <div class="date">Март 2026 &middot; Душанбе</div>

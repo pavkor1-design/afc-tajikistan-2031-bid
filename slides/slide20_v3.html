@@ -33,7 +33,16 @@
     width: 1920px;
     height: 1080px;
     overflow: hidden;
-    background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(10,24,48,0.95), var(--midnight));
+    background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(10,24,48,0.92), rgba(5,14,29,0.97));
+    z-index: 0;
   }
 
   /* Grid overlay */
@@ -369,6 +378,7 @@
 </head>
 <body>
 <div class="slide">
+  <div class="slide-overlay"></div>
   <div class="grid-overlay"></div>
 
   <!-- Particles -->
@@ -420,7 +430,7 @@
         </div>
         <div class="col-row">
           <div class="row-check"><svg viewBox="0 0 20 20"><polyline points="4 10 8 14 16 6"/></svg></div>
-          <div class="row-name">Тренировочные базы</div>
+          <div class="row-name">Тренировочные поля</div>
           <div class="row-detail">4 объекта, стандарт AFC</div>
         </div>
         <div class="col-row">
@@ -467,7 +477,7 @@
         <div class="col-row">
           <div class="row-check"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--warm-gold)" stroke="none"/></svg></div>
           <div class="row-name">Гарантии</div>
-          <div class="row-detail">Пакет гарантийных писем формируется</div>
+          <div class="row-detail">Государственная поддержка</div>
         </div>
       </div>
     </div>

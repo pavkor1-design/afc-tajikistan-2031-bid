@@ -393,8 +393,18 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.slide-section').forEach(s => s.classList.remove('active'));
     document.querySelector(`[data-slide="${slideNum}"]`).classList.add('active');
-    document.getElementById(`slide-${slideNum}`).classList.add('active');
+    document.querySelector(`#slide-${slideNum}`).classList.add('active');
     setTimeout(scaleIframes, 50);
+    // lazy load iframes
+    setTimeout(() => {
+      const containers = document.querySelectorAll('.slide-section.active .iframe-container');
+      containers.forEach(c => {
+        const iframe = c.querySelector('iframe');
+        if (iframe && !iframe.src && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+        }
+      });
+    }, 100);
   }
 
   function scaleIframes() {
@@ -582,6 +592,7 @@
     <button class="tab-btn" data-slide="4" onclick="switchTab(4)">Слайд 4</button>
     <button class="tab-btn" data-slide="5" onclick="switchTab(5)">Слайд 5</button>
     <button class="tab-btn" data-slide="6" onclick="switchTab(6)">Слайд 6</button>
+    <button class="tab-btn" data-slide="6b" onclick="switchTab('6b')">Гиссар</button>
     <button class="tab-btn" data-slide="7" onclick="switchTab(7)">Слайд 7</button>
     <button class="tab-btn" data-slide="8" onclick="switchTab(8)">Слайд 8</button>
     <button class="tab-btn" data-slide="9" onclick="switchTab(9)">Слайд 9</button>
@@ -589,7 +600,7 @@
     <button class="tab-btn" data-slide="11" onclick="switchTab(11)">Слайд 11</button>
     <button class="tab-btn" data-slide="12" onclick="switchTab(12)">Слайд 12</button>
     <!-- Slide 13 removed, content merged into slide 4 -->
-    <button class="tab-btn" data-slide="14" onclick="switchTab(14)">Слайд 14</button>
+    <!-- Slide 14 removed by client request -->
     <button class="tab-btn" data-slide="15" onclick="switchTab(15)">Слайд 15</button>
     <button class="tab-btn" data-slide="16" onclick="switchTab(16)">Слайд 16</button>
     <button class="tab-btn" data-slide="17" onclick="switchTab(17)">Слайд 17</button>
@@ -614,7 +625,7 @@
           <a href="slide1_v1_imperial_night.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide1_v1_imperial_night.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide1_v1_imperial_night.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide1_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -633,7 +644,7 @@
           <a href="slide1_v2_cinematic.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide1_v2_cinematic.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide1_v2_cinematic.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide1_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -652,7 +663,7 @@
           <a href="slide1_v3_split.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide1_v3_split.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide1_v3_split.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide1_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -671,7 +682,7 @@
           <a href="slide1_v4_geometric.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide1_v4_geometric.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide1_v4_geometric.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide1_v4">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -690,7 +701,7 @@
           <a href="slide1_v5_minimal.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide1_v5_minimal.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide1_v5_minimal.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide1_v5">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -709,7 +720,7 @@
           <a href="slide1_v6_silk_horizon.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide1_v6_silk_horizon.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide1_v6_silk_horizon.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide1_v6">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -738,7 +749,7 @@
           <a href="slide2_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide2_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide2_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide2_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -757,7 +768,7 @@
           <a href="slide2_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide2_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide2_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide2_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -776,7 +787,7 @@
           <a href="slide2_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide2_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide2_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide2_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -805,7 +816,7 @@
           <a href="slide3_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide3_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide3_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide3_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -824,7 +835,7 @@
           <a href="slide3_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide3_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide3_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide3_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -843,7 +854,7 @@
           <a href="slide3_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide3_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide3_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide3_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -872,7 +883,7 @@
           <a href="slide4_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide4_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide4_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide4_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -891,7 +902,7 @@
           <a href="slide4_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide4_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide4_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide4_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -910,7 +921,7 @@
           <a href="slide4_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide4_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide4_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide4_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -939,7 +950,7 @@
           <a href="slide5_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide5_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide5_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide5_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -958,7 +969,7 @@
           <a href="slide5_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide5_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide5_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide5_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -977,7 +988,7 @@
           <a href="slide5_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide5_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide5_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide5_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -996,7 +1007,7 @@
           <a href="slide5_v4.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide5_v4.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide5_v4.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide5_v4">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1025,7 +1036,7 @@
           <a href="slide6_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide6_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide6_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide6_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1044,7 +1055,7 @@
           <a href="slide6_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide6_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide6_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide6_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1063,7 +1074,7 @@
           <a href="slide6_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide6_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide6_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide6_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1074,6 +1085,35 @@
         </div>
         <div class="comments-list"></div>
       </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6b: Гиссар -->
+  <div class="slide-section" id="slide-6b">
+    <div class="section-title">
+      <h2>Слайд 6б — Гиссар: второй город-участник</h2>
+      <p>Историческое наследие и природная красота &middot; 1 вариант</p>
+    </div>
+    <div class="gallery">
+      <div class="slide-card approved">
+        <div class="slide-card-header">
+          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-name">Город Гиссар (согласован)</span>
+          <a class="open-btn" href="slide7_v1.html" target="_blank">Открыть</a>
+        </div>
+        <div class="iframe-container">
+          <iframe src="slide7_v1.html?v=20260319a" loading="lazy"></iframe>
+        </div>
+        <div class="comments-section" data-key="comments_slide6b_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1092,7 +1132,7 @@
           <a href="slide7_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide7_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide7_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide7_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1111,7 +1151,7 @@
           <a href="slide7_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide7_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide7_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide7_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1130,7 +1170,7 @@
           <a href="slide7_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide7_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide7_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide7_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1152,14 +1192,14 @@
       <p>Инфраструктура, логистика, размещение &middot; 3 варианта</p>
     </div>
     <div class="gallery">
-      <div class="slide-card">
+      <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">01</span>
           <span class="variant-name">Сплит-макет</span>
           <a href="slide8_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide8_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide8_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide8_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1178,7 +1218,7 @@
           <a href="slide8_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide8_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide8_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide8_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1197,7 +1237,7 @@
           <a href="slide8_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide8_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide8_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide8_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1226,7 +1266,7 @@
           <a href="slide9_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide9_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide9_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide9_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1245,7 +1285,7 @@
           <a href="slide9_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide9_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide9_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide9_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1264,7 +1304,7 @@
           <a href="slide9_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide9_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide9_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide9_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1293,7 +1333,7 @@
           <a href="slide10_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide10_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide10_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide10_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1312,7 +1352,7 @@
           <a href="slide10_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide10_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide10_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide10_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1331,7 +1371,7 @@
           <a href="slide10_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide10_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide10_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide10_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1360,7 +1400,7 @@
           <a href="slide11_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide11_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide11_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide11_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1379,7 +1419,7 @@
           <a href="slide11_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide11_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide11_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide11_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1398,7 +1438,7 @@
           <a href="slide11_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide11_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide11_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide11_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1427,7 +1467,7 @@
           <a href="slide12_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide12_v1.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide12_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide12_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1446,7 +1486,7 @@
           <a href="slide12_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide12_v2.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide12_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide12_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1465,7 +1505,7 @@
           <a href="slide12_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide12_v3.html?v=20260317c" loading="lazy"></iframe>
+          <iframe src="slide12_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide12_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1482,72 +1522,7 @@
 
   <!-- SLIDE 13 REMOVED — content merged into slide 4 -->
 
-  <!-- Slide 14 -->
-  <div class="slide-section" id="slide-14">
-    <div class="section-title">
-      <h2>Слайд 14 — Размещение и гостеприимство</h2>
-      <p>Гостиничный фонд Душанбе &middot; 3 варианта</p>
-    </div>
-    <div class="gallery">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Статистика + отели</span>
-          <a href="slide14_v1.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide14_v1.html?v=20260316d" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide14_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Карточная сетка</span>
-          <a href="slide14_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide14_v2.html?v=20260316d" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide14_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Горизонтальный обзор</span>
-          <a href="slide14_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide14_v3.html?v=20260316d" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide14_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-    </div>
-  </div>
+  <!-- Slide 14 removed by client request -->
 
   <!-- Slide 15 -->
   <div class="slide-section" id="slide-15">
@@ -1563,7 +1538,7 @@
           <a href="slide15_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide15_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide15_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide15_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1575,14 +1550,14 @@
         <div class="comments-list"></div>
       </div>
       </div>
-      <div class="slide-card">
+      <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Вертикальный поток</span>
+          <span class="variant-num">02 &#10003;</span>
+          <span class="variant-name">Вертикальный поток (согласован)</span>
           <a href="slide15_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide15_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide15_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide15_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1601,7 +1576,7 @@
           <a href="slide15_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide15_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide15_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide15_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1630,7 +1605,7 @@
           <a href="slide16_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide16_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide16_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide16_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1649,7 +1624,7 @@
           <a href="slide16_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide16_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide16_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide16_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1668,7 +1643,7 @@
           <a href="slide16_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide16_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide16_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide16_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1697,7 +1672,7 @@
           <a href="slide17_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide17_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide17_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide17_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1716,7 +1691,7 @@
           <a href="slide17_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide17_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide17_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide17_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1735,7 +1710,7 @@
           <a href="slide17_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide17_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide17_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide17_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1764,7 +1739,7 @@
           <a href="slide18_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide18_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide18_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide18_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1783,7 +1758,7 @@
           <a href="slide18_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide18_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide18_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide18_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1795,14 +1770,14 @@
         <div class="comments-list"></div>
       </div>
       </div>
-      <div class="slide-card">
+      <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Акцентная сетка</span>
+          <span class="variant-num">03 &#10003;</span>
+          <span class="variant-name">Акцентная сетка (согласован)</span>
           <a href="slide18_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide18_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide18_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide18_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1831,7 +1806,7 @@
           <a href="slide19_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide19_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide19_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide19_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1850,7 +1825,7 @@
           <a href="slide19_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide19_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide19_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide19_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1862,14 +1837,14 @@
         <div class="comments-list"></div>
       </div>
       </div>
-      <div class="slide-card">
+      <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Split с фото</span>
+          <span class="variant-num">03 &#10003;</span>
+          <span class="variant-name">Split с фото (согласован)</span>
           <a href="slide19_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide19_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide19_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide19_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1891,14 +1866,14 @@
       <p>Executive dashboard по ключевым блокам &middot; 3 варианта</p>
     </div>
     <div class="gallery">
-      <div class="slide-card">
+      <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Executive dashboard</span>
+          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-name">Executive dashboard (согласован)</span>
           <a href="slide20_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide20_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide20_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide20_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1917,7 +1892,7 @@
           <a href="slide20_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide20_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide20_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide20_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1936,7 +1911,7 @@
           <a href="slide20_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide20_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide20_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide20_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1965,7 +1940,7 @@
           <a href="slide21_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide21_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide21_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide21_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -1977,14 +1952,14 @@
         <div class="comments-list"></div>
       </div>
       </div>
-      <div class="slide-card">
+      <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Пять столпов</span>
+          <span class="variant-num">02 &#10003;</span>
+          <span class="variant-name">Пять столпов (согласован)</span>
           <a href="slide21_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide21_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide21_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide21_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -2003,7 +1978,7 @@
           <a href="slide21_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide21_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide21_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide21_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -2025,14 +2000,14 @@
       <p>Closing &middot; «Таджикистан готов» &middot; 3 варианта</p>
     </div>
     <div class="gallery">
-      <div class="slide-card">
+      <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Cinematic closing</span>
+          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-name">Cinematic closing (согласован)</span>
           <a href="slide22_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide22_v1.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide22_v1.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide22_v1">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -2051,7 +2026,7 @@
           <a href="slide22_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide22_v2.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide22_v2.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide22_v2">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
@@ -2070,7 +2045,7 @@
           <a href="slide22_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
-          <iframe src="slide22_v3.html?v=20260316d" loading="lazy"></iframe>
+          <iframe src="slide22_v3.html?v=20260319a" loading="lazy"></iframe>
         </div>
       <div class="comments-section" data-key="comments_slide22_v3">
         <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
