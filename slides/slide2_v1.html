@@ -117,6 +117,12 @@
     overflow: visible;
   }
 
+  .map-area img {
+    width: 820px;
+    height: auto;
+    object-fit: contain;
+  }
+
   /* Content — left side */
   .content {
     position: absolute;
@@ -339,7 +345,8 @@
 
   <!-- SVG Map — upper right -->
   <div class="map-area">
-    <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
+    <img src="img/karta-stran.png" alt="Карта стран">
+    <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" style="display:none">
       <defs>
         <!-- Topographic gradients -->
         <linearGradient id="topoKaz" x1="0" y1="0" x2="0" y2="1">
