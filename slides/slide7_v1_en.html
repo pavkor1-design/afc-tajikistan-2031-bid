@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Slide 7 — Hissar: Second Host City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+  }
+
+  /* Background image with drift */
+  .bg {
+    position: absolute;
+    inset: -40px;
+    background: url('img/hissar-fortress-v2.jpg') center/cover no-repeat;
+    animation: cinematicDrift 20s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  .bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(5,14,29,0.95) 0%, rgba(5,14,29,0.5) 40%, rgba(5,14,29,0.3) 60%, rgba(5,14,29,0.5) 100%);
+    z-index: 1;
+  }
+
+  @keyframes cinematicDrift {
+    0% { transform: scale(1.05) translate(0, 0); }
+    100% { transform: scale(1.08) translate(-20px, -10px); }
+  }
+
+  /* Cinematic letterbox bars */
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  /* Flag ribbon */
+  .flag-ribbon {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 8px;
+    height: 120px;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeIn 1s ease 0.7s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Title area */
+  .title-area {
+    position: absolute;
+    top: 180px;
+    left: 80px;
+    z-index: 10;
+    animation: fadeSlideUp 0.7s ease 0.8s both;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+
+  .divider {
+    width: 100px;
+    height: 4px;
+    background: var(--gold);
+    margin: 20px 0;
+    animation: growWidth 0.6s ease 1.2s both;
+  }
+
+  @keyframes growWidth {
+    from { width: 0; }
+    to { width: 100px; }
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+    color: rgba(246,244,239,0.65);
+    max-width: 600px;
+    line-height: 1.5;
+    animation: fadeSlideUp 0.7s ease 1.4s both;
+  }
+
+  /* 4 icon cards row */
+  .cards-row {
+    position: absolute;
+    bottom: 150px;
+    left: 80px;
+    right: 80px;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .fact-card {
+    background: rgba(10,24,48,0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(215,166,61,0.2);
+    border-radius: 12px;
+    padding: 34px 28px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .fact-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(215,166,61,0.5);
+  }
+
+  .fact-card:nth-child(1) { animation: fadeSlideUp 0.6s ease 1.6s both; }
+  .fact-card:nth-child(2) { animation: fadeSlideUp 0.6s ease 1.8s both; }
+  .fact-card:nth-child(3) { animation: fadeSlideUp 0.6s ease 2.0s both; }
+  .fact-card:nth-child(4) { animation: fadeSlideUp 0.6s ease 2.2s both; }
+
+  .fact-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 16px;
+    background: rgba(215,166,61,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fact-icon svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--gold);
+  }
+
+  .fact-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 38px;
+    color: var(--warm-gold);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .fact-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(246,244,239,0.7);
+    letter-spacing: 1px;
+    line-height: 1.4;
+  }
+
+  /* Bottom info strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 90px;
+    right: 80px;
+    z-index: 20;
+    text-align: right;
+    animation: fadeIn 1s ease 2.6s both;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 3px;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Background -->
+  <div class="bg"></div>
+
+  <!-- Cinematic letterbox -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon">
+    <div class="fr-red"></div>
+    <div class="fr-white"></div>
+    <div class="fr-green"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-area">
+    <h1 class="main-title">HISSAR: SECOND HOST CITY</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Historical heritage and natural beauty</p>
+  </div>
+
+  <!-- 4 Icon Cards Row -->
+  <div class="cards-row">
+    <div class="fact-card">
+      <div class="fact-icon">
+        <!-- Fortress / castle icon -->
+        <svg viewBox="0 0 24 24"><path d="M21 8V4h-3v2l-4-4H4v14H2v2h6v-4h4v4h10v-2h-2V8h1zm-8 4H7V6h2v2h2V6h2v6z"/></svg>
+      </div>
+      <div class="fact-number">~3,000 YEARS</div>
+      <div class="fact-label">Fortress history<br>Oldest monument in the region</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <!-- Observatory / star icon -->
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+      </div>
+      <div class="fact-number">OBSERVATORY</div>
+      <div class="fact-label">Ulugh Beg (historical)<br>15th-century scientific heritage</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <!-- Grape / vineyard icon -->
+        <svg viewBox="0 0 24 24"><path d="M6 20q-.825 0-1.412-.587T4 18v-2q0-.425.288-.712T5 15t.713.288T6 16v2h12v-2q0-.425.288-.712T19 15t.713.288T20 16v2q0 .825-.587 1.413T18 20H6zM12 4q.425 0 .713.288T13 5v8.55l2.1-2.1q.275-.275.688-.287t.712.287q.275.275.275.7t-.275.7l-3.6 3.6q-.15.15-.325.213T12 16.725t-.475-.062-.325-.213l-3.6-3.6q-.275-.275-.287-.687T7.6 11.45q.275-.275.7-.275t.7.275l2.1 2.1V5q0-.425.288-.712T12 4z"/></svg>
+      </div>
+      <div class="fact-number">VINEYARDS</div>
+      <div class="fact-label">Renowned winemaking<br>region of Tajikistan</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <!-- Stadium icon -->
+        <svg viewBox="0 0 24 24"><path d="M7 5L3 7V3l4 2zm14-2v4l-4-2 4-2zM3 17v4l4-2-4-2zm18 0-4 2 4 2v-4zM12 2C8.13 2 5 3.79 5 6v12c0 2.21 3.13 4 7 4s7-1.79 7-4V6c0-2.21-3.13-4-7-4zm5 16c0 .88-2.24 2-5 2s-5-1.12-5-2v-1.71C8.39 17.38 10.1 18 12 18s3.61-.62 5-1.71V18zm0-4c0 .88-2.24 2-5 2s-5-1.12-5-2v-1.71C8.39 13.38 10.1 14 12 14s3.61-.62 5-1.71V14zm0-4c0 .88-2.24 2-5 2s-5-1.12-5-2V6c0-.88 2.24-2 5-2s5 1.12 5 2v4z"/></svg>
+      </div>
+      <div class="fact-number">22,000</div>
+      <div class="fact-label">Hissar Stadium<br>Spectator capacity</div>
+    </div>
+  </div>
+
+  <!-- Bottom info -->
+  <div class="bottom-strip">
+    <div class="fft-name">Football Federation of Tajikistan</div>
+    <div class="date">March 2026 &middot; Dushanbe</div>
+  </div>
+</div>
+</body>
+</html>

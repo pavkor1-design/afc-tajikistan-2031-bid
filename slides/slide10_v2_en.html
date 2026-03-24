@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<title>Slide 10 — Stadiums: Technical Compliance (V2 — Cards)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  body {
+    width: 1920px; height: 1080px; overflow: hidden;
+    font-family: 'Inter', sans-serif; background: var(--midnight);
+  }
+
+  .slide {
+    position: relative; width: 1920px; height: 1080px; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(215,166,61,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 25%, rgba(215,166,61,0.04) 0%, transparent 45%),
+      linear-gradient(rgba(5,14,29,0.85), rgba(5,14,29,0.9)),
+      url('img/stadium-field-interior.jpg') center/cover no-repeat;
+  }
+
+  .grid-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(215,166,61,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215,166,61,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 55% 45%, rgba(0,0,0,0.5) 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 55% 45%, rgba(0,0,0,0.5) 0%, transparent 70%);
+  }
+
+  .particles { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .particle {
+    position: absolute; width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%; opacity: 0;
+    animation: particleFloat 8s ease-in-out infinite;
+  }
+  .particle:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
+  .particle:nth-child(2) { left: 35%; top: 55%; animation-delay: 1.5s; animation-duration: 9s; width: 2px; height: 2px; }
+  .particle:nth-child(3) { left: 55%; top: 15%; animation-delay: 3s; animation-duration: 6s; }
+  .particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 0.5s; animation-duration: 10s; width: 2px; height: 2px; }
+  .particle:nth-child(5) { left: 85%; top: 35%; animation-delay: 2s; animation-duration: 8s; }
+  .particle:nth-child(6) { left: 25%; top: 75%; animation-delay: 4s; animation-duration: 7s; width: 2px; height: 2px; }
+
+  @keyframes particleFloat {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    15% { opacity: 0.5; }
+    50% { opacity: 0.3; transform: translateY(-40px) scale(1.2); }
+    85% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+  }
+
+  .letterbox-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-bottom {
+    position: absolute; top: 1000px; left: 0; right: 0;
+    height: 80px; background: var(--midnight); z-index: 15;
+  }
+  .letterbox-top::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
+  }
+  .letterbox-bottom::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(215,166,61,0.2) 20%, rgba(215,166,61,0.2) 80%, transparent);
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    position: absolute; top: 90px; left: 80px; right: 80px;
+    height: 70px; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+  .title-center { text-align: center; flex: 1; padding: 0 40px; }
+  .tag {
+    display: none !important;
+  }
+  .slide-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 34px;
+    color: var(--white); text-transform: uppercase; letter-spacing: 4px; line-height: 1.1;
+  }
+  .title-divider {
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--warm-gold));
+    margin: 18px auto 0; border-radius: 2px; animation: growWidth 0.6s ease 1.0s both;
+  }
+  @keyframes growWidth { from { width: 0; } to { width: 80px; } }
+
+  .flag-ribbon {
+    display: flex; flex-direction: column; width: 8px; height: 80px;
+    border-radius: 4px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.3); flex-shrink: 0;
+  }
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* ===== TWO COLUMN CARDS LAYOUT ===== */
+  .cards-area {
+    position: absolute; top: 210px; left: 80px; right: 80px;
+    z-index: 10;
+    display: flex; gap: 24px; align-items: flex-start;
+  }
+
+  .stadium-card {
+    flex: 1;
+    background: linear-gradient(145deg, rgba(10,24,48,0.7), rgba(5,14,29,0.8));
+    border: 1px solid rgba(215,166,61,0.15);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    animation: fadeSlideUp 0.8s ease both;
+  }
+  .stadium-card:nth-child(1) { animation-delay: 0.8s; }
+  .stadium-card:nth-child(3) { animation-delay: 1.0s; }
+
+  .stadium-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 16px; padding: 1px;
+    background: linear-gradient(180deg, rgba(215,166,61,0.4), rgba(215,166,61,0.05));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+
+  .card-header {
+    height: 124px;
+    padding: 0 24px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: linear-gradient(180deg, rgba(215,166,61,0.1), rgba(215,166,61,0.02));
+    border-bottom: 1px solid rgba(215,166,61,0.15);
+    text-align: center;
+  }
+  .card-header h2 {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 26px;
+    color: var(--white); text-transform: uppercase; letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .card-header .card-sub {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.6); letter-spacing: 1px;
+  }
+  .card-header .status-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-top: 10px; padding: 4px 16px; border-radius: 20px;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .status-badge.ready {
+    background: rgba(76,175,80,0.15); color: #81C784; border: 1px solid rgba(76,175,80,0.3);
+  }
+  .status-badge.planned {
+    background: rgba(215,166,61,0.15); color: var(--warm-gold); border: 1px solid rgba(215,166,61,0.3);
+  }
+
+  .card-rows { padding: 12px 0; }
+
+  .spec-row {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 48px; padding: 0 32px;
+    border-bottom: 1px solid rgba(215,166,61,0.06);
+    animation: fadeIn 0.5s ease both;
+  }
+  .spec-row:nth-child(1) { animation-delay: 1.2s; }
+  .spec-row:nth-child(2) { animation-delay: 1.3s; }
+  .spec-row:nth-child(3) { animation-delay: 1.4s; }
+  .spec-row:nth-child(4) { animation-delay: 1.5s; }
+  .spec-row:nth-child(5) { animation-delay: 1.6s; }
+  .spec-row:nth-child(6) { animation-delay: 1.7s; }
+  .spec-row:nth-child(7) { animation-delay: 1.8s; }
+  .spec-row:nth-child(8) { animation-delay: 1.9s; }
+  .spec-row:nth-child(9) { animation-delay: 2.0s; }
+  .spec-row:nth-child(10) { animation-delay: 2.1s; }
+
+  .spec-row:last-child { border-bottom: none; }
+
+  .spec-value {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 15px;
+    color: var(--ivory); flex: 1;
+  }
+  .stadium-card:first-child .spec-value { text-align: left; padding-right: 16px; }
+  .stadium-card:last-child .spec-value { text-align: right; padding-left: 16px; }
+
+  .spec-check {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  }
+  .spec-check.ready { background: rgba(76,175,80,0.2); color: #81C784; font-size: 14px; box-shadow: 0 0 10px rgba(76,175,80,0.2); }
+  .spec-check.planned { background: rgba(215,166,61,0.2); color: var(--warm-gold); font-size: 14px; box-shadow: 0 0 10px rgba(215,166,61,0.2); }
+
+  /* CENTER COLUMN — requirements */
+  .center-col {
+    width: 280px; flex-shrink: 0;
+    display: flex; flex-direction: column;
+    animation: fadeIn 0.8s ease 1.0s both;
+  }
+
+  .center-header {
+    height: 124px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  }
+  .center-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, transparent, rgba(215,166,61,0.5));
+  }
+
+  .req-rows {
+    padding: 12px 0;
+    position: relative;
+  }
+  .req-rows::before {
+    content: ''; position: absolute;
+    top: 12px; bottom: 12px; left: 50%; width: 1px; transform: translateX(-50%);
+    background: rgba(215,166,61,0.15);
+    z-index: 0;
+  }
+
+  .req-label {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    height: 48px;
+    padding: 0 12px;
+    z-index: 2;
+  }
+  .req-label::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: -24px; right: -24px;
+    height: 1px;
+    border-top: 1px dashed rgba(215,166,61,0.3);
+    z-index: -1;
+  }
+  .req-label span {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 14px;
+    color: var(--warm-gold); letter-spacing: 1.5px; text-transform: uppercase;
+    background: #0A1830;
+    border: 1px solid rgba(215,166,61,0.3);
+    padding: 6px 20px; border-radius: 20px; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  /* BOTTOM */
+  .bottom-strip {
+    position: absolute; top: 915px; left: 80px; right: 80px;
+    height: 75px; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    animation: fadeIn 1s ease 2.4s both;
+  }
+  .bottom-left { flex: 1; }
+  .key-message {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
+    line-height: 1.6; color: rgba(246,244,239,0.5); max-width: 700px;
+  }
+  .bottom-right { text-align: right; flex-shrink: 0; }
+  .fft-name {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px;
+    color: rgba(246,244,239,0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .date {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
+    color: rgba(215,166,61,0.45); letter-spacing: 3px;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="grid-overlay"></div>
+
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  </div>
+
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <!-- AFC Logo removed per client request -->
+    <div class="title-center">
+      <div class="tag">Technical Compliance</div>
+      <h1 class="slide-title">Stadiums — Technical Compliance</h1>
+      <div class="title-divider"></div>
+    </div>
+    <div class="flag-ribbon">
+      <div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div>
+    </div>
+  </div>
+
+  <!-- TWO-COLUMN CARDS -->
+  <div class="cards-area">
+
+    <!-- LEFT: Dushanbe Arena -->
+    <div class="stadium-card">
+      <div class="card-header">
+        <h2>Markazi Stadium</h2>
+        <div class="card-sub">30,062 seats &middot; Operational stadium</div>
+        <div class="status-badge ready">10 / 10 parameters ✓</div>
+      </div>
+      <div class="card-rows">
+        <div class="spec-row"><span class="spec-value">Pitch: 105 &times; 68 m</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Turf: natural hybrid</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Lighting: FIFA Cat. B</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Capacity: 30,062</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Dressing rooms: 4 &times; &gt;80 m&sup2;</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">VIP/VVIP: 792 + 32 seats</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Media center: 600 m&sup2;</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Press seats: 72</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Accessibility: 150 + 150</span><span class="spec-check ready">✓</span></div>
+        <div class="spec-row"><span class="spec-value">Giant screens: 2 units</span><span class="spec-check ready">✓</span></div>
+      </div>
+    </div>
+
+    <!-- CENTER: Requirements -->
+    <div class="center-col">
+      <div class="center-header">
+        <div class="center-line"></div>
+      </div>
+      <div class="req-rows">
+        <div class="req-label"><span>105 &times; 68 m</span></div>
+        <div class="req-label"><span>Natural / hybrid</span></div>
+        <div class="req-label"><span>2,400 lux</span></div>
+        <div class="req-label"><span>20,000+</span></div>
+        <div class="req-label"><span>4 &times; 80 m&sup2;+</span></div>
+        <div class="req-label"><span>VIP zones</span></div>
+        <div class="req-label"><span>Media center</span></div>
+        <div class="req-label"><span>Press seats</span></div>
+        <div class="req-label"><span>Accessibility</span></div>
+        <div class="req-label"><span>2 screens</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Hissar -->
+    <div class="stadium-card">
+      <div class="card-header">
+        <h2>Hissar Stadium</h2>
+        <div class="card-sub">22,000 seats &middot; Reconstruction</div>
+        <div class="status-badge planned">10 / 10 planned ◉</div>
+      </div>
+      <div class="card-rows">
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">105 &times; 68 m (planned)</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">22,000 (planned)</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+        <div class="spec-row"><span class="spec-check planned">◉</span><span class="spec-value">Planned</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom-strip">
+    <div class="bottom-left">
+      <p class="key-message">Markazi Stadium is fully compliant. Hissar — all parameters are planned and guaranteed.</p>
+    </div>
+    <div class="bottom-right">
+      <div class="fft-name">Football Federation of Tajikistan</div>
+      <div class="date">March 2026 &middot; Dushanbe</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

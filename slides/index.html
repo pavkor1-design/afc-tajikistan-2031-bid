@@ -394,6 +394,45 @@
     color: rgba(224,221,214,0.35);
     margin-left: 6px;
   }
+
+  /* Language toggle */
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(10,14,23,0.85);
+    border: 1px solid rgba(215,166,61,0.3);
+    border-radius: 20px;
+    padding: 3px;
+    backdrop-filter: blur(8px);
+  }
+
+  .lang-btn {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: rgba(224,221,214,0.45);
+    background: transparent;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .lang-btn:hover {
+    color: rgba(224,221,214,0.7);
+  }
+
+  .lang-btn.active {
+    color: #0A0E17;
+    background: #D7A63D;
+  }
 </style>
 <script>
   function switchTab(slideNum) {
@@ -583,62 +622,135 @@
     d.textContent = s;
     return d.innerHTML;
   }
+
+  /* ===== Language Switching ===== */
+  const SLIDE_FILES = {
+    'slide1_v2_cinematic': 'slide1_v2_cinematic',
+    'slide2_v1': 'slide2_v1',
+    'slide3_v1': 'slide3_v1',
+    'slide4_v1': 'slide4_v1',
+    'slide5_v1': 'slide5_v1',
+    'slide6_v1': 'slide6_v1',
+    'slide7_v1': 'slide7_v1',
+    'slide7_v2': 'slide7_v2',
+    'slide8_v1': 'slide8_v1',
+    'slide9_v1': 'slide9_v1',
+    'slide10_v2': 'slide10_v2',
+    'slide11_v1': 'slide11_v1',
+    'slide12_v1': 'slide12_v1',
+    'slide14_v1': 'slide14_v1',
+    'slide15_v2': 'slide15_v2',
+    'slide17_v1': 'slide17_v1',
+    'slide18_v3': 'slide18_v3',
+    'slide19_v3': 'slide19_v3',
+    'slide20_v1': 'slide20_v1',
+    'slide21_v2': 'slide21_v2',
+    'slide22_v1': 'slide22_v1'
+  };
+
+  let currentLang = localStorage.getItem('afc_lang') || 'ru';
+
+  function switchLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('afc_lang', lang);
+    // Toggle buttons
+    document.getElementById('lang-ru').classList.toggle('active', lang === 'ru');
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    // Switch translatable text
+    document.querySelectorAll('[data-ru][data-en]').forEach(el => {
+      el.textContent = el.dataset[lang];
+    });
+    // Switch iframe sources
+    document.querySelectorAll('.iframe-container iframe').forEach(iframe => {
+      let src = iframe.src || iframe.getAttribute('src') || '';
+      if (!src) return;
+      const url = new URL(src, window.location.href);
+      let path = url.pathname.split('/').pop();
+      // Remove _en suffix and query params to get base name
+      let base = path.replace('.html', '').replace(/_en$/, '');
+      if (SLIDE_FILES[base] !== undefined) {
+        const newFile = lang === 'en' ? base + '_en.html' : base + '.html';
+        const newSrc = newFile + '?v=20260324';
+        iframe.src = newSrc;
+      }
+    });
+    // Switch "Открыть" links
+    document.querySelectorAll('.slide-card-header a[target="_blank"]').forEach(a => {
+      let href = a.getAttribute('href');
+      let base = href.replace('.html', '').replace(/_en$/, '');
+      if (SLIDE_FILES[base] !== undefined) {
+        a.href = lang === 'en' ? base + '_en.html' : base + '.html';
+      }
+    });
+    setTimeout(scaleIframes, 100);
+  }
+
+  // Init language on load
+  window.addEventListener('load', () => {
+    if (currentLang !== 'ru') switchLang(currentLang);
+  });
 </script>
 </head>
 <body>
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="lang-ru" onclick="switchLang('ru')">RU</button>
+    <button class="lang-btn" id="lang-en" onclick="switchLang('en')">EN</button>
+  </div>
+
   <div class="page-header">
-    <h1>AFC Asian Cup 2031 — Галерея дизайнов</h1>
-    <p>Заявка Таджикистана на проведение групповых матчей</p>
+    <h1 data-ru="AFC Asian Cup 2031 — Галерея дизайнов" data-en="AFC Asian Cup 2031 — Design Gallery">AFC Asian Cup 2031 — Галерея дизайнов</h1>
+    <p data-ru="Заявка Таджикистана на проведение групповых матчей" data-en="Tajikistan's Bid to Host Group Stage Matches">Заявка Таджикистана на проведение групповых матчей</p>
   </div>
 
   <!-- Tab Navigation -->
   <div class="tabs">
-    <button class="tab-btn active" data-slide="1" onclick="switchTab(1)">Слайд 1</button>
-    <button class="tab-btn" data-slide="2" onclick="switchTab(2)">Слайд 2</button>
-    <button class="tab-btn" data-slide="3" onclick="switchTab(3)">Слайд 3</button>
-    <button class="tab-btn" data-slide="4" onclick="switchTab(4)">Слайд 4</button>
-    <button class="tab-btn" data-slide="5" onclick="switchTab(5)">Слайд 5</button>
-    <button class="tab-btn" data-slide="6" onclick="switchTab(6)">Слайд 6</button>
-    <button class="tab-btn" data-slide="6b" onclick="switchTab('6b')">Гиссар</button>
-    <button class="tab-btn" data-slide="7" onclick="switchTab(7)">Слайд 7</button>
-    <button class="tab-btn" data-slide="8" onclick="switchTab(8)">Слайд 8</button>
-    <button class="tab-btn" data-slide="9" onclick="switchTab(9)">Слайд 9</button>
-    <button class="tab-btn" data-slide="10" onclick="switchTab(10)">Слайд 10</button>
-    <button class="tab-btn" data-slide="11" onclick="switchTab(11)">Слайд 11</button>
-    <button class="tab-btn" data-slide="12" onclick="switchTab(12)">Слайд 12</button>
+    <button class="tab-btn active" data-slide="1" onclick="switchTab(1)" data-ru="Слайд 1" data-en="Slide 1">Слайд 1</button>
+    <button class="tab-btn" data-slide="2" onclick="switchTab(2)" data-ru="Слайд 2" data-en="Slide 2">Слайд 2</button>
+    <button class="tab-btn" data-slide="3" onclick="switchTab(3)" data-ru="Слайд 3" data-en="Slide 3">Слайд 3</button>
+    <button class="tab-btn" data-slide="4" onclick="switchTab(4)" data-ru="Слайд 4" data-en="Slide 4">Слайд 4</button>
+    <button class="tab-btn" data-slide="5" onclick="switchTab(5)" data-ru="Слайд 5" data-en="Slide 5">Слайд 5</button>
+    <button class="tab-btn" data-slide="6" onclick="switchTab(6)" data-ru="Слайд 6" data-en="Slide 6">Слайд 6</button>
+    <button class="tab-btn" data-slide="6b" onclick="switchTab('6b')" data-ru="Гиссар" data-en="Hissar">Гиссар</button>
+    <button class="tab-btn" data-slide="7" onclick="switchTab(7)" data-ru="Слайд 7" data-en="Slide 7">Слайд 7</button>
+    <button class="tab-btn" data-slide="8" onclick="switchTab(8)" data-ru="Слайд 8" data-en="Slide 8">Слайд 8</button>
+    <button class="tab-btn" data-slide="9" onclick="switchTab(9)" data-ru="Слайд 9" data-en="Slide 9">Слайд 9</button>
+    <button class="tab-btn" data-slide="10" onclick="switchTab(10)" data-ru="Слайд 10" data-en="Slide 10">Слайд 10</button>
+    <button class="tab-btn" data-slide="11" onclick="switchTab(11)" data-ru="Слайд 11" data-en="Slide 11">Слайд 11</button>
+    <button class="tab-btn" data-slide="12" onclick="switchTab(12)" data-ru="Слайд 12" data-en="Slide 12">Слайд 12</button>
     <!-- Slide 13 removed, content merged into slide 4 -->
-    <button class="tab-btn" data-slide="14" onclick="switchTab(14)">Слайд 14</button>
-    <button class="tab-btn" data-slide="15" onclick="switchTab(15)">Слайд 15</button>
-    <button class="tab-btn" data-slide="17" onclick="switchTab(17)">Слайд 17</button>
-    <button class="tab-btn" data-slide="18" onclick="switchTab(18)">Слайд 18</button>
-    <button class="tab-btn" data-slide="19" onclick="switchTab(19)">Слайд 19</button>
-    <button class="tab-btn" data-slide="20" onclick="switchTab(20)">Слайд 20</button>
-    <button class="tab-btn" data-slide="21" onclick="switchTab(21)">Слайд 21</button>
-    <button class="tab-btn" data-slide="22" onclick="switchTab(22)">Слайд 22</button>
+    <button class="tab-btn" data-slide="14" onclick="switchTab(14)" data-ru="Слайд 14" data-en="Slide 14">Слайд 14</button>
+    <button class="tab-btn" data-slide="15" onclick="switchTab(15)" data-ru="Слайд 15" data-en="Slide 15">Слайд 15</button>
+    <button class="tab-btn" data-slide="17" onclick="switchTab(17)" data-ru="Слайд 17" data-en="Slide 17">Слайд 17</button>
+    <button class="tab-btn" data-slide="18" onclick="switchTab(18)" data-ru="Слайд 18" data-en="Slide 18">Слайд 18</button>
+    <button class="tab-btn" data-slide="19" onclick="switchTab(19)" data-ru="Слайд 19" data-en="Slide 19">Слайд 19</button>
+    <button class="tab-btn" data-slide="20" onclick="switchTab(20)" data-ru="Слайд 20" data-en="Slide 20">Слайд 20</button>
+    <button class="tab-btn" data-slide="21" onclick="switchTab(21)" data-ru="Слайд 21" data-en="Slide 21">Слайд 21</button>
+    <button class="tab-btn" data-slide="22" onclick="switchTab(22)" data-ru="Слайд 22" data-en="Slide 22">Слайд 22</button>
   </div>
 
   <!-- SLIDE 1 -->
   <div class="slide-section active" id="slide-1">
     <div class="section-title">
-      <h2>Слайд 1 — Титульный</h2>
-      <p>Таджикистан: Ваша арена 2031 &middot; Cinematic Widescreen</p>
+      <h2 data-ru="Слайд 1 — Титульный" data-en="Slide 1 — Title">Слайд 1 — Титульный</h2>
+      <p data-ru="Таджикистан: Ваша арена 2031 · Cinematic Widescreen" data-en="Tajikistan: Your Arena 2031 · Cinematic Widescreen">Таджикистан: Ваша арена 2031 &middot; Cinematic Widescreen</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Cinematic Widescreen (согласован)</span>
-          <a href="slide1_v2_cinematic.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Cinematic Widescreen (согласован)" data-en="Cinematic Widescreen (approved)">Cinematic Widescreen (согласован)</span>
+          <a href="slide1_v2_cinematic.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide1_v2_cinematic.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide1_v2">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -649,25 +761,25 @@
   <!-- SLIDE 2 -->
   <div class="slide-section" id="slide-2">
     <div class="section-title">
-      <h2>Слайд 2 — Таджикистан: страна на перекрёстке</h2>
-      <p>Геополитический контекст, карта, ключевые факты &middot; Карта справа + факты снизу</p>
+      <h2 data-ru="Слайд 2 — Таджикистан: страна на перекрёстке" data-en="Slide 2 — Tajikistan: A Country at the Crossroads">Слайд 2 — Таджикистан: страна на перекрёстке</h2>
+      <p data-ru="Геополитический контекст, карта, ключевые факты · Карта справа + факты снизу" data-en="Geopolitical context, map, key facts · Map right + facts below">Геополитический контекст, карта, ключевые факты &middot; Карта справа + факты снизу</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Карта справа + факты снизу (согласован)</span>
-          <a href="slide2_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Карта справа + факты снизу (согласован)" data-en="Map right + facts below (approved)">Карта справа + факты снизу (согласован)</span>
+          <a href="slide2_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide2_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide2_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -678,25 +790,25 @@
   <!-- SLIDE 3 -->
   <div class="slide-section" id="slide-3">
     <div class="section-title">
-      <h2>Слайд 3 — Красоты Таджикистана</h2>
-      <p>Природа, культура, горы &middot; Вариант 1</p>
+      <h2 data-ru="Слайд 3 — Красоты Таджикистана" data-en="Slide 3 — The Beauty of Tajikistan">Слайд 3 — Красоты Таджикистана</h2>
+      <p data-ru="Природа, культура, горы · Вариант 1" data-en="Nature, culture, mountains · Variant 1">Природа, культура, горы &middot; Вариант 1</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Вариант 1 (согласован)</span>
-          <a href="slide3_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Вариант 1 (согласован)" data-en="Variant 1 (approved)">Вариант 1 (согласован)</span>
+          <a href="slide3_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide3_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide3_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -707,25 +819,25 @@
   <!-- SLIDE 4 -->
   <div class="slide-section" id="slide-4">
     <div class="section-title">
-      <h2>Слайд 4 — Футбол: история и потенциал</h2>
-      <p>Статистика, рейтинг FIFA, членство AFC &middot; Timeline Horizontal</p>
+      <h2 data-ru="Слайд 4 — Футбол: история и потенциал" data-en="Slide 4 — Football: History and Potential">Слайд 4 — Футбол: история и потенциал</h2>
+      <p data-ru="Статистика, рейтинг FIFA, членство AFC · Timeline Horizontal" data-en="Statistics, FIFA ranking, AFC membership · Timeline Horizontal">Статистика, рейтинг FIFA, членство AFC &middot; Timeline Horizontal</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Timeline Horizontal (согласован)</span>
-          <a href="slide4_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Timeline Horizontal (согласован)" data-en="Timeline Horizontal (approved)">Timeline Horizontal (согласован)</span>
+          <a href="slide4_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide4_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide4_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -736,25 +848,25 @@
   <!-- SLIDE 5 -->
   <div class="slide-section" id="slide-5">
     <div class="section-title">
-      <h2>Слайд 5 — Наша заявка: суть и масштаб</h2>
-      <p>Турнирная схема, стадионы, ключевые цифры &middot; Карточки с числами</p>
+      <h2 data-ru="Слайд 5 — Наша заявка: суть и масштаб" data-en="Slide 5 — Our Bid: Scope and Scale">Слайд 5 — Наша заявка: суть и масштаб</h2>
+      <p data-ru="Турнирная схема, стадионы, ключевые цифры · Карточки с числами" data-en="Tournament format, stadiums, key figures · Number cards">Турнирная схема, стадионы, ключевые цифры &middot; Карточки с числами</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Карточки с числами (согласован)</span>
-          <a href="slide5_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Карточки с числами (согласован)" data-en="Number cards (approved)">Карточки с числами (согласован)</span>
+          <a href="slide5_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide5_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide5_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -765,25 +877,25 @@
   <!-- SLIDE 6 -->
   <div class="slide-section" id="slide-6">
     <div class="section-title">
-      <h2>Слайд 6 — Душанбе: город-организатор</h2>
-      <p>Инфраструктура, аэропорт, гостиницы, культура &middot; Карточки снизу</p>
+      <h2 data-ru="Слайд 6 — Душанбе: город-организатор" data-en="Slide 6 — Dushanbe: Host City">Слайд 6 — Душанбе: город-организатор</h2>
+      <p data-ru="Инфраструктура, аэропорт, гостиницы, культура · Карточки снизу" data-en="Infrastructure, airport, hotels, culture · Bottom cards">Инфраструктура, аэропорт, гостиницы, культура &middot; Карточки снизу</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Карточки снизу (согласован)</span>
-          <a href="slide6_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Карточки снизу (согласован)" data-en="Bottom cards (approved)">Карточки снизу (согласован)</span>
+          <a href="slide6_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide6_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide6_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -794,25 +906,25 @@
   <!-- SLIDE 6b: Гиссар -->
   <div class="slide-section" id="slide-6b">
     <div class="section-title">
-      <h2>Слайд 6б — Гиссар: второй город-участник</h2>
-      <p>Историческое наследие и природная красота &middot; Город Гиссар</p>
+      <h2 data-ru="Слайд 6б — Гиссар: второй город-участник" data-en="Slide 6b — Hissar: Second Host City">Слайд 6б — Гиссар: второй город-участник</h2>
+      <p data-ru="Историческое наследие и природная красота · Город Гиссар" data-en="Historical heritage and natural beauty · City of Hissar">Историческое наследие и природная красота &middot; Город Гиссар</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Город Гиссар (согласован)</span>
-          <a href="slide7_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Город Гиссар (согласован)" data-en="City of Hissar (approved)">Город Гиссар (согласован)</span>
+          <a href="slide7_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide7_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide6b_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -823,25 +935,25 @@
   <!-- SLIDE 7 -->
   <div class="slide-section" id="slide-7">
     <div class="section-title">
-      <h2>Слайд 7 — Соответствие требованиям AFC</h2>
-      <p>Чеклист требований, соответствие критериям &middot; Радиальная раскладка</p>
+      <h2 data-ru="Слайд 7 — Соответствие требованиям AFC" data-en="Slide 7 — AFC Compliance Requirements">Слайд 7 — Соответствие требованиям AFC</h2>
+      <p data-ru="Чеклист требований, соответствие критериям · Радиальная раскладка" data-en="Requirements checklist, criteria compliance · Radial layout">Чеклист требований, соответствие критериям &middot; Радиальная раскладка</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Радиальная раскладка (согласован)</span>
-          <a href="slide7_v2.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Радиальная раскладка (согласован)" data-en="Radial layout (approved)">Радиальная раскладка (согласован)</span>
+          <a href="slide7_v2.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide7_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide7_v2">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -852,25 +964,25 @@
   <!-- SLIDE 8 -->
   <div class="slide-section" id="slide-8">
     <div class="section-title">
-      <h2>Слайд 8 — Город-организатор: Душанбе</h2>
-      <p>Инфраструктура, логистика, размещение &middot; Сплит-макет</p>
+      <h2 data-ru="Слайд 8 — Город-организатор: Душанбе" data-en="Slide 8 — Host City: Dushanbe">Слайд 8 — Город-организатор: Душанбе</h2>
+      <p data-ru="Инфраструктура, логистика, размещение · Сплит-макет" data-en="Infrastructure, logistics, accommodation · Split layout">Инфраструктура, логистика, размещение &middot; Сплит-макет</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Сплит-макет (согласован)</span>
-          <a href="slide8_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Сплит-макет (согласован)" data-en="Split layout (approved)">Сплит-макет (согласован)</span>
+          <a href="slide8_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide8_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide8_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -881,25 +993,25 @@
   <!-- SLIDE 9 -->
   <div class="slide-section" id="slide-9">
     <div class="section-title">
-      <h2>Слайд 9 — Стадионы: обзор</h2>
-      <p>Обзор стадионов для проведения матчей &middot; Сравнение бок о бок</p>
+      <h2 data-ru="Слайд 9 — Стадионы: обзор" data-en="Slide 9 — Stadiums: Overview">Слайд 9 — Стадионы: обзор</h2>
+      <p data-ru="Обзор стадионов для проведения матчей · Сравнение бок о бок" data-en="Stadium overview for match hosting · Side-by-side comparison">Обзор стадионов для проведения матчей &middot; Сравнение бок о бок</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Сравнение бок о бок (согласован)</span>
-          <a href="slide9_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Сравнение бок о бок (согласован)" data-en="Side-by-side comparison (approved)">Сравнение бок о бок (согласован)</span>
+          <a href="slide9_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide9_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide9_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -910,25 +1022,25 @@
   <!-- SLIDE 10 -->
   <div class="slide-section" id="slide-10">
     <div class="section-title">
-      <h2>Слайд 10 — Стадионы: техническое соответствие</h2>
-      <p>Технические характеристики и стандарты стадионов &middot; Двухколоночное сравнение</p>
+      <h2 data-ru="Слайд 10 — Стадионы: техническое соответствие" data-en="Slide 10 — Stadiums: Technical Compliance">Слайд 10 — Стадионы: техническое соответствие</h2>
+      <p data-ru="Технические характеристики и стандарты стадионов · Двухколоночное сравнение" data-en="Technical specifications and stadium standards · Two-column comparison">Технические характеристики и стандарты стадионов &middot; Двухколоночное сравнение</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Двухколоночное сравнение (согласован)</span>
-          <a href="slide10_v2.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Двухколоночное сравнение (согласован)" data-en="Two-column comparison (approved)">Двухколоночное сравнение (согласован)</span>
+          <a href="slide10_v2.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide10_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide10_v2">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -939,25 +1051,25 @@
   <!-- SLIDE 11 -->
   <div class="slide-section" id="slide-11">
     <div class="section-title">
-      <h2>Слайд 11 — Реконструкция «Гиссар»</h2>
-      <p>План реконструкции стадиона, этапы, сроки &middot; Горизонтальный таймлайн</p>
+      <h2 data-ru="Слайд 11 — Реконструкция «Гиссар»" data-en="Slide 11 — Hissar Stadium Reconstruction">Слайд 11 — Реконструкция «Гиссар»</h2>
+      <p data-ru="План реконструкции стадиона, этапы, сроки · Горизонтальный таймлайн" data-en="Stadium reconstruction plan, phases, timeline · Horizontal timeline">План реконструкции стадиона, этапы, сроки &middot; Горизонтальный таймлайн</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Горизонтальный таймлайн (согласован)</span>
-          <a href="slide11_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Горизонтальный таймлайн (согласован)" data-en="Horizontal timeline (approved)">Горизонтальный таймлайн (согласован)</span>
+          <a href="slide11_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide11_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide11_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -968,25 +1080,25 @@
   <!-- SLIDE 12 -->
   <div class="slide-section" id="slide-12">
     <div class="section-title">
-      <h2>Слайд 12 — Тренировочная инфраструктура</h2>
-      <p>Тренировочные базы, площадки, локации &middot; Карта + список</p>
+      <h2 data-ru="Слайд 12 — Тренировочная инфраструктура" data-en="Slide 12 — Training Infrastructure">Слайд 12 — Тренировочная инфраструктура</h2>
+      <p data-ru="Тренировочные базы, площадки, локации · Карта + список" data-en="Training facilities, venues, locations · Map + list">Тренировочные базы, площадки, локации &middot; Карта + список</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Карта + список (согласован)</span>
-          <a href="slide12_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Карта + список (согласован)" data-en="Map + list (approved)">Карта + список (согласован)</span>
+          <a href="slide12_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide12_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide12_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -999,21 +1111,21 @@
   <!-- Slide 14 -->
   <div class="slide-section" id="slide-14">
     <div class="section-title">
-      <h2>Слайд 14 — Размещение и гостеприимство</h2>
-      <p>Гостиничный фонд &middot; Статистика + отели</p>
+      <h2 data-ru="Слайд 14 — Размещение и гостеприимство" data-en="Slide 14 — Accommodation and Hospitality">Слайд 14 — Размещение и гостеприимство</h2>
+      <p data-ru="Гостиничный фонд · Статистика + отели" data-en="Hotel capacity · Statistics + hotels">Гостиничный фонд &middot; Статистика + отели</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Статистика + отели (согласован)</span>
-          <a href="slide14_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Статистика + отели (согласован)" data-en="Statistics + hotels (approved)">Статистика + отели (согласован)</span>
+          <a href="slide14_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide14_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comment-section">
-          <button class="comment-toggle" onclick="this.parentElement.classList.toggle('open')">Добавить комментарий (1)</button>
+          <button class="comment-toggle" onclick="this.parentElement.classList.toggle('open')" data-ru="Добавить комментарий (1)" data-en="Add comment (1)">Добавить комментарий (1)</button>
           <div class="comments-list">
             <div class="comment"><span class="comment-author">искандар</span><span class="comment-date">17.03.2026 17:35</span><div class="comment-text">убрать 37 поставить реальные гостиницы как нафото еще (Хилтон,Сирена,Кангурт,Рединос коллекшенКровн плаза ,Хаят Редисон )и добавит к строющимся в 31 году количество</div></div>
           </div>
@@ -1025,25 +1137,25 @@
   <!-- Slide 15 -->
   <div class="slide-section" id="slide-15">
     <div class="section-title">
-      <h2>Слайд 15 — Инфраструктура города</h2>
-      <p>Полный цикл поддержки турнира &middot; Вертикальный поток</p>
+      <h2 data-ru="Слайд 15 — Инфраструктура города" data-en="Slide 15 — City Infrastructure">Слайд 15 — Инфраструктура города</h2>
+      <p data-ru="Полный цикл поддержки турнира · Вертикальный поток" data-en="Full tournament support cycle · Vertical flow">Полный цикл поддержки турнира &middot; Вертикальный поток</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Вертикальный поток (согласован)</span>
-          <a href="slide15_v2.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Вертикальный поток (согласован)" data-en="Vertical flow (approved)">Вертикальный поток (согласован)</span>
+          <a href="slide15_v2.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide15_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide15_v2">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -1056,25 +1168,25 @@
   <!-- Slide 17 -->
   <div class="slide-section" id="slide-17">
     <div class="section-title">
-      <h2>Слайд 17 — Государственные гарантии</h2>
-      <p>Поддержка правительства Республики Таджикистан &middot; Seal of assurance</p>
+      <h2 data-ru="Слайд 17 — Государственные гарантии" data-en="Slide 17 — Government Guarantees">Слайд 17 — Государственные гарантии</h2>
+      <p data-ru="Поддержка правительства Республики Таджикистан · Seal of assurance" data-en="Government of the Republic of Tajikistan support · Seal of assurance">Поддержка правительства Республики Таджикистан &middot; Seal of assurance</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Seal of assurance (согласован)</span>
-          <a href="slide17_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Seal of assurance (согласован)" data-en="Seal of assurance (approved)">Seal of assurance (согласован)</span>
+          <a href="slide17_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide17_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide17_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -1085,25 +1197,25 @@
   <!-- Slide 18 -->
   <div class="slide-section" id="slide-18">
     <div class="section-title">
-      <h2>Слайд 18 — Дополнительные требования (4d)</h2>
-      <p>Турнир как целостная система &middot; Акцентная сетка</p>
+      <h2 data-ru="Слайд 18 — Дополнительные требования (4d)" data-en="Slide 18 — Additional Requirements (4d)">Слайд 18 — Дополнительные требования (4d)</h2>
+      <p data-ru="Турнир как целостная система · Акцентная сетка" data-en="Tournament as an integrated system · Accent grid">Турнир как целостная система &middot; Акцентная сетка</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Акцентная сетка (согласован)</span>
-          <a href="slide18_v3.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Акцентная сетка (согласован)" data-en="Accent grid (approved)">Акцентная сетка (согласован)</span>
+          <a href="slide18_v3.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide18_v3.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide18_v3">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -1114,25 +1226,25 @@
   <!-- Slide 19 -->
   <div class="slide-section" id="slide-19">
     <div class="section-title">
-      <h2>Слайд 19 — Ответственное проведение</h2>
-      <p>Принципы ответственного проведения турнира &middot; Split с фото</p>
+      <h2 data-ru="Слайд 19 — Ответственное проведение" data-en="Slide 19 — Responsible Hosting">Слайд 19 — Ответственное проведение</h2>
+      <p data-ru="Принципы ответственного проведения турнира · Split с фото" data-en="Responsible tournament hosting principles · Split with photo">Принципы ответственного проведения турнира &middot; Split с фото</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Split с фото (согласован)</span>
-          <a href="slide19_v3.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Split с фото (согласован)" data-en="Split with photo (approved)">Split с фото (согласован)</span>
+          <a href="slide19_v3.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide19_v3.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide19_v3">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -1143,25 +1255,25 @@
   <!-- Slide 20 -->
   <div class="slide-section" id="slide-20">
     <div class="section-title">
-      <h2>Слайд 20 — Готовность заявки</h2>
-      <p>Executive dashboard по ключевым блокам &middot; Executive dashboard</p>
+      <h2 data-ru="Слайд 20 — Готовность заявки" data-en="Slide 20 — Bid Readiness">Слайд 20 — Готовность заявки</h2>
+      <p data-ru="Executive dashboard по ключевым блокам · Executive dashboard" data-en="Executive dashboard for key areas · Executive dashboard">Executive dashboard по ключевым блокам &middot; Executive dashboard</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Executive dashboard (согласован)</span>
-          <a href="slide20_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Executive dashboard (согласован)" data-en="Executive dashboard (approved)">Executive dashboard (согласован)</span>
+          <a href="slide20_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide20_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide20_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -1172,25 +1284,25 @@
   <!-- Slide 21 -->
   <div class="slide-section" id="slide-21">
     <div class="section-title">
-      <h2>Слайд 21 — Почему Таджикистан?</h2>
-      <p>Стратегический смысл заявки для AFC &middot; Пять столпов</p>
+      <h2 data-ru="Слайд 21 — Почему Таджикистан?" data-en="Slide 21 — Why Tajikistan?">Слайд 21 — Почему Таджикистан?</h2>
+      <p data-ru="Стратегический смысл заявки для AFC · Пять столпов" data-en="Strategic rationale of the bid for AFC · Five pillars">Стратегический смысл заявки для AFC &middot; Пять столпов</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Пять столпов (согласован)</span>
-          <a href="slide21_v2.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Пять столпов (согласован)" data-en="Five pillars (approved)">Пять столпов (согласован)</span>
+          <a href="slide21_v2.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide21_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide21_v2">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -1201,25 +1313,25 @@
   <!-- Slide 22 -->
   <div class="slide-section" id="slide-22">
     <div class="section-title">
-      <h2>Слайд 22 — Финальный слайд</h2>
-      <p>Closing &middot; «Таджикистан готов» &middot; Cinematic closing</p>
+      <h2 data-ru="Слайд 22 — Финальный слайд" data-en="Slide 22 — Final Slide">Слайд 22 — Финальный слайд</h2>
+      <p data-ru="Closing · «Таджикистан готов» · Cinematic closing" data-en="Closing · «Tajikistan is Ready» · Cinematic closing">Closing &middot; «Таджикистан готов» &middot; Cinematic closing</p>
     </div>
     <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
           <span class="variant-num">&#10003;</span>
-          <span class="variant-name">Cinematic closing (согласован)</span>
-          <a href="slide22_v1.html" target="_blank">Открыть</a>
+          <span class="variant-name" data-ru="Cinematic closing (согласован)" data-en="Cinematic closing (approved)">Cinematic closing (согласован)</span>
+          <a href="slide22_v1.html" target="_blank" data-ru="Открыть" data-en="Open">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide22_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
         <div class="comments-section" data-key="comments_slide22_v1">
-          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)" data-ru="Добавить комментарий" data-en="Add comment">Добавить комментарий<span class="comment-count"></span></button>
           <div class="comment-form">
             <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
             <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+            <button class="comment-submit-btn" onclick="submitComment(this)" data-ru="Отправить" data-en="Submit">Отправить</button>
           </div>
           <div class="comments-list"></div>
         </div>
@@ -1227,7 +1339,7 @@
     </div>
   </div>
 
-  <div class="footer">
+  <div class="footer" data-ru="AFC Asian Cup 2031 — Bid Presentation Design Concepts — МАРТ 2026" data-en="AFC Asian Cup 2031 — Bid Presentation Design Concepts — MARCH 2026">
     AFC Asian Cup 2031 — Bid Presentation Design Concepts — МАРТ 2026
   </div>
 </body>
