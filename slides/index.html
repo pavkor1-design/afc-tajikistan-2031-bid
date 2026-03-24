@@ -883,7 +883,7 @@
     if (!iframe) return;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    // 16:9 aspect ratio, fit inside viewport
+    // Fit 16:9 inside viewport
     let w, h;
     if (vw / vh > 16 / 9) {
       h = vh;
@@ -895,9 +895,8 @@
     const scale = w / 1920;
     iframe.style.width = '1920px';
     iframe.style.height = '1080px';
+    iframe.style.transformOrigin = 'top left';
     iframe.style.transform = 'scale(' + scale + ')';
-    iframe.style.transformOrigin = 'center center';
-    // Center with margin
     iframe.style.position = 'absolute';
     iframe.style.left = ((vw - w) / 2) + 'px';
     iframe.style.top = ((vh - h) / 2) + 'px';
