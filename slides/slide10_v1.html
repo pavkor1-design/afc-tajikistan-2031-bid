@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Слайд 10 — Стадионы: техническое соответствие (V1 — Таблица)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,12 +20,23 @@
     --white: #FFFFFF;
   }
 
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--midnight, #050E1D);
+  }
+
   body {
-    width: 1920px;
-    height: 1080px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     overflow: hidden;
     font-family: 'Inter', sans-serif;
-    background: var(--midnight);
+    background: var(--midnight, #050E1D);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .slide {
@@ -33,12 +44,7 @@
     width: 1920px;
     height: 1080px;
     overflow: hidden;
-    background:
-      radial-gradient(ellipse at 30% 40%, rgba(215,166,61,0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 75% 25%, rgba(215,166,61,0.04) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 80%, rgba(10,24,48,0.95) 0%, transparent 60%),
-      linear-gradient(rgba(5,14,29,0.85), rgba(5,14,29,0.9)),
-      url('img/stadium-field-interior.jpg') center/cover no-repeat;
+    flex-shrink: 0;
   }
 
   .grid-overlay {
@@ -424,5 +430,20 @@
   </div>
 
 </div>
+
+<script>
+  function fitSlide() {
+    var slide = document.querySelector('.slide');
+    if (!slide) return;
+    var scaleX = window.innerWidth / 1920;
+    var scaleY = window.innerHeight / 1080;
+    var scale = Math.min(scaleX, scaleY);
+    slide.style.transform = 'scale(' + scale + ')';
+    slide.style.transformOrigin = 'center center';
+  }
+  window.addEventListener('resize', fitSlide);
+  window.addEventListener('load', fitSlide);
+  fitSlide();
+</script>
 </body>
 </html>

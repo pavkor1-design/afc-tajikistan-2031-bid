@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Слайд 20 — Готовность заявки: Executive Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,12 +20,23 @@
     --white: #FFFFFF;
   }
 
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--midnight, #050E1D);
+  }
+
   body {
-    width: 1920px;
-    height: 1080px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     overflow: hidden;
     font-family: 'Inter', sans-serif;
-    background: var(--midnight);
+    background: var(--midnight, #050E1D);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .slide {
@@ -33,9 +44,7 @@
     width: 1920px;
     height: 1080px;
     overflow: hidden;
-    background-image: url('img/bg-slide20.jpg');
-    background-size: cover;
-    background-position: center;
+    flex-shrink: 0;
   }
 
   .slide-overlay {
@@ -534,5 +543,20 @@
     <span>Март 2026 · Душанбе</span>
   </div>
 </div>
+
+<script>
+  function fitSlide() {
+    var slide = document.querySelector('.slide');
+    if (!slide) return;
+    var scaleX = window.innerWidth / 1920;
+    var scaleY = window.innerHeight / 1080;
+    var scale = Math.min(scaleX, scaleY);
+    slide.style.transform = 'scale(' + scale + ')';
+    slide.style.transformOrigin = 'center center';
+  }
+  window.addEventListener('resize', fitSlide);
+  window.addEventListener('load', fitSlide);
+  fitSlide();
+</script>
 </body>
 </html>

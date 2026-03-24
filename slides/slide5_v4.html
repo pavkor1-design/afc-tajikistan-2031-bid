@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1920, height=1080, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Слайд 5 — Вариант 4: Турнирная сетка группового этапа</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,11 +18,31 @@
     --ivory: #F6F4EF;
     --white: #FFFFFF;
   }
-  body { width: 1920px; height: 1080px; overflow: hidden; font-family: 'Inter', sans-serif; background: var(--midnight); }
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--midnight, #050E1D);
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight, #050E1D);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .slide {
-    position: relative; width: 1920px; height: 1080px; overflow: hidden;
-    background: linear-gradient(rgba(5,14,29,0.7), rgba(5,14,29,0.85)), url('img/stadium-river-night.jpg') center/cover no-repeat;
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    flex-shrink: 0;
   }
 
   /* === LETTERBOX BARS === */
@@ -803,5 +823,20 @@
   </div>
 
 </div>
+
+<script>
+  function fitSlide() {
+    var slide = document.querySelector('.slide');
+    if (!slide) return;
+    var scaleX = window.innerWidth / 1920;
+    var scaleY = window.innerHeight / 1080;
+    var scale = Math.min(scaleX, scaleY);
+    slide.style.transform = 'scale(' + scale + ')';
+    slide.style.transformOrigin = 'center center';
+  }
+  window.addEventListener('resize', fitSlide);
+  window.addEventListener('load', fitSlide);
+  fitSlide();
+</script>
 </body>
 </html>
