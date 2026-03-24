@@ -122,6 +122,13 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Single approved variant — centered, wider */
+  .gallery.single {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
   .slide-card {
     position: relative;
     border-radius: 8px;
@@ -610,480 +617,176 @@
     <button class="tab-btn" data-slide="22" onclick="switchTab(22)">Слайд 22</button>
   </div>
 
-  <!-- SLIDE 1: 6 variants (approved: v2 Cinematic) -->
+  <!-- SLIDE 1 -->
   <div class="slide-section active" id="slide-1">
     <div class="section-title">
       <h2>Слайд 1 — Титульный</h2>
-      <p>Таджикистан: Ваша арена 2031 &middot; 6 вариантов дизайна &middot; Согласован: Вариант 2</p>
+      <p>Таджикистан: Ваша арена 2031 &middot; Cinematic Widescreen</p>
     </div>
-    <div class="gallery cols-2">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Imperial Night Classic</span>
-          <a href="slide1_v1_imperial_night.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide1_v1_imperial_night.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide1_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">02 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Cinematic Widescreen (согласован)</span>
           <a href="slide1_v2_cinematic.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide1_v2_cinematic.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide1_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide1_v2">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Split Composition</span>
-          <a href="slide1_v3_split.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide1_v3_split.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide1_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">04</span>
-          <span class="variant-name">Geometric Modern</span>
-          <a href="slide1_v4_geometric.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide1_v4_geometric.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide1_v4">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">05</span>
-          <span class="variant-name">Minimal Elegance</span>
-          <a href="slide1_v5_minimal.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide1_v5_minimal.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide1_v5">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">06</span>
-          <span class="variant-name">New Silk Horizon</span>
-          <a href="slide1_v6_silk_horizon.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide1_v6_silk_horizon.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide1_v6">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 2: 3 variants -->
+  <!-- SLIDE 2 -->
   <div class="slide-section" id="slide-2">
     <div class="section-title">
       <h2>Слайд 2 — Таджикистан: страна на перекрёстке</h2>
-      <p>Геополитический контекст, карта, ключевые факты &middot; 3 варианта</p>
+      <p>Геополитический контекст, карта, ключевые факты &middot; Карта справа + факты снизу</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Карта справа + факты снизу (согласован)</span>
           <a href="slide2_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide2_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide2_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide2_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Центр + карточки</span>
-          <a href="slide2_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide2_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide2_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Горизонтальная полоса</span>
-          <a href="slide2_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide2_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide2_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 3: 3 variants -->
+  <!-- SLIDE 3 -->
   <div class="slide-section" id="slide-3">
     <div class="section-title">
       <h2>Слайд 3 — Красоты Таджикистана</h2>
-      <p>Природа, культура, горы &middot; 3 варианта</p>
+      <p>Природа, культура, горы &middot; Вариант 1</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Вариант 1 (согласован)</span>
           <a href="slide3_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide3_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide3_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide3_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Вариант 2</span>
-          <a href="slide3_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide3_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide3_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Вариант 3</span>
-          <a href="slide3_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide3_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide3_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 4: 3 variants -->
+  <!-- SLIDE 4 -->
   <div class="slide-section" id="slide-4">
     <div class="section-title">
       <h2>Слайд 4 — Футбол: история и потенциал</h2>
-      <p>Статистика, рейтинг FIFA, членство AFC &middot; 3 варианта</p>
+      <p>Статистика, рейтинг FIFA, членство AFC &middot; Timeline Horizontal</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Timeline Horizontal (согласован)</span>
           <a href="slide4_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide4_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide4_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide4_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Metric Cards Row</span>
-          <a href="slide4_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide4_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide4_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Левый текст + карточки</span>
-          <a href="slide4_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide4_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide4_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 5: 3 variants -->
+  <!-- SLIDE 5 -->
   <div class="slide-section" id="slide-5">
     <div class="section-title">
       <h2>Слайд 5 — Наша заявка: суть и масштаб</h2>
-      <p>Турнирная схема, стадионы, ключевые цифры &middot; 4 варианта</p>
+      <p>Турнирная схема, стадионы, ключевые цифры &middot; Карточки с числами</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Карточки с числами (согласован)</span>
           <a href="slide5_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide5_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide5_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide5_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Турнирная сетка</span>
-          <a href="slide5_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide5_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide5_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Центральная инфографика</span>
-          <a href="slide5_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide5_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide5_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">04</span>
-          <span class="variant-name">Турнирная сетка на поле</span>
-          <a href="slide5_v4.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide5_v4.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide5_v4">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 6: 3 variants -->
+  <!-- SLIDE 6 -->
   <div class="slide-section" id="slide-6">
     <div class="section-title">
       <h2>Слайд 6 — Душанбе: город-организатор</h2>
-      <p>Инфраструктура, аэропорт, гостиницы, культура &middot; 3 варианта</p>
+      <p>Инфраструктура, аэропорт, гостиницы, культура &middot; Карточки снизу</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Карточки снизу (согласован)</span>
           <a href="slide6_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide6_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide6_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide6_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Сетка данных по центру</span>
-          <a href="slide6_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide6_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide6_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Слева текст — справа карточки</span>
-          <a href="slide6_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide6_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide6_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1092,14 +795,14 @@
   <div class="slide-section" id="slide-6b">
     <div class="section-title">
       <h2>Слайд 6б — Гиссар: второй город-участник</h2>
-      <p>Историческое наследие и природная красота &middot; 1 вариант</p>
+      <p>Историческое наследие и природная красота &middot; Город Гиссар</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Город Гиссар (согласован)</span>
-          <a class="open-btn" href="slide7_v1.html" target="_blank">Открыть</a>
+          <a href="slide7_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide7_v1.html?v=20260322b" loading="lazy"></iframe>
@@ -1117,404 +820,176 @@
     </div>
   </div>
 
-  <!-- SLIDE 7: 3 variants -->
+  <!-- SLIDE 7 -->
   <div class="slide-section" id="slide-7">
     <div class="section-title">
       <h2>Слайд 7 — Соответствие требованиям AFC</h2>
-      <p>Чеклист требований, соответствие критериям &middot; 3 варианта</p>
+      <p>Чеклист требований, соответствие критериям &middot; Радиальная раскладка</p>
     </div>
-    <div class="gallery">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Анимированный чеклист</span>
-          <a href="slide7_v1.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide7_v1.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide7_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">02 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Радиальная раскладка (согласован)</span>
           <a href="slide7_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide7_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide7_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide7_v2">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Горизонтальный путь</span>
-          <a href="slide7_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide7_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide7_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 8: 3 variants -->
+  <!-- SLIDE 8 -->
   <div class="slide-section" id="slide-8">
     <div class="section-title">
       <h2>Слайд 8 — Город-организатор: Душанбе</h2>
-      <p>Инфраструктура, логистика, размещение &middot; 3 варианта</p>
+      <p>Инфраструктура, логистика, размещение &middot; Сплит-макет</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Сплит-макет</span>
+          <span class="variant-num">&#10003;</span>
+          <span class="variant-name">Сплит-макет (согласован)</span>
           <a href="slide8_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide8_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide8_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide8_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Карточная сетка</span>
-          <a href="slide8_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide8_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide8_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Дашборд-пайплайн</span>
-          <a href="slide8_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide8_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide8_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 9: 3 variants -->
+  <!-- SLIDE 9 -->
   <div class="slide-section" id="slide-9">
     <div class="section-title">
       <h2>Слайд 9 — Стадионы: обзор</h2>
-      <p>Обзор стадионов для проведения матчей &middot; 3 варианта</p>
+      <p>Обзор стадионов для проведения матчей &middot; Сравнение бок о бок</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Сравнение бок о бок (согласован)</span>
           <a href="slide9_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide9_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide9_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide9_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Стадион-герой</span>
-          <a href="slide9_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide9_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide9_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Кинематографическое сравнение</span>
-          <a href="slide9_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide9_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide9_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 10: 3 variants -->
+  <!-- SLIDE 10 -->
   <div class="slide-section" id="slide-10">
     <div class="section-title">
       <h2>Слайд 10 — Стадионы: техническое соответствие</h2>
-      <p>Технические характеристики и стандарты стадионов &middot; 3 варианта</p>
+      <p>Технические характеристики и стандарты стадионов &middot; Двухколоночное сравнение</p>
     </div>
-    <div class="gallery">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Полная таблица</span>
-          <a href="slide10_v1.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide10_v1.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide10_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">02 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Двухколоночное сравнение (согласован)</span>
           <a href="slide10_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide10_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide10_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide10_v2">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Дашборд-сетка</span>
-          <a href="slide10_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide10_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide10_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 11: 3 variants -->
+  <!-- SLIDE 11 -->
   <div class="slide-section" id="slide-11">
     <div class="section-title">
       <h2>Слайд 11 — Реконструкция «Гиссар»</h2>
-      <p>План реконструкции стадиона, этапы, сроки &middot; 3 варианта</p>
+      <p>План реконструкции стадиона, этапы, сроки &middot; Горизонтальный таймлайн</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Горизонтальный таймлайн (согласован)</span>
           <a href="slide11_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide11_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide11_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide11_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Диаграмма Ганта</span>
-          <a href="slide11_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide11_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide11_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Кольцевой прогресс</span>
-          <a href="slide11_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide11_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide11_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 12: 3 variants -->
+  <!-- SLIDE 12 -->
   <div class="slide-section" id="slide-12">
     <div class="section-title">
       <h2>Слайд 12 — Тренировочная инфраструктура</h2>
-      <p>Тренировочные базы, площадки, локации &middot; 3 варианта</p>
+      <p>Тренировочные базы, площадки, локации &middot; Карта + список</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Карта + список (согласован)</span>
           <a href="slide12_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide12_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide12_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide12_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Фото-карточки</span>
-          <a href="slide12_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide12_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide12_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Радиальная инфографика</span>
-          <a href="slide12_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide12_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide12_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1525,14 +1000,14 @@
   <div class="slide-section" id="slide-14">
     <div class="section-title">
       <h2>Слайд 14 — Размещение и гостеприимство</h2>
-      <p>Гостиничный фонд · 1 вариант</p>
+      <p>Гостиничный фонд &middot; Статистика + отели</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 ✓</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Статистика + отели (согласован)</span>
-          <a class="open-btn" href="slide14_v1.html?v=20260322b" target="_blank">Открыть</a>
+          <a href="slide14_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide14_v1.html?v=20260322b" loading="lazy"></iframe>
@@ -1551,65 +1026,27 @@
   <div class="slide-section" id="slide-15">
     <div class="section-title">
       <h2>Слайд 15 — Инфраструктура города</h2>
-      <p>Полный цикл поддержки турнира &middot; 3 варианта</p>
+      <p>Полный цикл поддержки турнира &middot; Вертикальный поток</p>
     </div>
-    <div class="gallery">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Process flow</span>
-          <a href="slide15_v1.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide15_v1.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide15_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">02 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Вертикальный поток (согласован)</span>
           <a href="slide15_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide15_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide15_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide15_v2">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Icon-дашборд</span>
-          <a href="slide15_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide15_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide15_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1620,65 +1057,27 @@
   <div class="slide-section" id="slide-17">
     <div class="section-title">
       <h2>Слайд 17 — Государственные гарантии</h2>
-      <p>Поддержка правительства Республики Таджикистан &middot; 3 варианта</p>
+      <p>Поддержка правительства Республики Таджикистан &middot; Seal of assurance</p>
     </div>
-    <div class="gallery">
-      <div class="slide-card">
+    <div class="gallery single">
+      <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Seal of assurance</span>
+          <span class="variant-num">&#10003;</span>
+          <span class="variant-name">Seal of assurance (согласован)</span>
           <a href="slide17_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide17_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide17_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide17_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Горизонтальные карточки</span>
-          <a href="slide17_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide17_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide17_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Двухколоночный список</span>
-          <a href="slide17_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide17_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide17_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1687,65 +1086,27 @@
   <div class="slide-section" id="slide-18">
     <div class="section-title">
       <h2>Слайд 18 — Дополнительные требования (4d)</h2>
-      <p>Турнир как целостная система &middot; 3 варианта</p>
+      <p>Турнир как целостная система &middot; Акцентная сетка</p>
     </div>
-    <div class="gallery">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Six-card grid</span>
-          <a href="slide18_v1.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide18_v1.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide18_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Горизонтальные полосы</span>
-          <a href="slide18_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide18_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide18_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">03 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Акцентная сетка (согласован)</span>
           <a href="slide18_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide18_v3.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide18_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide18_v3">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1754,65 +1115,27 @@
   <div class="slide-section" id="slide-19">
     <div class="section-title">
       <h2>Слайд 19 — Ответственное проведение</h2>
-      <p>Принципы ответственного проведения турнира &middot; 3 варианта</p>
+      <p>Принципы ответственного проведения турнира &middot; Split с фото</p>
     </div>
-    <div class="gallery">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">Принципы</span>
-          <a href="slide19_v1.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide19_v1.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide19_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Icon-сетка</span>
-          <a href="slide19_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide19_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide19_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">03 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Split с фото (согласован)</span>
           <a href="slide19_v3.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide19_v3.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide19_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide19_v3">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1821,65 +1144,27 @@
   <div class="slide-section" id="slide-20">
     <div class="section-title">
       <h2>Слайд 20 — Готовность заявки</h2>
-      <p>Executive dashboard по ключевым блокам &middot; 3 варианта</p>
+      <p>Executive dashboard по ключевым блокам &middot; Executive dashboard</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Executive dashboard (согласован)</span>
           <a href="slide20_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide20_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide20_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide20_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Карточный дашборд</span>
-          <a href="slide20_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide20_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide20_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Двухколоночная таблица</span>
-          <a href="slide20_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide20_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide20_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1888,65 +1173,27 @@
   <div class="slide-section" id="slide-21">
     <div class="section-title">
       <h2>Слайд 21 — Почему Таджикистан?</h2>
-      <p>Стратегический смысл заявки для AFC &middot; 3 варианта</p>
+      <p>Стратегический смысл заявки для AFC &middot; Пять столпов</p>
     </div>
-    <div class="gallery">
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">01</span>
-          <span class="variant-name">5 тезисов</span>
-          <a href="slide21_v1.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide21_v1.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide21_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">02 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Пять столпов (согласован)</span>
           <a href="slide21_v2.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide21_v2.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide21_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide21_v2">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Центральный фокус</span>
-          <a href="slide21_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide21_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide21_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
@@ -1955,65 +1202,27 @@
   <div class="slide-section" id="slide-22">
     <div class="section-title">
       <h2>Слайд 22 — Финальный слайд</h2>
-      <p>Closing &middot; «Таджикистан готов» &middot; 3 варианта</p>
+      <p>Closing &middot; «Таджикистан готов» &middot; Cinematic closing</p>
     </div>
-    <div class="gallery">
+    <div class="gallery single">
       <div class="slide-card approved">
         <div class="slide-card-header">
-          <span class="variant-num">01 &#10003;</span>
+          <span class="variant-num">&#10003;</span>
           <span class="variant-name">Cinematic closing (согласован)</span>
           <a href="slide22_v1.html" target="_blank">Открыть</a>
         </div>
         <div class="iframe-container">
           <iframe src="slide22_v1.html?v=20260322b" loading="lazy"></iframe>
         </div>
-      <div class="comments-section" data-key="comments_slide22_v1">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+        <div class="comments-section" data-key="comments_slide22_v1">
+          <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
+          <div class="comment-form">
+            <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
+            <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
+            <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
+          </div>
+          <div class="comments-list"></div>
         </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">02</span>
-          <span class="variant-name">Минималистичный closing</span>
-          <a href="slide22_v2.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide22_v2.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide22_v2">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
-      </div>
-      <div class="slide-card">
-        <div class="slide-card-header">
-          <span class="variant-num">03</span>
-          <span class="variant-name">Панорама стадиона</span>
-          <a href="slide22_v3.html" target="_blank">Открыть</a>
-        </div>
-        <div class="iframe-container">
-          <iframe src="slide22_v3.html?v=20260322b" loading="lazy"></iframe>
-        </div>
-      <div class="comments-section" data-key="comments_slide22_v3">
-        <button class="comment-toggle-btn" onclick="toggleCommentForm(this)">Добавить комментарий<span class="comment-count"></span></button>
-        <div class="comment-form">
-          <input type="text" class="comment-name" placeholder="Ваше имя" maxlength="50">
-          <textarea class="comment-text-input" placeholder="Комментарий..." maxlength="1000"></textarea>
-          <button class="comment-submit-btn" onclick="submitComment(this)">Отправить</button>
-        </div>
-        <div class="comments-list"></div>
-      </div>
       </div>
     </div>
   </div>
