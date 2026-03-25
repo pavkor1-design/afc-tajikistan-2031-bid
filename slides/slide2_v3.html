@@ -234,10 +234,11 @@
     mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
   }
 
-  .map-col svg {
+  .map-col img {
     width: 100%;
     height: auto;
-    overflow: visible;
+    display: block;
+    border-radius: 8px;
   }
 
   /* Facts strip — bottom */
@@ -359,6 +360,9 @@
       <p class="desc">Сердце Центральной Азии на перекрёстке древнего Шёлкового пути. Граница с четырьмя государствами, мост между Востоком и Западом.</p>
     </div>
     <div class="map-col">
+      <img src="img/karta-central-asia.jpg" alt="Карта Центральной Азии">
+      <!-- SVG map replaced with photo -->
+      <!--
       <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="topoKaz" x1="0" y1="0" x2="0" y2="1">
@@ -546,6 +550,7 @@
 
         <!-- Map vignette (removed for seamless blending) -->
       </svg>
+      -->
     </div>
   </div>
 
