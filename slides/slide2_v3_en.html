@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slide 2 — Version 3: Left text + right map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #050E1D;
+    --navy: #0A1830;
+    --gold: #D7A63D;
+    --warm-gold: #E8BF5A;
+    --light-gold: #F2D98A;
+    --ivory: #F6F4EF;
+    --white: #FFFFFF;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--midnight, #050E1D);
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight, #050E1D);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Subtle dot grid */
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(215,166,61,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 45%, rgba(5,14,29,0.6) 100%),
+      linear-gradient(90deg, rgba(5,14,29,0.4) 0%, transparent 20%),
+      linear-gradient(-90deg, rgba(5,14,29,0.5) 0%, transparent 25%);
+    z-index: 3;
+  }
+
+  .letterbox-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .letterbox-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--midnight);
+    z-index: 15;
+  }
+
+  .afc-logo {
+    position: absolute;
+    top: 100px;
+    left: 80px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .afc-badge {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,14,29,0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .afc-badge svg { width: 30px; height: 30px; fill: var(--gold); }
+
+  .afc-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ivory);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .afc-text .year {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 5px;
+    display: block;
+  }
+
+  .flag-ribbon {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 8px;
+    height: 120px;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeIn 1s ease 0.7s both;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .flag-ribbon div { flex: 1; }
+  .fr-red { background: #CC0000; }
+  .fr-white { background: #FFFFFF; }
+  .fr-green { background: #006600; }
+
+  /* Top section: left title + right map */
+  .top-section {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 80px;
+  }
+
+  .title-col {
+    flex: 1;
+    padding-top: 85px;
+    padding-right: 60px;
+    animation: fadeSlideUp 0.8s ease 0.8s both;
+  }
+
+  .tag {
+    display: none !important;
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(215,166,61,0.12);
+    border: 1px solid rgba(215,166,61,0.25);
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-bottom: 28px;
+  }
+
+  .main-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 58px;
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+    margin-bottom: 8px;
+  }
+
+  .main-title .highlight {
+    color: var(--warm-gold);
+    font-weight: 400;
+    font-size: 32px;
+    display: block;
+    margin-top: 10px;
+    letter-spacing: 8px;
+  }
+
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+    margin: 24px 0;
+    animation: growWidth 0.6s ease 1.4s both;
+  }
+
+  @keyframes growWidth {
+    from { width: 0; }
+    to { width: 80px; }
+  }
+
+  .desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(246,244,239,0.6);
+    max-width: 500px;
+    animation: fadeSlideUp 0.7s ease 1.6s both;
+  }
+
+  .map-col {
+    width: 860px;
+    flex-shrink: 0;
+    animation: fadeIn 1.2s ease 0.6s both;
+    margin-top: -20px;
+    margin-right: -40px;
+    -webkit-mask-image: radial-gradient(ellipse 92% 88% at 55% 48%, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%);
+    mask-image: radial-gradient(ellipse 92% 88% at 55% 48%, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%);
+  }
+
+  .map-col img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Facts strip — bottom */
+  .facts-strip {
+    position: absolute;
+    bottom: 100px;
+    left: 80px;
+    right: 80px;
+    z-index: 10;
+    display: flex;
+    gap: 2px;
+  }
+
+  .fact-item {
+    flex: 1;
+    background: rgba(10,24,48,0.65);
+    border: 1px solid rgba(215,166,61,0.12);
+    padding: 26px 28px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    animation: fadeSlideUp 0.6s ease both;
+  }
+
+  .fact-item:first-child { border-radius: 10px 0 0 10px; }
+  .fact-item:last-child { border-radius: 0 10px 10px 0; }
+  .fact-item:nth-child(1) { animation-delay: 1.8s; }
+  .fact-item:nth-child(2) { animation-delay: 2.0s; }
+  .fact-item:nth-child(3) { animation-delay: 2.2s; }
+
+  .fact-num {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 46px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .fact-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--warm-gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .fact-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(246,244,239,0.5);
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    position: absolute;
+    bottom: 90px;
+    right: 80px;
+    z-index: 20;
+    text-align: right;
+    animation: fadeIn 1s ease 2.6s both;
+  }
+
+  .fft-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(215,166,61,0.5);
+    letter-spacing: 3px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="vignette"></div>
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- AFC Logo -->
+  <div class="afc-logo">
+    <div class="afc-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div class="afc-text">AFC Asian Cup<span class="year">2032</span></div>
+  </div>
+
+  <!-- Flag ribbon -->
+  <div class="flag-ribbon"><div class="fr-red"></div><div class="fr-white"></div><div class="fr-green"></div></div>
+
+  <!-- Top section -->
+  <div class="top-section">
+    <div class="title-col">
+      <div class="tag">Geopolitical Context</div>
+      <h1 class="main-title">TAJIKISTAN<span class="highlight">A Nation at the Crossroads of Civilizations</span></h1>
+      <div class="divider"></div>
+      <p class="desc">The heart of Central Asia at the crossroads of the ancient Silk Road. Bordering four nations, a bridge between East and West.</p>
+    </div>
+    <div class="map-col">
+      <img src="img/novaya-karta.jpg" alt="Map of Central Asia">
+    </div>
+  </div>
+
+  <!-- Facts strip — bottom -->
+  <div class="facts-strip">
+    <div class="fact-item">
+      <div class="fact-num">4</div>
+      <div class="fact-label">Neighboring Countries</div>
+      <div class="fact-desc">China, Afghanistan, Uzbekistan, Kyrgyzstan</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-num">10+</div>
+      <div class="fact-label">Million People</div>
+      <div class="fact-desc">A young nation — median age of 24 years</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-num">93%</div>
+      <div class="fact-label">Territory — Mountains</div>
+      <div class="fact-desc">"Roof of the World", a bridge between East and West</div>
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <div class="fft-name">Football Federation of Tajikistan</div>
+    <div class="date">March 2026 &middot; Dushanbe</div>
+  </div>
+</div>
+
+<script>
+  function fitSlide() {
+    var slide = document.querySelector('.slide');
+    if (!slide) return;
+    var scaleX = window.innerWidth / 1920;
+    var scaleY = window.innerHeight / 1080;
+    var scale = Math.min(scaleX, scaleY);
+    slide.style.transform = 'scale(' + scale + ')';
+    slide.style.transformOrigin = 'center center';
+  }
+  window.addEventListener('resize', fitSlide);
+  window.addEventListener('load', fitSlide);
+  fitSlide();
+</script>
+</body>
+</html>
